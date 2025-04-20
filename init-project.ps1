@@ -110,7 +110,8 @@ Write-ColorOutput Green ".gitignore updated."
 # Install npm dependencies
 Write-ColorOutput Yellow "Installing npm dependencies..."
 try {
-    npm install next react react-dom typescript @types/node @types/react @types/react-dom next-auth mongodb mongoose tailwindcss autoprefixer postcss eslint eslint-config-next marked @auth/mongodb-adapter
+    npm install next@15.3.1 react@19.1.0 react-dom@19.1.0 typescript@5.8.3 next-auth@4.24.11 mongodb@6.15.0 mongoose@8.13.2 tailwindcss@4.1.4 autoprefixer@10.4.16 postcss@8.5.3 eslint@9.25.0 eslint-config-next@15.3.1 marked@15.0.8 @auth/mongodb-adapter@3.9.0 swr@2.2.5 d3@7.8.5 react-flow-renderer@10.3.17
+    npm install -D @types/node@20.10.8 @types/react@19.1.0 @types/react-dom@19.1.0 @types/d3@7.4.3 jest@29.7.0 @testing-library/react@15.0.0 @testing-library/jest-dom@6.4.2 mongodb-memory-server@9.1.6 @playwright/test@1.42.1 ts-node@10.9.2 ts-jest@29.1.2
     Write-ColorOutput Green "Dependencies installed successfully."
 } catch {
     Write-ColorOutput Red "Error installing dependencies: $_"
