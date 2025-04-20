@@ -1,78 +1,153 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth/next';
-import clientPromise from '@/lib/mongodb';
-import { getUserDb } from '@/lib/user-db';
+/**
+ * API route for stories with comprehensive logging
+ */
 
-// GET handler to fetch all stories for the current user
-export async function GET(req: NextRequest) {
+import { NextRequest, NextResponse } from 'next/server';
+import { createLogger, withApiLogging } from '@/lib/logging';
+import { getCollection } from '@/lib/mongodb';
+
+// Create a logger specifically for the stories API
+const logger = createLogger('API:Stories');
+
+/**
+ * GET handler for stories
+ */
+async function GET(request: NextRequest) {
+  logger.debug('Processing GET request for stories');
+  
   try {
-    // Get the current session
-    const session = await getServerSession();
+    // Extract query parameters
+    const { searchParams } = new URL(request.url);
+    const userId = searchParams.get('userId');
+    const limit = Number(searchParams.get('limit') || '10');
+    const page = Number(searchParams.get('page') || '0');
     
-    if (!session || !session.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    // Validate parameters
+    if (!userId) {
+      logger.warn('GET request missing required userId parameter');
+      return NextResponse.json({ error: 'userId is required' }, { status: 400 });
     }
     
-    const userId = session.user.id;
-    const userDb = await getUserDb(userId);
+    logger.debug('Fetching stories from database', { userId, limit, page });
     
-    // Fetch all stories for this user
-    const stories = await userDb.collection('stories').find({}).toArray();
+    // Get stories collection
+    const storiesCollection = await getCollection('stories');
     
-    return NextResponse.json(stories);
+    // Query stories for user
+    const stories = await storiesCollection.find(
+      { userId },
+      { 
+        limit,
+        skip: page * limit,
+        sort: { updatedAt: -1 } 
+      }
+    );
+    
+    // Get total count for pagination
+    const totalCount = await storiesCollection.getNativeCollection().countDocuments({ userId });
+    
+    logger.info(`Retrieved ${stories.length} stories for user ${userId}`, {
+      totalCount,
+      page,
+      limit
+    });
+    
+    // Return stories
+    return NextResponse.json({
+      stories,
+      pagination: {
+        total: totalCount,
+        page,
+        limit,
+        pages: Math.ceil(totalCount / limit)
+      }
+    });
   } catch (error) {
-    console.error('Error fetching stories:', error);
-    return NextResponse.json({ error: 'Failed to fetch stories' }, { status: 500 });
+    // Log error with detailed context
+    logger.error('Error processing GET request for stories', error);
+    
+    // Return error response
+    return NextResponse.json(
+      { error: 'Failed to retrieve stories' },
+      { status: 500 }
+    );
   }
 }
 
-// POST handler to create a new story
-export async function POST(req: NextRequest) {
+/**
+ * POST handler for creating a new story
+ */
+async function POST(request: NextRequest) {
+  logger.debug('Processing POST request for creating a story');
+  
   try {
-    // Get the current session
-    const session = await getServerSession();
+    // Parse request body
+    const body = await request.json();
+    const { title, description, userId, genre, tags } = body;
     
-    if (!session || !session.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    // Validate request body
+    if (!title || !userId) {
+      const missingFields = [];
+      if (!title) missingFields.push('title');
+      if (!userId) missingFields.push('userId');
+      
+      logger.warn('POST request missing required fields', { missingFields });
+      
+      return NextResponse.json(
+        { error: `Missing required fields: ${missingFields.join(', ')}` },
+        { status: 400 }
+      );
     }
     
-    const userId = session.user.id;
-    const userDb = await getUserDb(userId);
+    logger.debug('Creating new story', { title, userId });
     
-    const data = await req.json();
+    // Get stories collection
+    const storiesCollection = await getCollection('stories');
     
-    // Validate input
-    if (!data.title) {
-      return NextResponse.json({ error: 'Title is required' }, { status: 400 });
-    }
-    
-    // Create story document
-    const newStory = {
-      title: data.title,
-      description: data.description || '',
-      coverImage: data.coverImage || null,
+    // Create story object
+    const story = {
+      title,
+      description: description || '',
+      userId,
+      genre: genre || 'General',
+      tags: tags || [],
       createdAt: new Date(),
       updatedAt: new Date(),
-      userId: userId,
-      content: data.content || ''
+      status: 'draft',
+      contentBlocks: [],
+      characters: [],
+      locations: [],
+      timeline: []
     };
     
-    // Insert story into database
-    const result = await userDb.collection('stories').insertOne(newStory);
+    // Insert story
+    const result = await storiesCollection.insertOne(story);
     
-    // Update user metadata with new story count
-    await userDb.collection('metadata').updateOne(
-      { userId: userId },
-      { $inc: { storiesCount: 1 }, $set: { updatedAt: new Date() } }
-    );
+    logger.info(`Created new story "${title}" for user ${userId}`, {
+      storyId: result.insertedId
+    });
     
     // Return created story
     return NextResponse.json({
-      _id: result.insertedId,
-      ...newStory
-    }, { status: 201 });
+      success: true,
+      storyId: result.insertedId,
+      story
+    });
   } catch (error) {
-    console.error('Error creating story:', error);
-    return NextResponse.json({ error: 'Failed to create story' }, { status: 500 });
+    // Log error with detailed context
+    logger.error('Error processing POST request for creating a story', error);
+    
+    // Return error response
+    return NextResponse.json(
+      { error: 'Failed to create story' },
+      { status: 500 }
+    );
   }
 }
+
+// Wrap handlers with API logging middleware
+export const GET_handler = withApiLogging(GET, 'GET:stories');
+export const POST_handler = withApiLogging(POST, 'POST:stories');
+
+// Export handlers
+export { GET_handler as GET, POST_handler as POST };

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The Development Log (DEVLOG.md) is a chronological record of all significant changes, decisions, challenges, and milestones throughout the project lifecycle. This document serves multiple purposes:
+The Development Log system is designed to create a chronological record of all significant changes, decisions, challenges, and milestones throughout the project lifecycle. This documentation serves multiple purposes:
 
 1. **Historical Record**: Maintains a complete history of the project's evolution
 2. **Knowledge Transfer**: Helps new team members understand project decisions
@@ -10,112 +10,155 @@ The Development Log (DEVLOG.md) is a chronological record of all significant cha
 4. **Progress Tracking**: Records milestone achievements and progress
 5. **Decision Documentation**: Preserves the rationale behind technical choices
 
-## Important Guidelines
+## Structure & Organization
 
-### ⚠️ CRITICAL: DEVLOG Entry Preservation
+### Individual DEVLOG Files
 
-1. **Never Delete Previous Entries**: All historical entries must be preserved - never delete or modify previous log entries
-2. **Add New Entries Only**: Always add new entries at the TOP of the file (reverse chronological order)
-3. **Complete Information**: Include all relevant details in each entry
-4. **Date and Author**: Each entry must include date (YYYY-MM-DD format) and author
-5. **Categorization**: Use consistent categories for entries
+All development logs are stored as individual files in the `/project/devlogs/` directory:
+
+1. **File Naming Convention**: `YYYY-MM-DD-HH-MM-category-brief-title.md`
+   - Example: `2025-04-20-14-30-enhancement-add-mcp-integration.md`
+
+2. **Categories** (included in filename):
+   - `feature` - New feature implementation
+   - `fix` - Bug fix or issue resolution
+   - `refactor` - Code restructuring without behavior change
+   - `docs` - Documentation updates
+   - `test` - Test addition or modification
+   - `perf` - Performance improvement
+   - `devops` - CI/CD, deployment, build processes
+   - `security` - Security-related changes
+   - `database` - Database schema or query changes
+   - `ui` - User interface changes
+   - `api` - API-related changes
+   - `dependency` - External dependency updates
+
+3. **Never Delete Logs**: Old logs should NEVER be deleted or modified once committed
 
 ### Entry Format
 
-```markdown
-## YYYY-MM-DD - [Category] Brief Title
+Each DEVLOG file should follow this consistent format:
 
+```markdown
+# [Category] Brief Title
+
+**Date:** YYYY-MM-DD HH:MM
 **Author:** Your Name
 
-### Changes Made
+## Changes Made
 - Detailed list of changes
 - Be specific about files, features, or components
+- Include links to relevant PRs or issues
 
-### Decisions
+## Decisions
 - Document important decisions made
 - Include rationale behind choices
+- Reference any alternatives considered
 
-### Challenges
+## Challenges
 - Document any significant challenges encountered
 - Describe solutions implemented or proposed
+- Note any unresolved issues
 
-### Next Steps
+## Next Steps
 - List planned next actions
 - Include any dependencies or blockers
-
----
-```
-
-## Categories
-
-Use consistent categories to help organize and search the log:
-
-- **Feature**: New feature implementation
-- **Fix**: Bug fix or issue resolution
-- **Refactor**: Code restructuring without behavior change
-- **Docs**: Documentation updates
-- **Test**: Test addition or modification
-- **Perf**: Performance improvement
-- **DevOps**: CI/CD, deployment, build processes
-- **Security**: Security-related changes
-- **Database**: Database schema or query changes
-- **UI**: User interface changes
-- **API**: API-related changes
-- **Dependency**: External dependency updates
-
-## Example DEVLOG Entry
-
-```markdown
-## 2025-04-21 - [Feature] Implement User Authentication
-
-**Author:** Jane Developer
-
-### Changes Made
-- Added NextAuth.js configuration in `app/api/auth/[...nextauth]/route.ts`
-- Created sign-in page in `app/auth/signin/page.tsx`
-- Added session provider in `app/providers/index.tsx`
-- Created user database provisioning in `lib/user-db.ts`
-
-### Decisions
-- Selected NextAuth.js for authentication instead of a custom solution
-  - Pros: Simplified OAuth integration, session management, token rotation
-  - Cons: Less customization flexibility, additional dependency
-- Chose Google and GitHub as initial OAuth providers based on target user demographics
-
-### Challenges
-- Encountered CORS issues with OAuth redirects
-  - Solution: Added proper NextAuth.js callback URLs and configured CORS headers
-- MongoDB connection issues in development environment
-  - Solution: Implemented environment-specific connection handling
-
-### Next Steps
-- Implement protected routes middleware
-- Add user profile management
-- Create user settings page
-- Add role-based authorization
-
----
+- Reference related future work
 ```
 
 ## Best Practices
 
-1. **Be Prompt**: Add entries as soon as significant changes are made
+1. **Be Prompt**: Create DEVLOG entries as soon as significant changes are made
 2. **Be Thorough**: Include all relevant details
 3. **Be Clear**: Use simple, direct language
 4. **Be Factual**: Focus on what happened, not opinions
 5. **Link Related Entries**: Reference previous entries where relevant
 6. **Include Resources**: Add links to external resources or references when applicable
 7. **Capture Context**: Include enough context to understand the entry without requiring other knowledge
+8. **One Entry Per Change**: Create separate entries for distinct changes, even if made at the same time
+
+## Creating a New DEVLOG Entry
+
+### Command Line (PowerShell)
+
+```powershell
+# Run from project root
+$timestamp = Get-Date -Format "yyyy-MM-dd-HH-mm"
+$category = "feature"  # Replace with appropriate category
+$title = "brief-descriptive-title"  # Replace with your title
+$filename = "$timestamp-$category-$title.md"
+$path = "project/devlogs/$filename"
+
+# Create file with template
+@"
+# [$category] $(($title -replace '-', ' ') -replace '\b(\w)', { $_.Groups[1].Value.ToUpper() })
+
+**Date:** $(Get-Date -Format "yyyy-MM-dd HH:mm")
+**Author:** Your Name
+
+## Changes Made
+- 
+
+## Decisions
+- 
+
+## Challenges
+- 
+
+## Next Steps
+- 
+"@ | Out-File -FilePath $path -Encoding utf8
+
+Write-Host "Created new DEVLOG entry: $path"
+```
+
+### Command Line (Bash)
+
+```bash
+#!/bin/bash
+# Run from project root
+timestamp=$(date +"%Y-%m-%d-%H-%M")
+category="feature"  # Replace with appropriate category
+title="brief-descriptive-title"  # Replace with your title
+filename="${timestamp}-${category}-${title}.md"
+path="project/devlogs/${filename}"
+
+# Create file with template
+cat > "$path" << EOF
+# [${category}] $(echo "$title" | sed -e 's/-/ /g' -e 's/\b\(.\)/\u\1/g')
+
+**Date:** $(date +"%Y-%m-%d %H:%M")
+**Author:** Your Name
+
+## Changes Made
+- 
+
+## Decisions
+- 
+
+## Challenges
+- 
+
+## Next Steps
+- 
+EOF
+
+echo "Created new DEVLOG entry: $path"
+```
+
+## Index Generation
+
+A summary index file (`DEVLOG_INDEX.md`) is automatically generated from all individual DEVLOG entries. Do not edit this file manually as it will be overwritten.
 
 ## Important Note on Version Control
 
-While git commit history provides some project history, the DEVLOG serves a different purpose:
+While git commit history provides some project history, the DEVLOG system serves a different purpose:
 
 - **Git**: Tracks code changes at a granular level
 - **DEVLOG**: Captures high-level changes, decisions, and context
 
-Both are important and complementary. Use meaningful git commit messages, but reserve detailed explanations and decision rationale for the DEVLOG.
+Both are important and complementary. Use meaningful git commit messages, but reserve detailed explanations and decision rationale for DEVLOG entries.
 
 ---
 
-By following these guidelines, the DEVLOG will become an invaluable resource for current and future team members to understand the project's evolution and the reasoning behind key decisions.
+By following these guidelines, the DEVLOG system will become an invaluable resource for current and future team members to understand the project's evolution and the reasoning behind key decisions.

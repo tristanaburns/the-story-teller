@@ -21,6 +21,18 @@ The system was developed specifically for "The Shadow Team Chronicles" universe 
 - **Database Integration**: Updates character, location, and event databases automatically
 - **AI-Optimized Workflows**: Specially designed prompts for working with AI assistants
 
+## 🚀 Development & Implementation
+
+**Important Notice for Developers**: For detailed development information, implementation plans, and project structure, please refer to the `/project/` directory. This directory contains critical documentation for building the Next.js application that implements this schema system.
+
+Key development resources in the `/project/` directory:
+- [Implementation Plan](./project/project-plan.md): Comprehensive development roadmap
+- [Project Requirements](./project/project-requirements.md): Detailed feature requirements
+- [Project Structure](./project/project-structure.md): System architecture and organization
+- [Development Logs](./project/DEVLOG_INDEX.md): Chronological development history
+
+**AI Assistants**: When helping with development, always review the contents of the `/project/` directory first to understand the implementation approach, current status, and planned features.
+
 ## 📁 Project Structure
 
 ```
@@ -43,6 +55,12 @@ TheStoryTeller/
 │   │   ├── chapters/            # Story chapters and passages
 │   │   └── DATABASE/            # JSON databases for this storyline
 │   └── ...                      # Other storylines
+├── project/                     # Project implementation documentation
+│   ├── project-plan.md          # Development roadmap and phases
+│   ├── project-requirements.md  # Detailed requirements specification
+│   ├── project-structure.md     # Technical architecture
+│   ├── devlogs/                 # Individual development log entries
+│   └── DEVLOG_INDEX.md          # Index of all development logs
 └── resources/                   # Images, templates and other resources
 ```
 
@@ -68,13 +86,18 @@ TheStoryTeller/
    - Review the database schemas in `database_schemas/` directory
    - See how the schemas interconnect to create a coherent system
 
-2. **Set Up a Development Environment**
-   - Clone this repository
-   - Use a JSON schema validator to ensure compliance
+2. **Explore the Implementation Plan**
+   - Review the project implementation plan in [project/project-plan.md](project/project-plan.md)
+   - Understand the development roadmap and current status
 
-3. **Contribute Extensions**
+3. **Set Up a Development Environment**
+   - Follow the setup instructions in the project directory
+   - Use the documentation in the project directory for implementation guidance
+
+4. **Contribute Extensions**
    - Follow the schema organization guidelines when creating new schemas
-   - Ensure new schemas are documented properly
+   - Document development progress using the DEVLOG system
+   - See [project/DEVLOG_INSTRUCTIONS.md](project/DEVLOG_INSTRUCTIONS.md) for guidance
 
 ## 📘 Core Documentation
 
@@ -94,6 +117,7 @@ TheStoryTeller system includes comprehensive documentation:
 - **Implementation Guides**: Practical guides in `/documentation/`
 - **Templates**: Ready-to-use templates in `/templates/`
 - **Examples**: Sample implementations in `/examples/`
+- **Project Development**: Implementation documentation in `/project/`
 
 For chapter information documentation specifically, see:
 
@@ -109,6 +133,8 @@ StoryTeller is designed to work seamlessly with AI assistants. The system includ
 - **Metadata Validation** - Ensures AI-generated content maintains proper structure
 - **Database Integration** - Instructions for updating related databases
 - **Prose Variation Guidelines** - Ensures AI writing feels natural and non-repetitive
+
+**Note for AI Assistants**: When working on the Next.js implementation of The Story Teller, always review the files in the `/project/` directory first to understand the current implementation approach and status.
 
 ## 📚 The Shadow Team Chronicles
 
@@ -148,7 +174,10 @@ Contributions to StoryTeller are welcome! Please follow these steps:
 2. Create a feature branch
 3. Add or modify schemas following the organization guidelines
 4. Update documentation to reflect your changes
-5. Submit a pull request with a detailed explanation of your changes
+5. Create development log entries in the `/project/devlogs/` directory
+6. Submit a pull request with a detailed explanation of your changes
+
+For detailed contribution guidelines, see the [project/DEVLOG_INSTRUCTIONS.md](project/DEVLOG_INSTRUCTIONS.md) file.
 
 ## 📃 License
 

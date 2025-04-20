@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  thinking-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: thinking-mcp
+    restart: unless-stopped
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://mongodb:27017/thinking-mcp
+      - MONGODB_DB_NAME=thinking-mcp
+      - API_KEY=dev_thinking_key
+      - API_KEY_REQUIRED=true
+      - PORT=3003
+    depends_on:
+      - mongodb
+    networks:
+      - thinking-network
+
+  mongodb:
+    image: mongo:latest
+    container_name: thinking-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - thinking-network
+
+networks:
+  thinking-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

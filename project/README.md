@@ -20,6 +20,7 @@ This application is built on the foundation of [The Story Teller schema system](
 - **Relationship Mapping**: Track and visualize relationships between narrative elements
 - **Content Editor**: Write and edit your story with markdown support
 - **Export Options**: Export your stories in various formats
+- **MCP Integration**: Enhanced functionality through Model Context Protocol servers
 
 ## 🚀 Getting Started
 
@@ -102,6 +103,7 @@ the-story-teller/
 │   ├── api/                      # API routes
 │   │   ├── auth/                 # Authentication API
 │   │   ├── stories/              # Story management API
+│   │   ├── mcp/                  # MCP API routes
 │   │   └── ai/                   # AI integration API
 │   ├── auth/                     # Authentication pages
 │   ├── dashboard/                # Dashboard pages
@@ -111,6 +113,7 @@ the-story-teller/
 │
 ├── components/                   # React components
 ├── lib/                          # Utility functions
+├── mcp-servers/                  # MCP server implementations
 ├── types/                        # TypeScript type definitions
 ├── public/                       # Static assets
 │
@@ -119,7 +122,14 @@ the-story-teller/
 │   ├── project-plan.md           # Implementation plan
 │   ├── project-structure.md      # Structure documentation
 │   ├── service-deployment-guide.md # Deployment guide
-│   └── test-implementation-plan.md # Testing plan
+│   ├── test-implementation-plan.md # Testing plan
+│   ├── DEVLOG_INDEX.md           # Development log index
+│   ├── DEVLOG_INSTRUCTIONS.md    # Development logging guidelines
+│   └── devlogs/                  # Individual development log entries
+│
+├── scripts/                      # Utility scripts
+│   ├── create-devlog-entry.ps1   # PowerShell script for creating devlog entries
+│   └── create-devlog-entry.sh    # Bash script for creating devlog entries
 │
 ├── database_schemas/             # JSON schemas for MongoDB validation
 ├── AI_INSTRUCTION_TEMPLATES/     # Templates for AI prompts
@@ -134,6 +144,29 @@ the-story-teller/
 ```
 
 ## 💻 Development
+
+### Adding Development Log Entries
+
+The project maintains a detailed development log with individual files for each significant change. To add a new entry:
+
+#### Using Scripts
+
+```bash
+# On Windows
+.\scripts\create-devlog-entry.ps1 -category "feature" -title "My New Feature"
+
+# On macOS/Linux
+./scripts/create-devlog-entry.sh feature "My New Feature"
+```
+
+#### Manual Creation
+
+1. Create a new file in the `project/devlogs/` directory
+2. Name it using the format: `YYYY-MM-DD-HH-MM-category-brief-title.md`
+3. Follow the template in [DEVLOG_INSTRUCTIONS.md](./DEVLOG_INSTRUCTIONS.md)
+4. Update the DEVLOG_INDEX.md file to include your new entry
+
+See [DEVLOG_INSTRUCTIONS.md](./DEVLOG_INSTRUCTIONS.md) for comprehensive documentation on development logging.
 
 ### Running Tests
 
@@ -196,7 +229,7 @@ The Story Teller includes an API endpoint for integration with OpenAI's Custom G
 - [Project Structure](project-structure.md)
 - [Service Deployment Guide](service-deployment-guide.md)
 - [Test Implementation Plan](test-implementation-plan.md)
-- [Development Log](DEVLOG.md)
+- [Development Log Index](DEVLOG_INDEX.md)
 
 ## 🧑‍💻 Contributing
 
@@ -205,6 +238,7 @@ The Story Teller includes an API endpoint for integration with OpenAI's Custom G
 3. Commit your changes: `git commit -m 'Add amazing feature'`
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a pull request
+6. Document your changes by creating a devlog entry: `./scripts/create-devlog-entry.sh feature "Your Amazing Feature"`
 
 ## 📄 License
 
@@ -216,6 +250,7 @@ This project is licensed under the MIT License - see the [LICENSE](../LICENSE) f
 - Next.js team for the amazing framework
 - MongoDB team for the database platform
 - OpenAI for the AI capabilities
+- MCP server implementers for enhanced functionality
 
 ---
 

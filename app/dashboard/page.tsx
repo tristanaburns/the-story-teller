@@ -1,9 +1,11 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import StoriesGrid from '@/components/dashboard/StoriesGrid';
+import StorySearch from '@/components/dashboard/StorySearch';
 
 interface Story {
   _id: string;
@@ -12,13 +14,16 @@ interface Story {
   coverImage?: string;
   createdAt: string;
   updatedAt: string;
+  status?: 'draft' | 'published' | 'archived';
 }
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [stories, setStories] = useState<Story[]>([]);
+  const [filteredStories, setFilteredStories] = useState<Story[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Redirect to signin if not authenticated
@@ -34,94 +39,98 @@ export default function Dashboard() {
 
   const fetchStories = async () => {
     try {
+      setIsLoading(true);
+      setError(null);
       const response = await fetch('/api/stories');
-      if (!response.ok) throw new Error('Failed to fetch stories');
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch stories');
+      }
       
       const data = await response.json();
       setStories(data);
+      setFilteredStories(data);
     } catch (error) {
       console.error('Error fetching stories:', error);
+      setError('Failed to load stories. Please try again later.');
     } finally {
       setIsLoading(false);
     }
   };
 
+  const handleSearch = (query: string) => {
+    if (!query.trim()) {
+      setFilteredStories(stories);
+      return;
+    }
+
+    const lowerQuery = query.toLowerCase();
+    const results = stories.filter(
+      story => 
+        story.title.toLowerCase().includes(lowerQuery) || 
+        (story.description && story.description.toLowerCase().includes(lowerQuery))
+    );
+    setFilteredStories(results);
+  };
+
   if (status === 'loading' || isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
-          <div>
-            <h1 className="text-3xl font-bold">Your Stories</h1>
-            <p className="text-gray-400 mt-1">
-              Create and manage your narrative content
-            </p>
-          </div>
-          <Link
-            href="/stories/new"
-            className="mt-4 md:mt-0 px-4 py-2 bg-primary hover:bg-blue-700 rounded-lg transition-colors duration-200 font-medium"
-          >
-            Create New Story
-          </Link>
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <div>
+          <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+          <p className="text-gray-400 mt-1">
+            Manage your stories and creative content
+          </p>
         </div>
-
-        {stories.length === 0 ? (
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 text-center">
-            <h2 className="text-xl font-semibold mb-3">No stories yet</h2>
-            <p className="text-gray-400 mb-6">
-              Get started by creating your first story
-            </p>
-            <Link
-              href="/stories/new"
-              className="px-6 py-3 bg-primary hover:bg-blue-700 rounded-lg transition-colors duration-200 inline-block font-medium"
-            >
-              Create Your First Story
-            </Link>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {stories.map((story) => (
-              <Link 
-                href={`/stories/${story._id}`} 
-                key={story._id}
-                className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-white/10 transition-colors duration-200"
-              >
-                <div 
-                  className="h-48 bg-gradient-to-br from-blue-600/20 to-purple-600/20 relative"
-                >
-                  {story.coverImage && (
-                    <img 
-                      src={story.coverImage} 
-                      alt={story.title} 
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
-                <div className="p-6">
-                  <h2 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-200">
-                    {story.title}
-                  </h2>
-                  <p className="text-gray-400 line-clamp-2 mb-4">
-                    {story.description}
-                  </p>
-                  <div className="flex justify-between items-center text-sm text-gray-500">
-                    <span>
-                      Last edited: {new Date(story.updatedAt).toLocaleDateString()}
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+        <Link
+          href="/stories/new"
+          className="mt-4 md:mt-0 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200 font-medium flex items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 4v16m8-8H4"
+            />
+          </svg>
+          Create New Story
+        </Link>
       </div>
+
+      <div className="mb-8">
+        <StorySearch onSearch={handleSearch} />
+      </div>
+
+      {error && (
+        <div className="bg-red-500/20 border border-red-500/50 text-white p-4 rounded-lg mb-8">
+          {error}
+          <button 
+            onClick={fetchStories} 
+            className="ml-4 underline text-red-200 hover:text-white"
+          >
+            Try again
+          </button>
+        </div>
+      )}
+
+      <StoriesGrid stories={filteredStories} />
     </div>
   );
 }
