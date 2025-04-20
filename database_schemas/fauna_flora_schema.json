@@ -1,0 +1,347 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/fauna_flora",
+  "title": "Fauna and Flora Schema",
+  "description": "Schema for documenting plant and animal species in The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "flora": {
+      "type": "array",
+      "description": "Collection of plant species from The Shadow Team Chronicles universe.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for this plant species."
+          },
+          "name": {
+            "type": "string",
+            "description": "Common name of the plant species."
+          },
+          "scientific_name": {
+            "type": "string",
+            "description": "Scientific or taxonomic name of the plant species."
+          },
+          "classification": {
+            "type": "object",
+            "properties": {
+              "kingdom": { "type": "string", "default": "Plantae" },
+              "family": { "type": "string" },
+              "genus": { "type": "string" },
+              "species": { "type": "string" }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed physical description of the plant, including size, structure, color, and notable features."
+          },
+          "habitat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The environments where this plant typically grows."
+          },
+          "distribution": {
+            "type": "string",
+            "description": "Geographic regions where this plant is found."
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "medicinal": {
+                "type": "boolean",
+                "description": "Whether the plant has medicinal properties."
+              },
+              "poisonous": {
+                "type": "boolean",
+                "description": "Whether the plant is poisonous or toxic."
+              },
+              "magical": {
+                "type": "boolean",
+                "description": "Whether the plant has magical or supernatural properties."
+              },
+              "edible": {
+                "type": "boolean",
+                "description": "Whether the plant is edible for humans."
+              }
+            }
+          },
+          "special_characteristics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Any unique or notable characteristics of this plant."
+          },
+          "cultural_significance": {
+            "type": "string",
+            "description": "How this plant is perceived, used, or valued in various cultures."
+          },
+          "ecological_role": {
+            "type": "string",
+            "description": "The plant's role in its ecosystem and interactions with other species."
+          },
+          "notable_uses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "How the plant is used by humans or other beings."
+          },
+          "appearance_in_story": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "event_id": {
+                  "type": "string",
+                  "description": "Reference to an event where this plant appears."
+                },
+                "location_id": {
+                  "type": "string",
+                  "description": "Reference to a location where this plant can be found."
+                },
+                "significance": {
+                  "type": "string",
+                  "description": "The narrative significance of this plant in the referenced context."
+                }
+              }
+            },
+            "description": "References to this plant's appearances in the narrative."
+          },
+          "metadata": {
+            "$ref": "../common/metadata_base_schema.json",
+            "description": "Standard metadata properties for this entry."
+          }
+        },
+        "required": ["id", "name", "description"]
+      }
+    },
+    "fauna": {
+      "type": "array",
+      "description": "Collection of animal species from The Shadow Team Chronicles universe.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for this animal species."
+          },
+          "name": {
+            "type": "string",
+            "description": "Common name of the animal species."
+          },
+          "scientific_name": {
+            "type": "string",
+            "description": "Scientific or taxonomic name of the animal species."
+          },
+          "classification": {
+            "type": "object",
+            "properties": {
+              "kingdom": { "type": "string", "default": "Animalia" },
+              "phylum": { "type": "string" },
+              "class": { "type": "string" },
+              "order": { "type": "string" },
+              "family": { "type": "string" },
+              "genus": { "type": "string" },
+              "species": { "type": "string" }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed physical description of the animal, including size, appearance, and distinctive features."
+          },
+          "habitat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The environments where this animal typically lives."
+          },
+          "distribution": {
+            "type": "string",
+            "description": "Geographic regions where this animal is found."
+          },
+          "behavior": {
+            "type": "object",
+            "properties": {
+              "social_structure": {
+                "type": "string",
+                "description": "How these animals organize socially."
+              },
+              "activity_pattern": {
+                "type": "string",
+                "enum": ["diurnal", "nocturnal", "crepuscular", "cathemeral"],
+                "description": "When the animal is typically active."
+              },
+              "diet": {
+                "type": "string",
+                "enum": ["carnivore", "herbivore", "omnivore", "insectivore", "other"],
+                "description": "The animal's primary food sources."
+              },
+              "hunting_method": {
+                "type": "string",
+                "description": "How the animal obtains food, if applicable."
+              }
+            }
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "dangerous": {
+                "type": "boolean",
+                "description": "Whether the animal is dangerous to humans."
+              },
+              "magical": {
+                "type": "boolean",
+                "description": "Whether the animal has magical or supernatural properties."
+              },
+              "intelligent": {
+                "type": "boolean",
+                "description": "Whether the animal possesses above-average intelligence."
+              },
+              "domesticable": {
+                "type": "boolean",
+                "description": "Whether the animal can be domesticated."
+              }
+            }
+          },
+          "special_abilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Any unique abilities or talents this animal possesses."
+          },
+          "cultural_significance": {
+            "type": "string",
+            "description": "How this animal is perceived, used, or valued in various cultures."
+          },
+          "ecological_role": {
+            "type": "string",
+            "description": "The animal's role in its ecosystem and interactions with other species."
+          },
+          "appearance_in_story": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "event_id": {
+                  "type": "string",
+                  "description": "Reference to an event where this animal appears."
+                },
+                "location_id": {
+                  "type": "string",
+                  "description": "Reference to a location where this animal can be found."
+                },
+                "significance": {
+                  "type": "string",
+                  "description": "The narrative significance of this animal in the referenced context."
+                }
+              }
+            },
+            "description": "References to this animal's appearances in the narrative."
+          },
+          "metadata": {
+            "$ref": "../common/metadata_base_schema.json",
+            "description": "Standard metadata properties for this entry."
+          }
+        },
+        "required": ["id", "name", "description"]
+      }
+    },
+    "magical_beings": {
+      "type": "array",
+      "description": "Collection of magical creatures that don't fit conventional fauna classifications.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for this magical being."
+          },
+          "name": {
+            "type": "string",
+            "description": "Common name of the magical being."
+          },
+          "classification": {
+            "type": "string",
+            "description": "The type or category of magical being."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed physical description of the being."
+          },
+          "habitat": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Where this being typically resides."
+          },
+          "magical_properties": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Name of the magical property or ability."
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Detailed explanation of how this property works."
+                },
+                "limitations": {
+                  "type": "string",
+                  "description": "Any constraints or limitations on this magical property."
+                }
+              },
+              "required": ["name", "description"]
+            },
+            "description": "Special magical abilities or properties this being possesses."
+          },
+          "origin": {
+            "type": "string",
+            "description": "The origin or creation story of this type of being."
+          },
+          "interaction_with_humans": {
+            "type": "string",
+            "description": "How this being typically interacts with humans or other intelligent species."
+          },
+          "appearance_in_story": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "event_id": {
+                  "type": "string",
+                  "description": "Reference to an event where this being appears."
+                },
+                "location_id": {
+                  "type": "string",
+                  "description": "Reference to a location where this being can be found."
+                },
+                "significance": {
+                  "type": "string",
+                  "description": "The narrative significance of this being in the referenced context."
+                }
+              }
+            },
+            "description": "References to this being's appearances in the narrative."
+          },
+          "metadata": {
+            "$ref": "../common/metadata_base_schema.json",
+            "description": "Standard metadata properties for this entry."
+          }
+        },
+        "required": ["id", "name", "description"]
+      }
+    }
+  }
+}

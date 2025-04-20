@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/timeline/temporal_positioning",
+  "title": "Temporal Positioning Schema",
+  "description": "Schema for defining when events occur and how they relate to other events in time within The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "absolute_date": {
+      "$ref": "../common/time_period_schema.json",
+      "description": "The specific point or span of time when this event occurred."
+    },
+    "era": {
+      "$ref": "../common/timeline_era_schema.json",
+      "description": "The historical era to which this event belongs."
+    },
+    "relative_position": {
+      "type": "object",
+      "properties": {
+        "preceding_events": {
+          "type": "array",
+          "items": {
+            "$ref": "../common/references_schema.json"
+          },
+          "description": "Events that directly led to or happened just before this event."
+        },
+        "concurrent_events": {
+          "type": "array",
+          "items": {
+            "$ref": "../common/references_schema.json"
+          },
+          "description": "Events happening simultaneously with this event that have relevant connections."
+        },
+        "subsequent_events": {
+          "type": "array",
+          "items": {
+            "$ref": "../common/references_schema.json"
+          },
+          "description": "Events that directly resulted from or happened as a consequence of this event."
+        }
+      },
+      "description": "How this event relates chronologically to other events in the timeline."
+    },
+    "duration": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "The numeric length of time this event spanned."
+        },
+        "unit": {
+          "type": "string",
+          "enum": ["minutes", "hours", "days", "weeks", "months", "years", "decades", "centuries", "instantaneous"],
+          "description": "The unit of measure for the duration."
+        },
+        "precision": {
+          "type": "string",
+          "enum": ["exact", "approximate", "minimum", "maximum", "average"],
+          "description": "How precisely the duration is known."
+        }
+      },
+      "required": ["value", "unit"],
+      "description": "How long the event lasted, if it wasn't instantaneous."
+    },
+    "calendar_system": {
+      "type": "string",
+      "description": "The dating or calendar framework being used for this temporal reference."
+    },
+    "cyclical_recurrence": {
+      "type": "object",
+      "properties": {
+        "cycle_length": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "description": "The numeric length of the recurrence cycle."
+            },
+            "unit": {
+              "type": "string",
+              "enum": ["days", "weeks", "months", "years", "decades"],
+              "description": "The unit of measure for the cycle length."
+            }
+          },
+          "required": ["value", "unit"],
+          "description": "How frequently the event repeats."
+        },
+        "next_occurrence": {
+          "$ref": "../common/time_period_schema.json",
+          "description": "When the event will occur again."
+        },
+        "variations": {
+          "type": "string",
+          "description": "How the recurrence might vary or change over time."
+        }
+      },
+      "description": "Information about events that repeat or occur in cycles."
+    },
+    "temporal_anomalies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "anomaly_type": {
+            "$ref": "../common/temporal_anomaly_schema.json",
+            "description": "The category of temporal anomaly affecting this event."
+          },
+          "description": {
+            "type": "string",
+            "description": "Details about how time functions unusually in relation to this event."
+          },
+          "scope": {
+            "type": "string",
+            "description": "Who or what is affected by this temporal anomaly."
+          }
+        },
+        "required": ["anomaly_type", "description"],
+        "description": "A specific unusual relationship with normal time flow."
+      },
+      "description": "Any unusual or non-linear temporal characteristics this event possesses."
+    }
+  }
+}

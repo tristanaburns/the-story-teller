@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/timeline_era",
+  "title": "Timeline Era Schema",
+  "description": "Standardized enumeration of historical eras in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "ancient_origins",
+    "mythical_age",
+    "old_kingdoms",
+    "imperial_expansion",
+    "industrial_revolution",
+    "global_conflicts",
+    "information_age",
+    "corporate_ascendancy",
+    "connectivity_era",
+    "quantum_age",
+    "transhuman_period",
+    "neo_feudalism",
+    "ecological_collapse",
+    "diaspora_era",
+    "new_renaissance"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each timeline era (not part of the enum, provided for documentation)",
+    "properties": {
+      "ancient_origins": {
+        "type": "string",
+        "description": "Earliest recorded history through prehistoric developments and early civilizations.",
+        "approximate_years": "Pre-history - 500 BCE"
+      },
+      "mythical_age": {
+        "type": "string",
+        "description": "Period of legendary figures and foundational myths that shape later cultural development.",
+        "approximate_years": "Variable depending on region"
+      },
+      "old_kingdoms": {
+        "type": "string",
+        "description": "Era of classical civilizations, empires, and the establishment of enduring cultural traditions.",
+        "approximate_years": "500 BCE - 1500 CE"
+      },
+      "imperial_expansion": {
+        "type": "string",
+        "description": "Period marked by colonization, exploration, and growing global interconnection.",
+        "approximate_years": "1500 - 1800"
+      },
+      "industrial_revolution": {
+        "type": "string",
+        "description": "Era of rapid technological development, urbanization, and mechanization of production.",
+        "approximate_years": "1800 - 1945"
+      },
+      "global_conflicts": {
+        "type": "string",
+        "description": "Period dominated by world wars and international power struggles that reshape political landscapes.",
+        "approximate_years": "1914 - 1989"
+      },
+      "information_age": {
+        "type": "string",
+        "description": "Era defined by the rise of digital technology, computers, and early information networks.",
+        "approximate_years": "1970 - 2030"
+      },
+      "corporate_ascendancy": {
+        "type": "string",
+        "description": "Period when corporate power begins to eclipse traditional nation-states in global influence.",
+        "approximate_years": "2030 - 2060"
+      },
+      "connectivity_era": {
+        "type": "string",
+        "description": "Period of ubiquitous digital connectivity, social transformation, and early human augmentation.",
+        "approximate_years": "2060 - 2090"
+      },
+      "quantum_age": {
+        "type": "string",
+        "description": "Era defined by quantum computing breakthroughs and their revolutionary impact on technology and society.",
+        "approximate_years": "2090 - 2120"
+      },
+      "transhuman_period": {
+        "type": "string",
+        "description": "Time when human enhancement technologies become widespread, blurring the line between human and machine.",
+        "approximate_years": "2120 - 2160"
+      },
+      "neo_feudalism": {
+        "type": "string",
+        "description": "Era characterized by extreme stratification between elites with access to advanced technology and marginalized populations.",
+        "approximate_years": "2160 - 2200"
+      },
+      "ecological_collapse": {
+        "type": "string",
+        "description": "Period of environmental crisis and large-scale climate disasters forcing societal adaptation.",
+        "approximate_years": "2200 - 2240"
+      },
+      "diaspora_era": {
+        "type": "string",
+        "description": "Period of significant off-world colonization and the beginning of humanity's expansion beyond Earth.",
+        "approximate_years": "2240 - 2280"
+      },
+      "new_renaissance": {
+        "type": "string",
+        "description": "Era of cultural and technological revival after periods of crisis, featuring new forms of social organization.",
+        "approximate_years": "2280 - 2320"
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/location_type",
+  "title": "Location Type Schema",
+  "description": "Standardized enumeration of all possible location types in The Shadow Team Chronicles universe, categorized by their physical nature and scale.",
+  "type": "string",
+  "enum": [
+    "universe",
+    "dimension",
+    "realm",
+    "celestial_body",
+    "planet",
+    "continent",
+    "region",
+    "country",
+    "territory",
+    "province",
+    "state",
+    "district",
+    "city",
+    "town",
+    "village",
+    "neighborhood",
+    "landmark",
+    "building",
+    "structure",
+    "room",
+    "natural_feature",
+    "body_of_water",
+    "mountain",
+    "forest",
+    "desert",
+    "wilderness",
+    "battlefield",
+    "ruin",
+    "dungeon",
+    "portal",
+    "road",
+    "path",
+    "bridge",
+    "vehicle",
+    "ship",
+    "aircraft",
+    "space_vessel",
+    "pocket_dimension",
+    "virtual_space",
+    "dreamscape",
+    "metaphysical_plane",
+    "underwater_location"
+  ],
+  "categoryMapping": {
+    "type": "object",
+    "description": "Grouping of location types by their category (not part of the enum, provided for documentation)",
+    "properties": {
+      "cosmic_scale": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["universe", "dimension", "realm", "celestial_body", "planet"]
+        },
+        "description": "Locations that exist at the largest possible scale, defining the fundamental physical or metaphysical context for other locations."
+      },
+      "geographical_regions": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["continent", "region", "country", "territory", "province", "state", "district"]
+        },
+        "description": "Major land divisions defined by political, cultural, or geographical boundaries."
+      },
+      "settlements": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["city", "town", "village", "neighborhood"]
+        },
+        "description": "Areas where people live in organized communities of various sizes."
+      },
+      "structures": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["landmark", "building", "structure", "room", "ruin", "dungeon", "bridge"]
+        },
+        "description": "Constructed locations made by intelligent beings for specific purposes."
+      },
+      "natural_environments": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["natural_feature", "body_of_water", "mountain", "forest", "desert", "wilderness", "underwater_location"]
+        },
+        "description": "Non-constructed locations defined by natural environmental features."
+      },
+      "transit_locations": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["road", "path", "portal", "vehicle", "ship", "aircraft", "space_vessel"]
+        },
+        "description": "Locations primarily designed for or associated with movement and transportation."
+      },
+      "abstract_locations": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["pocket_dimension", "virtual_space", "dreamscape", "metaphysical_plane"]
+        },
+        "description": "Non-physical or metaphysical locations that exist outside conventional physical space."
+      }
+    }
+  }
+}

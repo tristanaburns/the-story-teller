@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/organization_type",
+  "title": "Organization Type Schema",
+  "description": "Standardized enumeration of organization types within The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "corporation",
+    "government",
+    "military",
+    "intelligence_agency",
+    "criminal_syndicate",
+    "resistance_group",
+    "religious_order",
+    "research_institution",
+    "megacorp",
+    "non_profit",
+    "secret_society",
+    "mercenary_group",
+    "political_party",
+    "guild",
+    "tribe",
+    "community",
+    "cult",
+    "activist_group",
+    "media_outlet",
+    "terrorist_organization",
+    "international_body",
+    "clan",
+    "school",
+    "family_dynasty",
+    "social_club",
+    "hacker_collective"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each organization type (not part of the enum, provided for documentation)",
+    "properties": {
+      "corporation": {
+        "type": "string",
+        "description": "A business entity focused primarily on commercial interests and profit generation."
+      },
+      "government": {
+        "type": "string",
+        "description": "An official governing body with administrative authority over a region or population."
+      },
+      "military": {
+        "type": "string",
+        "description": "Armed forces organized for combat, defense, or security operations."
+      },
+      "intelligence_agency": {
+        "type": "string",
+        "description": "Organization specializing in gathering and analyzing information, often secretly."
+      },
+      "criminal_syndicate": {
+        "type": "string",
+        "description": "Group engaged in illegal activities, typically with a structured hierarchy and profit motive."
+      },
+      "resistance_group": {
+        "type": "string",
+        "description": "Organization opposing an established power through various means including protest, sabotage, or armed struggle."
+      },
+      "religious_order": {
+        "type": "string",
+        "description": "Community united by spiritual beliefs, practices, and/or traditions."
+      },
+      "research_institution": {
+        "type": "string",
+        "description": "Organization dedicated to scientific, technological, or academic investigation and discovery."
+      },
+      "megacorp": {
+        "type": "string",
+        "description": "Massive corporate entity with influence and power equivalent to or exceeding that of governments."
+      },
+      "non_profit": {
+        "type": "string",
+        "description": "Organization pursuing social, cultural, or humanitarian goals without profit distribution to members."
+      },
+      "secret_society": {
+        "type": "string",
+        "description": "Covert group with hidden membership, rituals, and objectives, often seeking to influence events from the shadows."
+      },
+      "mercenary_group": {
+        "type": "string",
+        "description": "Professional fighters who sell their military services to the highest bidder."
+      },
+      "political_party": {
+        "type": "string",
+        "description": "Organization that seeks to influence government policy or gain political power through electoral processes."
+      },
+      "guild": {
+        "type": "string",
+        "description": "Association of professionals, craftspeople, or merchants that regulates practices and standards in their field."
+      },
+      "tribe": {
+        "type": "string",
+        "description": "Social group connected by kinship, shared traditions, and often territory, typically with distinct cultural identity."
+      },
+      "community": {
+        "type": "string",
+        "description": "Group united by common interests, location, or purpose, usually with informal structure and collective decision-making."
+      },
+      "cult": {
+        "type": "string",
+        "description": "Group characterized by unusual beliefs, extreme devotion to a figure or idea, and often isolation from mainstream society."
+      },
+      "activist_group": {
+        "type": "string",
+        "description": "Organization focused on advocating for specific social, political, or environmental changes."
+      },
+      "media_outlet": {
+        "type": "string",
+        "description": "Entity that distributes news, entertainment, or information through various channels."
+      },
+      "terrorist_organization": {
+        "type": "string",
+        "description": "Group using violence and intimidation against civilians to achieve political, religious, or ideological objectives."
+      },
+      "international_body": {
+        "type": "string",
+        "description": "Organization composed of multiple member states or entities for coordinated governance or cooperation on specific issues."
+      },
+      "clan": {
+        "type": "string",
+        "description": "Group united by actual or perceived family ties with shared traditions and often territories."
+      },
+      "school": {
+        "type": "string",
+        "description": "Institution focused on education, training, or the transmission of specialized knowledge."
+      },
+      "family_dynasty": {
+        "type": "string",
+        "description": "Extended family with significant power, wealth, or influence maintained across multiple generations."
+      },
+      "social_club": {
+        "type": "string",
+        "description": "Organization formed primarily for social interaction, recreation, or mutual support among members."
+      },
+      "hacker_collective": {
+        "type": "string",
+        "description": "Group of computer specialists who collaborate on digital activities, often with political or social objectives."
+      }
+    }
+  },
+  "categoryMapping": {
+    "type": "object",
+    "description": "Grouping of organization types by category (not part of the enum, provided for documentation)",
+    "properties": {
+      "commercial": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["corporation", "megacorp", "guild", "media_outlet"]
+        },
+        "description": "Organizations primarily driven by economic interests."
+      },
+      "governmental": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["government", "military", "intelligence_agency", "international_body", "political_party"]
+        },
+        "description": "Organizations with official political authority or seeking such authority."
+      },
+      "illicit": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["criminal_syndicate", "terrorist_organization"]
+        },
+        "description": "Organizations operating outside legal frameworks for profit or ideological reasons."
+      },
+      "community_based": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["community", "tribe", "clan", "family_dynasty", "social_club"]
+        },
+        "description": "Organizations based on shared identity, territory, or interpersonal connections."
+      },
+      "ideological": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["religious_order", "cult", "activist_group", "resistance_group"]
+        },
+        "description": "Organizations united by shared beliefs, values, or objectives."
+      },
+      "specialized": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["research_institution", "non_profit", "mercenary_group", "hacker_collective", "school", "secret_society"]
+        },
+        "description": "Organizations with specific professional, expertise-based, or niche functions."
+      }
+    }
+  }
+}

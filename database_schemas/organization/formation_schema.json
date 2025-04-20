@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/formation",
+  "title": "Organization Formation Schema",
+  "description": "Details about how and why an organization was created, including its founding circumstances and original purpose.",
+  "type": "object",
+  "properties": {
+    "founding_date": {
+      "$ref": "../common/time_period_schema.json",
+      "description": "When the organization was officially or unofficially established."
+    },
+    "founders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to a character or organization that played a key role in founding this organization."
+          },
+          "role": {
+            "type": "string",
+            "description": "The specific contribution or function this founder provided in establishing the organization."
+          },
+          "motivation": {
+            "type": "string",
+            "description": "Why this founder helped establish the organization, including personal or strategic reasons."
+          },
+          "current_status": {
+            "type": "string",
+            "enum": ["active", "retired", "deceased", "unknown", "symbolic"],
+            "description": "The founder's present relationship to the organization, if any."
+          }
+        },
+        "required": ["entity_reference"]
+      },
+      "description": "Key figures or entities who established the organization."
+    },
+    "founding_circumstances": {
+      "type": "string",
+      "description": "The historical context, events, or conditions that led to the organization's creation."
+    },
+    "original_purpose": {
+      "type": "string",
+      "description": "The initial mission or objective that the organization was formed to pursue."
+    },
+    "formation_event": {
+      "$ref": "../common/references_schema.json",
+      "description": "Reference to a specific historical event that marks the organization's establishment."
+    },
+    "legal_status_at_founding": {
+      "type": "string",
+      "description": "The initial legal recognition, registration, or classification of the organization when it was formed."
+    },
+    "founding_resources": {
+      "type": "object",
+      "properties": {
+        "financial": {
+          "type": "string",
+          "description": "The monetary assets, funding sources, or economic basis that supported the organization's establishment."
+        },
+        "material": {
+          "type": "string",
+          "description": "Physical resources, equipment, or property the organization possessed at its founding."
+        },
+        "human": {
+          "type": "string",
+          "description": "The initial membership, personnel, or workforce that comprised the early organization."
+        },
+        "knowledge": {
+          "type": "string",
+          "description": "Intellectual property, expertise, or information that was crucial to the organization's formation."
+        },
+        "influential_backing": {
+          "type": "string",
+          "description": "Political support, social connections, or strategic alliances that enabled the organization's creation."
+        }
+      },
+      "description": "The assets and support that made the organization's formation possible."
+    },
+    "founding_challenges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Significant obstacles or opposition faced during the organization's establishment."
+    },
+    "founding_document": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The name of the charter, constitution, manifesto, or other document that established the organization's principles."
+        },
+        "key_principles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The core values, rules, or guidelines established in the founding document."
+        },
+        "signatories": {
+          "type": "array",
+          "items": {
+            "$ref": "../common/references_schema.json"
+          },
+          "description": "References to characters or entities who officially endorsed or signed the founding document."
+        },
+        "significance": {
+          "type": "string",
+          "description": "The historical or cultural importance of the founding document beyond its practical function."
+        }
+      },
+      "description": "The formal charter or declaration that established the organization's initial structure and purpose."
+    }
+  },
+  "required": ["founding_date", "original_purpose"]
+}

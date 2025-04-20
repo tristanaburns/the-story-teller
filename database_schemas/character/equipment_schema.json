@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/equipment",
+  "title": "Character Equipment Schema",
+  "description": "The key items, weapons, tools, and gear that a character regularly carries or uses, which may influence their capabilities and identity within the narrative.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "The primary name or title of this piece of equipment."
+      },
+      "item_type": {
+        "$ref": "../common/equipment_type_schema.json",
+        "description": "The categorical classification of this item within the equipment framework."
+      },
+      "description": {
+        "type": "string",
+        "description": "Detailed physical description of the item, including its appearance, materials, and distinctive features."
+      },
+      "artifact_reference": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Optional link to a full artifact record if this equipment is significant enough to warrant detailed documentation."
+      },
+      "significance": {
+        "type": "string",
+        "description": "The item's importance to the character's identity, capabilities, or narrative role. Explains why this item matters beyond its practical function."
+      },
+      "history": {
+        "type": "string",
+        "description": "The item's origins, previous owners, and how it came into the character's possession, which may link to important backstory elements."
+      },
+      "capabilities": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "function": {
+              "type": "string",
+              "description": "A specific capability or feature of the equipment."
+            },
+            "description": {
+              "type": "string",
+              "description": "Detailed explanation of how this function works and its effects in the narrative."
+            }
+          },
+          "required": ["function", "description"]
+        },
+        "description": "The functional properties of the equipment that affect the character's abilities or the narrative."
+      },
+      "limitations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Restrictions, drawbacks, or requirements associated with using or carrying this equipment."
+      },
+      "customization": {
+        "type": "string",
+        "description": "Any modifications or personal touches the character has added to make this equipment unique or better suited to their needs."
+      },
+      "visual_properties": {
+        "type": "object",
+        "properties": {
+          "appearance": {
+            "type": "string",
+            "description": "How the item looks when worn, carried, or used by the character, including how it integrates with their overall visual design."
+          },
+          "distinctive_elements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Visual features that make this item recognizable or memorable within the narrative."
+          }
+        },
+        "description": "How the equipment contributes to the character's visual presentation and design language."
+      }
+    },
+    "required": ["name", "item_type", "description"]
+  }
+}

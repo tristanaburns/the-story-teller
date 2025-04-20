@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/goals",
+  "title": "Organization Goals Schema",
+  "description": "The mission, objectives, and aspirations that drive an organization's actions and decisions.",
+  "type": "object",
+  "properties": {
+    "primary_purpose": {
+      "$ref": "../common/organization_purpose_schema.json",
+      "description": "The fundamental reason this organization exists."
+    },
+    "mission_statement": {
+      "type": "string",
+      "description": "The official declaration of the organization's purpose and core values."
+    },
+    "public_objectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "objective": {
+            "type": "string",
+            "description": "A goal or aim that the organization openly acknowledges pursuing."
+          },
+          "rationale": {
+            "type": "string",
+            "description": "The publicly stated reasoning or justification for this objective."
+          },
+          "progress": {
+            "type": "string",
+            "enum": ["not_started", "early_stages", "in_progress", "advanced", "nearly_complete", "achieved", "abandoned", "redefined"],
+            "description": "The current status of efforts toward achieving this objective."
+          },
+          "timeline": {
+            "type": "string",
+            "description": "The expected or announced schedule for completing this objective."
+          }
+        },
+        "required": ["objective"]
+      },
+      "description": "Goals that the organization has formally declared or that are widely known."
+    },
+    "secret_objectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "objective": {
+            "type": "string",
+            "description": "A goal that the organization pursues covertly or reveals only to insiders."
+          },
+          "true_rationale": {
+            "type": "string",
+            "description": "The actual reasoning or motivation behind this hidden objective."
+          },
+          "progress": {
+            "type": "string",
+            "enum": ["not_started", "early_stages", "in_progress", "advanced", "nearly_complete", "achieved", "abandoned", "redefined"],
+            "description": "The current status of efforts toward achieving this secret objective."
+          },
+          "cover_story": {
+            "type": "string",
+            "description": "How the organization disguises or explains activities related to this objective."
+          },
+          "known_by": {
+            "type": "string",
+            "description": "Who within or outside the organization is aware of this secret objective."
+          }
+        },
+        "required": ["objective", "true_rationale"]
+      },
+      "description": "Goals that the organization conceals from the public or most of its own members."
+    },
+    "ideological_framework": {
+      "type": "object",
+      "properties": {
+        "core_beliefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Fundamental principles or convictions that guide the organization's decisions and culture."
+        },
+        "value_system": {
+          "type": "string",
+          "description": "What the organization considers important, right, or worthy of pursuit and protection."
+        },
+        "philosophical_influences": {
+          "type": "string",
+          "description": "Schools of thought, concepts, or traditions that have shaped the organization's worldview."
+        },
+        "moral_flexibility": {
+          "type": "string",
+          "enum": ["absolute", "principled", "pragmatic", "situational", "opportunistic", "amoral"],
+          "description": "How strictly or consistently the organization adheres to its stated ethical positions."
+        }
+      },
+      "description": "The belief system or ethical framework that underlies the organization's goals."
+    },
+    "strategic_vision": {
+      "type": "object",
+      "properties": {
+        "long_term_aspiration": {
+          "type": "string",
+          "description": "The ultimate state or accomplishment the organization hopes to achieve."
+        },
+        "time_horizon": {
+          "type": "string",
+          "description": "How far into the future the organization typically plans its major initiatives."
+        },
+        "key_milestones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "What the organization aims to achieve at this intermediate stage."
+              },
+              "significance": {
+                "type": "string",
+                "description": "Why this milestone is important to the organization's larger objectives."
+              },
+              "estimated_timeline": {
+                "$ref": "../common/time_period_schema.json",
+                "description": "When the organization expects to reach this milestone."
+              }
+            },
+            "required": ["description"]
+          },
+          "description": "Major achievements or developments the organization plans to reach on the way to its ultimate goals."
+        },
+        "contingency_plans": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scenario": {
+                "type": "string",
+                "description": "A possible future situation that might require the organization to adapt its approach."
+              },
+              "planned_response": {
+                "type": "string",
+                "description": "How the organization intends to react if this scenario occurs."
+              }
+            },
+            "required": ["scenario", "planned_response"]
+          },
+          "description": "Alternative strategies the organization has prepared for potential obstacles or changes."
+        }
+      },
+      "description": "The long-term plan and direction that guides the organization's activities and growth."
+    },
+    "methods_and_tactics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "approach": {
+            "type": "string",
+            "description": "A specific methodology or strategy the organization employs to achieve its objectives."
+          },
+          "justification": {
+            "type": "string",
+            "description": "Why the organization considers this approach appropriate or necessary."
+          },
+          "typical_use_cases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Common situations or contexts where the organization applies this tactic."
+          },
+          "controversy": {
+            "type": "string",
+            "description": "Any ethical concerns, criticisms, or disagreements about this method, either internally or externally."
+          }
+        },
+        "required": ["approach"]
+      },
+      "description": "The characteristic ways the organization works to accomplish its goals."
+    },
+    "success_metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metric_name": {
+            "type": "string",
+            "description": "What the organization measures to evaluate its progress or effectiveness."
+          },
+          "measurement_method": {
+            "type": "string",
+            "description": "How the organization quantifies or qualifies performance on this metric."
+          },
+          "current_status": {
+            "type": "string",
+            "description": "The organization's present standing according to this measurement."
+          },
+          "target": {
+            "type": "string",
+            "description": "The level or outcome the organization aims to achieve on this metric."
+          }
+        },
+        "required": ["metric_name"]
+      },
+      "description": "How the organization defines and measures success in its endeavors."
+    },
+    "evolution_of_goals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "previous_goal": {
+            "type": "string",
+            "description": "An objective or mission the organization once pursued but has since modified or abandoned."
+          },
+          "current_adaptation": {
+            "type": "string",
+            "description": "How this goal has changed or what has replaced it in the organization's priorities."
+          },
+          "reason_for_change": {
+            "type": "string",
+            "description": "What prompted the organization to alter this aspect of its direction."
+          },
+          "date_of_shift": {
+            "$ref": "../common/time_period_schema.json",
+            "description": "When this change in organizational focus occurred."
+          }
+        },
+        "required": ["previous_goal", "current_adaptation"]
+      },
+      "description": "How the organization's objectives have changed over time and why."
+    }
+  },
+  "required": ["mission_statement"]
+}

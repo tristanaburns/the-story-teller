@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/metadata/versioning",
+  "title": "Content Versioning Schema",
+  "description": "Schema for tracking version history and changes to content within The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "The current version of this content in semantic versioning format (MAJOR.MINOR.PATCH)."
+    },
+    "previous_versions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$",
+            "description": "The version number in semantic versioning format."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When this version was created."
+          },
+          "author": {
+            "type": "string",
+            "description": "Who created this version."
+          },
+          "change_summary": {
+            "type": "string",
+            "description": "Brief description of changes from the previous version."
+          },
+          "archive_location": {
+            "type": "string",
+            "description": "Where the full content of this version is stored, if maintained."
+          }
+        },
+        "required": ["version", "timestamp", "change_summary"]
+      },
+      "description": "History of previous versions of this content."
+    },
+    "change_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When this change was made."
+          },
+          "author": {
+            "type": "string",
+            "description": "Who made this change."
+          },
+          "change_type": {
+            "$ref": "../common/change_type_schema.json",
+            "description": "The category of change that was made."
+          },
+          "description": {
+            "type": "string",
+            "description": "What was changed and why."
+          },
+          "sections_affected": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Which parts of the content were modified."
+          },
+          "version_produced": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$",
+            "description": "Which version number resulted from this change."
+          }
+        },
+        "required": ["timestamp", "change_type", "description"]
+      },
+      "description": "Detailed record of individual changes made to the content over time."
+    },
+    "branching": {
+      "type": "object",
+      "properties": {
+        "branch_name": {
+          "type": "string",
+          "description": "The name of the content branch, if using a branched development approach."
+        },
+        "parent_branch": {
+          "type": "string",
+          "description": "The branch from which this content was derived, if applicable."
+        },
+        "derived_branches": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Branches that were created based on this content."
+        },
+        "merge_history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source_branch": {
+                "type": "string",
+                "description": "The branch from which changes were incorporated."
+              },
+              "target_branch": {
+                "type": "string",
+                "description": "The branch into which changes were merged."
+              },
+              "merge_timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When the merge occurred."
+              },
+              "merge_conflicts": {
+                "type": "boolean",
+                "description": "Whether there were conflicts during the merge process."
+              },
+              "conflict_resolution": {
+                "type": "string",
+                "description": "How any merge conflicts were addressed."
+              }
+            },
+            "required": ["source_branch", "target_branch", "merge_timestamp"]
+          },
+          "description": "Record of merges involving this content branch."
+        }
+      },
+      "description": "Information about branch management for this content, if using a branched workflow."
+    },
+    "deprecation": {
+      "type": "object",
+      "properties": {
+        "is_deprecated": {
+          "type": "boolean",
+          "description": "Whether this content is considered obsolete or superseded."
+        },
+        "deprecation_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this content was marked as deprecated."
+        },
+        "deprecation_reason": {
+          "type": "string",
+          "description": "Why this content is no longer current or relevant."
+        },
+        "replacement_reference": {
+          "$ref": "../common/references_schema.json",
+          "description": "Reference to the content that replaces this deprecated item."
+        }
+      },
+      "required": ["is_deprecated"],
+      "description": "Information about deprecated content that is maintained for reference but no longer current."
+    }
+  },
+  "required": ["version"]
+}

@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/funding_source",
+  "title": "Funding Source Schema",
+  "description": "Standardized enumeration of methods organizations use to finance their activities within The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "commercial_revenue",
+    "membership_dues",
+    "taxation",
+    "donations",
+    "investments",
+    "criminal_activity",
+    "government_funding",
+    "corporate_sponsorship",
+    "resource_exploitation",
+    "tribute",
+    "front_operations",
+    "subscription_services",
+    "product_sales",
+    "illegal_trade",
+    "data_selling",
+    "contract_work",
+    "grants",
+    "asset_seizure",
+    "protection_money",
+    "magical_resources",
+    "technology_licensing",
+    "crowdfunding",
+    "tithe"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each funding source (not part of the enum, provided for documentation)",
+    "properties": {
+      "commercial_revenue": {
+        "type": "string",
+        "description": "Income from standard business operations, selling goods or services on the open market."
+      },
+      "membership_dues": {
+        "type": "string",
+        "description": "Regular payments required from individuals or entities belonging to the organization."
+      },
+      "taxation": {
+        "type": "string",
+        "description": "Mandatory financial contributions collected from a population or territory under the organization's authority."
+      },
+      "donations": {
+        "type": "string",
+        "description": "Voluntary financial or material contributions given by supporters or the public."
+      },
+      "investments": {
+        "type": "string",
+        "description": "Revenue from financial instruments, property, or business stakes owned by the organization."
+      },
+      "criminal_activity": {
+        "type": "string",
+        "description": "Money obtained through illegal operations such as theft, extortion, smuggling, or other prohibited activities."
+      },
+      "government_funding": {
+        "type": "string",
+        "description": "Financial support provided by official governing bodies through budgets, contracts, or grants."
+      },
+      "corporate_sponsorship": {
+        "type": "string",
+        "description": "Funding provided by businesses in exchange for promotional consideration, influence, or services."
+      },
+      "resource_exploitation": {
+        "type": "string",
+        "description": "Direct extraction and monetization of natural resources such as minerals, energy, or biological materials."
+      },
+      "tribute": {
+        "type": "string",
+        "description": "Regular payments made by subordinate groups or territories as a symbol of allegiance or for protection."
+      },
+      "front_operations": {
+        "type": "string",
+        "description": "Legitimate-appearing businesses or activities that serve primarily to generate or launder funds."
+      },
+      "subscription_services": {
+        "type": "string",
+        "description": "Recurring payment model where clients pay regularly for ongoing access to services or content."
+      },
+      "product_sales": {
+        "type": "string",
+        "description": "Revenue from developing and selling specific goods, whether physical or digital."
+      },
+      "illegal_trade": {
+        "type": "string",
+        "description": "Trafficking in prohibited goods such as drugs, weapons, or other contraband."
+      },
+      "data_selling": {
+        "type": "string",
+        "description": "Monetization of collected information, intelligence, or digital data."
+      },
+      "contract_work": {
+        "type": "string",
+        "description": "Payment for specific services rendered to clients on a project basis."
+      },
+      "grants": {
+        "type": "string",
+        "description": "Non-repayable funds provided by governments, foundations, or other entities for specific purposes."
+      },
+      "asset_seizure": {
+        "type": "string",
+        "description": "Appropriation of property, accounts, or resources from enemies, criminals, or targets."
+      },
+      "protection_money": {
+        "type": "string",
+        "description": "Payments extracted from individuals or businesses in exchange for safety from harm or interference."
+      },
+      "magical_resources": {
+        "type": "string",
+        "description": "Exploitation or sale of arcane materials, enchanted items, or supernatural services."
+      },
+      "technology_licensing": {
+        "type": "string",
+        "description": "Revenue from allowing others to use proprietary technological innovations or patents."
+      },
+      "crowdfunding": {
+        "type": "string",
+        "description": "Small contributions solicited from large numbers of people, typically via digital platforms."
+      },
+      "tithe": {
+        "type": "string",
+        "description": "Religiously mandated contributions, traditionally a tenth of income or produce given by followers."
+      }
+    }
+  },
+  "categoryMapping": {
+    "type": "object",
+    "description": "Grouping of funding sources by legitimacy (not part of the enum, provided for documentation)",
+    "properties": {
+      "legitimate": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "commercial_revenue", 
+            "membership_dues", 
+            "taxation", 
+            "donations", 
+            "investments", 
+            "government_funding", 
+            "corporate_sponsorship", 
+            "subscription_services", 
+            "product_sales", 
+            "contract_work", 
+            "grants", 
+            "technology_licensing", 
+            "crowdfunding", 
+            "tithe", 
+            "resource_exploitation"
+          ]
+        },
+        "description": "Funding sources that are generally legal and socially accepted."
+      },
+      "questionable": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "front_operations", 
+            "tribute", 
+            "data_selling", 
+            "magical_resources"
+          ]
+        },
+        "description": "Funding sources that operate in gray areas or depend on context for legitimacy."
+      },
+      "illicit": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "criminal_activity", 
+            "illegal_trade", 
+            "asset_seizure", 
+            "protection_money"
+          ]
+        },
+        "description": "Funding sources that are generally illegal or considered unethical."
+      }
+    }
+  }
+}

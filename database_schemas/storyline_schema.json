@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/storyline",
+  "title": "Storyline Schema",
+  "description": "Schema for defining narrative storylines within The Shadow Team Chronicles universe, encompassing the structural, thematic, and presentational aspects of stories.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "metadata/base_metadata_schema.json"
+    }
+  ],
+  "properties": {
+    "object_type": {
+      "const": "storyline",
+      "description": "Fixed value indicating this is a storyline object."
+    },
+    "story_references": {
+      "$ref": "storyline/story_references_schema.json"
+    },
+    "appearances": {
+      "$ref": "storyline/appearances_schema.json"
+    },
+    "interactions": {
+      "$ref": "storyline/interactions_schema.json"
+    },
+    "thematic_connections": {
+      "$ref": "storyline/thematic_connections_schema.json"
+    },
+    "chronological_view": {
+      "$ref": "storyline/chronological_view_schema.json"
+    },
+    "writing_style": {
+      "$ref": "common/writing_elements_schema.json"
+    },
+    "timeline_integration": {
+      "$ref": "storyline/timeline_integration_schema.json"
+    },
+    "multimedia": {
+      "$ref": "multimedia_schema.json#/properties/multimedia"
+    }
+  },
+  "required": ["object_type", "story_references"]
+}

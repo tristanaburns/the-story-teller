@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/historical_significance",
+  "title": "Historical Significance Schema",
+  "description": "Standard schema for describing how an entity relates to historical events and impacts the narrative world.",
+  "type": "object",
+  "properties": {
+    "major_historical_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_reference": {
+            "$ref": "references_schema.json"
+          },
+          "entity_role": {
+            "type": "string",
+            "description": "The part this entity played in the historical event (e.g., 'participant', 'catalyst', 'witness', 'victim', 'location')."
+          },
+          "impact": {
+            "type": "string",
+            "description": "How this event affected the entity or how the entity influenced the event."
+          }
+        },
+        "required": ["entity_role"]
+      },
+      "description": "Key historical events connected to this entity that have significance in the narrative world."
+    },
+    "cultural_importance": {
+      "type": "string",
+      "description": "How this entity is viewed or remembered in the culture(s) of the narrative world, including legends, myths, or common knowledge associated with it."
+    },
+    "symbolic_meaning": {
+      "type": "string",
+      "description": "What this entity represents in the broader thematic context of the narrative world (e.g., 'symbol of hope', 'harbinger of destruction', 'embodiment of corruption')."
+    },
+    "legacy": {
+      "type": "string",
+      "description": "The lasting impact this entity has had or will have on the narrative world, extending beyond its direct actions or existence."
+    }
+  }
+}

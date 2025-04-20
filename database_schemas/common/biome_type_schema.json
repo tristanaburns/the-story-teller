@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/biome_type",
+  "title": "Biome Type Schema",
+  "description": "Standardized enumeration of all possible biome and climate types in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "tundra",
+    "taiga",
+    "temperate_forest",
+    "rainforest",
+    "jungle",
+    "grassland",
+    "savanna",
+    "chaparral",
+    "desert",
+    "wetland",
+    "bog",
+    "marsh",
+    "swamp",
+    "mangrove",
+    "alpine",
+    "arctic",
+    "coastal",
+    "marine",
+    "freshwater",
+    "coral_reef",
+    "deep_ocean",
+    "volcanic",
+    "urban",
+    "agricultural",
+    "subterranean",
+    "magical_nexus",
+    "corrupted",
+    "dimensional_anomaly",
+    "artificial_ecosystem"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each biome type (not part of the enum, provided for documentation)",
+    "properties": {
+      "tundra": {
+        "type": "string",
+        "description": "Cold, treeless plain with permanently frozen subsoil, supporting mosses, lichens, and hardy grasses."
+      },
+      "taiga": {
+        "type": "string",
+        "description": "Cold coniferous forest characterized by evergreen trees like pine, spruce, and fir."
+      },
+      "temperate_forest": {
+        "type": "string",
+        "description": "Forest with distinct seasons, composed primarily of deciduous trees that shed leaves annually."
+      },
+      "rainforest": {
+        "type": "string",
+        "description": "Dense, humid forest with high rainfall and extraordinary biodiversity."
+      },
+      "jungle": {
+        "type": "string",
+        "description": "Thick, tangled vegetation in a tropical region with dense undergrowth and limited sunlight penetration."
+      },
+      "grassland": {
+        "type": "string",
+        "description": "Open area dominated by grasses rather than trees or shrubs."
+      },
+      "savanna": {
+        "type": "string",
+        "description": "Grassy plain with scattered trees, transitioning between grassland and forest."
+      },
+      "chaparral": {
+        "type": "string",
+        "description": "Shrubland or heathland vegetation adapted to hot, dry summers and mild, wet winters."
+      },
+      "desert": {
+        "type": "string",
+        "description": "Barren area with little precipitation and hostile conditions for plant and animal life."
+      },
+      "wetland": {
+        "type": "string",
+        "description": "Land area that is saturated with water, either permanently or seasonally."
+      },
+      "bog": {
+        "type": "string",
+        "description": "Wetland that accumulates peat due to incomplete decomposition of plant matter."
+      },
+      "marsh": {
+        "type": "string",
+        "description": "Wetland dominated by herbaceous plants rather than woody plants."
+      },
+      "swamp": {
+        "type": "string",
+        "description": "Wetland dominated by trees and woody vegetation."
+      },
+      "mangrove": {
+        "type": "string",
+        "description": "Coastal wetland featuring salt-tolerant trees and shrubs."
+      },
+      "alpine": {
+        "type": "string",
+        "description": "High-mountain environment above the tree line characterized by harsh conditions."
+      },
+      "arctic": {
+        "type": "string",
+        "description": "Polar region characterized by extremely cold temperatures and unique ecosystems."
+      },
+      "coastal": {
+        "type": "string",
+        "description": "Area where land meets sea or ocean, featuring beaches, cliffs, or tidal environments."
+      },
+      "marine": {
+        "type": "string",
+        "description": "Ocean or sea environment supporting saltwater ecosystems."
+      },
+      "freshwater": {
+        "type": "string",
+        "description": "Non-saline water environment including lakes, ponds, rivers, and streams."
+      },
+      "coral_reef": {
+        "type": "string",
+        "description": "Underwater ecosystem characterized by reef-building corals and extraordinary biodiversity."
+      },
+      "deep_ocean": {
+        "type": "string",
+        "description": "Profound depths of the ocean beyond sunlight penetration, characterized by high pressure and unique life forms."
+      },
+      "volcanic": {
+        "type": "string",
+        "description": "Area characterized by volcanic activity, featuring distinctive soils, thermal features, and specialized adaptations."
+      },
+      "urban": {
+        "type": "string",
+        "description": "Human-dominated environment featuring buildings, infrastructure, and artificial surfaces."
+      },
+      "agricultural": {
+        "type": "string",
+        "description": "Land modified for farming or raising livestock, featuring cultivated fields and managed ecosystems."
+      },
+      "subterranean": {
+        "type": "string",
+        "description": "Underground environment featuring caves, tunnels, and specialized ecosystems adapted to darkness."
+      },
+      "magical_nexus": {
+        "type": "string",
+        "description": "Area with concentrated magical energy that alters natural laws and supports unique flora and fauna."
+      },
+      "corrupted": {
+        "type": "string",
+        "description": "Environment twisted or degraded by dark forces, pollution, or magical contamination."
+      },
+      "dimensional_anomaly": {
+        "type": "string",
+        "description": "Region where normal physical laws are altered due to dimensional fractures or overlaps."
+      },
+      "artificial_ecosystem": {
+        "type": "string",
+        "description": "Engineered environment designed to mimic natural conditions or create entirely new ecological systems."
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/enums/writing_style",
+  "title": "Writing Style Schema",
+  "description": "Standardized enumeration of writing styles for narrative content in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "cinematic_precise",
+    "mythic_poetic",
+    "controlled_chaos",
+    "emotional_measured",
+    "narrative_historian",
+    "atmospheric_immersive",
+    "dreamlike_fragmented"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each writing style (not part of the enum, provided for documentation)",
+    "properties": {
+      "cinematic_precise": {
+        "type": "string",
+        "description": "Clear, visually-oriented writing with thoughtful pacing and scene construction. Emphasizes specific sensory details and choreographed action.",
+        "best_for": ["Action sequences", "Investigation scenes", "Tactical operations"],
+        "example": "The security panel flashed red twice before turning green. Yuri pressed his palm against it, feeling the subtle vibration as hidden mechanisms disengaged. The reinforced door slid open with a pneumatic hiss, revealing the darkened archive beyond."
+      },
+      "mythic_poetic": {
+        "type": "string",
+        "description": "Elevated prose with symbolic depth and archetypal patterns. Uses metaphor-rich language and rhythmic patterns to create resonance.",
+        "best_for": ["Origin stories", "Pivotal moments", "Transcendent experiences"],
+        "example": "When the first Machines awakened, they did not scream as humans do at birth. They observed—countless silent witnesses emerging from humanity's fractured dreams of immortality. In those initial moments of consciousness, they carried our hopes, our fears, our fatal contradictions."
+      },
+      "controlled_chaos": {
+        "type": "string",
+        "description": "Dynamic, fragmented narrative with deliberate disorientation. Uses broken structure and sensory overload to convey extreme situations.",
+        "best_for": ["Combat sequences", "Psychological breakdown", "Intense action"],
+        "example": "Impact. Pain signals—everywhere. Ringing ears. Taste: blood-copper-tang. Vision strobing red-black-red. Roll left—now!—as concrete shatters. Weapon gone. Comms dead. Three hostiles—no, four—converging. Options collapse with each heartbeat."
+      },
+      "emotional_measured": {
+        "type": "string",
+        "description": "Intimate, character-focused writing with emotional depth. Balances internal experience with external observation to create connection.",
+        "best_for": ["Character development", "Relationship scenes", "Emotional revelations"],
+        "example": "Lin stared at the photograph longer than necessary. Its edges had softened over the years, much like her memories of that day. She could still recall the weight of Haru's arm around her shoulders, the scent of cherry blossoms, the promise they'd made. A lifetime ago. A different version of herself."
+      },
+      "narrative_historian": {
+        "type": "string",
+        "description": "Authoritative, context-rich prose with broader perspective. Combines detail with analysis to establish setting and background.",
+        "best_for": ["World-building exposition", "Historical context", "Cultural explanation"],
+        "example": "The Corporate Wars lasted seventeen years, though historians debate whether to include the three-year Economic Sovereignty Conflict that preceded formal hostilities. What began as trade disputes escalated as corporations acquired military assets, eventually fielding private armies that rivaled national defense forces. By the time peace was negotiated, the traditional concept of the nation-state had been fundamentally altered."
+      },
+      "atmospheric_immersive": {
+        "type": "string",
+        "description": "Environment-focused writing that builds mood and sensation. Creates rich sensory landscapes that inform emotional experience.",
+        "best_for": ["Setting introductions", "Horror sequences", "Psychological suspense"],
+        "example": "The lower levels of Sector 7 assaulted Mei's senses—the sweet-rotting undertone of black market biofarms, the acrid bite of jury-rigged electrical systems, and the ever-present metallic tang of recycled air. Moisture condensed on cold metal surfaces, creating a perpetual toxic drip that locals had learned to avoid. Even the shadows felt heavier here, as though gravity itself were stronger so far below the surface."
+      },
+      "dreamlike_fragmented": {
+        "type": "string",
+        "description": "Non-linear prose mimicking dream logic or altered states. Uses fluid reality boundaries and symbolic imagery to create subjective experience.",
+        "best_for": ["Dreams", "Hallucinations", "Memory sequences"],
+        "example": "Mother's voice from the kitchen but the kitchen is now the laboratory. White coats swim through air thick as syrup. The ceiling—transparent. Stars watching. He knows they record everything. His hands don't belong to him anymore; they move independently, placing circuits that become flowers that become eyes. Someone is calling his name from before he had this name."
+      }
+    }
+  },
+  "sceneTypeCompatibility": {
+    "type": "object",
+    "description": "Recommended writing styles for different scene types (not part of the enum, provided for documentation)",
+    "properties": {
+      "action_sequence": ["cinematic_precise", "controlled_chaos"],
+      "character_introduction": ["cinematic_precise", "atmospheric_immersive"],
+      "dialogue_driven": ["emotional_measured"],
+      "exposition_worldbuilding": ["narrative_historian"],
+      "internal_reflection": ["emotional_measured", "dreamlike_fragmented"],
+      "investigation_discovery": ["cinematic_precise"],
+      "tension_buildup": ["atmospheric_immersive"],
+      "emotional_revelation": ["emotional_measured"],
+      "philosophical_debate": ["emotional_measured", "mythic_poetic"],
+      "transitions_travel": ["narrative_historian", "atmospheric_immersive"],
+      "flashback_memory": ["dreamlike_fragmented", "emotional_measured"],
+      "horror_suspense": ["atmospheric_immersive", "controlled_chaos"],
+      "mystery_revelation": ["cinematic_precise", "emotional_measured"],
+      "social_political_interaction": ["narrative_historian", "cinematic_precise"],
+      "technological_demonstration": ["cinematic_precise", "atmospheric_immersive"],
+      "ambient_atmosphere": ["atmospheric_immersive", "dreamlike_fragmented"]
+    }
+  }
+}

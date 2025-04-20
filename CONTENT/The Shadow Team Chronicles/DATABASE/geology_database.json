@@ -1,0 +1,60 @@
+{
+  "geological_formations": [
+    {
+      "id": "geo-northern-mountains-001",
+      "name": "Northern Mountain Range",
+      "type": "mountain_range",
+      "location": "Northern Honshu",
+      "era": "Heian Period",
+      "description": "A rugged mountain chain forming the northern approach from Kyoto, characterized by steep passes, dense forests, and hidden valleys that provided strategic advantages for Yoshi and Benkei during their journey. These mountains served as both a physical and symbolic boundary, marking their transition from urban centers of power to the wilderness where conventional forces struggled to operate.",
+      "physical_characteristics": {
+        "elevation": "600-1500 meters",
+        "composition": "Primarily granite and metamorphic formations",
+        "notable_features": [
+          "Narrow, easily defended passes",
+          "Steep gorges with fast-moving rivers",
+          "Dense forests providing natural concealment",
+          "Scattered caves and cavern systems"
+        ],
+        "climate": "Cold winters with heavy snowfall, mild summers, frequent mist in valleys"
+      },
+      "strategic_significance": {
+        "defensive_advantages": "Limited approach routes easily monitored and defended",
+        "resource_availability": "Fresh water, game, and limited foraging opportunities",
+        "navigation_challenges": "Complex terrain requiring specialized knowledge of mountain paths"
+      },
+      "narrative_importance": {
+        "physical_journey": "Represents the challenging path away from conventional society",
+        "symbolic_meaning": "The ascent into mountains parallels Benkei's internal journey toward transformation",
+        "plot_function": "Provides natural obstacles that test and develop the Yoshi-Benkei relationship"
+      },
+      "notable_locations": [
+        {
+          "location_id": "loc-mountain-path-001",
+          "significance": "Site of landslide incident where Benkei saved Yoshi, breaking protocol"
+        },
+        {
+          "location_id": "loc-hidden-forge-001",
+          "significance": "Concealed mountain forge where Benkei's transformation manifested physically"
+        }
+      ],
+      "appears_in": [
+        {
+          "event_id": "event-mountain-path-landslide-001",
+          "role": "setting"
+        },
+        {
+          "event_id": "event-taira-mercenary-ambush-001",
+          "role": "setting"
+        }
+      ],
+      "metadata": {
+        "creation_date": "2025-03-27T00:00:00Z",
+        "last_modified": "2025-03-27T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - FINAL - STORYLINE - CHAPTER - 1 - The Warriors Oath.md"
+      }
+    }
+  ]
+}

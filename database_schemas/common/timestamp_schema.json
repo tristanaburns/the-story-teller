@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/timestamp",
+  "title": "Timestamp Schema",
+  "description": "Standard format for temporal references across all schema types.",
+  "type": "string",
+  "format": "date-time",
+  "description": "A standardized in-universe date and time, allowing for consistent temporal referencing across objects and events."
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Multimedia Schema",
+  "description": "Schema for associating visual and audio media with world-building elements, including AI-generated prompts for consistency in visual representation.",
+  "type": "object",
+  "properties": {
+    "multimedia": {
+      "type": "object",
+      "description": "Media resources associated with this world-building element.",
+      "properties": {
+        "image_prompt": {
+          "type": "string",
+          "description": "A detailed descriptive prompt designed for AI image generation tools to create a consistent visual representation of this object. This should include specific visual details, lighting, perspective, and style information."
+        },
+        "image_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The direct web address where the canonical image of this object is stored and can be retrieved."
+        },
+        "video_prompt": {
+          "type": "string",
+          "description": "A detailed descriptive prompt designed for AI video generation tools to create motion-based visual representation. This should include movement descriptions, camera angles, transitions, and duration information."
+        },
+        "video_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The direct web address where a canonical video representation of this object is stored."
+        },
+        "audio_description": {
+          "type": "string",
+          "description": "Detailed description of sounds, music, or voice characteristics associated with this object, providing auditory context for multimedia representations."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/impact_magnitude",
+  "title": "Impact Magnitude Schema",
+  "description": "Standard scale for defining the scope and significance of events, influences, or changes within the narrative universe.",
+  "type": "string",
+  "enum": [
+    "trivial",
+    "minor",
+    "moderate",
+    "significant",
+    "major",
+    "historic",
+    "world_changing",
+    "era_defining",
+    "reality_altering",
+    "cosmic"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each magnitude level (not part of the enum, provided for documentation)",
+    "properties": {
+      "trivial": {
+        "type": "string",
+        "description": "Effects limited to a few individuals with no lasting consequences beyond immediate participants."
+      },
+      "minor": {
+        "type": "string",
+        "description": "Local impact affecting a small community or group with effects lasting days to weeks."
+      },
+      "moderate": {
+        "type": "string",
+        "description": "Regional influence affecting multiple communities with effects persisting for months."
+      },
+      "significant": {
+        "type": "string",
+        "description": "Large regional or small national impact with effects lasting years and potential historical documentation."
+      },
+      "major": {
+        "type": "string",
+        "description": "National or multi-regional impact with effects spanning decades and definite historical significance."
+      },
+      "historic": {
+        "type": "string",
+        "description": "Continental or global impact changing political boundaries, cultural norms, or technological paradigms with effects lasting centuries."
+      },
+      "world_changing": {
+        "type": "string",
+        "description": "Global transformation that fundamentally alters civilization's trajectory, creating a clear 'before and after' division in history."
+      },
+      "era_defining": {
+        "type": "string",
+        "description": "Marks the transition between major historical epochs, completely reshaping society, technology, or the natural world."
+      },
+      "reality_altering": {
+        "type": "string",
+        "description": "Changes fundamental aspects of reality itself, altering physical laws, magical systems, or the metaphysical structure of the world."
+      },
+      "cosmic": {
+        "type": "string",
+        "description": "Impact extends beyond a single world or dimension, affecting multiple realities or the fundamental structure of the multiverse."
+      }
+    }
+  }
+}

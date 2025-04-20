@@ -1,0 +1,182 @@
+{
+  "chapters": [
+    {
+      "id": "chapter-warriors-oath-001",
+      "title": "The Warriors Oath",
+      "chapter_number": 2,
+      "file_path": "CONTENT\\The Shadow Team Chronicles\\STORYLINE\\FINAL\\1. The Shadow Team Chronicles - FINAL - STORYLINE - CHAPTER - 1 - The Warriors Oath.md",
+      "created_date": "2025-03-15T00:00:00Z",
+      "last_modified": "2025-03-17T00:00:00Z",
+      "status": "final",
+      "version": 1.0,
+      "word_count": 12500,
+      "reading_time_minutes": 50,
+      "narrative_time": {
+        "start_date": "1174-05-15",
+        "end_date": "1174-05-19",
+        "time_span_description": "Four days during the spring of 1174"
+      },
+      "previous_chapter": {
+        "id": "chapter-bridge-of-fate-001",
+        "title": "The Bridge of Fate"
+      },
+      "next_chapter": null,
+      "locations": [
+        "loc-gojo-bridge-001",
+        "loc-kyoto-outskirts-001",
+        "loc-mountain-forest-village-001",
+        "loc-mountain-path-001",
+        "loc-forest-ambush-point-001",
+        "loc-mountain-monastery-001"
+      ],
+      "characters": {
+        "primary": [
+          "char-yoshi-001",
+          "char-benkei-001"
+        ],
+        "secondary": [
+          "char-tanaka-hunter-001",
+          "char-village-elder-001"
+        ],
+        "mentioned": [
+          "char-monastery-abbot-001"
+        ]
+      },
+      "point_of_view": "third-person-omniscient",
+      "narrative_style": "historical-epic",
+      "primary_themes": [
+        "theme-martial-philosophy-001",
+        "theme-finding-purpose-001"
+      ],
+      "secondary_themes": [
+        "theme-protocol-necessity-001", 
+        "theme-complementary-strengths-001"
+      ],
+      "key_events": [
+        "event-yoshi-benkei-three-cuts-001",
+        "event-benkei-oath-001",
+        "event-journey-north-begins-001",
+        "event-village-boar-hunt-001",
+        "event-mountain-path-landslide-001",
+        "event-taira-mercenary-ambush-001",
+        "event-benkei-monastery-childhood-001"
+      ],
+      "event_chain": "event-chain-yoshi-benkei-001",
+      "chapter_sections": [
+        {
+          "title": "The Duel at Gojo Bridge",
+          "narrative_function": "Establishes the battle where Yoshi defeats Benkei"
+        },
+        {
+          "title": "Three Cuts, Three Lessons",
+          "narrative_function": "Details the specific technique and philosophy behind Yoshi's victory"
+        },
+        {
+          "title": "The Warrior's Oath",
+          "narrative_function": "Depicts Benkei's pledge of loyalty to Yoshi"
+        },
+        {
+          "title": "The Road Beyond the Bridge",
+          "narrative_function": "Shows the beginning of their journey together"
+        },
+        {
+          "title": "First Steps as Comrades",
+          "narrative_function": "Chronicles their early interactions and challenges as master and retainer"
+        },
+        {
+          "title": "The Road Before the Bridge - Benkei's Past",
+          "narrative_function": "Flashback revealing Benkei's backstory and character motivation"
+        }
+      ],
+      "pacing": {
+        "overall": "measured",
+        "action_scenes": "dynamic",
+        "character_development": "deliberate",
+        "description": "atmospheric"
+      },
+      "cultural_references": [
+        "Master-retainer relationships in Heian Period Japan",
+        "Buddhist monastery life and training",
+        "Traditional dueling protocols",
+        "Warrior code and honor systems"
+      ],
+      "character_arcs": {
+        "char-benkei-001": {
+          "arc_type": "transformation",
+          "starting_state": "Directionless warrior seeking purpose through empty victories",
+          "ending_state": "Devoted retainer finding meaning in service to a worthy master",
+          "pivot_moment": "event-benkei-oath-001",
+          "development_summary": "Benkei transforms from a collector of meaningless trophies to a purposeful protector, learning that true strength lies in service rather than domination."
+        },
+        "char-yoshi-001": {
+          "arc_type": "revelation",
+          "starting_state": "Skilled warrior traveling alone",
+          "ending_state": "Leader with a devoted companion",
+          "pivot_moment": "event-taira-mercenary-ambush-001",
+          "development_summary": "Yoshi reveals deeper aspects of his character through his interactions with Benkei, villagers, and enemies, establishing himself as both a superior warrior and a thoughtful leader."
+        }
+      },
+      "editorial_notes": {
+        "strengths": [
+          "Strong characterization of Benkei through backstory",
+          "Visual clarity in combat sequences",
+          "Thematically coherent lessons through the three cuts"
+        ],
+        "areas_for_improvement": [
+          "Consider expanding political context of Genpei War",
+          "Potential to develop secondary characters in village scene"
+        ],
+        "follow_up_chapters": [
+          "Need to address the growing Taira pursuit",
+          "Explore developing trust between Yoshi and Benkei"
+        ]
+      },
+      "setting_details": {
+        "weather_conditions": "Beginning in night mist, changing to rain, then clearing",
+        "season": "Early spring",
+        "environmental_factors": "Mountain paths becoming treacherous due to rain",
+        "sensory_atmosphere": "Transitions from misty mystery to clear purpose"
+      },
+      "metadata": {
+        "creation_date": "2025-03-17T00:00:00Z",
+        "last_modified": "2025-03-17T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "author": "Story Database System"
+      }
+    },
+    {
+      "id": "chapter-path-into-mountains-001",
+      "title": "The Path Into the Mountains",
+      "sequence_number": 3,
+      "description": "Yoshi leads Benkei into the mountains to a hidden forge, where Benkei undergoes a transformation through the creation of new weapons and armor that symbolize his rebirth as a warrior with purpose.",
+      "key_events": [
+        "event-yoshi-benkei-mountain-journey-001",
+        "event-forging-weapons-armor-001",
+        "event-benkei-concealment-decision-001",
+        "event-bandit-ambush-001"
+      ],
+      "key_characters": [
+        "char-yoshi-001",
+        "char-benkei-001",
+        "char-blacksmith-001"
+      ],
+      "key_locations": [
+        "loc-mountain-path-001",
+        "loc-hidden-forge-001"
+      ],
+      "key_themes": [
+        "theme-transformation-001",
+        "theme-identity-001"
+      ],
+      "created_at": "2025-03-17T00:00:00Z",
+      "updated_at": "2025-03-17T00:00:00Z"
+    }
+  ],
+  "metadata": {
+    "creation_date": "2025-03-15T00:00:00Z",
+    "last_modified": "2025-03-24T00:00:00Z",
+    "version": 1,
+    "canon_status": "official"
+  }
+}

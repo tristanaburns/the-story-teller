@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location",
+  "title": "Location Schema",
+  "description": "Schema for defining locations across multiple universes, galaxies, and planetary bodies, supporting both terrestrial and space-based coordinates.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "base_metadata_schema.json"
+    }
+  ],
+  "properties": {
+    "object_type": {
+      "const": "location",
+      "description": "Fixed value indicating this is a location object. This constrains the general object_type property from the base schema."
+    },
+    "universe_data": {
+      "$ref": "location/universe_data_schema.json"
+    },
+    "celestial_data": {
+      "$ref": "location/celestial_data_schema.json"
+    },
+    "geographical_data": {
+      "$ref": "location/geographical_data_schema.json"
+    },
+    "space_coordinates": {
+      "$ref": "location/space_coordinates_schema.json"
+    },
+    "time_variants": {
+      "$ref": "location/time_variants_schema.json"
+    },
+    "physical_characteristics": {
+      "$ref": "location/physical_characteristics_schema.json"
+    },
+    "cultural_significance": {
+      "$ref": "location/cultural_significance_schema.json"
+    },
+    "multimedia": {
+      "$ref": "multimedia_schema.json#/properties/multimedia"
+    }
+  },
+  "required": ["geographical_data", "physical_characteristics"]
+}

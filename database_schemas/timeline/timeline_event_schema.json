@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/timeline/timeline_event",
+  "title": "Timeline Event Schema",
+  "description": "Schema for defining discrete events on the timeline within The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "event_name": {
+      "type": "string",
+      "description": "The official title or designation for this historical occurrence."
+    },
+    "event_type": {
+      "$ref": "../common/timeline_event_type_schema.json",
+      "description": "The category of event this represents."
+    },
+    "description": {
+      "type": "string",
+      "description": "A concise summary of what occurred during this event."
+    },
+    "detailed_account": {
+      "type": "string",
+      "description": "An in-depth explanation of the event, including context and consequences."
+    },
+    "temporal_data": {
+      "$ref": "./temporal_positioning_schema.json",
+      "description": "When this event occurred and how it relates to other events in time."
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to a location where this event occurred."
+          },
+          "role": {
+            "type": "string",
+            "enum": ["primary", "secondary", "origin", "destination", "affected_area", "staging_ground"],
+            "description": "How this location was involved in the event."
+          },
+          "details": {
+            "type": "string",
+            "description": "Specific information about what happened at this location during the event."
+          }
+        },
+        "required": ["location_reference"]
+      },
+      "description": "The places where this event took place."
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to a character or organization involved in this event."
+          },
+          "role": {
+            "type": "string",
+            "description": "How this entity participated in or was affected by the event."
+          },
+          "significance": {
+            "type": "string",
+            "description": "Why this entity's involvement matters to the event or its outcomes."
+          },
+          "faction": {
+            "type": "string",
+            "description": "Which side or group this participant represented during the event, if applicable."
+          }
+        },
+        "required": ["entity_reference"]
+      },
+      "description": "Characters and organizations that took part in or were directly affected by this event."
+    },
+    "causes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cause_type": {
+            "$ref": "../common/timeline_causality_type_schema.json",
+            "description": "How this factor contributed to bringing about the event."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of how this cause led to or influenced the event."
+          },
+          "related_event": {
+            "$ref": "../common/references_schema.json",
+            "description": "If the cause was another historical event, a reference to it."
+          }
+        },
+        "required": ["description"]
+      },
+      "description": "Factors, circumstances, or prior events that led to this event occurring."
+    },
+    "consequences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "consequence_type": {
+            "$ref": "../common/timeline_consequence_type_schema.json",
+            "description": "The category of outcome this represents."
+          },
+          "timeframe": {
+            "type": "string",
+            "enum": ["immediate", "short_term", "long_term", "ongoing", "theoretical"],
+            "description": "When this consequence manifested or is expected to manifest."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of this particular effect or result of the event."
+          },
+          "affected_entities": {
+            "type": "array",
+            "items": {
+              "$ref": "../common/references_schema.json"
+            },
+            "description": "Characters, organizations, or locations specifically impacted by this consequence."
+          },
+          "related_event": {
+            "$ref": "../common/references_schema.json",
+            "description": "If this consequence led to another historical event, a reference to it."
+          }
+        },
+        "required": ["description"]
+      },
+      "description": "The outcomes, effects, or results that followed from this event."
+    },
+    "significance": {
+      "type": "object",
+      "properties": {
+        "importance_level": {
+          "$ref": "../common/timeline_significance_schema.json",
+          "description": "How important this event is in the overall timeline."
+        },
+        "historical_impact": {
+          "type": "string",
+          "description": "How this event changed the course of history in the narrative world."
+        },
+        "narrative_importance": {
+          "type": "string",
+          "description": "How this event relates to or affects the main storylines and arcs."
+        },
+        "legacy": {
+          "type": "string",
+          "description": "How this event is remembered, commemorated, or interpreted in later times."
+        }
+      },
+      "required": ["importance_level"],
+      "description": "The importance and impact of this event in historical and narrative contexts."
+    },
+    "documentation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "document_type": {
+            "type": "string",
+            "enum": ["historical_record", "personal_account", "official_report", "media_coverage", "artifact", "academic_analysis", "propaganda", "artistic_representation", "conspiracy_theory"],
+            "description": "The category of historical documentation this represents."
+          },
+          "title": {
+            "type": "string",
+            "description": "The name or heading of this document or record."
+          },
+          "content": {
+            "type": "string",
+            "description": "The relevant text or description of this documentation."
+          },
+          "creator": {
+            "$ref": "../common/references_schema.json",
+            "description": "Who produced this documentation, if known."
+          },
+          "reliability": {
+            "type": "string",
+            "enum": ["factual", "mostly_accurate", "biased", "disputed", "fictional", "deceptive"],
+            "description": "How trustworthy this source is as a historical record."
+          }
+        },
+        "required": ["document_type", "content"]
+      },
+      "description": "Records, accounts, or evidence related to this historical event."
+    },
+    "alternate_perspectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "viewpoint": {
+            "type": "string",
+            "description": "The faction, culture, or entity holding this alternative interpretation."
+          },
+          "interpretation": {
+            "type": "string",
+            "description": "How this event is understood or explained differently from the standard account."
+          },
+          "basis": {
+            "type": "string",
+            "description": "The evidence, beliefs, or motivations supporting this alternative perspective."
+          }
+        },
+        "required": ["viewpoint", "interpretation"]
+      },
+      "description": "Different ways this event is understood or remembered by various groups."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keywords or categories for organizing and finding this timeline event."
+    },
+    "confidentiality": {
+      "type": "string",
+      "enum": ["public_knowledge", "restricted", "classified", "hidden", "forgotten", "fabricated"],
+      "description": "How widely known or accessible information about this event is within the narrative world."
+    }
+  },
+  "required": ["event_name", "description", "temporal_data", "significance"]
+}

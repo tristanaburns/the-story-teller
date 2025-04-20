@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location/environment",
+  "title": "Location Environment Schema",
+  "description": "Natural and artificial ecosystem elements, environmental conditions, and ecological impact of a location.",
+  "type": "object",
+  "properties": {
+    "natural_elements": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "string",
+          "description": "How natural features exist within or alongside artificial elements at this location."
+        },
+        "flora": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "species": {
+                "type": "string",
+                "description": "The name of a significant plant species or plant group found in this location."
+              },
+              "prevalence": {
+                "type": "string",
+                "enum": ["dominant", "common", "scattered", "rare", "unique"],
+                "description": "How frequently this plant species occurs within the location."
+              },
+              "significance": {
+                "type": "string",
+                "description": "Why this plant species matters to the location's identity, ecosystem, or inhabitants."
+              }
+            },
+            "required": ["species"]
+          },
+          "description": "Notable or distinctive plant life found at this location."
+        },
+        "fauna": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "species": {
+                "type": "string",
+                "description": "The name of a significant animal species or animal group found in this location."
+              },
+              "behavior": {
+                "type": "string",
+                "description": "How these animals typically act within this location, including migratory patterns, territorial behavior, or interactions with inhabitants."
+              },
+              "relationship_to_inhabitants": {
+                "type": "string",
+                "description": "How the location's intelligent inhabitants interact with these animals (e.g., 'hunted', 'domesticated', 'avoided', 'worshipped')."
+              }
+            },
+            "required": ["species"]
+          },
+          "description": "Notable or distinctive animal life found at this location."
+        },
+        "notable_features": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The title or descriptor for this natural feature."
+              },
+              "description": {
+                "type": "string",
+                "description": "Detailed information about what this natural feature is and what makes it significant."
+              }
+            },
+            "required": ["name", "description"]
+          },
+          "description": "Distinctive natural elements that define the location's environment."
+        }
+      },
+      "description": "The living or naturally occurring components of the location's ecosystem."
+    },
+    "environmental_conditions": {
+      "type": "object",
+      "properties": {
+        "air_quality": {
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "The overall condition of the air in this location, including purity, breathability, and any notable contaminants."
+            },
+            "variations": {
+              "type": "object",
+              "description": "How air quality differs across different parts or levels of the location, if applicable."
+            }
+          },
+          "description": "The composition, purity, and breathability of the air in this location."
+        },
+        "water_sources": {
+          "type": "object",
+          "properties": {
+            "primary": {
+              "type": "string",
+              "description": "The main source of water for this location."
+            },
+            "secondary": {
+              "type": "string",
+              "description": "Additional water sources that supplement the primary source."
+            },
+            "quality_control": {
+              "type": "string",
+              "description": "Methods used to maintain or improve water quality in this location."
+            },
+            "water_features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Notable bodies of water within or adjacent to the location."
+            }
+          },
+          "description": "Available water resources and how they are managed or utilized."
+        },
+        "magical_conditions": {
+          "type": "object",
+          "properties": {
+            "ambient_magic": {
+              "type": "string",
+              "description": "The baseline level of magical energy present in this location."
+            },
+            "magical_phenomena": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name or description of this magical phenomenon."
+                  },
+                  "effect": {
+                    "type": "string",
+                    "description": "What this phenomenon does or how it manifests."
+                  },
+                  "trigger": {
+                    "type": "string",
+                    "description": "What causes this phenomenon to occur or activate."
+                  }
+                },
+                "required": ["name", "effect"]
+              },
+              "description": "Recurring or persistent magical effects that characterize this location."
+            },
+            "magical_restrictions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Types of magic that function differently, are enhanced, or are suppressed in this location."
+            }
+          },
+          "description": "How magical forces manifest or behave in this location, if applicable."
+        },
+        "technological_fields": {
+          "type": "object",
+          "properties": {
+            "energy_grid": {
+              "type": "string",
+              "description": "How power is generated, distributed, and utilized throughout this location."
+            },
+            "connectivity": {
+              "type": "string",
+              "description": "The communication and data infrastructure available in this location."
+            },
+            "automation": {
+              "type": "string",
+              "description": "The extent to which systems and services are automated in this location."
+            },
+            "unique_technologies": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Technologies that are distinctive to this location or particularly prevalent here."
+            }
+          },
+          "description": "The technological infrastructure and systems that shape this location's environment."
+        }
+      },
+      "description": "The ambient physical, magical, and technological conditions that characterize the location."
+    },
+    "ecological_impact": {
+      "type": "object",
+      "properties": {
+        "footprint": {
+          "type": "string",
+          "description": "The overall effect of this location's existence on the surrounding natural environment."
+        },
+        "sustainability_measures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Actions or systems implemented to reduce environmental harm or promote ecological balance."
+        },
+        "environmental_hazards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name or description of this environmental danger."
+              },
+              "description": {
+                "type": "string",
+                "description": "Details about this hazard, including its causes, effects, and scope."
+              },
+              "management": {
+                "type": "string",
+                "description": "How this hazard is contained, mitigated, or addressed by the location's inhabitants or authorities."
+              },
+              "magnitude": {
+                "$ref": "../common/impact_magnitude_schema.json",
+                "description": "The severity or scale of this environmental hazard."
+              }
+            },
+            "required": ["name", "description"]
+          },
+          "description": "Dangerous or harmful environmental conditions present in the location."
+        },
+        "conservation_areas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The designation or title of this protected area."
+              },
+              "purpose": {
+                "type": "string",
+                "description": "Why this area is preserved or given special protection."
+              },
+              "restrictions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Activities that are limited or prohibited in this conservation zone."
+              }
+            },
+            "required": ["name"]
+          },
+          "description": "Areas within the location that are specifically protected or preserved for ecological reasons."
+        }
+      },
+      "description": "How the location interacts with its broader ecological context, including environmental protection and damage."
+    },
+    "sensory_experience": {
+      "type": "object",
+      "properties": {
+        "sights": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Distinctive visual elements that a visitor would notice about this location's environment."
+        },
+        "sounds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Characteristic noises, music, or ambient sounds that pervade this location."
+        },
+        "smells": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Odors and scents that are typical of or distinctive to this location."
+        },
+        "tactile_sensations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "How the location feels to the touch, including textures, temperatures, or other physical sensations."
+        },
+        "atmosphere": {
+          "type": "string",
+          "description": "The overall mood or feeling evoked by the environment of this location."
+        }
+      },
+      "description": "The sensory details that create the environmental experience of being in this location."
+    }
+  }
+}

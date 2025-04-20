@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/cultural_value",
+  "title": "Cultural Value Schema",
+  "description": "Standardized enumeration of core values that define organizational cultures in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "tradition",
+    "innovation",
+    "loyalty",
+    "efficiency",
+    "hierarchy",
+    "equality",
+    "competition",
+    "collaboration",
+    "secrecy",
+    "transparency",
+    "discipline",
+    "creativity",
+    "honor",
+    "profit",
+    "service",
+    "strength",
+    "knowledge",
+    "harmony",
+    "individuality",
+    "collectivism",
+    "adaptability",
+    "purity",
+    "ambition",
+    "integrity",
+    "ruthlessness",
+    "compassion",
+    "sacrifice",
+    "excellence",
+    "spirituality",
+    "pragmatism"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each cultural value (not part of the enum, provided for documentation)",
+    "properties": {
+      "tradition": {
+        "type": "string",
+        "description": "Respect for established practices, continuity with the past, and preservation of heritage."
+      },
+      "innovation": {
+        "type": "string",
+        "description": "Emphasis on new ideas, approaches, and willingness to break from conventional methods."
+      },
+      "loyalty": {
+        "type": "string",
+        "description": "Steadfast allegiance to the organization, its leadership, and fellow members."
+      },
+      "efficiency": {
+        "type": "string",
+        "description": "Maximizing productivity while minimizing wasted resources, effort, or time."
+      },
+      "hierarchy": {
+        "type": "string",
+        "description": "Respect for rank, clear chain of command, and deference to authority."
+      },
+      "equality": {
+        "type": "string",
+        "description": "Belief in fair treatment, equal voice, and distributed power among members."
+      },
+      "competition": {
+        "type": "string",
+        "description": "Encouraging rivalry, individual achievement, and striving to outperform others."
+      },
+      "collaboration": {
+        "type": "string",
+        "description": "Prioritizing teamwork, mutual support, and collective accomplishment."
+      },
+      "secrecy": {
+        "type": "string",
+        "description": "Protecting information, operating discreetly, and maintaining confidentiality."
+      },
+      "transparency": {
+        "type": "string",
+        "description": "Open sharing of information, processes, and decision-making with members or the public."
+      },
+      "discipline": {
+        "type": "string",
+        "description": "Adherence to rules, self-control, and structured behavior."
+      },
+      "creativity": {
+        "type": "string",
+        "description": "Valuing imagination, original thinking, and artistic or intellectual expression."
+      },
+      "honor": {
+        "type": "string",
+        "description": "Maintaining reputation, keeping one's word, and adhering to a code of conduct."
+      },
+      "profit": {
+        "type": "string",
+        "description": "Focus on financial gain, return on investment, and material prosperity."
+      },
+      "service": {
+        "type": "string",
+        "description": "Dedication to helping others, fulfilling needs, and providing benefits to constituencies."
+      },
+      "strength": {
+        "type": "string",
+        "description": "Valuing power, resilience, and the capacity to overcome opposition or challenges."
+      },
+      "knowledge": {
+        "type": "string",
+        "description": "Pursuit of information, wisdom, expertise, and understanding."
+      },
+      "harmony": {
+        "type": "string",
+        "description": "Maintaining balance, peaceful relations, and avoiding unnecessary conflict."
+      },
+      "individuality": {
+        "type": "string",
+        "description": "Respecting personal freedom, unique expression, and autonomous choice."
+      },
+      "collectivism": {
+        "type": "string",
+        "description": "Prioritizing group interests, shared identity, and communal wellbeing."
+      },
+      "adaptability": {
+        "type": "string",
+        "description": "Valuing flexibility, responsiveness to change, and evolution over time."
+      },
+      "purity": {
+        "type": "string",
+        "description": "Concern with cleanliness, moral correctness, and avoiding contamination or corruption."
+      },
+      "ambition": {
+        "type": "string",
+        "description": "Encouraging aspiration, goal-setting, and the drive to achieve greater heights."
+      },
+      "integrity": {
+        "type": "string",
+        "description": "Maintaining moral principles, ethical standards, and consistent values even when challenging."
+      },
+      "ruthlessness": {
+        "type": "string",
+        "description": "Willingness to take any actions necessary to achieve goals without moral constraint."
+      },
+      "compassion": {
+        "type": "string",
+        "description": "Concern for the suffering of others and desire to alleviate hardship."
+      },
+      "sacrifice": {
+        "type": "string",
+        "description": "Willingness to surrender personal interests for a greater cause or collective good."
+      },
+      "excellence": {
+        "type": "string",
+        "description": "Pursuit of superior quality, exceptional performance, and mastery in all activities."
+      },
+      "spirituality": {
+        "type": "string",
+        "description": "Recognition of metaphysical dimensions, connection to higher powers, or transcendent purpose."
+      },
+      "pragmatism": {
+        "type": "string",
+        "description": "Focus on practical outcomes, realistic solutions, and what works rather than ideals."
+      }
+    }
+  },
+  "opposingPairs": {
+    "type": "object",
+    "description": "Values that commonly exist in tension with each other (not part of the enum, provided for documentation)",
+    "properties": {
+      "tradition": "innovation",
+      "hierarchy": "equality",
+      "competition": "collaboration",
+      "secrecy": "transparency",
+      "discipline": "creativity",
+      "profit": "service",
+      "individuality": "collectivism",
+      "ruthlessness": "compassion",
+      "spirituality": "pragmatism"
+    }
+  }
+}

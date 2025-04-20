@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/organizational_activity",
+  "title": "Organizational Activity Schema",
+  "description": "Standardized enumeration of significant activities conducted by organizations in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "resource_acquisition",
+    "political_maneuvering",
+    "market_competition",
+    "territorial_expansion",
+    "intelligence_gathering",
+    "research_development",
+    "recruitment_campaign",
+    "public_relations",
+    "military_operation",
+    "clandestine_mission",
+    "infrastructure_development",
+    "community_service",
+    "economic_manipulation",
+    "diplomatic_initiative",
+    "cultural_promotion",
+    "religious_observance",
+    "technological_innovation",
+    "criminal_enterprise",
+    "law_enforcement",
+    "education_program",
+    "media_campaign",
+    "internal_restructuring",
+    "ritual_performance",
+    "disaster_response",
+    "recreational_event",
+    "trade_negotiation",
+    "environmental_initiative",
+    "magical_working"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each activity type (not part of the enum, provided for documentation)",
+    "properties": {
+      "resource_acquisition": {
+        "type": "string",
+        "description": "Obtaining materials, funds, assets, or other valuable resources needed for operations."
+      },
+      "political_maneuvering": {
+        "type": "string",
+        "description": "Strategic actions to influence governance, policies, or power structures."
+      },
+      "market_competition": {
+        "type": "string",
+        "description": "Commercial activities aimed at gaining advantage or market share against rivals."
+      },
+      "territorial_expansion": {
+        "type": "string",
+        "description": "Extending physical control or presence into new geographic areas."
+      },
+      "intelligence_gathering": {
+        "type": "string",
+        "description": "Collecting and analyzing information about relevant entities or developments."
+      },
+      "research_development": {
+        "type": "string",
+        "description": "Creating new knowledge, technologies, or capabilities through investigation."
+      },
+      "recruitment_campaign": {
+        "type": "string",
+        "description": "Organized efforts to identify and attract new members to the organization."
+      },
+      "public_relations": {
+        "type": "string",
+        "description": "Managing public perception and image through communications and media engagement."
+      },
+      "military_operation": {
+        "type": "string",
+        "description": "Planned and coordinated use of force to achieve strategic objectives."
+      },
+      "clandestine_mission": {
+        "type": "string",
+        "description": "Secret operations conducted to achieve goals without attribution."
+      },
+      "infrastructure_development": {
+        "type": "string",
+        "description": "Building or improving physical facilities and systems that support operations."
+      },
+      "community_service": {
+        "type": "string",
+        "description": "Providing assistance, resources, or support to populations or areas."
+      },
+      "economic_manipulation": {
+        "type": "string",
+        "description": "Intentionally influencing markets, currencies, or financial systems for advantage."
+      },
+      "diplomatic_initiative": {
+        "type": "string",
+        "description": "Formal engagement with other organizations or entities to establish relationships or agreements."
+      },
+      "cultural_promotion": {
+        "type": "string",
+        "description": "Advancing specific cultural practices, arts, or identity markers."
+      },
+      "religious_observance": {
+        "type": "string",
+        "description": "Conducting or participating in spiritual ceremonies, rituals, or traditions."
+      },
+      "technological_innovation": {
+        "type": "string",
+        "description": "Developing new tools, systems, or applications of technical knowledge."
+      },
+      "criminal_enterprise": {
+        "type": "string",
+        "description": "Activities that violate laws or social norms for profit or advantage."
+      },
+      "law_enforcement": {
+        "type": "string",
+        "description": "Upholding rules, regulations, or laws through monitoring, prevention, and punishment."
+      },
+      "education_program": {
+        "type": "string",
+        "description": "Structured transmission of knowledge, values, or skills to members or outsiders."
+      },
+      "media_campaign": {
+        "type": "string",
+        "description": "Coordinated use of communication channels to promote specific messages or outcomes."
+      },
+      "internal_restructuring": {
+        "type": "string",
+        "description": "Reorganizing leadership, systems, or operations within the organization."
+      },
+      "ritual_performance": {
+        "type": "string",
+        "description": "Conducting symbolic ceremonies that reinforce values, identity, or mystical connections."
+      },
+      "disaster_response": {
+        "type": "string",
+        "description": "Providing aid, resources, or intervention during crises or catastrophes."
+      },
+      "recreational_event": {
+        "type": "string",
+        "description": "Organizing activities focused on entertainment, celebration, or social bonding."
+      },
+      "trade_negotiation": {
+        "type": "string",
+        "description": "Formal discussions to establish terms for exchange of goods or services."
+      },
+      "environmental_initiative": {
+        "type": "string",
+        "description": "Actions taken to protect, restore, or influence natural ecosystems."
+      },
+      "magical_working": {
+        "type": "string",
+        "description": "Conducting operations that involve supernatural forces or arcane energies."
+      }
+    }
+  }
+}

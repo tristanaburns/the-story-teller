@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/timeline_branch_status",
+  "title": "Timeline Branch Status Schema",
+  "description": "Standardized enumeration of canonical statuses for alternative timeline branches in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "primary_canon",
+    "secondary_canon",
+    "potential_future",
+    "averted_timeline",
+    "parallel_reality",
+    "hypothetical",
+    "dream_sequence",
+    "simulation",
+    "erased",
+    "quantum_possibility",
+    "narrative_exploration"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each branch status (not part of the enum, provided for documentation)",
+    "properties": {
+      "primary_canon": {
+        "type": "string",
+        "description": "The main storyline that is considered the authoritative account of events in the universe."
+      },
+      "secondary_canon": {
+        "type": "string",
+        "description": "Alternative sequence that is also considered 'real' within the multiverse structure but isn't the focus of main narratives."
+      },
+      "potential_future": {
+        "type": "string",
+        "description": "Possible outcome that may occur depending on unresolved events in the primary timeline."
+      },
+      "averted_timeline": {
+        "type": "string",
+        "description": "Sequence that was prevented from occurring through character actions or interventions."
+      },
+      "parallel_reality": {
+        "type": "string",
+        "description": "Fully realized alternate universe with its own consistent internal history."
+      },
+      "hypothetical": {
+        "type": "string",
+        "description": "Speculative sequence used to explore 'what if' scenarios without being treated as having actually occurred."
+      },
+      "dream_sequence": {
+        "type": "string",
+        "description": "Events occurring only within a character's dream, vision, or hallucination."
+      },
+      "simulation": {
+        "type": "string",
+        "description": "Artificially generated scenario created by technology or powers within the universe."
+      },
+      "erased": {
+        "type": "string",
+        "description": "Timeline that once existed but was removed from continuity through time manipulation."
+      },
+      "quantum_possibility": {
+        "type": "string",
+        "description": "Branch existing in quantum superposition, neither fully real nor unreal until observed or resolved."
+      },
+      "narrative_exploration": {
+        "type": "string",
+        "description": "Out-of-universe storytelling device used to explore themes or characters without affecting main canon."
+      }
+    }
+  }
+}

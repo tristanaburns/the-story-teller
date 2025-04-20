@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/communication_methods",
+  "title": "Organization Communication Methods Schema",
+  "description": "How information flows within an organization and between the organization and external entities.",
+  "type": "object",
+  "properties": {
+    "internal_communications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "$ref": "../common/communication_method_schema.json",
+            "description": "The technology, practice, or system used for information exchange."
+          },
+          "description": {
+            "type": "string",
+            "description": "Specific details about how this communication method is implemented within the organization."
+          },
+          "purpose": {
+            "type": "string",
+            "description": "What types of information or messages are typically conveyed through this method."
+          },
+          "authorized_users": {
+            "type": "string",
+            "description": "Who within the organization has access to or participates in this form of communication."
+          },
+          "security_level": {
+            "type": "string",
+            "enum": ["minimal", "basic", "moderate", "high", "maximum", "compartmentalized"],
+            "description": "How protected this communication channel is against unauthorized access or monitoring."
+          }
+        },
+        "required": ["method", "description"]
+      },
+      "description": "Communication systems used for information exchange between members of the organization."
+    },
+    "external_messaging": {
+      "type": "object",
+      "properties": {
+        "public_communications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "How the organization communicates with the general populace, including propaganda methods, public announcements, or symbolic displays that reinforce its presence."
+        },
+        "diplomatic_channels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The formal and informal pathways through which the organization communicates with other power structures, negotiates, or shares intelligence with allies and rivals."
+        }
+      },
+      "description": "How the organization projects its message to the outside world, manages its public image, and conducts relations with other entities."
+    },
+    "distinctive_practices": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Unique or signature communication elements that distinguish this organization, such as special greetings, coded messages, or unique information networks that reflect its culture and operational needs."
+    }
+  }
+}

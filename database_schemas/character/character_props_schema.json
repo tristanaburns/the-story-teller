@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Character JSON Schema",
+  "description": "Simplified character schema for import/export operations within The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "A globally unique identifier for this character."
+    },
+    "name": {
+      "type": "string",
+      "description": "The character's primary name."
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alternative names by which this character is known."
+    },
+    "description": {
+      "type": "string",
+      "description": "A comprehensive summary of the character."
+    },
+    "status": {
+      "$ref": "character_schema.json#/properties/status"
+    },
+    "role": {
+      "$ref": "character_schema.json#/properties/role"
+    },
+    "personal_data": {
+      "$ref": "character/personal_data_schema.json"
+    },
+    "timeline": {
+      "$ref": "character/timeline_schema.json"
+    },
+    "multimedia": {
+      "$ref": "multimedia_schema.json#/properties/multimedia"
+    }
+  },
+  "required": ["id", "name", "description", "status"]
+}

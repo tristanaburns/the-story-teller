@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/relationships",
+  "title": "Organization Relationships Schema",
+  "description": "Defines connections, alliances, conflicts, and other relationships between an organization and other entities.",
+  "type": "object",
+  "properties": {
+    "organizational_relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to another organization with which this organization has a relationship."
+          },
+          "relationship_type": {
+            "$ref": "../common/organization_relationship_type_schema.json",
+            "description": "The nature of the connection between these organizations."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed explanation of the relationship, including its history, dynamics, and significance."
+          },
+          "public_knowledge": {
+            "type": "boolean",
+            "description": "Whether the general public is aware of this relationship."
+          },
+          "formality_level": {
+            "type": "string",
+            "enum": ["formal", "informal", "contractual", "unspoken", "denied"],
+            "description": "How officially recognized or structured the relationship is."
+          },
+          "stability": {
+            "type": "string",
+            "enum": ["strong", "stable", "tenuous", "fragile", "deteriorating", "improving"],
+            "description": "The current state of the relationship's strength and durability."
+          },
+          "key_points_of_contact": {
+            "type": "array",
+            "items": {
+              "$ref": "../common/references_schema.json"
+            },
+            "description": "The primary individuals who manage or embody this relationship."
+          },
+          "areas_of_cooperation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specific domains or activities where the organizations work together, if applicable."
+          },
+          "areas_of_conflict": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specific domains or activities where the organizations compete or clash, if applicable."
+          }
+        },
+        "required": ["entity_reference", "relationship_type", "description"]
+      },
+      "description": "Connections this organization has with other organizations."
+    },
+    "character_relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to a character with a significant relationship to this organization."
+          },
+          "relationship_nature": {
+            "type": "string",
+            "description": "Brief description of how this character relates to the organization (e.g., 'founder', 'enemy', 'double agent')."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed explanation of the relationship, including its history, dynamics, and significance."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "former", "honorary", "hostile", "targeted", "potential", "deceased"],
+            "description": "Current standing of the relationship between character and organization."
+          },
+          "influence_level": {
+            "type": "string",
+            "enum": ["controlling", "major", "moderate", "minor", "negligible"],
+            "description": "How much power the character has over the organization's decisions or activities."
+          },
+          "public_knowledge": {
+            "type": "boolean",
+            "description": "Whether the general public is aware of this relationship."
+          },
+          "character_opinion": {
+            "type": "string",
+            "description": "How the character feels about or views the organization."
+          },
+          "organization_stance": {
+            "type": "string",
+            "description": "How the organization officially views or treats this character."
+          }
+        },
+        "required": ["character_reference", "relationship_nature", "description"]
+      },
+      "description": "Connections this organization has with individual characters."
+    },
+    "location_relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to a location with a significant relationship to this organization."
+          },
+          "relationship_nature": {
+            "type": "string",
+            "description": "Brief description of how this location relates to the organization (e.g., 'headquarters', 'territory', 'target')."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed explanation of the connection between the organization and this location."
+          },
+          "control_level": {
+            "type": "string",
+            "enum": ["complete", "dominant", "significant", "partial", "minimal", "contested", "covert"],
+            "description": "How much authority or influence the organization has in this location."
+          },
+          "facilities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name or designation of this facility."
+                },
+                "purpose": {
+                  "type": "string",
+                  "description": "What activities take place at this location."
+                },
+                "secrecy": {
+                  "type": "string",
+                  "enum": ["public", "known", "obscured", "secret", "black site"],
+                  "description": "How widely known this facility's existence or true purpose is."
+                }
+              },
+              "required": ["name", "purpose"]
+            },
+            "description": "Physical locations or structures the organization maintains at this location."
+          }
+        },
+        "required": ["location_reference", "relationship_nature"]
+      },
+      "description": "Connections this organization has with specific locations."
+    },
+    "factional_divisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "faction_name": {
+            "type": "string",
+            "description": "The name or identifier for this internal group."
+          },
+          "leadership": {
+            "type": "array",
+            "items": {
+              "$ref": "../common/references_schema.json"
+            },
+            "description": "The primary individuals who lead this faction."
+          },
+          "ideology": {
+            "type": "string",
+            "description": "The core beliefs or values that define this faction."
+          },
+          "goals": {
+            "type": "string",
+            "description": "What this faction aims to achieve within or through the organization."
+          },
+          "relative_strength": {
+            "type": "string",
+            "enum": ["dominant", "major", "significant", "minor", "fringe"],
+            "description": "How powerful or influential this faction is within the organization."
+          },
+          "relationships_with_other_factions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "faction_name": {
+                  "type": "string",
+                  "description": "The name of another internal faction."
+                },
+                "relationship": {
+                  "type": "string",
+                  "enum": ["allied", "cooperative", "neutral", "competitive", "hostile"],
+                  "description": "How this faction interacts with the other named faction."
+                }
+              },
+              "required": ["faction_name", "relationship"]
+            },
+            "description": "How this faction relates to other internal groups."
+          }
+        },
+        "required": ["faction_name", "ideology"]
+      },
+      "description": "Internal groups or subfactions that exist within the organization."
+    },
+    "alliances_and_networks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "network_name": {
+            "type": "string",
+            "description": "The official or informal name of this alliance or coalition."
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "../common/references_schema.json"
+            },
+            "description": "Organizations that belong to this network or alliance."
+          },
+          "purpose": {
+            "type": "string",
+            "description": "The shared objectives or reasons this network exists."
+          },
+          "organization_role": {
+            "type": "string",
+            "description": "The specific function or position this organization holds within the broader network."
+          },
+          "benefits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Advantages the organization gains from this alliance."
+          },
+          "obligations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Responsibilities or commitments the organization must fulfill as part of this alliance."
+          },
+          "formation_date": {
+            "$ref": "../common/time_period_schema.json",
+            "description": "When this alliance or network was established."
+          },
+          "public_knowledge": {
+            "type": "boolean",
+            "description": "Whether the general public is aware of this alliance's existence."
+          }
+        },
+        "required": ["network_name", "purpose"]
+      },
+      "description": "Formal or informal coalitions, federations, or networks to which the organization belongs."
+    },
+    "rivalries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rival_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to an entity (typically an organization) with which this organization has a significant rivalry."
+          },
+          "nature": {
+            "type": "string",
+            "description": "The core reason for or character of this rivalry."
+          },
+          "intensity": {
+            "type": "string",
+            "enum": ["deadly", "serious", "moderate", "mild", "symbolic"],
+            "description": "How severe or consequential the rivalry is."
+          },
+          "history": {
+            "type": "string",
+            "description": "How this rivalry began and evolved over time."
+          },
+          "current_status": {
+            "type": "string",
+            "description": "The present state of hostilities or competition."
+          },
+          "conflict_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specific areas or contexts where the rivalry manifests."
+          },
+          "public_knowledge": {
+            "type": "boolean",
+            "description": "Whether the general public is aware of this rivalry."
+          }
+        },
+        "required": ["rival_reference", "nature"]
+      },
+      "description": "Significant competitive or hostile relationships with other entities."
+    }
+  }
+}

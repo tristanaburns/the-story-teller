@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/character_metadata",
+  "title": "Character Metadata Schema",
+  "description": "Essential reference information for character tracking and management within the story database.",
+  "type": "object",
+  "properties": {
+    "character_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier for this character within the database system."
+    },
+    "status": {
+      "$ref": "../character_schema.json#/properties/status",
+      "description": "The character's current living state as of the latest point in the narrative timeline."
+    },
+    "role": {
+      "$ref": "../character_schema.json#/properties/role",
+      "description": "The character's primary narrative function within the story structure."
+    },
+    "version": {
+      "type": "string",
+      "description": "The version number of this character entry, updated when significant changes are made to the character definition."
+    },
+    "creation_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this character was first created in the database."
+    },
+    "last_modified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this character was last updated in the database."
+    },
+    "narrative_participation": {
+      "type": "object",
+      "properties": {
+        "first_appearance": {
+          "$ref": "../common/references_schema.json",
+          "description": "Reference to the story element where this character first appears in the narrative."
+        },
+        "last_appearance": {
+          "$ref": "../common/references_schema.json",
+          "description": "Reference to the story element where this character last appears in the narrative."
+        },
+        "appearance_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The total number of scenes in which this character appears throughout the narrative."
+        },
+        "prominence": {
+          "type": "string",
+          "enum": ["major", "supporting", "recurring", "minor", "mentioned"],
+          "description": "The overall importance of this character to the narrative as a whole."
+        }
+      },
+      "description": "Information about how and when this character appears throughout the narrative."
+    },
+    "creative_metadata": {
+      "type": "object",
+      "properties": {
+        "concept_origin": {
+          "type": "string",
+          "description": "Notes on how and why this character was created, including inspirations and design intentions."
+        },
+        "development_notes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When this development note was created."
+              },
+              "note": {
+                "type": "string",
+                "description": "The actual development thought, idea, or direction for this character."
+              },
+              "author": {
+                "type": "string",
+                "description": "Who created this development note."
+              }
+            },
+            "required": ["note"]
+          },
+          "description": "Collection of thoughts, ideas, and evolving concepts for this character's development."
+        },
+        "archetype_influences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Literary, mythological, or cultural archetypes that influenced this character's conception."
+        },
+        "writing_style": {
+          "$ref": "../common/writing_elements_schema.json",
+          "description": "The preferred narrative style for depicting this character's scenes and dialogue."
+        }
+      },
+      "description": "Behind-the-scenes information about the character's creation and development process."
+    },
+    "related_characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_reference": {
+            "$ref": "../common/references_schema.json"
+          },
+          "relationship_type": {
+            "type": "string",
+            "description": "How this character is related to the referenced character (e.g., 'rival', 'mentor', 'sibling')."
+          },
+          "story_relevance": {
+            "type": "string",
+            "description": "How this relationship impacts the narrative or character development."
+          }
+        },
+        "required": ["character_reference", "relationship_type"]
+      },
+      "description": "Connections to other characters that are particularly important for understanding this character's role in the narrative."
+    },
+    "multimedia_references": {
+      "type": "object",
+      "properties": {
+        "portrait_image_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to the definitive character portrait image."
+        },
+        "voice_reference_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to an audio file demonstrating the character's voice and speech patterns."
+        },
+        "image_generation_prompt": {
+          "type": "string",
+          "description": "An optimized text prompt for AI image generation systems to create accurate visual representations of this character."
+        }
+      },
+      "description": "Links to media resources associated with this character for reference purposes."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Searchable keywords and categories associated with this character for filtering and organization."
+    }
+  },
+  "required": ["character_id", "status", "role", "creation_date", "last_modified"]
+}

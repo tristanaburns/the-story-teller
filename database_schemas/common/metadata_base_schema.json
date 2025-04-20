@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/metadata_base",
+  "title": "Metadata Base Schema",
+  "description": "Common metadata structure for AI writing projects",
+  "type": "object",
+  "description": "Encapsulates all metadata properties for tracking and execution.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "A globally unique identifier (UUID v4) for this object."
+    },
+    "name": {
+      "type": "string",
+      "description": "The title or name of this object."
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed summary or description of this object."
+    },
+    "object_type": {
+      "$ref": "object_type_schema.json",
+      "description": "The classification of this object."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "final", "in_progress", "approved", "rejected"],
+      "description": "The current progression state of this object."
+    },
+    "tags": {
+      "$ref": "base_metadata_schema.json#/properties/tags"
+    }
+  },
+  "required": ["id", "name", "object_type"]
+}

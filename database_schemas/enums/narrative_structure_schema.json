@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/enums/narrative_structure",
+  "title": "Narrative Structure Schema",
+  "description": "Standardized enumeration of narrative structural elements in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "storyline",
+    "volume",
+    "act",
+    "story",
+    "chapter",
+    "passage",
+    "part"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each narrative structure level (not part of the enum, provided for documentation)",
+    "properties": {
+      "storyline": {
+        "type": "string",
+        "description": "The overarching narrative arc spanning multiple volumes",
+        "example": "The Shadow Team Chronicles: Rise of Neo-Tokyo"
+      },
+      "volume": {
+        "type": "string",
+        "description": "Major section of a storyline with particular phase or theme",
+        "example": "Volume 1: Corporate Shadows"
+      },
+      "act": {
+        "type": "string",
+        "description": "Significant narrative shift or thematic change within a volume",
+        "example": "Act II: The Resistance Emerges"
+      },
+      "story": {
+        "type": "string",
+        "description": "Contained plot arc within an act",
+        "example": "The Den of Wolves"
+      },
+      "chapter": {
+        "type": "string",
+        "description": "Major event-based division within a story",
+        "example": "Chapter 5: Infiltration"
+      },
+      "passage": {
+        "type": "string",
+        "description": "Cinematic scene within a chapter",
+        "example": "The Mountain Path"
+      },
+      "part": {
+        "type": "string",
+        "description": "Smallest unit of narrative, corresponding to a single AI response",
+        "example": "Part 3: The Ambush"
+      }
+    }
+  },
+  "hierarchicalOrder": [
+    "storyline",
+    "volume",
+    "act",
+    "story",
+    "chapter",
+    "passage",
+    "part"
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/prompt_technique",
+  "title": "Prompt Technique Schema",
+  "description": "Standardized enumeration of AI prompt engineering techniques used in The Shadow Team Chronicles production process.",
+  "type": "string",
+  "enum": [
+    "zero_shot",
+    "few_shot",
+    "chain_of_thought",
+    "role_play",
+    "step_by_step",
+    "iterative_revision",
+    "system_prompt",
+    "constrained_generation",
+    "knowledge_retrieval",
+    "critique_revision",
+    "multi_agent",
+    "outline_expansion",
+    "tree_of_thought",
+    "persona_driven",
+    "schema_guided",
+    "consistency_reinforcement",
+    "narrative_framing",
+    "expertize_emulation",
+    "style_mimicking",
+    "dialogue_based"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each prompt technique (not part of the enum, provided for documentation)",
+    "properties": {
+      "zero_shot": {
+        "type": "string",
+        "description": "Asking the AI to perform a task directly without examples, relying on its pre-trained knowledge."
+      },
+      "few_shot": {
+        "type": "string",
+        "description": "Providing the AI with a small number of examples demonstrating the desired output format or approach before asking it to generate similar content."
+      },
+      "chain_of_thought": {
+        "type": "string",
+        "description": "Prompting the AI to break down its reasoning process step-by-step, showing the logical progression from question to answer."
+      },
+      "role_play": {
+        "type": "string",
+        "description": "Instructing the AI to adopt a specific character, perspective, or professional role when generating content."
+      },
+      "step_by_step": {
+        "type": "string",
+        "description": "Guiding the AI through a sequential process where each step builds upon previous ones to develop comprehensive content."
+      },
+      "iterative_revision": {
+        "type": "string",
+        "description": "Repeatedly refining AI outputs through multiple rounds of feedback and specific improvement instructions."
+      },
+      "system_prompt": {
+        "type": "string",
+        "description": "Using specialized instructions that set global parameters for how the AI should behave throughout the entire interaction."
+      },
+      "constrained_generation": {
+        "type": "string",
+        "description": "Limiting AI outputs through specific rules, formats, word counts, or other technical boundaries."
+      },
+      "knowledge_retrieval": {
+        "type": "string",
+        "description": "Prompting the AI to recall and incorporate specific factual information from its training data or provided context."
+      },
+      "critique_revision": {
+        "type": "string",
+        "description": "Having the AI evaluate its own output and then make improvements based on that self-critique."
+      },
+      "multi_agent": {
+        "type": "string",
+        "description": "Creating simulated dialogue between different AI perspectives or specialties to explore multiple angles on a topic."
+      },
+      "outline_expansion": {
+        "type": "string",
+        "description": "Starting with a structured outline or skeleton that the AI progressively fills in with increasing detail."
+      },
+      "tree_of_thought": {
+        "type": "string",
+        "description": "Exploring multiple potential reasoning paths simultaneously and evaluating their respective merits to reach the best conclusion."
+      },
+      "persona_driven": {
+        "type": "string",
+        "description": "Creating a detailed character profile to guide how the AI responds, ensuring consistent voice and perspective."
+      },
+      "schema_guided": {
+        "type": "string",
+        "description": "Providing formal structures or JSON schemas that the AI must follow when generating its output."
+      },
+      "consistency_reinforcement": {
+        "type": "string",
+        "description": "Repeatedly reminding the AI about key facts, rules, or contexts to maintain coherence across a longer generation."
+      },
+      "narrative_framing": {
+        "type": "string",
+        "description": "Establishing a clear storytelling context or narrative perspective before requesting content generation."
+      },
+      "expertize_emulation": {
+        "type": "string",
+        "description": "Instructing the AI to generate content at a specific knowledge or skill level appropriate for the target audience."
+      },
+      "style_mimicking": {
+        "type": "string",
+        "description": "Providing examples of a particular writing style, tone, or author's voice for the AI to emulate in its generation."
+      },
+      "dialogue_based": {
+        "type": "string",
+        "description": "Formulating prompts as natural conversation to elicit more nuanced or creative responses from the AI."
+      }
+    }
+  }
+}

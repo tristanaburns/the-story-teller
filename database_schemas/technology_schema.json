@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/technology",
+  "title": "Technology Schema",
+  "description": "Schema for defining technologies, scientific advances, and invented systems within The Shadow Team Chronicles universe.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "base_metadata_schema.json"
+    }
+  ],
+  "properties": {
+    "object_type": {
+      "const": "technology",
+      "description": "Fixed value indicating this is a technology object. This constrains the general object_type property from the base schema."
+    },
+    "technology_type": {
+      "type": "string",
+      "enum": ["weapon", "communication", "transportation", "medical", "computational", "energy", "defense", "manufacturing", "surveillance", "enhancement"],
+      "description": "The primary functional category of this technology."
+    },
+    "physical_properties": {
+      "$ref": "technology/physical_properties_schema.json"
+    },
+    "capabilities": {
+      "$ref": "artifact/capabilities_schema.json"
+    },
+    "development_history": {
+      "$ref": "technology/development_history_schema.json"
+    },
+    "cultural_impact": {
+      "$ref": "artifact/cultural_significance_schema.json"
+    },
+    "time_variants": {
+      "$ref": "timeline/time_state_variants_schema.json"
+    },
+    "multimedia": {
+      "$ref": "multimedia_schema.json#/properties/multimedia"
+    }
+  },
+  "required": ["technology_type", "physical_properties", "capabilities"]
+}

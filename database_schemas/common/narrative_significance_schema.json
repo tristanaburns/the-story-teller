@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/narrative_significance",
+  "title": "Narrative Significance Schema",
+  "description": "Standard schema for describing how an entity functions within narrative structures and thematic elements.",
+  "type": "object",
+  "properties": {
+    "thematic_representation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "description": "A central idea or message explored by the narrative."
+          },
+          "representation": {
+            "type": "string",
+            "description": "How this entity specifically embodies or engages with this theme through its nature, role, or changes."
+          }
+        },
+        "required": ["theme", "representation"]
+      },
+      "description": "The abstract concepts or universal ideas that this entity illustrates or explores within the narrative."
+    },
+    "plot_functions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "function": {
+            "type": "string",
+            "description": "A specific way this entity moves the plot forward or affects the story structure."
+          },
+          "significance": {
+            "type": "string",
+            "description": "The importance of this plot function to the overall narrative and how it serves the story's progression."
+          }
+        },
+        "required": ["function"]
+      },
+      "description": "The entity's specific contributions to advancing the narrative's events and conflicts."
+    },
+    "structural_necessity": {
+      "type": "string",
+      "description": "How essential this entity is to the narrative structure, identifying whether removing it would cause the story to collapse or merely change in minor ways."
+    },
+    "audience_connection": {
+      "type": "object",
+      "properties": {
+        "intended_reaction": {
+          "type": "string",
+          "description": "The emotional or intellectual response the entity is designed to evoke from the audience."
+        }
+      },
+      "description": "How the entity is designed to engage the audience and what responses it's intended to evoke."
+    }
+  }
+}

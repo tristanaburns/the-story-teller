@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/timeline_event_type",
+  "title": "Timeline Event Type Schema",
+  "description": "Standardized enumeration of event types for timeline entries in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "historical_milestone",
+    "character_moment",
+    "organizational_change",
+    "technological_breakthrough",
+    "political_development",
+    "social_shift",
+    "conflict_outbreak",
+    "conflict_resolution",
+    "discovery",
+    "disaster",
+    "founding",
+    "dissolution",
+    "alliance_formation",
+    "betrayal",
+    "revolution",
+    "reform",
+    "migration",
+    "cultural_transformation",
+    "economic_event",
+    "scientific_achievement",
+    "supernatural_occurrence",
+    "assassination",
+    "succession",
+    "treaty",
+    "expedition",
+    "first_contact"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each event type (not part of the enum, provided for documentation)",
+    "properties": {
+      "historical_milestone": {
+        "type": "string",
+        "description": "A significant moment that marks a turning point in the world's history."
+      },
+      "character_moment": {
+        "type": "string",
+        "description": "An important personal event in a significant character's life."
+      },
+      "organizational_change": {
+        "type": "string",
+        "description": "A major shift in an organization's structure, leadership, or purpose."
+      },
+      "technological_breakthrough": {
+        "type": "string",
+        "description": "The development or discovery of a new technology with widespread implications."
+      },
+      "political_development": {
+        "type": "string",
+        "description": "A change in governance, leadership, or political structure."
+      },
+      "social_shift": {
+        "type": "string",
+        "description": "A significant change in societal values, norms, or collective behavior."
+      },
+      "conflict_outbreak": {
+        "type": "string",
+        "description": "The beginning of a war, battle, or other violent confrontation."
+      },
+      "conflict_resolution": {
+        "type": "string",
+        "description": "The ending or settlement of a conflict through victory, surrender, or agreement."
+      },
+      "discovery": {
+        "type": "string",
+        "description": "Finding or revealing something previously unknown, such as a place, resource, or knowledge."
+      },
+      "disaster": {
+        "type": "string",
+        "description": "A catastrophic event with widespread damage or loss of life, whether natural or artificial."
+      },
+      "founding": {
+        "type": "string",
+        "description": "The establishment of a new entity, such as a nation, city, or organization."
+      },
+      "dissolution": {
+        "type": "string",
+        "description": "The end or breaking apart of a previously established entity."
+      },
+      "alliance_formation": {
+        "type": "string",
+        "description": "The formal joining of two or more entities in partnership or mutual support."
+      },
+      "betrayal": {
+        "type": "string",
+        "description": "A significant act of disloyalty or breaking of trust with major consequences."
+      },
+      "revolution": {
+        "type": "string",
+        "description": "A forcible overthrow of a government or social order in favor of a new system."
+      },
+      "reform": {
+        "type": "string",
+        "description": "Significant intentional changes to an existing system or structure to improve it."
+      },
+      "migration": {
+        "type": "string",
+        "description": "The movement of a significant population from one area to another."
+      },
+      "cultural_transformation": {
+        "type": "string",
+        "description": "A major shift in artistic, intellectual, or spiritual expression or values."
+      },
+      "economic_event": {
+        "type": "string",
+        "description": "A significant change in wealth distribution, trade patterns, or financial systems."
+      },
+      "scientific_achievement": {
+        "type": "string",
+        "description": "A major advancement in understanding of the natural world or universe."
+      },
+      "supernatural_occurrence": {
+        "type": "string",
+        "description": "An event involving forces or entities beyond normal scientific understanding."
+      },
+      "assassination": {
+        "type": "string",
+        "description": "The targeted killing of an important individual, often with political motives."
+      },
+      "succession": {
+        "type": "string",
+        "description": "The transfer of power or authority from one leader to another."
+      },
+      "treaty": {
+        "type": "string",
+        "description": "A formal agreement between entities, usually resolving conflicts or establishing rules."
+      },
+      "expedition": {
+        "type": "string",
+        "description": "An organized journey or voyage for a specific purpose, such as exploration or scientific research."
+      },
+      "first_contact": {
+        "type": "string",
+        "description": "The initial meeting between previously unaware groups, cultures, or species."
+      }
+    }
+  },
+  "categoryMapping": {
+    "type": "object",
+    "description": "Grouping of timeline events by broad category (not part of the enum, provided for documentation)",
+    "properties": {
+      "political": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["political_development", "revolution", "reform", "treaty", "succession", "assassination"]
+        },
+        "description": "Events primarily concerned with governance, power structures, and authority."
+      },
+      "social": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["social_shift", "cultural_transformation", "migration", "founding", "dissolution"]
+        },
+        "description": "Events primarily concerning people, communities, and societal structures."
+      },
+      "technological": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["technological_breakthrough", "scientific_achievement", "discovery"]
+        },
+        "description": "Events focused on advancements in science, engineering, and applied knowledge."
+      },
+      "conflict": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["conflict_outbreak", "conflict_resolution", "betrayal", "alliance_formation"]
+        },
+        "description": "Events involving hostilities, warfare, or their resolution."
+      },
+      "personal": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["character_moment"]
+        },
+        "description": "Events centered on individual experiences or developments."
+      },
+      "extraordinary": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["supernatural_occurrence", "first_contact", "disaster"]
+        },
+        "description": "Events involving unusual, rare, or otherworldly occurrences."
+      }
+    }
+  }
+}

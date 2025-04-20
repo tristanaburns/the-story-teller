@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location/governance",
+  "title": "Location Governance Schema",
+  "description": "The political structures, leadership, and systems of rule that govern a location.",
+  "type": "object",
+  "properties": {
+    "political_system": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The classification or formal name of the governing system in place at this location."
+        },
+        "description": {
+          "type": "string",
+          "description": "Details about how this system of governance functions in practice."
+        },
+        "stability": {
+          "type": "string",
+          "enum": ["extremely_stable", "stable", "somewhat_stable", "unstable", "collapsing", "transitional"],
+          "description": "The current level of resilience or vulnerability in the political system."
+        },
+        "legitimacy_source": {
+          "type": "string",
+          "description": "The basis upon which the governing authority claims the right to rule (e.g., 'divine right', 'democratic mandate', 'military strength')."
+        }
+      },
+      "required": ["type"],
+      "description": "The form and structure of governance that administers this location."
+    },
+    "leadership": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The official position or role this leader holds."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the individual currently holding this position, if known."
+          },
+          "character_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Link to the character entry for this leader, if they are a documented character."
+          },
+          "authority": {
+            "type": "string",
+            "description": "The specific powers, responsibilities, or jurisdiction this leader possesses."
+          },
+          "selection_method": {
+            "type": "string",
+            "description": "How this leader came to power or how new leaders for this position are typically chosen."
+          },
+          "term": {
+            "type": "string",
+            "description": "How long this leader typically serves, if there are term limits or predetermined service lengths."
+          }
+        },
+        "required": ["title"]
+      },
+      "description": "The individuals or offices that hold governing power over this location."
+    },
+    "ruling_body": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The formal title of the governing council, assembly, or ruling group."
+        },
+        "structure": {
+          "type": "string",
+          "description": "The composition and organization of this body, including number of members, divisions, or hierarchies within it."
+        },
+        "powers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The specific authorities and responsibilities this body holds in governing the location."
+        },
+        "membership_criteria": {
+          "type": "string",
+          "description": "How individuals become members of this ruling body."
+        },
+        "meeting_process": {
+          "type": "string",
+          "description": "How and when this body convenes, deliberates, and makes decisions."
+        },
+        "notable_factions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The identifier for this political bloc or interest group."
+              },
+              "agenda": {
+                "type": "string",
+                "description": "The primary goals or values this faction promotes."
+              },
+              "influence": {
+                "$ref": "../common/impact_magnitude_schema.json",
+                "description": "The degree of power this faction wields within the governing body."
+              }
+            },
+            "required": ["name", "agenda"]
+          },
+          "description": "Significant political groupings or blocs within the ruling body that influence governance."
+        }
+      },
+      "description": "The council, parliament, court, or other group that makes governing decisions for this location."
+    },
+    "law_enforcement": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "agency": {
+            "type": "string",
+            "description": "The name of this security force, police agency, or enforcer group."
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "The area or types of situations this force has authority over."
+          },
+          "organization_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Link to the organization entry for this enforcement agency, if it exists as a documented organization."
+          },
+          "description": {
+            "type": "string",
+            "description": "Details about how this enforcement body operates, including methods, equipment, and typical activities."
+          },
+          "authority_level": {
+            "type": "string",
+            "enum": ["minimal", "limited", "standard", "extensive", "absolute"],
+            "description": "The level of power and discretion this enforcement body has in carrying out its duties."
+          }
+        },
+        "required": ["agency"]
+      },
+      "description": "The forces or agencies responsible for maintaining order and enforcing laws or rules at this location."
+    },
+    "legal_system": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The category or framework of law used in this location (e.g., 'common law', 'code law', 'religious law')."
+        },
+        "description": {
+          "type": "string",
+          "description": "An explanation of how laws are interpreted, cases are tried, and justice is administered."
+        },
+        "notable_laws": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The title or common reference for this law or legal principle."
+              },
+              "effect": {
+                "type": "string",
+                "description": "What this law prohibits, requires, or regulates."
+              },
+              "enforcement": {
+                "type": "string",
+                "description": "How strictly this law is enforced and what penalties exist for violations."
+              }
+            },
+            "required": ["name", "effect"]
+          },
+          "description": "Significant, unusual, or particularly defining laws that characterize this location's legal system."
+        },
+        "courts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The title of this judicial body or court."
+              },
+              "jurisdiction": {
+                "type": "string",
+                "description": "The types of cases or geographical area this court oversees."
+              },
+              "process": {
+                "type": "string",
+                "description": "How cases are brought before this court and how judgments are determined."
+              }
+            },
+            "required": ["name"]
+          },
+          "description": "The judicial bodies that interpret laws and resolve disputes in this location."
+        }
+      },
+      "description": "The framework of laws, courts, and judicial processes that govern this location."
+    },
+    "territorial_divisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The title of this administrative division or district."
+          },
+          "type": {
+            "type": "string",
+            "description": "The category of territorial division (e.g., 'district', 'ward', 'province')."
+          },
+          "leadership": {
+            "type": "string",
+            "description": "How this division is governed and who has authority over it."
+          },
+          "notable_features": {
+            "type": "string",
+            "description": "Distinctive aspects of this territorial division that set it apart from others."
+          },
+          "location_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Link to the location entry for this division, if it exists as a separate documented location."
+          }
+        },
+        "required": ["name", "type"]
+      },
+      "description": "The internal political or administrative divisions within this location."
+    },
+    "services": {
+      "type": "object",
+      "properties": {
+        "public_services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "service": {
+                "type": "string",
+                "description": "The type of public service provided (e.g., 'healthcare', 'education', 'sanitation')."
+              },
+              "quality": {
+                "type": "string",
+                "enum": ["excellent", "good", "adequate", "poor", "failing", "nonexistent"],
+                "description": "The overall effectiveness and accessibility of this service."
+              },
+              "administration": {
+                "type": "string",
+                "description": "Which governing body or organization manages this service."
+              },
+              "access": {
+                "type": "string",
+                "description": "Who can use this service and under what conditions."
+              }
+            },
+            "required": ["service"]
+          },
+          "description": "Basic services provided by the governing body to inhabitants or visitors."
+        },
+        "taxation": {
+          "type": "object",
+          "properties": {
+            "system": {
+              "type": "string",
+              "description": "The general structure of how taxes, tributes, or fees are collected."
+            },
+            "primary_sources": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The main activities, goods, or entities that are taxed to fund governance."
+            },
+            "burden_distribution": {
+              "type": "string",
+              "description": "How the tax burden is distributed across different segments of the population."
+            }
+          },
+          "description": "How the governing authority funds itself through collection of taxes, fees, or tribute."
+        }
+      },
+      "description": "The amenities and support systems that the governing body provides to inhabitants and the means of funding them."
+    }
+  }
+}

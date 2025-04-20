@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Faction Database Schema",
+  "description": "Defines the structure for faction or group entries in The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "A globally unique identifier (UUID v4) for tracking this faction across all databases and systems."
+    },
+    "name": {
+      "type": "string",
+      "description": "The primary name of the faction or group as it is most commonly known in the narrative."
+    },
+    "aliases": {
+      "type": "array",
+      "description": "Alternative names or titles by which this faction is known. Useful for cross-referencing in the narrative.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "A comprehensive summary of the faction's background, purpose, ideology, and significance to the story."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "disbanded", "destroyed", "varied", "historical"],
+      "description": "The current operational status of the faction as of the latest narrative point."
+    },
+    "role": {
+      "type": "string",
+      "description": "The faction's function in the narrative (e.g., 'ally', 'enemy', 'neutral force')."
+    },
+    "timeline": {
+      "type": "object",
+      "description": "Tracks the faction's appearances and significance throughout the narrative chronology.",
+      "properties": {
+        "first_appearance": {
+          "type": "object",
+          "description": "Details of the faction's introduction to the narrative.",
+          "properties": {
+            "timestamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The in-universe date and time when the faction first appears."
+            },
+            "volume": {
+              "type": "string",
+              "description": "The volume number where the faction is first introduced."
+            },
+            "chapter": {
+              "type": "string",
+              "description": "The chapter number where the faction is first introduced."
+            },
+            "scene_id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "A reference to the specific scene where the faction first appears."
+            }
+          },
+          "required": ["timestamp", "scene_id"]
+        },
+        "historical_events": {
+          "type": "array",
+          "description": "A chronological record of significant events in the faction's history.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The in-universe date and time of this event."
+              },
+              "event": {
+                "type": "string",
+                "description": "A description of the historical event involving this faction."
+              }
+            },
+            "required": ["timestamp", "event"]
+          }
+        }
+      }
+    },
+    "members": {
+      "type": "array",
+      "description": "Notable individuals who are part of this faction.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The UUID of the character who is a member of this faction."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the character who is a member of this faction."
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Alternative names or titles for this member."
+          },
+          "description": {
+            "type": "string",
+            "description": "A summary of the member's role and significance within the faction."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "deceased", "former"],
+            "description": "The member's current status within the faction."
+          },
+          "role": {
+            "type": "string",
+            "description": "The member's position or function within the faction."
+          },
+          "leader": {
+            "type": "string",
+            "description": "The name of the faction leader, if this member is in a leadership role."
+          },
+          "notable_members": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Names of other significant members associated with this member, if applicable."
+          },
+          "relationships": {
+            "type": "array",
+            "description": "The member's connections to other characters.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "character_id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "description": "The UUID of the related character."
+                },
+                "relationship_type": {
+                  "type": "string",
+                  "description": "The nature of their connection (e.g., 'ally', 'enemy', 'leader')."
+                },
+                "dynamic": {
+                  "type": "string",
+                  "description": "A detailed explanation of the relationship's complexity and nuances."
+                }
+              },
+              "required": ["character_id", "relationship_type"]
+            }
+          }
+        },
+        "required": ["name", "description"]
+      }
+    }
+  },
+  "required": ["id", "name", "description", "status", "role"]
+}

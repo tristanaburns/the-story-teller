@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/resource_management",
+  "title": "Organization Resource Management Schema",
+  "description": "How an organization acquires, allocates, and utilizes its resources to pursue its objectives.",
+  "type": "object",
+  "properties": {
+    "priority_resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resource_type": {
+            "$ref": "../common/resource_type_schema.json",
+            "description": "The category of resource that is particularly important to this organization."
+          },
+          "importance": {
+            "type": "string",
+            "enum": ["vital", "high", "moderate", "supplemental"],
+            "description": "How crucial this resource is to the organization's core functions and goals."
+          },
+          "description": {
+            "type": "string",
+            "description": "Specific details about this resource and why it matters to the organization."
+          },
+          "typical_sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Where or how the organization typically obtains this resource."
+          },
+          "current_status": {
+            "type": "string",
+            "enum": ["abundant", "sufficient", "strained", "scarce", "depleted", "inaccessible"],
+            "description": "The organization's present situation regarding this resource."
+          },
+          "allocation_strategy": {
+            "type": "string",
+            "description": "How the organization distributes this resource among its divisions or activities."
+          }
+        },
+        "required": ["resource_type", "importance", "description"]
+      },
+      "description": "The key resources that the organization needs to function and pursue its goals."
+    },
+    "sustainability": {
+      "type": "string",
+      "enum": ["self-sufficient", "dependent", "parasitic", "symbiotic", "exploitative", "balanced"],
+      "description": "The organization's overall approach to resource acquisition and usage, indicating how well it can maintain operations without external support and the ethical nature of its resource gathering methods."
+    },
+    "resource_priorities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resource_type": {
+            "type": "string",
+            "enum": ["financial", "human", "material", "information", "territorial", "technological", "magical"],
+            "description": "The category of resource that the organization values and manages."
+          },
+          "priority_level": {
+            "type": "string",
+            "enum": ["critical", "high", "moderate", "low", "negligible"],
+            "description": "How important this resource category is to the organization's operations and survival, affecting allocation decisions and strategic planning."
+          },
+          "acquisition_methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The specific approaches used to obtain this type of resource, which may range from legitimate to illicit depending on the organization's nature and ethical boundaries."
+          }
+        },
+        "required": ["resource_type", "priority_level"]
+      },
+      "description": "The organization's hierarchy of resource importance, showing what it values most and how these preferences shape its decisions and operations."
+    },
+    "logistics": {
+      "type": "object",
+      "properties": {
+        "supply_chains": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "Details of how the organization moves resources, goods, information, or personnel between locations to maintain its operations."
+              },
+              "vulnerability": {
+                "type": "string",
+                "enum": ["secure", "mostly_secure", "vulnerable", "compromised", "critical_weakness"],
+                "description": "Assessment of how susceptible this logistical pathway is to disruption by enemies, natural events, or other external factors."
+              }
+            },
+            "required": ["description"]
+          },
+          "description": "The networks and pathways through which the organization moves resources, potentially creating strategic vulnerabilities or strengths."
+        },
+        "stockpiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "resource": {
+                "type": "string",
+                "description": "The specific material, weaponry, food, or other tangible asset being stored for future use."
+              },
+              "location_id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Reference to where these reserves are maintained, linking to a complete location object."
+              },
+              "quantity": {
+                "type": "string",
+                "description": "The amount of this resource currently in reserve, expressed in appropriate units or general scale."
+              }
+            },
+            "required": ["resource"]
+          },
+          "description": "Caches of important resources maintained by the organization to ensure operational continuity during shortages or emergencies."
+        }
+      },
+      "description": "The organization's systems for moving, storing, and distributing resources across its sphere of influence, critical for maintaining operations across multiple locations."
+    },
+    "operational_capacity": {
+      "type": "object",
+      "properties": {
+        "maximum_deployment": {
+          "type": "string",
+          "description": "The largest scale of operation the organization can sustain with its current resources, setting an upper bound on its capabilities."
+        },
+        "response_time": {
+          "type": "string",
+          "enum": ["immediate", "rapid", "moderate", "delayed", "extensive"],
+          "description": "How quickly the organization can mobilize its resources to respond to threats or opportunities, affecting its tactical flexibility."
+        },
+        "sustainable_operations": {
+          "type": "string",
+          "description": "The duration for which the organization can maintain its activities at normal levels before resource constraints become critical."
+        }
+      },
+      "description": "The practical limits of what the organization can accomplish based on its resource management capabilities, defining the scale and duration of its potential actions."
+    }
+  }
+}

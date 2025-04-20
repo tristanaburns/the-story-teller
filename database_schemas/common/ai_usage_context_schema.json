@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/ai_usage_context",
+  "title": "AI Usage Context Schema",
+  "description": "Standardized enumeration of the different purposes for which AI-generated content is created in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "character_development",
+    "world_building",
+    "plot_generation",
+    "scene_generation",
+    "dialogue_creation",
+    "lore_expansion",
+    "narrative_outlining",
+    "backstory_creation",
+    "description_enhancement",
+    "conflict_development",
+    "relationship_mapping",
+    "timeline_construction",
+    "perspective_exploration",
+    "setting_detailing",
+    "artifact_design",
+    "organization_structuring",
+    "magic_system_development",
+    "technology_conceptualization",
+    "cultural_elaboration",
+    "literary_adaptation",
+    "historical_event_creation",
+    "game_mechanics_design"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each usage context (not part of the enum, provided for documentation)",
+    "properties": {
+      "character_development": {
+        "type": "string",
+        "description": "Creating or enhancing character profiles, personalities, motivations, or arcs."
+      },
+      "world_building": {
+        "type": "string",
+        "description": "Developing the setting, cultures, geography, or systems that make up the narrative universe."
+      },
+      "plot_generation": {
+        "type": "string",
+        "description": "Creating narrative structures, story beats, or plot outlines that guide the overall story."
+      },
+      "scene_generation": {
+        "type": "string",
+        "description": "Writing specific moments or interactions that will appear directly in the narrative."
+      },
+      "dialogue_creation": {
+        "type": "string",
+        "description": "Developing the spoken exchanges between characters, with attention to voice and subtext."
+      },
+      "lore_expansion": {
+        "type": "string",
+        "description": "Adding depth to existing worldbuilding by creating additional history, myths, or background elements."
+      },
+      "narrative_outlining": {
+        "type": "string",
+        "description": "Structuring the overall story flow, chapter breakdowns, or episode sequences."
+      },
+      "backstory_creation": {
+        "type": "string",
+        "description": "Developing historical events or experiences that shaped characters or settings prior to the main narrative."
+      },
+      "description_enhancement": {
+        "type": "string",
+        "description": "Improving or creating sensory details, atmospheric elements, or visual characteristics."
+      },
+      "conflict_development": {
+        "type": "string",
+        "description": "Designing obstacles, antagonistic forces, dilemmas, or other challenges that drive the narrative."
+      },
+      "relationship_mapping": {
+        "type": "string",
+        "description": "Creating or elaborating connections, histories, and dynamics between characters or factions."
+      },
+      "timeline_construction": {
+        "type": "string",
+        "description": "Organizing events chronologically and establishing causal relationships between occurrences."
+      },
+      "perspective_exploration": {
+        "type": "string",
+        "description": "Examining narrative events or worldbuilding elements from different character viewpoints."
+      },
+      "setting_detailing": {
+        "type": "string",
+        "description": "Elaborating specific locations with architectural, geographical, or atmospheric details."
+      },
+      "artifact_design": {
+        "type": "string",
+        "description": "Creating significant objects, technologies, or items with physical descriptions and narrative significance."
+      },
+      "organization_structuring": {
+        "type": "string",
+        "description": "Developing groups, factions, governments, or other collective entities within the narrative world."
+      },
+      "magic_system_development": {
+        "type": "string",
+        "description": "Creating or enhancing supernatural elements, including rules, limitations, and cultural integration."
+      },
+      "technology_conceptualization": {
+        "type": "string",
+        "description": "Designing futuristic or alternative technological systems, devices, or scientific principles."
+      },
+      "cultural_elaboration": {
+        "type": "string",
+        "description": "Developing customs, traditions, arts, languages, or social structures for groups within the narrative."
+      },
+      "literary_adaptation": {
+        "type": "string",
+        "description": "Transforming content between different media forms, story structures, or narrative approaches."
+      },
+      "historical_event_creation": {
+        "type": "string",
+        "description": "Designing significant past occurrences that shaped the narrative world's current state."
+      },
+      "game_mechanics_design": {
+        "type": "string",
+        "description": "Developing systems, rules, or interactive elements for gameplay or tabletop experiences."
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/culture",
+  "title": "Organization Culture Schema",
+  "description": "The shared values, beliefs, practices, and environment that characterize an organization.",
+  "type": "object",
+  "properties": {
+    "core_values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "../common/cultural_value_schema.json",
+            "description": "A principle or quality that is particularly important to the organization."
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["primary", "secondary", "tertiary", "aspirational"],
+            "description": "How central this value is to the organization's identity and decision-making."
+          },
+          "expression": {
+            "type": "string",
+            "description": "How this value manifests in the organization's practices, policies, or behaviors."
+          }
+        },
+        "required": ["value"]
+      },
+      "description": "The fundamental principles that shape the organization's identity and guide its actions."
+    },
+    "ethos": {
+      "type": "string",
+      "description": "A brief statement that captures the distinctive character, spirit, or attitude of the organization."
+    },
+    "rituals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The title or designation for this specific ceremony or practice."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed account of how this ritual is performed, including required participants, actions, and settings."
+          },
+          "purpose": {
+            "type": "string",
+            "description": "The function this ritual serves within the organization, explaining why it continues to be performed."
+          }
+        }
+      },
+      "description": "Ceremonial practices and formalized procedures that reinforce the organization's values, commemorate its history, or mark significant transitions for its members."
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The identifier for this emblem, icon, or symbolic element used by the organization."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed account of the symbol's appearance, including colors, shapes, and design elements."
+          },
+          "meaning": {
+            "type": "string",
+            "description": "The significance and symbolism behind this visual representation."
+          }
+        }
+      },
+      "description": "Visual emblems, insignias, colors, or icons that represent the organization's identity, history, or values."
+    }
+  }
+}

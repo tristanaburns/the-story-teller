@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/organization_purpose",
+  "title": "Organization Purpose Schema",
+  "description": "Standardized enumeration of primary organizational motivations and purposes in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "profit_generation",
+    "political_power",
+    "social_change",
+    "knowledge_pursuit",
+    "security_provision",
+    "resource_control",
+    "religious_promotion",
+    "cultural_preservation",
+    "territorial_defense",
+    "technological_advancement",
+    "ideological_spread",
+    "entertainment_creation",
+    "infrastructure_development",
+    "public_service",
+    "community_support",
+    "environmental_protection",
+    "criminal_enterprise",
+    "power_projection",
+    "survival_assurance",
+    "magical_mastery",
+    "historical_documentation"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each organizational purpose (not part of the enum, provided for documentation)",
+    "properties": {
+      "profit_generation": {
+        "type": "string",
+        "description": "Creating financial gain for owners, shareholders, or members through commercial activities."
+      },
+      "political_power": {
+        "type": "string",
+        "description": "Acquiring and exercising influence over governance or policy decisions at various levels."
+      },
+      "social_change": {
+        "type": "string",
+        "description": "Transforming societal structures, norms, values, or practices according to a vision."
+      },
+      "knowledge_pursuit": {
+        "type": "string",
+        "description": "Discovery, development, or preservation of information, techniques, or understanding."
+      },
+      "security_provision": {
+        "type": "string",
+        "description": "Protecting people, assets, information, or territories from various threats."
+      },
+      "resource_control": {
+        "type": "string",
+        "description": "Maintaining authority over access to or distribution of valuable materials or supplies."
+      },
+      "religious_promotion": {
+        "type": "string",
+        "description": "Advancing spiritual beliefs, practices, traditions, or religious institutions."
+      },
+      "cultural_preservation": {
+        "type": "string",
+        "description": "Maintaining and protecting traditions, languages, arts, or ways of life."
+      },
+      "territorial_defense": {
+        "type": "string",
+        "description": "Protecting geographic areas from external threats or competing claims."
+      },
+      "technological_advancement": {
+        "type": "string",
+        "description": "Creating or improving tools, techniques, or systems that expand capabilities."
+      },
+      "ideological_spread": {
+        "type": "string",
+        "description": "Expanding the adoption of specific philosophical, political, or belief systems."
+      },
+      "entertainment_creation": {
+        "type": "string",
+        "description": "Producing content, experiences, or activities designed for enjoyment or diversion."
+      },
+      "infrastructure_development": {
+        "type": "string",
+        "description": "Building or maintaining fundamental facilities and systems serving a common need."
+      },
+      "public_service": {
+        "type": "string",
+        "description": "Providing essential functions that benefit the general population."
+      },
+      "community_support": {
+        "type": "string",
+        "description": "Offering assistance, resources, or care to specific groups or localities."
+      },
+      "environmental_protection": {
+        "type": "string",
+        "description": "Preserving natural ecosystems, reducing harmful impacts, or restoring damaged areas."
+      },
+      "criminal_enterprise": {
+        "type": "string",
+        "description": "Generating profit or power through activities outside legal frameworks."
+      },
+      "power_projection": {
+        "type": "string",
+        "description": "Demonstrating strength and extending influence beyond immediate boundaries."
+      },
+      "survival_assurance": {
+        "type": "string",
+        "description": "Focusing primarily on ensuring the continued existence of its members or constituency."
+      },
+      "magical_mastery": {
+        "type": "string",
+        "description": "Developing, controlling, or understanding supernatural forces or arcane knowledge."
+      },
+      "historical_documentation": {
+        "type": "string",
+        "description": "Recording, preserving, and interpreting past events and developments."
+      }
+    }
+  }
+}

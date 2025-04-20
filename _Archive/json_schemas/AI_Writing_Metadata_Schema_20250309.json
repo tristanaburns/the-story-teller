@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Writing Metadata Schema",
+  "description": "Defines the structure for metadata tracking in The Shadow Team Chronicles.",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Encapsulates all metadata properties for tracking and execution.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "A globally unique identifier (UUID v4) for this object."
+        },
+        "name": {
+          "type": "string",
+          "description": "The title or name of this object."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed summary or description of this object."
+        },
+        "object_type": {
+          "type": "string",
+          "enum": [
+            "storyline", "volume", "act", "story", "chapter", 
+            "passage", "part", "technology", "character", "location", 
+            "category", "image", "video", "audio", "map"
+          ],
+          "description": "The classification of this object."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "final"],
+          "description": "The current progression state of this object."
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "Indicates whether this object has been reviewed and confirmed."
+        },
+        "sequence": {
+          "type": "object",
+          "description": "Numerical tracking for story progression.",
+          "properties": {
+            "act": { "type": "integer", "minimum": 1 },
+            "volume": { "type": "integer", "minimum": 1 },
+            "story": { "type": "integer", "minimum": 1 },
+            "chapter": { "type": "integer", "minimum": 1 },
+            "passage": { "type": "integer", "minimum": 1 },
+            "part": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["act", "volume", "story", "chapter", "passage", "part"]
+        },
+        "writing_style": {
+          "type": "string",
+          "enum": [
+            "Mythic & Poetic",
+            "Cinematic & Precise",
+            "Controlled Chaos",
+            "Emotional & Measured",
+            "Narrative Historian",
+            "Atmospheric & Immersive",
+            "Dreamlike & Fragmented"
+          ],
+          "description": "Explicitly defines the narrative style used for this object."
+        },
+        "setting": {
+          "type": "string",
+          "description": "Defined setting/location for this object."
+        },
+        "characters": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of characters involved in this object."
+        },
+        "timeline": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "type": "string",
+              "format": "date",
+              "description": "Start date of the events."
+            },
+            "end": {
+              "type": ["string", "null"],
+              "format": "date",
+              "description": "End date of the events (if known); null if ongoing or unknown."
+            }
+          },
+          "required": ["start"]
+        },
+        "map_prompt": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["pending", "passed", "failed"],
+              "description": "The status of the map generation process."
+            },
+            "map_prompt_text": {
+              "type": "string",
+              "description": "The dynamically generated prompt for creating a location map, adjusted based on the story's timeline."
+            },
+            "timeline_integration": {
+              "type": "string",
+              "description": "Details how the map adjusts to different time periods, such as parchment maps for ancient settings, military-style maps for modern settings, and holographic maps for futuristic settings."
+            }
+          },
+          "required": ["status", "map_prompt_text", "timeline_integration"]
+        },
+        "multimedia": {
+          "type": "object",
+          "properties": {
+            "image_generation": {
+              "type": "object",
+              "properties": {
+                "prompt_text": { "type": "string" },
+                "status": { 
+                  "type": "string",
+                  "enum": ["pending", "passed", "failed"]
+                },
+                "failure_reason": { 
+                  "type": ["string", "null"],
+                  "description": "Provided if status is 'failed'; null otherwise."
+                }
+              },
+              "required": ["prompt_text", "status"]
+            },
+            "video_generation": {
+              "type": "object",
+              "properties": {
+                "prompt_text": { "type": "string" },
+                "status": {
+                  "type": "string",
+                  "enum": ["pending", "passed", "failed"]
+                },
+                "failure_reason": { 
+                  "type": ["string", "null"],
+                  "description": "Provided if status is 'failed'; null otherwise."
+                }
+              },
+              "required": ["prompt_text", "status"]
+            }
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": { "type": "string" },
+              "value": { "type": "string" }
+            },
+            "required": ["key", "value"]
+          }
+        },
+        "source": {
+          "type": ["string", "null"],
+          "description": "Original source or external citation if applicable; null if original."
+        }
+      },
+      "required": [
+        "id", "name", "object_type", "status", "verified", "sequence", "tags", "writing_style"
+      ]
+    }
+  },
+  "required": ["metadata"]
+}

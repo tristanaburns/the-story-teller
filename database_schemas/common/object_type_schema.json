@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/object_type",
+  "title": "Object Type Schema",
+  "description": "Standardized enumeration of all possible object types in The Shadow Team Chronicles universe. Types are organized into categories for clarity.",
+  "type": "string",
+  "enum": [
+    "character",
+    "location",
+    "organization",
+    "faction",
+    "historical_event",
+    "artifact",
+    "weapon",
+    "armor",
+    "technology",
+    "realm",
+    "dimension",
+    "storyline",
+    "volume",
+    "act",
+    "story",
+    "chapter",
+    "passage",
+    "part",
+    "scene",
+    "image",
+    "video",
+    "audio",
+    "map",
+    "music",
+    "sound_effect",
+    "category",
+    "tag",
+    "collection",
+    "timeline",
+    "reference"
+  ],
+  "categoryMapping": {
+    "type": "object",
+    "description": "Grouping of object types by their functional category (not part of the enum, provided for documentation)",
+    "properties": {
+      "narrative_world": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["character", "location", "organization", "faction", "historical_event", "artifact", "weapon", "armor", "technology", "realm", "dimension"]
+        },
+        "description": "Elements that exist within the narrative world itself, representing entities, objects, and events that characters may interact with."
+      },
+      "narrative_structure": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["storyline", "volume", "act", "story", "chapter", "passage", "part", "scene"]
+        },
+        "description": "Elements that organize and structure the narrative, representing containers and segments of the actual storytelling."
+      },
+      "media": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["image", "video", "audio", "map", "music", "sound_effect"]
+        },
+        "description": "Elements that represent multimedia content associated with the narrative world or storytelling."
+      },
+      "metadata": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["category", "tag", "collection", "timeline", "reference"]
+        },
+        "description": "Elements used primarily for organization, classification, and cross-referencing within the database."
+      }
+    }
+  },
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each object type (not part of the enum, provided for documentation)",
+    "properties": {
+      "character": {
+        "type": "string",
+        "description": "An individual entity with agency, personality, and narrative significance within the story world."
+      },
+      "location": {
+        "type": "string",
+        "description": "A physical or virtual place where narrative events occur, with defined characteristics and boundaries."
+      },
+      "organization": {
+        "type": "string",
+        "description": "A structured group of characters united by common purpose, leadership, and identity."
+      },
+      "faction": {
+        "type": "string",
+        "description": "A political, ideological, or social group with shared interests that may conflict with other factions."
+      },
+      "historical_event": {
+        "type": "string",
+        "description": "A significant occurrence that impacts the narrative world and influences characters and organizations."
+      },
+      "artifact": {
+        "type": "string",
+        "description": "A significant object with unique properties, history, and narrative importance beyond ordinary items."
+      },
+      "weapon": {
+        "type": "string",
+        "description": "An object designed primarily for combat, with specifications for damage capabilities and fighting styles."
+      },
+      "armor": {
+        "type": "string",
+        "description": "Protective gear designed to shield characters from harm, with specific defensive properties."
+      },
+      "technology": {
+        "type": "string",
+        "description": "Scientific or magical systems, devices, and innovations that affect the capabilities of characters and societies."
+      },
+      "storyline": {
+        "type": "string",
+        "description": "The highest level of narrative organization, encompassing multiple volumes united by overarching themes and plots."
+      },
+      "volume": {
+        "type": "string",
+        "description": "A major division of a storyline, typically containing multiple stories with thematic cohesion."
+      },
+      "act": {
+        "type": "string",
+        "description": "A major structural division within a story, marking significant shifts in the narrative arc."
+      },
+      "story": {
+        "type": "string",
+        "description": "A complete narrative unit with beginning, middle, and end, focused on specific characters and conflicts."
+      },
+      "chapter": {
+        "type": "string",
+        "description": "A division within a story that contains a coherent episode or sequence of closely related events."
+      },
+      "passage": {
+        "type": "string",
+        "description": "A significant scene or moment within a chapter, typically unified by location, time, and participating characters."
+      },
+      "part": {
+        "type": "string",
+        "description": "A subdivision of a passage representing a discrete narrative beat or moment within a scene."
+      },
+      "scene": {
+        "type": "string",
+        "description": "A continuous action sequence occurring in a single location and time frame, involving specific characters."
+      },
+      "image": {
+        "type": "string",
+        "description": "Visual representation of narrative elements, characters, locations, or events."
+      },
+      "video": {
+        "type": "string",
+        "description": "Dynamic visual content depicting action sequences, character interactions, or world elements."
+      },
+      "audio": {
+        "type": "string",
+        "description": "Sound-based content that may include dialogue, ambient sounds, effects, or narrative description."
+      },
+      "map": {
+        "type": "string",
+        "description": "Geographical or spatial representation of locations, territories, or movement paths."
+      },
+      "category": {
+        "type": "string",
+        "description": "A classification system for grouping related objects based on shared characteristics."
+      },
+      "timeline": {
+        "type": "string",
+        "description": "Chronological organization of events, character appearances, and world developments."
+      }
+    }
+  }
+}

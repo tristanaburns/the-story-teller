@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/historical_event",
+  "title": "Historical Event Schema",
+  "description": "Schema for defining historical events within The Shadow Team Chronicles universe, including their temporal, geographic, and causal properties.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "base_metadata_schema.json"
+    }
+  ],
+  "properties": {
+    "object_type": {
+      "const": "historical_event",
+      "description": "Fixed value indicating this is a historical event object."
+    },
+    "event_type": {
+      "$ref": "common/event_type_schema.json",
+      "description": "The categorical classification of this historical event."
+    },
+    "temporal_data": {
+      "$ref": "historical_event/temporal_data_schema.json",
+      "description": "When the event occurred, including start and end dates, duration, and temporal context."
+    },
+    "location_data": {
+      "$ref": "historical_event/location_data_schema.json",
+      "description": "Where the event took place, including primary and secondary locations."
+    },
+    "participants": {
+      "$ref": "historical_event/participants_schema.json",
+      "description": "Who was involved in the event, including individuals, organizations, and affected populations."
+    },
+    "causality": {
+      "$ref": "historical_event/causality_schema.json",
+      "description": "The causes and effects of the event, both immediate and long-term."
+    },
+    "cultural_significance": {
+      "$ref": "historical_event/cultural_significance_schema.json",
+      "description": "How the event is remembered, commemorated, and represented in culture."
+    },
+    "historical_significance": {
+      "$ref": "common/historical_significance_schema.json",
+      "description": "The event's broader impact on the world's history and development."
+    },
+    "narrative_significance": {
+      "$ref": "common/narrative_significance_schema.json",
+      "description": "How the event functions within the narrative structure and themes."
+    },
+    "multimedia": {
+      "$ref": "multimedia_schema.json#/properties/multimedia"
+    }
+  },
+  "required": ["object_type", "event_type", "temporal_data", "location_data", "causality"]
+}

@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Writing Metadata Schema",
+  "description": "Defines the structure for metadata tracking in The Shadow Team Chronicles. This schema provides a comprehensive framework for organizing narrative elements, managing story progression, and integrating multimedia components.",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Encapsulates all metadata properties for tracking and execution of narrative elements. This container ensures all metadata remains organized and accessible within a single context.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "A globally unique identifier (UUID v4) for this object. Example: '123e4567-e89b-12d3-a456-426614174000'. This should be generated automatically and never duplicated."
+        },
+        "name": {
+          "type": "string",
+          "description": "The title or name of this object. Should be concise yet descriptive enough to identify the element within the narrative structure. Example: 'The Duel at Gojo Bridge'."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed summary or description of this object. Should provide enough context to understand the element's purpose and place in the narrative. Example: 'The legendary confrontation between Yoshitsune and Benkei that changed the course of Japanese history.'"
+        },
+        "object_type": {
+          "type": "string",
+          "enum": [
+            "storyline", "volume", "act", "story", "chapter", 
+            "passage", "part", "technology", "character", "location", 
+            "category", "image", "video", "audio", "map"
+          ],
+          "description": "The classification of this object within the narrative hierarchy. Each type has specific expectations for content and structure.",
+          "enumDescriptions": {
+            "storyline": "The highest narrative level encompassing the entire epic",
+            "volume": "A major collection of related stories sharing a theme",
+            "act": "A significant narrative phase with its own arc and resolution",
+            "story": "A complete narrative unit with beginning, middle, and end",
+            "chapter": "A substantial division within a story focusing on specific events",
+            "passage": "A cinematic sequence or narrative focus within a chapter",
+            "part": "A discrete scene or moment within a passage",
+            "technology": "A technological element or system within the narrative world",
+            "character": "An individual or entity with agency in the narrative",
+            "location": "A physical or virtual setting where events occur",
+            "category": "A classification grouping for narrative elements",
+            "image": "A visual representation of narrative elements",
+            "video": "An animated sequence depicting narrative elements",
+            "audio": "A sound recording related to narrative elements",
+            "map": "A geographic representation of narrative locations"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "final"],
+          "description": "The current progression state of this object. Use 'draft' for content still under development or revision, and 'final' only when the content has been completed, reviewed, and approved."
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "Indicates whether this object has been reviewed and confirmed for narrative consistency, quality, and adherence to the established canon. Set to true only after explicit verification by authorized reviewers."
+        },
+        "setting": {
+          "type": "string",
+          "description": "Defined setting/location for this object. Should include specific details about the physical environment, historical context, and atmospheric conditions. Example: 'Gojo Bridge, Kyoto, Japan - 1180 CE, during a torrential thunderstorm at midnight'."
+        },
+        "writing_style": {
+          "type": "object",
+          "description": "Defines the writing style and format for this object. These parameters influence the tone, pacing, and emotional impact of the narrative.",
+          "properties": {
+            "tone": {
+              "type": "string",
+              "enum": ["Epic", "Cinematic", "Mythic"],
+              "description": "The overarching tone of the narrative that shapes the reader's emotional experience. 'Epic' emphasizes grand scale and historical importance, 'Cinematic' focuses on visual storytelling and scene composition, 'Mythic' incorporates legendary and supernatural elements."
+            },
+            "theme": {
+              "type": "string",
+              "enum": ["Fate", "Honor", "Battle of Legends"],
+              "description": "The central theme of the narrative that defines its philosophical core. 'Fate' explores destiny and predetermined outcomes, 'Honor' examines moral codes and ethical dilemmas, 'Battle of Legends' focuses on the clash of extraordinary individuals and their legacies."
+            },
+            "style_type": {
+              "type": "string",
+              "enum": [
+                "Mythic & Poetic",
+                "Cinematic & Precise",
+                "Controlled Chaos",
+                "Emotional & Measured",
+                "Narrative Historian",
+                "Atmospheric & Immersive",
+                "Dreamlike & Fragmented"
+              ],
+              "description": "Explicitly defines the narrative style used for this object, influencing sentence structure, vocabulary, and rhythm.",
+              "enumDescriptions": {
+                "Mythic & Poetic": "Elevated language with metaphorical richness and archetypal imagery",
+                "Cinematic & Precise": "Clear, visual descriptions with careful attention to detail and pacing",
+                "Controlled Chaos": "Dynamic, energetic prose with strategic disruptions of rhythm for impact",
+                "Emotional & Measured": "Balanced exploration of feelings with thoughtful, measured progression",
+                "Narrative Historian": "Authoritative voice providing context and significance to events",
+                "Atmospheric & Immersive": "Rich sensory details creating a vivid environment for the reader",
+                "Dreamlike & Fragmented": "Non-linear, impressionistic prose with emotional resonance over logical flow"
+              }
+            },
+            "events": {
+              "type": "array",
+              "description": "Key events that shape the narrative, listed in chronological order. Each event should be significant enough to impact character development or plot progression.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "event": { 
+                    "type": "string",
+                    "description": "A concise description of what occurs. Example: 'Yoshitsune defeats Benkei in single combat'"
+                  },
+                  "importance": { 
+                    "type": "string",
+                    "description": "Why this event matters to the narrative. Example: 'Establishes Yoshitsune's exceptional combat skills despite his youth and small stature'"
+                  },
+                  "impact": { 
+                    "type": "string",
+                    "description": "How this event changes characters or storylines. Example: 'Benkei pledges lifelong loyalty to Yoshitsune, creating the most famous warrior bond in Japanese history'"
+                  }
+                },
+                "required": ["event", "importance", "impact"]
+              }
+            }
+          },
+          "required": ["tone", "theme", "style_type", "events"]
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "object_type",
+        "status",
+        "verified",
+        "sequence",
+        "tags",
+        "writing_style"
+      ]
+    }
+  },
+  "required": ["metadata"]
+}

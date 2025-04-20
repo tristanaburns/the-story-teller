@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/historical_event/cultural_significance",
+  "title": "Historical Event Cultural Significance Schema",
+  "description": "The cultural impact, memory, and representation of a historical event within the narrative world.",
+  "type": "object",
+  "properties": {
+    "commemorations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name or title of this commemorative practice or observance."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["holiday", "memorial", "monument", "ceremony", "ritual", "anniversary", "festival", "day_of_remembrance"],
+            "description": "The form this commemoration takes."
+          },
+          "description": {
+            "type": "string",
+            "description": "Details about the commemorative practice, including its customs, significance, and how widely it is observed."
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "../common/references_schema.json"
+            },
+            "description": "Groups or organizations that typically participate in or maintain this commemoration."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Formal or informal ways that the historical event is remembered, celebrated, or memorialized within the culture."
+    },
+    "artistic_depictions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "medium": {
+            "type": "string",
+            "description": "The art form or cultural medium through which the event is portrayed (e.g., 'literature', 'theater', 'music', 'visual art', 'digital media')."
+          },
+          "title": {
+            "type": "string",
+            "description": "The name of the specific artistic work that depicts the historical event."
+          },
+          "creator": {
+            "type": "string",
+            "description": "The artist, author, or creative entity responsible for this depiction."
+          },
+          "significance": {
+            "type": "string",
+            "description": "How this artistic representation has influenced cultural understanding of the historical event or holds particular importance."
+          }
+        },
+        "required": ["medium", "title"]
+      },
+      "description": "Notable artistic works or cultural productions that draw inspiration from or depict the historical event."
+    },
+    "historical_interpretations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "perspective": {
+            "type": "string",
+            "description": "The cultural, political, or historical lens through which this interpretation views the event."
+          },
+          "narrative": {
+            "type": "string",
+            "description": "The version of events or meaning ascribed to the historical event by this interpretation."
+          },
+          "proponents": {
+            "type": "string",
+            "description": "The individuals, groups, or societies that primarily support or promote this interpretation."
+          }
+        },
+        "required": ["perspective", "narrative"]
+      },
+      "description": "Different ways the historical event has been explained, contextualized, or understood by different groups within the narrative world."
+    },
+    "phrase_origin": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "phrase": {
+            "type": "string",
+            "description": "A saying, idiom, or expression that originated from or references the historical event."
+          },
+          "meaning": {
+            "type": "string",
+            "description": "What the phrase has come to signify in cultural discourse, which may differ from its literal connection to the event."
+          },
+          "context": {
+            "type": "string",
+            "description": "How and when this phrase is typically used, and how it connects to the historical event."
+          }
+        },
+        "required": ["phrase", "meaning"]
+      },
+      "description": "Linguistic legacies of the historical event that persist in everyday language and cultural expressions."
+    },
+    "symbolism": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "An object, image, or concept that has come to represent the historical event or its meaning."
+          },
+          "significance": {
+            "type": "string",
+            "description": "What this symbol represents and how it connects to the historical event."
+          },
+          "usage": {
+            "type": "string",
+            "description": "How this symbol is used in cultural contexts, including political, artistic, or religious applications."
+          }
+        },
+        "required": ["symbol", "significance"]
+      },
+      "description": "Visual or conceptual symbols that have become associated with the historical event in popular consciousness."
+    },
+    "cultural_impact": {
+      "$ref": "../common/impact_magnitude_schema.json",
+      "description": "The overall magnitude of this event's influence on culture, ranging from localized effects to civilization-defining shifts."
+    }
+  }
+}

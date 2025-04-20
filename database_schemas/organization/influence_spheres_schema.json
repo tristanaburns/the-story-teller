@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/influence_spheres",
+  "title": "Organization Influence Spheres Schema",
+  "description": "The domains, regions, or systems over which an organization exerts power, control, or significant impact.",
+  "type": "object",
+  "properties": {
+    "primary_spheres": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sphere": {
+            "$ref": "../common/influence_sphere_schema.json",
+            "description": "The domain or category in which the organization holds significant influence."
+          },
+          "description": {
+            "type": "string",
+            "description": "Details about how the organization's influence manifests in this sphere and why it's significant."
+          },
+          "control_level": {
+            "type": "string",
+            "enum": ["dominant", "major", "significant", "moderate", "limited", "emerging", "declining"],
+            "description": "The degree of power or control the organization holds within this sphere."
+          },
+          "geographical_extent": {
+            "type": "string",
+            "description": "The physical regions or locations where this influence applies."
+          },
+          "key_assets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Important resources, positions, or capabilities that enable the organization's influence in this sphere."
+          },
+          "strategies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Methods the organization uses to maintain or expand its influence in this sphere."
+          },
+          "rivals": {
+            "type": "array",
+            "items": {
+              "$ref": "../common/references_schema.json"
+            },
+            "description": "Other organizations that compete with or challenge this organization's influence in this sphere."
+          }
+        },
+        "required": ["sphere", "description", "control_level"]
+      },
+      "description": "The main areas where the organization wields substantial influence or power."
+    },
+    "secondary_spheres": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sphere": {
+            "$ref": "../common/influence_sphere_schema.json",
+            "description": "A domain where the organization has some presence or impact, but not as central to its identity or operations."
+          },
+          "description": {
+            "type": "string",
+            "description": "How the organization's influence appears in this sphere and its relative importance."
+          },
+          "relationship_to_primary": {
+            "type": "string",
+            "description": "How this sphere of influence connects to or supports the organization's primary spheres."
+          }
+        },
+        "required": ["sphere", "description"]
+      },
+      "description": "Additional areas where the organization has some influence, but which are less central to its identity or operations."
+    },
+    "regional_influence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "type": "string",
+            "description": "The geographical area or political jurisdiction where the organization has presence."
+          },
+          "strength": {
+            "type": "string",
+            "enum": ["headquarters", "stronghold", "significant", "presence", "limited", "covert", "minimal"],
+            "description": "The degree of the organization's established influence in this region."
+          },
+          "description": {
+            "type": "string",
+            "description": "Details about the organization's activities, relationships, and impact in this region."
+          },
+          "key_locations": {
+            "type": "array",
+            "items": {
+              "$ref": "../common/references_schema.json"
+            },
+            "description": "Specific places within this region that are particularly important to the organization's operations or influence."
+          },
+          "regional_leadership": {
+            "type": "array",
+            "items": {
+              "$ref": "../common/references_schema.json"
+            },
+            "description": "Characters who manage the organization's presence or interests in this region."
+          }
+        },
+        "required": ["region", "strength", "description"]
+      },
+      "description": "The organization's power and presence across different geographical areas."
+    },
+    "covert_influence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sphere": {
+            "$ref": "../common/influence_sphere_schema.json",
+            "description": "A domain where the organization maintains hidden or unacknowledged influence."
+          },
+          "description": {
+            "type": "string",
+            "description": "How the organization secretly exerts power or control in this sphere."
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The techniques used to maintain secrecy while exercising influence."
+          },
+          "known_by": {
+            "type": "string",
+            "description": "Who is aware of this hidden influence, if anyone."
+          },
+          "strategic_importance": {
+            "type": "string",
+            "description": "Why this covert influence matters to the organization's overall goals or operations."
+          }
+        },
+        "required": ["sphere", "description"]
+      },
+      "description": "Areas where the organization has deliberately concealed its influence or involvement."
+    },
+    "aspired_spheres": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sphere": {
+            "$ref": "../common/influence_sphere_schema.json",
+            "description": "A domain where the organization seeks to establish or expand influence."
+          },
+          "current_status": {
+            "type": "string",
+            "description": "The organization's present position or capabilities in this sphere."
+          },
+          "target_goal": {
+            "type": "string",
+            "description": "What level of influence or specific outcome the organization hopes to achieve."
+          },
+          "strategy": {
+            "type": "string",
+            "description": "How the organization plans to gain or increase its influence in this sphere."
+          },
+          "timeline": {
+            "type": "string",
+            "description": "The expected timeframe for establishing the desired level of influence."
+          },
+          "obstacles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Factors or entities that hinder the organization's expansion into this sphere."
+          }
+        },
+        "required": ["sphere", "current_status", "target_goal"]
+      },
+      "description": "Areas where the organization is actively working to build new influence or significantly expand existing influence."
+    },
+    "declining_influence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sphere": {
+            "$ref": "../common/influence_sphere_schema.json",
+            "description": "A domain where the organization's power or control is diminishing."
+          },
+          "previous_level": {
+            "type": "string",
+            "description": "The organization's former standing or capabilities in this sphere."
+          },
+          "current_status": {
+            "type": "string",
+            "description": "The organization's present, reduced position in this sphere."
+          },
+          "reasons_for_decline": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Factors that have caused the organization to lose influence."
+          },
+          "response": {
+            "type": "string",
+            "description": "How the organization is reacting to this loss of influence."
+          }
+        },
+        "required": ["sphere", "previous_level", "current_status"]
+      },
+      "description": "Areas where the organization's influence has weakened or is actively being challenged or lost."
+    }
+  }
+}

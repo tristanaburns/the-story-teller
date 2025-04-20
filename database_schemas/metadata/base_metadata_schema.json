@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/metadata/base_metadata",
+  "title": "Base Metadata Schema",
+  "description": "Fundamental metadata schema that provides core information about content within The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "object_type": {
+      "$ref": "../common/object_type_schema.json",
+      "description": "The categorization of this content item within the database system."
+    },
+    "creation_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this content was initially created, in ISO 8601 format."
+    },
+    "last_modified_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this content was most recently updated, in ISO 8601 format."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "The version of this content in semantic versioning format (MAJOR.MINOR.PATCH)."
+    },
+    "creator_info": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name or identifier of the primary creator of this content."
+        },
+        "role": {
+          "$ref": "../common/creator_role_schema.json",
+          "description": "The role or function this creator performed in developing the content."
+        },
+        "additional_creators": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name or identifier of an additional contributor."
+              },
+              "role": {
+                "$ref": "../common/creator_role_schema.json",
+                "description": "The role this additional contributor played."
+              },
+              "contribution": {
+                "type": "string",
+                "description": "Specific aspects or elements contributed by this person."
+              }
+            },
+            "required": ["name", "role"]
+          },
+          "description": "Other individuals who made significant contributions to this content."
+        }
+      },
+      "required": ["name", "role"],
+      "description": "Information about who created or contributed to this content."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keywords or categorization tags that help organize and find this content."
+    },
+    "related_content": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/references_schema.json"
+      },
+      "description": "Links to other content items that have significant relationships with this one."
+    },
+    "external_resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resource_type": {
+            "type": "string",
+            "enum": ["image", "audio", "video", "document", "website", "data_file", "research_material", "tool"],
+            "description": "The category of external resource."
+          },
+          "identifier": {
+            "type": "string",
+            "description": "A URI, file path, or other unique identifier for locating this resource."
+          },
+          "description": {
+            "type": "string",
+            "description": "Brief explanation of what this resource contains or how it relates to the content."
+          }
+        },
+        "required": ["resource_type", "identifier"]
+      },
+      "description": "References to files, links, or other external materials relevant to this content."
+    },
+    "system_info": {
+      "type": "object",
+      "properties": {
+        "content_status": {
+          "$ref": "../common/content_status_schema.json",
+          "description": "The current state of this content in the workflow pipeline."
+        },
+        "workflow_stage": {
+          "type": "string",
+          "description": "The specific project phase or development stage associated with this content."
+        },
+        "access_level": {
+          "type": "string",
+          "enum": ["public", "restricted", "private", "confidential"],
+          "description": "Who can view or access this content within the system."
+        }
+      },
+      "description": "Information related to the content's status within organizational workflows and systems."
+    }
+  },
+  "required": ["object_type", "creation_timestamp", "last_modified_timestamp", "version"],
+  "additionalProperties": false
+}

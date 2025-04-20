@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/historical_event/participants",
+  "title": "Historical Event Participants Schema",
+  "description": "Entities that were involved in or affected by a historical event, including individuals, groups, and organizations.",
+  "type": "object",
+  "properties": {
+    "key_individuals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "individual": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to the character who participated in the event."
+          },
+          "role": {
+            "type": "string",
+            "description": "The specific function or position this individual held during the event."
+          },
+          "significance": {
+            "type": "string",
+            "description": "How important this individual's actions were to the outcome or course of the event."
+          },
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specific actions this individual took during the event that had notable impact."
+          },
+          "fate": {
+            "type": "string",
+            "description": "What happened to this individual as a result of the event."
+          }
+        },
+        "required": ["individual", "role"]
+      },
+      "description": "Notable characters who played significant roles in the historical event."
+    },
+    "organizations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "organization": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to the organization that participated in the event."
+          },
+          "involvement": {
+            "type": "string",
+            "description": "The nature of this organization's participation in the event."
+          },
+          "stance": {
+            "type": "string",
+            "enum": ["instigator", "supporter", "defender", "victim", "neutral", "mediator", "observer"],
+            "description": "The organization's position or attitude regarding the event."
+          },
+          "outcome": {
+            "type": "string",
+            "description": "How this organization was affected by or changed due to the event."
+          }
+        },
+        "required": ["organization", "involvement"]
+      },
+      "description": "Formal groups, institutions, or organized bodies involved in the historical event."
+    },
+    "factions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The identifying name or descriptor for this faction."
+          },
+          "leader": {
+            "$ref": "../common/references_schema.json",
+            "description": "The primary leader or representative of this faction during the event."
+          },
+          "motivation": {
+            "type": "string",
+            "description": "What this faction sought to achieve through their involvement in the event."
+          },
+          "tactics": {
+            "type": "string",
+            "description": "Methods, strategies, or approaches this faction employed during the event."
+          },
+          "aftermath": {
+            "type": "string",
+            "description": "The consequences for this faction following the event's conclusion."
+          }
+        },
+        "required": ["name"]
+      },
+      "description": "Distinct sides, parties, or interest groups that formed around the historical event."
+    },
+    "civilian_impact": {
+      "type": "object",
+      "properties": {
+        "population_affected": {
+          "type": "string",
+          "description": "Approximate number or percentage of the general population affected by the event."
+        },
+        "casualty_count": {
+          "type": "string",
+          "description": "Estimates of deaths, injuries, or other direct harm to civilians, if applicable."
+        },
+        "displacement": {
+          "type": "string",
+          "description": "Information about population movements or refugees created by the event."
+        },
+        "economic_impact": {
+          "type": "string",
+          "description": "How the civilian economy and livelihoods were affected by the event."
+        },
+        "social_changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Shifts in social structure, customs, or behaviors that resulted from the event."
+        }
+      },
+      "description": "How the general populace was affected by or involved in the historical event."
+    },
+    "non_human_entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to the non-human entity that participated in the event."
+          },
+          "role": {
+            "type": "string",
+            "description": "The function or position this entity held during the event."
+          },
+          "impact": {
+            "type": "string",
+            "description": "How this entity influenced the course or outcome of the event."
+          }
+        },
+        "required": ["entity", "role"]
+      },
+      "description": "Non-human beings, creatures, or supernatural forces that played a role in the historical event."
+    }
+  }
+}

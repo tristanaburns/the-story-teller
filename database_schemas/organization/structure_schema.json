@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/structure",
+  "title": "Organization Structure Schema",
+  "description": "The internal composition, hierarchy, and operational framework of an organization.",
+  "type": "object",
+  "properties": {
+    "leadership_type": {
+      "$ref": "../common/leadership_structure_schema.json",
+      "description": "The fundamental approach to authority and decision-making within the organization."
+    },
+    "leaders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to a character who holds a leadership position in the organization."
+          },
+          "title": {
+            "type": "string",
+            "description": "The official designation or role name for this leadership position."
+          },
+          "responsibilities": {
+            "type": "string",
+            "description": "The specific duties, authority, and domain overseen by this leader."
+          },
+          "authority_level": {
+            "type": "string",
+            "enum": ["absolute", "high", "moderate", "limited", "symbolic", "specialized"],
+            "description": "The degree of power this leader has within the organization."
+          },
+          "term": {
+            "type": "string",
+            "description": "How long this leader has held the position or is expected to hold it."
+          },
+          "selection_method": {
+            "type": "string",
+            "description": "How this leader came to power or how leaders for this position are typically chosen."
+          }
+        },
+        "required": ["entity_reference", "title"]
+      },
+      "description": "The primary individuals who direct and represent the organization."
+    },
+    "leadership_council": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The formal title of the governing body or leadership group."
+        },
+        "composition": {
+          "type": "string",
+          "description": "How many members comprise the council and how they are selected or qualify for membership."
+        },
+        "function": {
+          "type": "string",
+          "description": "The specific role this council plays in organizational governance and decision-making."
+        },
+        "meeting_frequency": {
+          "type": "string",
+          "description": "How often the council convenes and under what circumstances."
+        },
+        "decision_process": {
+          "type": "string",
+          "description": "How the council reaches conclusions, resolves disputes, or establishes policy."
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "../common/references_schema.json"
+          },
+          "description": "References to characters who currently sit on the leadership council."
+        }
+      },
+      "description": "A collective body that shares leadership responsibilities or advises primary leaders."
+    },
+    "divisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The designation for this organizational unit or department."
+          },
+          "purpose": {
+            "type": "string",
+            "description": "The specific function or objective this division serves within the larger organization."
+          },
+          "leader": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to the character who heads this division."
+          },
+          "size": {
+            "type": "string",
+            "description": "The approximate number of members or resources allocated to this division."
+          },
+          "location": {
+            "type": "string",
+            "description": "Where this division primarily operates or is headquartered."
+          },
+          "autonomy_level": {
+            "type": "string",
+            "enum": ["high", "moderate", "low"],
+            "description": "How much independent decision-making authority this division has."
+          },
+          "sub_divisions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of this smaller unit within the division."
+                },
+                "function": {
+                  "type": "string",
+                  "description": "The specific purpose this sub-division serves."
+                }
+              },
+              "required": ["name", "function"]
+            },
+            "description": "Smaller units or teams within this division."
+          }
+        },
+        "required": ["name", "purpose"]
+      },
+      "description": "Major departments, branches, or sections that make up the organization's operational structure."
+    },
+    "hierarchy_levels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "level_name": {
+            "type": "string",
+            "description": "The title for this tier in the organizational hierarchy."
+          },
+          "rank_titles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The official designations used for positions at this level."
+          },
+          "authority_scope": {
+            "type": "string",
+            "description": "The type and extent of decisions individuals at this level can make."
+          },
+          "reporting_relationship": {
+            "type": "string",
+            "description": "How this level interacts with levels above and below it in the hierarchy."
+          }
+        },
+        "required": ["level_name"]
+      },
+      "description": "The distinct tiers or ranks that exist within the organization's command structure."
+    },
+    "membership_ranks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rank_name": {
+            "type": "string",
+            "description": "The title given to members at this level of seniority or status."
+          },
+          "requirements": {
+            "type": "string",
+            "description": "What is needed to attain or qualify for this rank."
+          },
+          "privileges": {
+            "type": "string",
+            "description": "The special access, benefits, or authorities granted to members of this rank."
+          },
+          "responsibilities": {
+            "type": "string",
+            "description": "The duties or obligations expected from members at this rank."
+          },
+          "insignia": {
+            "type": "string",
+            "description": "Visual markers, uniforms, or symbols that designate this rank."
+          },
+          "population": {
+            "type": "string",
+            "description": "How many members hold this rank or what proportion of the organization they represent."
+          }
+        },
+        "required": ["rank_name"]
+      },
+      "description": "The progressive levels of membership status or recognition within the organization."
+    },
+    "decision_making_process": {
+      "type": "string",
+      "description": "How the organization typically reaches conclusions, resolves disagreements, or establishes direction."
+    },
+    "succession_protocol": {
+      "type": "string",
+      "description": "The established procedure for transferring leadership when current leaders step down, are removed, or become incapacitated."
+    },
+    "organizational_chart": {
+      "type": "string",
+      "description": "A textual representation of the key reporting relationships and authority flows within the organization."
+    }
+  },
+  "required": ["leadership_type"]
+}

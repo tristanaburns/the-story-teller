@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "World Element Database Schema",
+  "description": "Defines the structure for locations, artifacts, and other world-building elements in The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "A globally unique identifier (UUID v4) for tracking this world element."
+    },
+    "name": {
+      "type": "string",
+      "description": "The primary name of the location, artifact, or world element."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["location", "weapon", "armor", "artifact", "battlefield", "city", "landmark"],
+      "description": "The category that best describes this world element."
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alternative names or titles by which this element is known."
+    },
+    "description": {
+      "type": "string",
+      "description": "A comprehensive description of the element, including its appearance, purpose, and significance."
+    },
+    "existence": {
+      "type": "object",
+      "description": "Tracks the timeline of the element's existence in the world.",
+      "properties": {
+        "first_recorded": {
+          "type": "object",
+          "properties": {
+            "timestamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "When this element first appeared or was created in the narrative universe."
+            },
+            "description": {
+              "type": "string",
+              "description": "Details about the element's origin or first appearance."
+            }
+          },
+          "required": ["timestamp"]
+        },
+        "last_known_status": {
+          "type": "object",
+          "properties": {
+            "timestamp": {
+              "type": "string",
+              "description": "When this element was last known to exist, or 'Present' if still exists."
+            },
+            "description": {
+              "type": "string",
+              "description": "Details about the element's current status or final fate."
+            }
+          },
+          "required": ["timestamp"]
+        },
+        "historical_transfers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When this historical event or transfer occurred."
+              },
+              "event": {
+                "type": "string",
+                "description": "Description of what happened to the element at this point in time."
+              }
+            },
+            "required": ["timestamp", "event"]
+          },
+          "description": "Records of significant changes in ownership, location, or state."
+        }
+      },
+      "required": ["first_recorded", "last_known_status"]
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Physical and functional characteristics of the element.",
+      "properties": {
+        "material": {
+          "type": "string",
+          "description": "What the element is made of, if applicable."
+        },
+        "weight": {
+          "type": "string",
+          "description": "The element's weight or heaviness, particularly relevant for weapons and armor."
+        },
+        "defense_capability": {
+          "type": "string",
+          "description": "For armor or defensive structures, details on protection level."
+        },
+        "offensive_capability": {
+          "type": "string",
+          "description": "For weapons or offensive items, details on damage potential."
+        },
+        "enhancements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Special features or magical properties that enhance the element."
+        },
+        "visual_design": {
+          "type": "string",
+          "description": "Detailed aesthetic description of how the element appears."
+        },
+        "location": {
+          "type": "string",
+          "description": "Where this element is typically found or situated."
+        },
+        "structure": {
+          "type": "string",
+          "description": "For locations or buildings, details on architectural design."
+        },
+        "historical_significance": {
+          "type": "string",
+          "description": "The element's importance in the world's history or lore."
+        },
+        "current_usage": {
+          "type": "string",
+          "description": "How the element is currently used or functions in the present narrative."
+        },
+        "length": {
+          "type": "string",
+          "description": "The element's physical dimensions, particularly for weapons or structures."
+        }
+      }
+    },
+    "affiliations": {
+      "type": "array",
+      "description": "Groups or individuals associated with this element.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the affiliated person or group."
+          },
+          "role": {
+            "type": "string",
+            "description": "How this affiliation relates to the element."
+          }
+        },
+        "required": ["name"]
+      }
+    },
+    "image_prompts": {
+      "type": "array",
+      "description": "Prompts for generating visual representations of the element.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "prompt_text": {
+            "type": "string",
+            "description": "Detailed instructions for AI image generation to depict this element."
+          },
+          "image_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Link to a generated or reference image of the element."
+          }
+        },
+        "required": ["prompt_text"]
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "destroyed", "abandoned", "historical", "decommissioned", "possessed", "lost", "used"],
+      "description": "The current condition or state of the element in the narrative present."
+    },
+    "tags": {
+      "type": "array",
+      "description": "Metadata tags for categorizing and searching world elements.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The category of the tag (e.g., 'origin', 'function', 'user')."
+          },
+          "value": {
+            "type": "string",
+            "description": "The specific value for this tag category."
+          }
+        },
+        "required": ["key", "value"]
+      }
+    }
+  },
+  "required": ["id", "name", "type", "description", "status"]
+}

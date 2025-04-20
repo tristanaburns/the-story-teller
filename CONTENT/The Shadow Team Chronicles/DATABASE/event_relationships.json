@@ -1,0 +1,87 @@
+{
+  "event_chains": [
+    {
+      "id": "event-chain-yoshi-benkei-001",
+      "name": "Yoshi and Benkei's Initial Journey",
+      "description": "The sequence of events describing the initial meeting, duel, oath, and first days of Yoshi and Benkei traveling together.",
+      "primary_characters": ["char-yoshi-001", "char-benkei-001"],
+      "time_period": {
+        "start_date": "1180-03-15",
+        "end_date": "1180-03-19"
+      },
+      "event_sequence": [
+        {
+          "event_id": "event-yoshi-benkei-first-meeting-001",
+          "position": 1,
+          "relationship_to_next": "directly_leads_to",
+          "narrative_function": "Introduction of key characters and establishing initial conflict"
+        },
+        {
+          "event_id": "event-yoshi-benkei-three-cuts-001",
+          "position": 2,
+          "relationship_to_next": "directly_causes",
+          "narrative_function": "Demonstration of Yoshi's superior skill and philosophical approach to combat"
+        },
+        {
+          "event_id": "event-benkei-oath-001",
+          "position": 3,
+          "relationship_to_next": "directly_leads_to",
+          "narrative_function": "Resolution of initial conflict and establishment of new relationship dynamic"
+        },
+        {
+          "event_id": "event-journey-north-begins-001",
+          "position": 4,
+          "relationship_to_next": "leads_to",
+          "narrative_function": "Transition from confrontation to journey narrative"
+        },
+        {
+          "event_id": "event-village-boar-hunt-001",
+          "position": 5,
+          "relationship_to_next": "leads_to",
+          "narrative_function": "Demonstration of Yoshi's character through interaction with commoners"
+        },
+        {
+          "event_id": "event-mountain-path-landslide-001",
+          "position": 6,
+          "relationship_to_next": "indirectly_leads_to",
+          "narrative_function": "Evolution of master-retainer relationship through crisis"
+        },
+        {
+          "event_id": "event-taira-mercenary-ambush-001",
+          "position": 7,
+          "relationship_to_next": "concludes_chain",
+          "narrative_function": "Establishes broader political conflict and further demonstrates Yoshi's combat philosophy"
+        }
+      ],
+      "flashbacks": [
+        {
+          "event_id": "event-benkei-monastery-childhood-001",
+          "narrative_position": "after event-taira-mercenary-ambush-001",
+          "narrative_function": "Provides backstory explaining Benkei's character development and search for purpose"
+        }
+      ],
+      "thematic_development": [
+        {
+          "theme_id": "theme-finding-purpose-001",
+          "arc": "Benkei transitions from seeking purpose through collecting trophies to finding meaning through service to a worthy master"
+        },
+        {
+          "theme_id": "theme-protocol-necessity-001",
+          "arc": "The relationship evolves from strict adherence to protocol toward pragmatic flexibility while maintaining respect"
+        },
+        {
+          "theme_id": "theme-complementary-strengths-001",
+          "arc": "Initial opposition of fighting styles transforms into complementary partnership where each compensates for the other's weaknesses"
+        }
+      ],
+      "narrative_significance": "Establishes the foundation of Yoshi and Benkei's legendary partnership while introducing key themes that will develop throughout their story.",
+      "metadata": {
+        "creation_date": "2025-03-17T00:00:00Z",
+        "last_modified": "2025-03-17T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    }
+  ]
+}

@@ -1,0 +1,322 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/enums/character_dynamic",
+  "title": "Character Dynamic Schema",
+  "description": "Standardized enumeration of relationship dynamics between characters in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "mentor_protege",
+    "rivals",
+    "allies_of_convenience",
+    "loyal_partners",
+    "asymmetric_trust",
+    "forced_cooperation",
+    "deep_friendship",
+    "romantic_involvement",
+    "hidden_agenda",
+    "predator_prey",
+    "mutual_dependence",
+    "shared_history",
+    "power_imbalance",
+    "surrogate_family",
+    "conflicting_loyalty"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each character dynamic (not part of the enum, provided for documentation)",
+    "properties": {
+      "mentor_protege": {
+        "type": "string",
+        "description": "A relationship where one character guides, teaches, or develops another, with an inherent experience or knowledge gap between them.",
+        "dialogue_characteristics": [
+          "Knowledge transfer through questions and explanations",
+          "Constructive criticism and correction",
+          "Occasional testing of boundaries or authority"
+        ],
+        "tension_sources": [
+          "Protege outgrowing mentor's knowledge or abilities",
+          "Different approaches to shared goals",
+          "Mentor's hidden motives or past mistakes"
+        ],
+        "example": "Takeshi's combat expertise made him the logical choice to train Maya, but her rapid mastery of techniques he'd spent decades perfecting stirred an uncomfortable mix of pride and obsolescence within him."
+      },
+      "rivals": {
+        "type": "string",
+        "description": "A competitive relationship where characters measure themselves against each other, often with grudging respect despite opposition.",
+        "dialogue_characteristics": [
+          "Backhanded compliments and calculated insults",
+          "Knowledge of each other's weaknesses",
+          "Tense exchanges with underlying respect"
+        ],
+        "tension_sources": [
+          "Competition for the same resources or recognition",
+          "Contrasting methodologies with similar goals",
+          "History of past defeats or victories"
+        ],
+        "example": "Director Chen and Commander Lau maintained professional courtesy in public, but everyone in NexusCorp knew each budget meeting was another battle in their decades-long war for corporate influence."
+      },
+      "allies_of_convenience": {
+        "type": "string",
+        "description": "A temporary alliance formed due to circumstantial necessity rather than genuine alignment or trust.",
+        "dialogue_characteristics": [
+          "Minimal information sharing",
+          "Clear boundaries established through language",
+          "Constant reassessment of the alliance's value"
+        ],
+        "tension_sources": [
+          "Conflicting long-term goals",
+          "Lack of established trust",
+          "Potential for betrayal when circumstances change"
+        ],
+        "example": "The resistance needed the smuggler's routes, and the smuggler needed their protection from NexusCorp's increasingly aggressive security measures. Neither mentioned what would happen once those immediate needs were satisfied."
+      },
+      "loyal_partners": {
+        "type": "string",
+        "description": "A deep, trusting relationship built on shared experiences and proven reliability, where characters prioritize their partnership.",
+        "dialogue_characteristics": [
+          "Shorthand communications and inside references",
+          "Open discussion of vulnerabilities",
+          "Active concern for each other's wellbeing"
+        ],
+        "tension_sources": [
+          "External forces threatening the partnership",
+          "Unspoken feelings or expectations",
+          "Different tolerance levels for risk or compromise"
+        ],
+        "example": "Three years of missions had given Maya and Yuri a connection that transcended words. A slight tension in his voice was enough to alert her to danger; the particular rhythm of her breathing told him when she'd found what they were seeking."
+      },
+      "asymmetric_trust": {
+        "type": "string",
+        "description": "A relationship where one character trusts more deeply than the other, creating an imbalance in vulnerability and commitment.",
+        "dialogue_characteristics": [
+          "One-sided sharing of personal information",
+          "Evasiveness from the less-trusting party",
+          "Frequent reassurance-seeking from the more-trusting party"
+        ],
+        "tension_sources": [
+          "Unequal emotional investment",
+          "Hidden information affecting the relationship",
+          "Constant testing of boundaries and loyalty"
+        ],
+        "example": "Ren had shared everything about his past with Miko, while she carefully constructed a version of herself that revealed nothing of her true origins or the mission that had brought her into his life."
+      },
+      "forced_cooperation": {
+        "type": "string",
+        "description": "A relationship where external forces compel characters to work together despite opposition, animosity, or conflicting goals.",
+        "dialogue_characteristics": [
+          "Hostile or minimal communication",
+          "Clearly established boundaries",
+          "Constant reminders of the forced nature of cooperation"
+        ],
+        "tension_sources": [
+          "Active sabotage within constraints",
+          "Planning for post-cooperation conflict",
+          "Grudging recognition of complementary skills"
+        ],
+        "example": "The neural handcuff binding them ensured they couldn't move more than three meters apart without crippling pain. The corporate assassin and the resistance hacker had exactly twelve hours to break into the vault together before the kill switch activated."
+      },
+      "deep_friendship": {
+        "type": "string",
+        "description": "A relationship built on genuine care, shared values, and mutual support that transcends mere utility or circumstance.",
+        "dialogue_characteristics": [
+          "Honest feedback without excessive diplomacy",
+          "References to shared experiences and private jokes",
+          "Discussions about personal matters beyond immediate tasks"
+        ],
+        "tension_sources": [
+          "Conflicting obligations to others",
+          "Different visions for the future",
+          "Betrayal of shared values or trust"
+        ],
+        "example": "Though they now stood on opposite sides of the corporate war, Kenji still risked everything to meet Haru once a year on the anniversary of their escape from the laboratories. Some bonds survived even the most fundamental ideological divides."
+      },
+      "romantic_involvement": {
+        "type": "string",
+        "description": "A relationship with romantic or sexual components that adds personal vulnerability and emotion to interactions.",
+        "dialogue_characteristics": [
+          "Emotionally charged language and reactions",
+          "Personal questions and observations",
+          "References to shared intimate moments"
+        ],
+        "tension_sources": [
+          "Professional vs. personal boundaries",
+          "Different levels of commitment or expectations",
+          "External threats to the relationship"
+        ],
+        "example": "Their professional communications remained flawlessly detached during operations, but the way Lin's fingers lingered when passing Sora the tactical display—that silent, forbidden acknowledgment of something beyond their mission—had nearly cost them both their lives during the extraction."
+      },
+      "hidden_agenda": {
+        "type": "string",
+        "description": "A relationship where one or both characters maintain concealed motives that would significantly alter the dynamic if revealed.",
+        "dialogue_characteristics": [
+          "Calculated information management",
+          "Double-meaning statements",
+          "Strategic avoidance of certain topics"
+        ],
+        "tension_sources": [
+          "Risk of exposure",
+          "Genuine connection developing despite deception",
+          "Escalating stakes that test the deception"
+        ],
+        "example": "Director Nakamura had mentored Talia for five years, grooming her for leadership while systematically gathering evidence of her connection to the resistance. His affection for her was genuine; his obligation to NexusCorp security, absolute."
+      },
+      "predator_prey": {
+        "type": "string",
+        "description": "A fundamentally antagonistic relationship where one character actively seeks to capture, harm, or defeat the other.",
+        "dialogue_characteristics": [
+          "Psychological manipulation and intimidation",
+          "Taunting or threatening language",
+          "Power displays through words and tone"
+        ],
+        "tension_sources": [
+          "Shifting power dynamics",
+          "Unexpected vulnerability from the predator",
+          "Strategic resistance from the prey"
+        ],
+        "example": "The Hunter had pursued her across three sectors, always one step behind but never far enough to let her rest. The messages left at each safe house grew increasingly personal—evidence he was learning her patterns, preferences, weaknesses."
+      },
+      "mutual_dependence": {
+        "type": "string",
+        "description": "A relationship where characters rely on each other for survival, success, or essential needs despite potential conflicts.",
+        "dialogue_characteristics": [
+          "Negotiation of resources or assistance",
+          "Reminders of interdependence",
+          "Careful balance between request and demand"
+        ],
+        "tension_sources": [
+          "Unequal contribution or need",
+          "Attempts to reduce dependency",
+          "External threats that test the dependence"
+        ],
+        "example": "The implant in her spine kept him alive by filtering toxins from his bloodstream; his technical expertise kept the ancient hardware functioning. Neither could survive alone, though both had contemplated the possibility during their darker moments."
+      },
+      "shared_history": {
+        "type": "string",
+        "description": "A relationship defined by significant past experiences that continue to influence current interactions, whether positively or negatively.",
+        "dialogue_characteristics": [
+          "References to past events unknown to others",
+          "Unfinished conversations resumed from before",
+          "Established patterns of communication"
+        ],
+        "tension_sources": [
+          "Different interpretations of shared past",
+          "Unresolved conflicts or traumas",
+          "Growth that makes past connections obsolete"
+        ],
+        "example": "Twenty years had passed since they'd escaped the burning research facility together, yet within minutes of reuniting, they had fallen back into the same rhythms—Mei taking point, Hiroshi watching the exits. Some partnerships were encoded at a level deeper than conscious memory."
+      },
+      "power_imbalance": {
+        "type": "string",
+        "description": "A relationship with a significant disparity in authority, influence, or control that affects all interactions.",
+        "dialogue_characteristics": [
+          "Deferential language from the lower-power individual",
+          "Directive language from the higher-power individual",
+          "Careful negotiation around requests and commands"
+        ],
+        "tension_sources": [
+          "Resistance against established hierarchy",
+          "Abuse or testing of power boundaries",
+          "External challenges to the power structure"
+        ],
+        "example": "As long as the neural inhibitor remained active, Kai had no choice but to comply with the Director's requirements. Yet in their quiet moments, he recognized a strange dependency in her eyes—the controller becoming reliant on the controlled."
+      },
+      "surrogate_family": {
+        "type": "string",
+        "description": "A relationship that recreates family dynamics among non-related individuals, including parental figures, sibling-like bonds, or found family connections.",
+        "dialogue_characteristics": [
+          "Use of family-like terminology or references",
+          "Higher emotional expectations than professional relationships",
+          "Protective or nurturing language patterns"
+        ],
+        "tension_sources": [
+          "Unspoken familial expectations",
+          "Boundaries between actual and surrogate family",
+          "Different interpretations of family roles"
+        ],
+        "example": "The resistance cell had started as a tactical unit, but four years in the abandoned district had transformed them. Takeshi prepared meals with a father's attention to individual preferences; Maya and Jun bickered with sibling familiarity; Daiyu's stern guidance carried a grandmother's wisdom."
+      },
+      "conflicting_loyalty": {
+        "type": "string",
+        "description": "A relationship complicated by one or both characters having obligations or allegiances that directly oppose their connection.",
+        "dialogue_characteristics": [
+          "Careful topic avoidance around sensitive areas",
+          "Defensive responses to loyalty questions",
+          "Attempts to define safe conversational territory"
+        ],
+        "tension_sources": [
+          "Forced choices between competing loyalties",
+          "Pressure from external groups",
+          "Discovery of actions taken for other loyalties"
+        ],
+        "example": "Their friendship had survived her promotion to Security Director and his covert work with the resistance—a delicate equilibrium maintained through strategic omissions and carefully worded truths. But as the corporate crackdown intensified, they both knew a breaking point approached."
+      }
+    }
+  },
+  "progressionPatterns": {
+    "type": "object",
+    "description": "Common patterns of evolution in character relationships (not part of the enum, provided for documentation)",
+    "properties": {
+      "trust_development": {
+        "type": "array",
+        "description": "How relationships typically evolve through increasing trust",
+        "items": [
+          "allies_of_convenience",
+          "asymmetric_trust",
+          "loyal_partners",
+          "deep_friendship"
+        ]
+      },
+      "mentor_relationship_evolution": {
+        "type": "array",
+        "description": "How mentor-protege relationships typically evolve",
+        "items": [
+          "power_imbalance",
+          "mentor_protege",
+          "rivals",
+          "loyal_partners"
+        ]
+      },
+      "antagonist_transformation": {
+        "type": "array",
+        "description": "How enemy relationships might transform",
+        "items": [
+          "predator_prey",
+          "forced_cooperation",
+          "allies_of_convenience",
+          "mutual_dependence"
+        ]
+      },
+      "romantic_progression": {
+        "type": "array",
+        "description": "Common progression patterns in romantic relationships",
+        "items": [
+          "shared_history",
+          "asymmetric_trust",
+          "romantic_involvement",
+          "deep_friendship"
+        ]
+      }
+    }
+  },
+  "implementation_guidelines": {
+    "type": "object",
+    "description": "Practical advice for using these relationship dynamics in narrative (not part of the enum, provided for documentation)",
+    "properties": {
+      "dialogue_implementation": {
+        "type": "string",
+        "description": "How to reflect relationship dynamics in dialogue",
+        "value": "Dialogue between characters should reflect their defined dynamic through word choice, topic selection, communication patterns, and subtext. For example, a mentor-protege dynamic might show the mentor using instructive language and the protege asking clarifying questions."
+      },
+      "conflict_generation": {
+        "type": "string",
+        "description": "Using dynamics to create organic conflict",
+        "value": "Each relationship dynamic has built-in tension sources that can be activated to create conflict. For instance, 'asymmetric_trust' naturally creates tension through the imbalance in vulnerability between characters."
+      },
+      "dynamic_evolution": {
+        "type": "string",
+        "description": "How to evolve relationships naturally",
+        "value": "Character dynamics should evolve based on shared experiences, revelations, and changing circumstances. Document the progression of relationships in metadata to ensure consistent development."
+      }
+    }
+  }
+}

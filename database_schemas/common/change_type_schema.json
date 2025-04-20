@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/change_type",
+  "title": "Change Type Schema",
+  "description": "Standardized enumeration of all possible content change types in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "addition",
+    "removal",
+    "modification",
+    "restructuring",
+    "correction",
+    "formatting",
+    "clarification",
+    "consistency_adjustment",
+    "expansion",
+    "consolidation",
+    "canon_alignment",
+    "style_revision",
+    "continuity_fix",
+    "lore_update",
+    "timeline_adjustment",
+    "translation_update",
+    "metadata_change",
+    "merge"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each change type (not part of the enum, provided for documentation)",
+    "properties": {
+      "addition": {
+        "type": "string",
+        "description": "Introduction of entirely new content, characters, events, or elements."
+      },
+      "removal": {
+        "type": "string",
+        "description": "Deletion of existing content, characters, events, or elements."
+      },
+      "modification": {
+        "type": "string",
+        "description": "Changes to existing content that alter its meaning, characteristics, or outcomes."
+      },
+      "restructuring": {
+        "type": "string",
+        "description": "Reorganization of content without substantially changing its meaning or substance."
+      },
+      "correction": {
+        "type": "string",
+        "description": "Fixing errors in facts, spelling, grammar, or other technical aspects of the content."
+      },
+      "formatting": {
+        "type": "string",
+        "description": "Changes to visual presentation, layout, or styling without altering content."
+      },
+      "clarification": {
+        "type": "string",
+        "description": "Making existing content more clear or explicit without changing its meaning."
+      },
+      "consistency_adjustment": {
+        "type": "string",
+        "description": "Aligning content with established patterns, terminology, or conventions in other works."
+      },
+      "expansion": {
+        "type": "string",
+        "description": "Adding detail or depth to existing content without fundamentally changing it."
+      },
+      "consolidation": {
+        "type": "string",
+        "description": "Combining or simplifying related content for clarity or efficiency."
+      },
+      "canon_alignment": {
+        "type": "string",
+        "description": "Adjusting content to ensure it aligns with established canonical facts or events."
+      },
+      "style_revision": {
+        "type": "string",
+        "description": "Changes to tone, voice, or narrative approach without altering factual content."
+      },
+      "continuity_fix": {
+        "type": "string",
+        "description": "Resolving contradictions or logical inconsistencies within or between content items."
+      },
+      "lore_update": {
+        "type": "string",
+        "description": "Revising background information, worldbuilding, or historical elements."
+      },
+      "timeline_adjustment": {
+        "type": "string",
+        "description": "Modifying when events occur or the sequence of occurrences."
+      },
+      "translation_update": {
+        "type": "string",
+        "description": "Changes to content when converting between languages or adapting for different cultures."
+      },
+      "metadata_change": {
+        "type": "string",
+        "description": "Updates to tags, categories, or other classification information without changing content."
+      },
+      "merge": {
+        "type": "string",
+        "description": "Combining changes from different versions or branches of content."
+      }
+    }
+  },
+  "impactLevels": {
+    "type": "object",
+    "description": "Classification of change types by typical impact level (not part of the enum, provided for documentation)",
+    "properties": {
+      "major": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["addition", "removal", "modification", "restructuring", "canon_alignment", "timeline_adjustment"]
+        },
+        "description": "Changes that typically warrant a major version increment (1.0.0 → 2.0.0)."
+      },
+      "minor": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["expansion", "consolidation", "lore_update", "style_revision", "continuity_fix"]
+        },
+        "description": "Changes that typically warrant a minor version increment (1.0.0 → 1.1.0)."
+      },
+      "patch": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["correction", "formatting", "clarification", "consistency_adjustment", "metadata_change", "translation_update"]
+        },
+        "description": "Changes that typically warrant a patch version increment (1.0.0 → 1.0.1)."
+      }
+    }
+  }
+}

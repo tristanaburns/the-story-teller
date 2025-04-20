@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/artifact",
+  "title": "Artifact Schema",
+  "description": "Schema for defining significant objects, relics, and devices within The Shadow Team Chronicles universe, documenting their physical properties, powers, history, and cultural impact across different time periods and locations.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "base_metadata_schema.json"
+    }
+  ],
+  "properties": {
+    "object_type": {
+      "const": "artifact",
+      "description": "Fixed value indicating this is an artifact object. This constrains the general object_type property from the base schema to ensure proper categorization."
+    },
+    "artifact_type": {
+      "type": "string",
+      "enum": ["weapon", "tool", "relic", "technological_device", "wayfinder", "vessel", "wearable", "container", "communication_device", "power_source"],
+      "description": "The specific classification of this artifact within the broader category, defining its primary purpose and the general expectations for its capabilities and appearance. This helps with organization and ensures consistent categorization across the narrative universe."
+    },
+    "physical_properties": {
+      "$ref": "artifact/physical_properties_schema.json"
+    },
+    "capabilities": {
+      "$ref": "artifact/capabilities_schema.json"
+    },
+    "history": {
+      "$ref": "artifact/history_schema.json"
+    },
+    "cultural_significance": {
+      "$ref": "artifact/cultural_significance_schema.json"
+    },
+    "narrative_role": {
+      "$ref": "artifact/narrative_role_schema.json"
+    },
+    "multimedia": {
+      "$ref": "multimedia_schema.json#/properties/multimedia"
+    }
+  },
+  "required": ["artifact_type", "physical_properties", "capabilities", "history"]
+}

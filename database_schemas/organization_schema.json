@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization",
+  "title": "Organization Schema",
+  "description": "Schema for defining collective entities such as factions, governments, clans, and other organized groups within The Shadow Team Chronicles universe.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "base_metadata_schema.json"
+    }
+  ],
+  "properties": {
+    "object_type": {
+      "const": "organization",
+      "description": "Fixed value indicating this is an organization object. This constrains the general object_type property from the base schema."
+    },
+    "organization_type": {
+      "type": "string",
+      "enum": ["clan", "government", "military", "religious", "merchant", "guild", "criminal", "secret_society", "resistance", "mercenary", "educational", "diplomatic"],
+      "description": "The primary classification that determines the fundamental nature and typical structure of this organization within the narrative world."
+    },
+    "formation": {
+      "$ref": "organization/formation_schema.json"
+    },
+    "structure": {
+      "$ref": "organization/structure_schema.json"
+    },
+    "assets": {
+      "$ref": "organization/assets_schema.json"
+    },
+    "relationships": {
+      "$ref": "organization/relationships_schema.json"
+    },
+    "culture": {
+      "$ref": "organization/culture_schema.json"
+    },
+    "history": {
+      "$ref": "organization/history_schema.json"
+    },
+    "goals": {
+      "$ref": "organization/goals_schema.json"
+    },
+    "membership": {
+      "$ref": "organization/membership_schema.json"
+    },
+    "communication_methods": {
+      "$ref": "organization/communication_methods_schema.json"
+    },
+    "notable_activities": {
+      "$ref": "organization/notable_activities_schema.json"
+    },
+    "influence_spheres": {
+      "$ref": "organization/influence_spheres_schema.json"
+    },
+    "resource_management": {
+      "$ref": "organization/resource_management_schema.json"
+    }
+  },
+  "required": ["organization_type", "structure"]
+}

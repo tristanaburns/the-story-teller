@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/metadata/ai_writing_metadata",
+  "title": "AI Writing Metadata Schema",
+  "description": "Schema for recording information specific to AI-assisted or AI-generated content within The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "model": {
+      "type": "string",
+      "description": "The AI model or system used for generation (e.g., 'GPT-4', 'Claude', 'Custom NLP System')."
+    },
+    "model_version": {
+      "type": "string",
+      "description": "Specific version or build of the AI model, if applicable."
+    },
+    "prompt_summary": {
+      "type": "string",
+      "description": "A condensed description of the prompting approach used to generate this content."
+    },
+    "prompt_techniques": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/prompt_technique_schema.json"
+      },
+      "description": "The prompt engineering methods employed when generating this content."
+    },
+    "generation_parameters": {
+      "type": "object",
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2,
+          "description": "The temperature setting used during generation, affecting randomness."
+        },
+        "top_p": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "The nucleus sampling parameter, if applicable."
+        },
+        "max_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The maximum length of content generated in a single completion."
+        },
+        "presence_penalty": {
+          "type": "number",
+          "minimum": -2,
+          "maximum": 2,
+          "description": "Penalty to reduce repetition of tokens already present in the text."
+        },
+        "frequency_penalty": {
+          "type": "number",
+          "minimum": -2,
+          "maximum": 2,
+          "description": "Penalty to reduce repetition of tokens based on their frequency in the text."
+        },
+        "stop_sequences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specific text sequences that signal the AI to stop generating."
+        }
+      },
+      "description": "The configuration settings used when generating the content with the AI."
+    },
+    "usage_context": {
+      "$ref": "../common/ai_usage_context_schema.json",
+      "description": "The purpose or application for which this AI-generated content was created."
+    },
+    "prompt_engineering_approach": {
+      "type": "string",
+      "description": "Detailed explanation of how prompts were crafted to achieve the desired outcome."
+    },
+    "human_editing": {
+      "type": "object",
+      "properties": {
+        "edited": {
+          "type": "boolean",
+          "description": "Whether human edits were made to the AI-generated content."
+        },
+        "edit_summary": {
+          "type": "string",
+          "description": "Brief description of the nature and extent of human modifications."
+        },
+        "edit_percentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Estimated percentage of the final content that was modified by human editing."
+        }
+      },
+      "required": ["edited"],
+      "description": "Information about human involvement in refining the AI output."
+    },
+    "iteration_details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "iteration_number": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "The sequence number of this generation iteration."
+          },
+          "prompt_variation": {
+            "type": "string",
+            "description": "How the prompt was modified for this specific iteration."
+          },
+          "outcome": {
+            "type": "string",
+            "description": "Brief assessment of the results from this iteration."
+          }
+        },
+        "required": ["iteration_number"]
+      },
+      "description": "Record of multiple attempts or refinements in the generation process."
+    }
+  },
+  "required": ["model", "prompt_summary"]
+}

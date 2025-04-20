@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/content_status",
+  "title": "Content Status Schema",
+  "description": "Standardized enumeration of all possible content workflow statuses in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "concept",
+    "draft",
+    "review",
+    "revision",
+    "approved",
+    "published",
+    "archived",
+    "deprecated",
+    "on_hold",
+    "rejected"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each content status (not part of the enum, provided for documentation)",
+    "properties": {
+      "concept": {
+        "type": "string",
+        "description": "Initial idea or outline that has not yet been developed into full content."
+      },
+      "draft": {
+        "type": "string",
+        "description": "Work-in-progress content that is still being actively developed or written."
+      },
+      "review": {
+        "type": "string",
+        "description": "Content that has been submitted for evaluation, feedback, or approval by others."
+      },
+      "revision": {
+        "type": "string",
+        "description": "Content that is being modified or updated based on feedback from the review process."
+      },
+      "approved": {
+        "type": "string",
+        "description": "Content that has passed review and been officially accepted, but not yet publicly released."
+      },
+      "published": {
+        "type": "string",
+        "description": "Content that has been finalized, approved, and made available in its intended context."
+      },
+      "archived": {
+        "type": "string",
+        "description": "Content that is no longer actively used but preserved for historical or reference purposes."
+      },
+      "deprecated": {
+        "type": "string",
+        "description": "Content that has been officially superseded by newer content and should no longer be used."
+      },
+      "on_hold": {
+        "type": "string",
+        "description": "Content whose development or review has been temporarily paused for strategic or resource reasons."
+      },
+      "rejected": {
+        "type": "string",
+        "description": "Content that was reviewed and determined not to meet necessary standards or narrative requirements."
+      }
+    }
+  },
+  "statusFlow": {
+    "type": "object",
+    "description": "Typical workflow transitions between statuses (not part of the enum, provided for documentation)",
+    "properties": {
+      "concept": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["draft", "rejected", "on_hold"]
+        },
+        "description": "Valid next stages after concept"
+      },
+      "draft": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["review", "on_hold", "rejected"]
+        },
+        "description": "Valid next stages after draft"
+      },
+      "review": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["approved", "revision", "rejected", "on_hold"]
+        },
+        "description": "Valid next stages after review"
+      },
+      "revision": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["review", "on_hold", "rejected"]
+        },
+        "description": "Valid next stages after revision"
+      },
+      "approved": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["published", "revision", "on_hold"]
+        },
+        "description": "Valid next stages after approved"
+      },
+      "published": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["revision", "archived", "deprecated"]
+        },
+        "description": "Valid next stages after published"
+      },
+      "on_hold": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["concept", "draft", "review", "rejected", "archived"]
+        },
+        "description": "Valid next stages after on_hold"
+      }
+    }
+  }
+}

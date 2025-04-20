@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/notification_type",
+  "title": "Notification Type Schema",
+  "description": "Standardized enumeration of notification types for content workflow changes in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "status_change",
+    "review_required",
+    "feedback_added",
+    "content_updated",
+    "version_published",
+    "assignment_changed",
+    "deadline_approaching",
+    "deadline_missed",
+    "approval_granted",
+    "revision_requested",
+    "comment_added",
+    "dependency_updated",
+    "conflict_detected",
+    "merge_completed",
+    "reference_broken"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each notification type (not part of the enum, provided for documentation)",
+    "properties": {
+      "status_change": {
+        "type": "string",
+        "description": "A change in the workflow status of content (e.g., from 'draft' to 'review')."
+      },
+      "review_required": {
+        "type": "string",
+        "description": "Content that needs evaluation or feedback from specific team members."
+      },
+      "feedback_added": {
+        "type": "string",
+        "description": "New comments or evaluations have been added to the content."
+      },
+      "content_updated": {
+        "type": "string",
+        "description": "Significant modifications have been made to the content."
+      },
+      "version_published": {
+        "type": "string",
+        "description": "A new version of the content has been finalized and released."
+      },
+      "assignment_changed": {
+        "type": "string",
+        "description": "Responsibility for the content has been transferred to different team members."
+      },
+      "deadline_approaching": {
+        "type": "string",
+        "description": "The scheduled completion date for content is near."
+      },
+      "deadline_missed": {
+        "type": "string",
+        "description": "The content has passed its target completion date without being finished."
+      },
+      "approval_granted": {
+        "type": "string",
+        "description": "Content has received necessary sign-offs from required reviewers."
+      },
+      "revision_requested": {
+        "type": "string",
+        "description": "Specific changes or improvements have been requested for the content."
+      },
+      "comment_added": {
+        "type": "string",
+        "description": "General remarks or notes have been attached to the content."
+      },
+      "dependency_updated": {
+        "type": "string",
+        "description": "Another content item that this content relies on has been modified."
+      },
+      "conflict_detected": {
+        "type": "string",
+        "description": "Inconsistencies found between this content and other related materials."
+      },
+      "merge_completed": {
+        "type": "string",
+        "description": "Changes from different versions have been successfully combined."
+      },
+      "reference_broken": {
+        "type": "string",
+        "description": "A connection to another content item is no longer valid or functioning."
+      }
+    }
+  },
+  "priorityLevels": {
+    "type": "object",
+    "description": "Suggested urgency levels for each notification type (not part of the enum, provided for documentation)",
+    "properties": {
+      "high": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["deadline_missed", "conflict_detected", "reference_broken", "revision_requested"]
+        },
+        "description": "Notifications that typically require immediate attention."
+      },
+      "medium": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["review_required", "deadline_approaching", "dependency_updated", "feedback_added"]
+        },
+        "description": "Notifications that should be addressed soon but are not urgent emergencies."
+      },
+      "low": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["status_change", "content_updated", "version_published", "approval_granted", "comment_added", "merge_completed", "assignment_changed"]
+        },
+        "description": "Informational notifications that don't necessarily require immediate action."
+      }
+    }
+  }
+}

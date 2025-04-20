@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/abilities",
+  "title": "Character Abilities Schema",
+  "description": "Special or extraordinary capabilities that distinguish the character beyond normal human or species limitations.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "The title or name of this special ability."
+      },
+      "ability_type": {
+        "type": "string",
+        "enum": [
+          "innate_power",
+          "magical",
+          "technological",
+          "spiritual",
+          "physical_mutation",
+          "psychological",
+          "divine",
+          "cursed",
+          "hybrid"
+        ],
+        "description": "The fundamental nature or source of this ability, categorizing its origin and general properties."
+      },
+      "description": {
+        "type": "string",
+        "description": "A comprehensive explanation of what this ability allows the character to do and how it functions. Should include both capabilities and limitations."
+      },
+      "origin": {
+        "type": "string",
+        "description": "How the character acquired or developed this ability, which may be through birth, training, magical events, technological enhancement, etc."
+      },
+      "limitations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Specific restrictions, costs, or drawbacks associated with using this ability, providing narrative balance."
+      },
+      "manifestations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "context": {
+              "type": "string",
+              "description": "The specific situation or trigger that causes this manifestation of the ability."
+            },
+            "effect": {
+              "type": "string",
+              "description": "What happens when the ability activates in this context, including sensory details and physical impact."
+            }
+          }
+        },
+        "description": "Different ways the ability expresses itself in various situations or emotional states."
+      },
+      "evolution": {
+        "type": "object",
+        "properties": {
+          "initial_state": {
+            "type": "string",
+            "description": "How the ability first manifested or functioned when the character initially acquired it."
+          },
+          "current_state": {
+            "type": "string",
+            "description": "The present condition and capabilities of this ability as of the current point in the narrative."
+          },
+          "potential": {
+            "type": "string",
+            "description": "Possible future developments or enhancements of this ability that may occur through the character's growth or specific plot events."
+          }
+        },
+        "description": "How this ability has changed over time and may continue to develop throughout the narrative."
+      },
+      "narrative_significance": {
+        "type": "string",
+        "description": "How this ability connects to the character's arc, the broader themes of the story, or major plot developments."
+      }
+    },
+    "required": ["name", "ability_type", "description"]
+  }
+}

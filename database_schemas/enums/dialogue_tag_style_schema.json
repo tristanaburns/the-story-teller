@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/enums/dialogue_tag_style",
+  "title": "Dialogue Tag Style Schema",
+  "description": "Standardized enumeration of dialogue tagging approaches in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "standard",
+    "minimalist",
+    "descriptive",
+    "action_integrated",
+    "emotive",
+    "internalized",
+    "untethered"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each dialogue tagging style (not part of the enum, provided for documentation)",
+    "properties": {
+      "standard": {
+        "type": "string",
+        "description": "Basic dialogue tags that identify the speaker with simple verbs like 'said' or 'asked'.",
+        "example": "\"We need to move,\" he said."
+      },
+      "minimalist": {
+        "type": "string",
+        "description": "Reduced or eliminated dialogue tags, using context and voice to identify speakers.",
+        "example": "\"We need to move.\" He checked the exit routes. \"They're coming.\""
+      },
+      "descriptive": {
+        "type": "string",
+        "description": "Dialogue tags that convey additional information about tone, volume, or delivery.",
+        "example": "\"We need to move,\" he whispered urgently."
+      },
+      "action_integrated": {
+        "type": "string",
+        "description": "Dialogue integrated with character actions instead of traditional tags.",
+        "example": "He checked the security feed. \"We need to move.\""
+      },
+      "emotive": {
+        "type": "string",
+        "description": "Dialogue tags that emphasize emotional states or reactions.",
+        "example": "\"We need to move,\" he urged, fear evident in his voice."
+      },
+      "internalized": {
+        "type": "string",
+        "description": "Dialogue mixed with internal thoughts or perceptions of the viewpoint character.",
+        "example": "\"We need to move.\" His voice remained calm, but she could tell he was terrified."
+      },
+      "untethered": {
+        "type": "string",
+        "description": "Dialogue presented without tags or attributions, creating a floating or disembodied quality.",
+        "example": "\"We need to move.\"\n\"Are you sure?\"\n\"They've found us.\""
+      }
+    }
+  },
+  "styleMapping": {
+    "type": "object",
+    "description": "Recommended dialogue tag styles for different writing styles (not part of the enum, provided for documentation)",
+    "properties": {
+      "cinematic_precise": ["standard", "minimalist", "action_integrated"],
+      "mythic_poetic": ["descriptive", "emotive", "untethered"],
+      "controlled_chaos": ["minimalist", "action_integrated", "untethered"],
+      "emotional_measured": ["emotive", "internalized", "descriptive"],
+      "narrative_historian": ["standard", "descriptive"],
+      "atmospheric_immersive": ["descriptive", "emotive", "internalized"],
+      "dreamlike_fragmented": ["untethered", "internalized", "minimalist"]
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/timeline_causality_type",
+  "title": "Timeline Causality Type Schema",
+  "description": "Standardized enumeration of causal relationship types between events in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "direct_cause",
+    "enabling_condition",
+    "catalyst",
+    "accelerant",
+    "last_straw",
+    "underlying_tension",
+    "cascade_trigger",
+    "distant_origin",
+    "parallel_development",
+    "reaction_response",
+    "recursive_loop",
+    "inevitable_progression",
+    "synchronicity",
+    "temporal_convergence",
+    "preventative_measure",
+    "unintended_consequence"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each causality type (not part of the enum, provided for documentation)",
+    "properties": {
+      "direct_cause": {
+        "type": "string",
+        "description": "The event or factor is the primary, immediate reason for the subsequent occurrence, with a clear and straightforward connection."
+      },
+      "enabling_condition": {
+        "type": "string",
+        "description": "A circumstance that made the subsequent event possible but didn't actively trigger it."
+      },
+      "catalyst": {
+        "type": "string",
+        "description": "An element that initiated or significantly increased the rate of a process without being consumed by it."
+      },
+      "accelerant": {
+        "type": "string",
+        "description": "A factor that sped up a process that was already underway."
+      },
+      "last_straw": {
+        "type": "string",
+        "description": "A relatively minor event that triggered a major outcome because of accumulated preceding factors."
+      },
+      "underlying_tension": {
+        "type": "string",
+        "description": "A long-term, often hidden pressure or condition that created the environment for the subsequent event."
+      },
+      "cascade_trigger": {
+        "type": "string",
+        "description": "An event that set off a chain reaction of multiple subsequent events."
+      },
+      "distant_origin": {
+        "type": "string",
+        "description": "A causal factor that occurred significantly earlier in time with effects that took long to manifest."
+      },
+      "parallel_development": {
+        "type": "string",
+        "description": "A simultaneous but independent process that interacted with other factors to produce an outcome."
+      },
+      "reaction_response": {
+        "type": "string",
+        "description": "An event that occurred specifically as a counter or answer to another event."
+      },
+      "recursive_loop": {
+        "type": "string",
+        "description": "A situation where the effect reinforces or amplifies its own cause, creating a feedback cycle."
+      },
+      "inevitable_progression": {
+        "type": "string",
+        "description": "A natural or logical next step in a predictable sequence of developments."
+      },
+      "synchronicity": {
+        "type": "string",
+        "description": "Meaningful coincidence where events align without direct causal connection."
+      },
+      "temporal_convergence": {
+        "type": "string",
+        "description": "Multiple causal streams from different time periods intersecting at a single point."
+      },
+      "preventative_measure": {
+        "type": "string",
+        "description": "An action taken specifically to prevent or mitigate a potential event."
+      },
+      "unintended_consequence": {
+        "type": "string",
+        "description": "An unexpected outcome that occurs as a result of an action aimed at producing a different effect."
+      }
+    }
+  },
+  "temporalProperties": {
+    "type": "object",
+    "description": "Relationship to time flow for each causality type (not part of the enum, provided for documentation)",
+    "properties": {
+      "immediate": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["direct_cause", "catalyst", "last_straw", "cascade_trigger", "reaction_response"]
+        },
+        "description": "Causal relationships that typically manifest over short time spans"
+      },
+      "gradual": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["enabling_condition", "accelerant", "underlying_tension", "inevitable_progression", "recursive_loop"]
+        },
+        "description": "Causal relationships that typically develop or manifest over longer periods"
+      },
+      "complex": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["distant_origin", "parallel_development", "synchronicity", "temporal_convergence", "unintended_consequence", "preventative_measure"]
+        },
+        "description": "Causal relationships with complex temporal characteristics"
+      }
+    }
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/timeline/timeline",
+  "title": "Timeline Schema",
+  "description": "Schema for defining chronological sequences of events within The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "$ref": "../metadata/base_metadata_schema.json",
+      "description": "Standard metadata for this timeline."
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or heading of this timeline."
+    },
+    "description": {
+      "type": "string",
+      "description": "An explanation of what this timeline represents and its significance."
+    },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "start_date": {
+          "$ref": "../common/time_period_schema.json",
+          "description": "When this timeline begins."
+        },
+        "end_date": {
+          "$ref": "../common/time_period_schema.json",
+          "description": "When this timeline ends."
+        },
+        "geographic_focus": {
+          "type": "string",
+          "description": "The spatial area this timeline primarily concerns."
+        },
+        "thematic_focus": {
+          "type": "string",
+          "description": "The primary subject, theme, or aspect of history this timeline tracks."
+        },
+        "entity_focus": {
+          "type": "array",
+          "items": {
+            "$ref": "../common/references_schema.json"
+          },
+          "description": "Specific characters, organizations, or locations that this timeline revolves around."
+        }
+      },
+      "description": "Parameters defining what this timeline includes and excludes."
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to the detailed event entry."
+          },
+          "timeline_notes": {
+            "type": "string",
+            "description": "Additional context about how this event fits into this specific timeline."
+          },
+          "display_priority": {
+            "type": "integer",
+            "description": "Optional value to control the prominence of this event when visualizing the timeline."
+          }
+        },
+        "required": ["event_reference"]
+      },
+      "description": "The sequence of occurrences that make up this timeline."
+    },
+    "branches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "branch_name": {
+            "type": "string",
+            "description": "The name or identifier for this alternate sequence."
+          },
+          "divergence_point": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to the event that causes the timeline to split."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of how and why this branch differs from the main timeline."
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "event_reference": {
+                  "$ref": "../common/references_schema.json",
+                  "description": "Reference to the detailed event entry."
+                },
+                "overwrites": {
+                  "$ref": "../common/references_schema.json",
+                  "description": "Reference to the main timeline event this replaces, if applicable."
+                },
+                "timeline_notes": {
+                  "type": "string",
+                  "description": "Additional context about how this event fits into this specific timeline branch."
+                }
+              },
+              "required": ["event_reference"]
+            },
+            "description": "The sequence of occurrences specific to this alternate timeline branch."
+          },
+          "status": {
+            "$ref": "../common/timeline_branch_status_schema.json",
+            "description": "The canonical standing of this branch in the narrative universe."
+          }
+        },
+        "required": ["branch_name", "description", "events"]
+      },
+      "description": "Alternate sequences that split from the main timeline."
+    },
+    "eras": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "era": {
+            "$ref": "../common/timeline_era_schema.json",
+            "description": "Reference to the historical period."
+          },
+          "start_date": {
+            "$ref": "../common/time_period_schema.json",
+            "description": "When this era begins within this specific timeline."
+          },
+          "end_date": {
+            "$ref": "../common/time_period_schema.json",
+            "description": "When this era ends within this specific timeline."
+          },
+          "description": {
+            "type": "string",
+            "description": "Details about this era's significance and characteristics in this timeline."
+          }
+        },
+        "required": ["era"]
+      },
+      "description": "Historical periods that organize the timeline into meaningful segments."
+    },
+    "related_timelines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timeline_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to another timeline that connects with this one."
+          },
+          "relationship": {
+            "$ref": "../common/timeline_relationship_schema.json",
+            "description": "How this timeline relates to the referenced timeline."
+          },
+          "relationship_notes": {
+            "type": "string",
+            "description": "Additional details about the connection between the timelines."
+          }
+        },
+        "required": ["timeline_reference", "relationship"]
+      },
+      "description": "Connections to other timelines within the narrative universe."
+    },
+    "visualization_options": {
+      "type": "object",
+      "properties": {
+        "default_view": {
+          "type": "string",
+          "enum": ["linear", "branching", "spiral", "calendar", "network"],
+          "description": "Recommended display format for this timeline."
+        },
+        "color_coding": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "format": "color"
+          },
+          "description": "Color assignments for categories or types of events."
+        },
+        "emphasized_events": {
+          "type": "array",
+          "items": {
+            "$ref": "../common/references_schema.json"
+          },
+          "description": "Events that should be highlighted or given special prominence in visualizations."
+        }
+      },
+      "description": "Settings for how this timeline should be displayed in visual representations."
+    }
+  },
+  "required": ["metadata", "title", "description", "events"]
+}

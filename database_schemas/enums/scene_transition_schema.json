@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/enums/scene_transition",
+  "title": "Scene Transition Schema",
+  "description": "Standardized enumeration of transition types between scenes in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "hard_cut",
+    "fade_to_black",
+    "time_lapse",
+    "location_shift",
+    "perspective_change",
+    "flashback_entry",
+    "flashback_exit",
+    "dream_sequence_entry",
+    "dream_sequence_exit",
+    "thematic_bridge",
+    "sensory_shift",
+    "memory_trigger",
+    "parallel_action",
+    "environmental_transition"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each transition type (not part of the enum, provided for documentation)",
+    "properties": {
+      "hard_cut": {
+        "type": "string",
+        "description": "An immediate, abrupt shift between scenes with no transitional elements."
+      },
+      "fade_to_black": {
+        "type": "string",
+        "description": "A gradual diminishing of the scene, often indicating passage of time or emotional finality."
+      },
+      "time_lapse": {
+        "type": "string",
+        "description": "A transition that explicitly indicates the passage of time between scenes."
+      },
+      "location_shift": {
+        "type": "string",
+        "description": "A transition focused on movement between different physical settings."
+      },
+      "perspective_change": {
+        "type": "string",
+        "description": "A transition that shifts the narrative viewpoint from one character to another."
+      },
+      "flashback_entry": {
+        "type": "string",
+        "description": "A transition that moves from present to past narrative time."
+      },
+      "flashback_exit": {
+        "type": "string",
+        "description": "A transition that returns from past to present narrative time."
+      },
+      "dream_sequence_entry": {
+        "type": "string",
+        "description": "A transition that moves from waking reality to dream state."
+      },
+      "dream_sequence_exit": {
+        "type": "string",
+        "description": "A transition that returns from dream state to waking reality."
+      },
+      "thematic_bridge": {
+        "type": "string",
+        "description": "A transition based on thematic elements, connecting scenes through ideas rather than time/space."
+      },
+      "sensory_shift": {
+        "type": "string",
+        "description": "A transition based on sensory experience, such as a sound or visual element that carries between scenes."
+      },
+      "memory_trigger": {
+        "type": "string",
+        "description": "A transition initiated by a character recalling or being reminded of past events."
+      },
+      "parallel_action": {
+        "type": "string",
+        "description": "A transition that indicates simultaneous events happening in different locations."
+      },
+      "environmental_transition": {
+        "type": "string",
+        "description": "A transition driven by environmental changes like weather, lighting, or atmosphere."
+      }
+    }
+  }
+}

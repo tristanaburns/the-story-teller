@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/resource_type",
+  "title": "Resource Type Schema",
+  "description": "Standardized enumeration of resources used by organizations in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "financial_capital",
+    "raw_materials",
+    "manufactured_goods",
+    "technological_equipment",
+    "data",
+    "intelligence",
+    "personnel",
+    "facilities",
+    "land",
+    "energy",
+    "food_supplies",
+    "water_sources",
+    "military_hardware",
+    "transportation_assets",
+    "intellectual_property",
+    "specialized_knowledge",
+    "digital_systems",
+    "propaganda_channels",
+    "historical_artifacts",
+    "political_connections",
+    "legal_authority",
+    "public_goodwill",
+    "espionage_network",
+    "magical_components",
+    "ancient_relics",
+    "experimental_technology",
+    "medical_supplies",
+    "communication_infrastructure",
+    "luxury_goods"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each resource type (not part of the enum, provided for documentation)",
+    "properties": {
+      "financial_capital": {
+        "type": "string",
+        "description": "Monetary resources including currency, investments, credit lines, and financial instruments."
+      },
+      "raw_materials": {
+        "type": "string",
+        "description": "Unprocessed natural resources that serve as inputs for production or construction."
+      },
+      "manufactured_goods": {
+        "type": "string",
+        "description": "Finished products ready for use or consumption."
+      },
+      "technological_equipment": {
+        "type": "string",
+        "description": "Specialized devices, machinery, or systems that perform specific functions."
+      },
+      "data": {
+        "type": "string",
+        "description": "Collected information, statistics, or digital content that can be analyzed or leveraged."
+      },
+      "intelligence": {
+        "type": "string",
+        "description": "Valuable information about entities, events, or developments, often obtained covertly."
+      },
+      "personnel": {
+        "type": "string",
+        "description": "Human workforce including employees, members, agents, or contractors."
+      },
+      "facilities": {
+        "type": "string",
+        "description": "Buildings or installations that house operations, production, or administrative functions."
+      },
+      "land": {
+        "type": "string",
+        "description": "Owned or controlled territory, real estate, or property."
+      },
+      "energy": {
+        "type": "string",
+        "description": "Power resources including electricity, fuel, or alternative power sources."
+      },
+      "food_supplies": {
+        "type": "string",
+        "description": "Nutritional resources including agricultural products, processed foods, or emergency rations."
+      },
+      "water_sources": {
+        "type": "string",
+        "description": "Access to clean water, including natural sources, purification capabilities, or distribution systems."
+      },
+      "military_hardware": {
+        "type": "string",
+        "description": "Weapons, armor, vehicles, or other equipment designed for combat or security operations."
+      },
+      "transportation_assets": {
+        "type": "string",
+        "description": "Vehicles, vessels, aircraft, or other means of moving people and goods."
+      },
+      "intellectual_property": {
+        "type": "string",
+        "description": "Patents, copyrights, trade secrets, or other legally protected ideas or creations."
+      },
+      "specialized_knowledge": {
+        "type": "string",
+        "description": "Expertise, skills, or technical know-how possessed by personnel."
+      },
+      "digital_systems": {
+        "type": "string",
+        "description": "Computer networks, software, algorithms, or other information technology resources."
+      },
+      "propaganda_channels": {
+        "type": "string",
+        "description": "Media outlets, communication platforms, or distribution networks for spreading messages."
+      },
+      "historical_artifacts": {
+        "type": "string",
+        "description": "Objects of cultural, scientific, or symbolic significance from the past."
+      },
+      "political_connections": {
+        "type": "string",
+        "description": "Relationships with government officials, policymakers, or influential leaders."
+      },
+      "legal_authority": {
+        "type": "string",
+        "description": "Official rights, permissions, licenses, or jurisdiction granted by governing bodies."
+      },
+      "public_goodwill": {
+        "type": "string",
+        "description": "Positive reputation, trust, or favorable perception among the general population."
+      },
+      "espionage_network": {
+        "type": "string",
+        "description": "Spies, informants, surveillance systems, or other covert intelligence-gathering assets."
+      },
+      "magical_components": {
+        "type": "string",
+        "description": "Materials, artifacts, or substances with supernatural properties used in arcane practices."
+      },
+      "ancient_relics": {
+        "type": "string",
+        "description": "Objects of great age with historical, mystical, or technological significance."
+      },
+      "experimental_technology": {
+        "type": "string",
+        "description": "Innovative devices, systems, or techniques not yet widely available or understood."
+      },
+      "medical_supplies": {
+        "type": "string",
+        "description": "Pharmaceuticals, equipment, facilities, or personnel related to healthcare."
+      },
+      "communication_infrastructure": {
+        "type": "string",
+        "description": "Systems for transmitting information, including physical networks, wireless technologies, or specialized equipment."
+      },
+      "luxury_goods": {
+        "type": "string",
+        "description": "High-value items that confer status, comfort, or exclusivity but are not essential for operations."
+      }
+    }
+  },
+  "categoryMapping": {
+    "type": "object",
+    "description": "Grouping of resource types by category (not part of the enum, provided for documentation)",
+    "properties": {
+      "tangible": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "financial_capital",
+            "raw_materials",
+            "manufactured_goods",
+            "technological_equipment",
+            "facilities",
+            "land",
+            "energy",
+            "food_supplies",
+            "water_sources",
+            "military_hardware",
+            "transportation_assets",
+            "magical_components",
+            "ancient_relics",
+            "experimental_technology",
+            "medical_supplies",
+            "communication_infrastructure",
+            "luxury_goods"
+          ]
+        },
+        "description": "Physical resources that can be handled, counted, or moved."
+      },
+      "intangible": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "data",
+            "intelligence",
+            "intellectual_property",
+            "specialized_knowledge",
+            "political_connections",
+            "legal_authority",
+            "public_goodwill"
+          ]
+        },
+        "description": "Non-physical resources that provide value through information, relationships, or rights."
+      },
+      "operational": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "personnel",
+            "digital_systems",
+            "propaganda_channels",
+            "espionage_network",
+            "communication_infrastructure"
+          ]
+        },
+        "description": "Resources directly involved in carrying out the organization's activities."
+      }
+    }
+  }
+}

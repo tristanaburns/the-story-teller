@@ -1,0 +1,594 @@
+{
+  "storylines": [
+    {
+      "id": "storyline-shadow-team-001",
+      "name": "The Shadow Team Chronicles",
+      "description": "The epic saga of legendary warriors whose fates become intertwined through encounters that shape the course of history.",
+      "volumes": [
+        {
+          "id": "volume-introduction-001",
+          "name": "Introduction",
+          "description": "The foundational events that establish the core characters and their legendary partnerships.",
+          "acts": [
+            {
+              "id": "act-origins-001",
+              "name": "Act I - Origins",
+              "description": "The origin stories of key characters and how their paths cross in ways that will change the course of history.",
+              "stories": [
+                {
+                  "id": "story-bridge-of-fate-001",
+                  "name": "The Bridge of Fate",
+                  "description": "The legendary first meeting between Yoshi and Benkei that forges their unbreakable bond and sets them on a shared path.",
+                  "chapters": [
+                    {
+                      "id": "chapter-warriors-oath-001",
+                      "name": "Chapter 1 - The Warriors Oath",
+                      "description": "The fateful encounter where Yoshi and Benkei's legendary duel takes place in 1174, changing both their destinies forever.",
+                      "passages": [
+                        {
+                          "id": "passage-bridge-decide-fate-001",
+                          "name": "The Bridge That Would Decide Fate",
+                          "description": "The atmospheric setting of Gojo Bridge, where countless duels have taken place and where Yoshi and Benkei are about to meet.",
+                          "parts": [
+                            {
+                              "id": "part-opening-duel-001",
+                              "name": "Opening Duel Between Yoshi and Benkei",
+                              "description": "The initial confrontation between Yoshi and Benkei, establishing their legendary rivalry and eventual partnership.",
+                              "writing_style": "Cinematic & Precise",
+                              "scene_elements": {
+                                "characters": ["char-yoshi-001", "char-benkei-001"],
+                                "locations": ["loc-gojo-bridge-001"],
+                                "events": ["event-yoshi-benkei-duel-001"],
+                                "themes": ["Fate", "Honor", "Battle of Legends"],
+                                "tone": ["Epic", "Cinematic", "Mythic"]
+                              },
+                              "multimedia": {
+                                "image_prompt": "A mist-covered wooden bridge under the pale moonlight. The air is thick with silence and the echoes of past battles. At the center stands Benkei, a towering warrior, gripping his naginata. Opposite him, Yoshi—a lean, sharp-eyed swordsman—with his hand ready to draw his sword Higekiri. The bridge bears the scars of countless duels: broken railings, deep slashes in the wood, and a single bloodstained sandal at its entrance.",
+                                "video_prompt": "A cinematic video sequence capturing the legendary duel at Gojo Bridge. The camera pans through the mist, revealing the bridge's battle-worn structure. Temple bells toll softly in the distance. The mist shifts to reveal Benkei, standing like an immovable statue, gripping his naginata. Across from him, Yoshi smirks, drawing his sword Higekiri. The atmosphere is tense—like the breath before a storm. A single gust of wind sweeps through the bridge. Then, silence. And the duel begins."
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "key_characters": ["char-yoshi-001", "char-benkei-001"],
+      "main_locations": ["loc-gojo-bridge-001", "loc-kyoto-001"],
+      "created_at": "2025-03-10T00:00:00Z",
+      "updated_at": "2025-03-15T00:00:00Z"
+    },
+    {
+      "id": "storyline-benkei-transformation-001",
+      "title": "Benkei's Transformation",
+      "description": "The journey of Benkei from defeated warrior to purposeful protector, symbolized by his new weapons and armor that are forged in the mountain.",
+      "key_characters": [
+        "char-benkei-001",
+        "char-yoshi-001",
+        "char-blacksmith-001"
+      ],
+      "key_events": [
+        "event-yoshi-benkei-duel-001",
+        "event-yoshi-benkei-mountain-journey-001",
+        "event-forging-weapons-armor-001",
+        "event-benkei-concealment-decision-001",
+        "event-bandit-ambush-001"
+      ],
+      "status": "ongoing",
+      "created_at": "2025-03-17T00:00:00Z",
+      "updated_at": "2025-03-17T00:00:00Z"
+    }
+  ],
+  "plot_points": [
+    {
+      "id": "plot-point-journey-north-begins-001",
+      "title": "Journey North Begins",
+      "type": "journey_commencement",
+      "description": "Yoshi and Benkei begin their journey northward, establishing the formal master-retainer relationship and its protocols.",
+      "timeline": {
+        "date": "1180-03-17",
+        "time": "dawn"
+      },
+      "location_id": "loc-gojo-bridge-001",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "leader"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "follower"
+        }
+      ],
+      "event_id": "event-journey-north-begins-001",
+      "narrative_significance": {
+        "plot_function": "Establishes the physical journey northward and the formal master-retainer relationship with its protocols",
+        "character_impact": [
+          {
+            "character_id": "char-benkei-001",
+            "impact": "Begins to understand the formal protocols of the master-retainer relationship"
+          },
+          {
+            "character_id": "char-yoshi-001",
+            "impact": "Establishes his role as the leader and sets the tone for the journey"
+          }
+        ],
+        "thematic_significance": [
+          {
+            "theme_id": "theme-journey-001",
+            "expression": "Represents the beginning of a new journey and the establishment of a formal relationship"
+          }
+        ]
+      },
+      "sensory_details": {
+        "visual": [
+          "Benkei's imposing figure following at precise distance behind Yoshi",
+          "The contrast between their silhouettes against the dawn light",
+          "The abandoned bridge behind them marking the threshold crossed"
+        ],
+        "auditory": [
+          "The rhythmic footsteps maintaining perfect cadence",
+          "Morning birds beginning to call as night transitions to dawn",
+          "The distant sounds of Kyoto awakening behind them"
+        ],
+        "atmospheric": [
+          "Sense of new beginning and journey's commencement",
+          "The formal tension of a new master-retainer relationship",
+          "The quiet determination of two warriors with shared purpose"
+        ]
+      },
+      "outcome": "Establishes the physical journey northward and the formal master-retainer relationship with its protocols",
+      "subsequent_plot_points": [
+        "plot-point-village-boar-hunt-001"
+      ],
+      "metadata": {
+        "creation_date": "2025-03-24T00:00:00Z",
+        "last_modified": "2025-03-24T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "plot-point-village-boar-hunt-001",
+      "title": "Village Boar Hunt",
+      "type": "character_revelation",
+      "description": "Encountering a hunter tracking a wounded boar, Yoshi demonstrates his character by helping kill the animal humanely and then ordering Benkei to carry it to the hunter's village for sharing rather than claiming it as their own.",
+      "timeline": {
+        "date": "1180-03-18",
+        "time": "afternoon"
+      },
+      "location_id": "loc-village-001",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "decision_maker"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "follower"
+        },
+        {
+          "character_id": "char-tanaka-hunter-001",
+          "role": "beneficiary"
+        },
+        {
+          "character_id": "char-village-elder-001",
+          "role": "host"
+        }
+      ],
+      "event_id": "event-village-boar-hunt-001",
+      "narrative_significance": {
+        "plot_function": "Reveals Yoshi's character through his actions toward common people",
+        "character_impact": [
+          {
+            "character_id": "char-benkei-001",
+            "impact": "Deepens respect for his master through witnessing his treatment of commoners"
+          },
+          {
+            "character_id": "char-yoshi-001",
+            "impact": "Establishes his compassionate leadership beyond martial prowess"
+          }
+        ],
+        "thematic_significance": [
+          {
+            "theme_id": "theme-respect-for-all-001",
+            "expression": "Demonstrates that true nobility lies in treatment of those without power"
+          }
+        ]
+      },
+      "sensory_details": {
+        "visual": [
+          "Wounded boar thrashing in pain amidst underbrush",
+          "Swift, merciful killing stroke from Yoshi",
+          "Benkei's massive form carrying the boar to the village",
+          "Surprised expressions of villagers seeing warriors approach"
+        ],
+        "auditory": [
+          "Boar's pained squeals silenced by clean kill",
+          "Murmurs of wonder from gathered villagers",
+          "Elder's formal words of welcome"
+        ],
+        "atmospheric": [
+          "Initial tension of villagers seeing armed warriors",
+          "Gradual transition to warm hospitality",
+          "Sense of unusual bridge between warrior and commoner worlds"
+        ]
+      },
+      "outcome": "Yoshi and Benkei spend the night as honored guests of the village, receiving shelter and information in exchange for the shared meat",
+      "subsequent_plot_points": [
+        "plot-point-mountain-path-landslide-001"
+      ],
+      "metadata": {
+        "creation_date": "2025-03-24T00:00:00Z",
+        "last_modified": "2025-03-24T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "plot-point-mountain-path-landslide-001",
+      "title": "The Mountain Path Landslide",
+      "type": "relationship_evolution",
+      "description": "On a treacherous mountain path, the ground beneath Yoshi's foot gives way. Benkei breaks formal protocol to save him, marking the first significant evolution in their relationship beyond rigid master-retainer roles.",
+      "timeline": {
+        "date": "1180-03-19",
+        "time": "day"
+      },
+      "location_id": "loc-mountain-path-001",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "endangered"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "rescuer"
+        }
+      ],
+      "event_id": "event-mountain-path-landslide-001",
+      "narrative_significance": {
+        "plot_function": "Evolves the formal relationship to one with more pragmatic flexibility",
+        "character_impact": [
+          {
+            "character_id": "char-benkei-001",
+            "impact": "First active choice to prioritize Yoshi's safety over formal protocol"
+          },
+          {
+            "character_id": "char-yoshi-001",
+            "impact": "Recognition of Benkei's value beyond physical strength"
+          }
+        ],
+        "thematic_significance": [
+          {
+            "theme_id": "theme-protocol-necessity-001",
+            "expression": "Direct contrast between rigid formality and practical necessity"
+          },
+          {
+            "theme_id": "theme-complementary-strengths-001",
+            "expression": "Physical danger to Yoshi compensated by Benkei's strength"
+          }
+        ]
+      },
+      "sensory_details": {
+        "visual": [
+          "Crumbling edge of narrow mountain path",
+          "Yoshi beginning to fall backward toward ravine",
+          "Benkei's hand shooting forward to grasp Yoshi's arm",
+          "The momentary breaking of the three-paces distance"
+        ],
+        "auditory": [
+          "Sudden crack of stone giving way",
+          "Tumbling debris echoing down the ravine",
+          "Benkei's grunt of effort as he pulls Yoshi to safety"
+        ],
+        "atmospheric": [
+          "The tension between imminent danger and protocol violation",
+          "The sense of physical boundary between master and retainer temporarily broken",
+          "Silent acknowledgment of necessary protocol breach"
+        ]
+      },
+      "outcome": "Benkei protects Yoshi through breaking protocol, and Yoshi acknowledges the propriety of this breach, beginning a more nuanced relationship",
+      "subsequent_plot_points": [
+        "plot-point-taira-mercenary-ambush-001"
+      ],
+      "metadata": {
+        "creation_date": "2025-03-24T00:00:00Z",
+        "last_modified": "2025-03-24T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "plot-point-taira-mercenary-ambush-001",
+      "title": "Taira Mercenary Ambush",
+      "type": "skill_demonstration",
+      "description": "Five men claiming to work for Lord Taira Kiyomori ambush Yoshi and Benkei. Yoshi orders Benkei to stand aside, demonstrating extraordinary skill by defeating all five attackers without killing any of them.",
+      "timeline": {
+        "date": "1180-03-19",
+        "time": "midday"
+      },
+      "location_id": "loc-forest-clearing-001",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "demonstrator"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "observer"
+        },
+        {
+          "character_id": "char-taira-mercenary-leader-001",
+          "role": "antagonist"
+        }
+      ],
+      "event_id": "event-taira-mercenary-ambush-001",
+      "narrative_significance": {
+        "plot_function": "Demonstrates Yoshi's extraordinary combat skills and restraint",
+        "character_impact": [
+          {
+            "character_id": "char-benkei-001",
+            "impact": "Deepens understanding of Yoshi's combat mastery beyond the initial duel"
+          },
+          {
+            "character_id": "char-yoshi-001",
+            "impact": "Establishes his preference for precision and control over lethal force"
+          }
+        ],
+        "thematic_significance": [
+          {
+            "theme_id": "theme-martial-philosophy-001",
+            "expression": "Practical application of the three principles demonstrated during their duel"
+          },
+          {
+            "theme_id": "theme-protocol-necessity-001",
+            "expression": "Benkei's struggle to follow orders and stand aside despite protective instinct"
+          }
+        ]
+      },
+      "sensory_details": {
+        "visual": [
+          "Five armed men emerging from forest shadows",
+          "Yoshi's calm stance contrasting with the aggressive attackers",
+          "Precise movements disabling rather than killing each opponent",
+          "Benkei's tense restraint as he observes without intervening"
+        ],
+        "auditory": [
+          "Attackers' threatening demands and accusations",
+          "The whisper of Yoshi's blade through air",
+          "Cries of surprise and pain from disabled attackers"
+        ],
+        "atmospheric": [
+          "Initial threat tension transitioning to demonstration",
+          "Benkei's internal struggle between obedience and protection",
+          "The attackers' growing fear as they recognize their disadvantage"
+        ]
+      },
+      "outcome": "All five attackers are defeated but left alive, demonstrating Yoshi's superior skill and his philosophy of controlled combat",
+      "subsequent_plot_points": [
+        "plot-point-benkei-transformation-decision-001"
+      ],
+      "metadata": {
+        "creation_date": "2025-03-24T00:00:00Z",
+        "last_modified": "2025-03-24T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "plot-point-benkei-transformation-decision-001",
+      "title": "Benkei's Transformation Decision",
+      "type": "character_transition",
+      "description": "Following the journey's challenges, Benkei reflects on what he has witnessed and makes the internal decision to embrace transformation from trophy collector to dedicated protector, setting the stage for the physical manifestation of this change at the forge.",
+      "timeline": {
+        "date": "1180-03-19",
+        "time": "evening"
+      },
+      "location_id": "loc-mountain-camp-001",
+      "participants": [
+        {
+          "character_id": "char-benkei-001",
+          "role": "protagonist"
+        },
+        {
+          "character_id": "char-yoshi-001",
+          "role": "catalyst"
+        }
+      ],
+      "event_id": "event-benkei-transformation-decision-001",
+      "narrative_significance": {
+        "plot_function": "Marks the internal decision that precedes the external transformation",
+        "character_impact": [
+          {
+            "character_id": "char-benkei-001",
+            "impact": "Completes the psychological shift from directionless warrior to purposeful protector"
+          }
+        ],
+        "thematic_significance": [
+          {
+            "theme_id": "theme-transformation-001",
+            "expression": "Represents the internal change that must precede external transformation"
+          },
+          {
+            "theme_id": "theme-finding-purpose-001",
+            "expression": "Culmination of Benkei's search for meaningful direction"
+          }
+        ]
+      },
+      "sensory_details": {
+        "visual": [
+          "Benkei sitting in contemplation by the campfire",
+          "Reflective shadows playing across his features",
+          "His 999 sword trophies now seeming less significant",
+          "Yoshi sleeping peacefully nearby, trusting in Benkei's watch"
+        ],
+        "auditory": [
+          "Crackling fire punctuating silent contemplation",
+          "Occasional night sounds from surrounding wilderness",
+          "Steady breathing of his sleeping master"
+        ],
+        "atmospheric": [
+          "Sense of quiet revelation and internal resolution",
+          "The weight of past identity loosening",
+          "Anticipation of formal commitment to new path"
+        ]
+      },
+      "outcome": "Benkei makes the internal decision to fully embrace transformation, setting the stage for the forge scene and physical manifestation of this change",
+      "subsequent_plot_points": [
+        "plot-point-journey-to-forge-001"
+      ],
+      "metadata": {
+        "creation_date": "2025-03-24T00:00:00Z",
+        "last_modified": "2025-03-24T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    }
+  ],
+  "narrative_structures": [
+    {
+      "id": "narrative-structure-benkei-transformation-001",
+      "title": "Benkei's Transformation Arc",
+      "type": "character_development",
+      "description": "The structured progression of Benkei's evolution from directionless warrior to purposeful protector, following recognizable stages of character transformation that parallel physical journey and forging process.",
+      "key_stages": [
+        {
+          "stage_name": "Initial Identity",
+          "description": "Benkei defined by physical strength and trophy collection, lacking deeper purpose",
+          "plot_points": ["plot-point-gojo-bridge-meeting-001"]
+        },
+        {
+          "stage_name": "Challenge to Identity",
+          "description": "Defeat by Yoshi disrupts self-concept and forces reevaluation",
+          "plot_points": ["plot-point-three-cuts-lesson-001"]
+        },
+        {
+          "stage_name": "New Allegiance",
+          "description": "Formal oath creates external framework for new identity",
+          "plot_points": ["plot-point-benkei-oath-001", "plot-point-journey-north-begins-001"]
+        },
+        {
+          "stage_name": "Testing",
+          "description": "Journey events test and deepen commitment to new path",
+          "plot_points": ["plot-point-village-boar-hunt-001", "plot-point-mountain-path-landslide-001", "plot-point-taira-mercenary-ambush-001"]
+        },
+        {
+          "stage_name": "Internal Acceptance",
+          "description": "Full psychological embracing of transformation",
+          "plot_points": ["plot-point-benkei-transformation-decision-001"]
+        },
+        {
+          "stage_name": "External Manifestation",
+          "description": "Physical transformation through weapons and armor that embody new identity",
+          "plot_points": ["plot-point-journey-to-forge-001", "plot-point-forging-scene-001"]
+        },
+        {
+          "stage_name": "Integration",
+          "description": "Testing and embodying the new identity in action",
+          "plot_points": ["plot-point-first-battle-as-iron-bear-001"]
+        }
+      ],
+      "literary_parallels": {
+        "hero_journey": "Follows aspects of the traditional hero's journey with departure, initiation through trials, and return in transformed state",
+        "death_rebirth": "Symbolic death of old identity and rebirth as new self",
+        "forge_metaphor": "Physical forging process directly parallels psychological transformation"
+      },
+      "narrative_techniques": {
+        "external_internal_reflection": "Physical environments and actions reflect internal psychological states",
+        "symbolic_objects": "Weapons and armor serve as physical manifestations of identity",
+        "transitional_spaces": "Journey between locations represents movement between identity states"
+      },
+      "related_themes": [
+        {
+          "theme_id": "theme-transformation-001",
+          "relationship": "central"
+        },
+        {
+          "theme_id": "theme-finding-purpose-001",
+          "relationship": "supporting"
+        },
+        {
+          "theme_id": "theme-identity-001",
+          "relationship": "supporting"
+        }
+      ],
+      "metadata": {
+        "creation_date": "2025-03-24T00:00:00Z",
+        "last_modified": "2025-03-24T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "narrative-structure-relationship-evolution-001",
+      "title": "Master-Retainer Relationship Evolution",
+      "type": "relationship_development",
+      "description": "The structured progression of the relationship between Yoshi and Benkei from formal master-retainer protocol toward genuine partnership, showing how rigid social structures gradually accommodate personal bonds and practical necessities.",
+      "key_stages": [
+        {
+          "stage_name": "Adversarial",
+          "description": "Initial meeting as opponents with contrasting martial philosophies",
+          "plot_points": ["plot-point-gojo-bridge-meeting-001", "plot-point-three-cuts-lesson-001"]
+        },
+        {
+          "stage_name": "Formal Establishment",
+          "description": "Creation of structured relationship through oath and protocols",
+          "plot_points": ["plot-point-benkei-oath-001", "plot-point-journey-north-begins-001"]
+        },
+        {
+          "stage_name": "Protocol Testing",
+          "description": "Circumstances that force choices between adherence to form and practical necessity",
+          "plot_points": ["plot-point-mountain-path-landslide-001", "plot-point-taira-mercenary-ambush-001"]
+        },
+        {
+          "stage_name": "Mutual Recognition",
+          "description": "Acknowledgment of complementary strengths and value beyond formal roles",
+          "plot_points": ["plot-point-deer-trail-discussion-001"]
+        },
+        {
+          "stage_name": "Adaptive Partnership",
+          "description": "Evolution toward relationship that maintains respect while allowing flexibility",
+          "plot_points": ["plot-point-first-battle-as-iron-bear-001"]
+        }
+      ],
+      "literary_parallels": {
+        "social_evolution": "Mirrors broader societal evolution from rigid hierarchies to practical adaptations",
+        "learning_relationship": "Elements of teacher-student dynamic that evolves toward collaboration",
+        "symbolic_distance": "Physical distances representing psychological and social spaces"
+      },
+      "narrative_techniques": {
+        "protocol_breach_moments": "Strategic points where formal rules are broken for significant reasons",
+        "distance_manipulation": "Changes in physical proximity to reflect relationship evolution",
+        "complementary_action": "Scenes showing how different capacities create effective partnership"
+      },
+      "related_themes": [
+        {
+          "theme_id": "theme-protocol-necessity-001",
+          "relationship": "central"
+        },
+        {
+          "theme_id": "theme-complementary-strengths-001",
+          "relationship": "supporting"
+        }
+      ],
+      "metadata": {
+        "creation_date": "2025-03-24T00:00:00Z",
+        "last_modified": "2025-03-24T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    }
+  ]
+}

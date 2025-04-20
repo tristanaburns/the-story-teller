@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/visual_representation",
+  "title": "Character Visual Representation Schema",
+  "description": "Guidelines and specifications for the consistent visual depiction of a character across different media forms and artistic styles.",
+  "allOf": [
+    {
+      "$ref": "../common/visual_representation_schema.json"
+    }
+  ],
+  "properties": {
+    "animation_guidelines": {
+      "type": "object",
+      "properties": {
+        "movement_style": {
+          "type": "string",
+          "description": "How the character typically moves, including posture, gait, gestures, and mannerisms that reflect their personality and physical attributes."
+        },
+        "expressions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "emotion": {
+                "type": "string",
+                "description": "The specific emotional state being depicted."
+              },
+              "description": {
+                "type": "string",
+                "description": "How this character uniquely expresses this emotion through facial expressions and body language."
+              }
+            }
+          },
+          "description": "Guidelines for how the character's face and body express various emotions, accounting for their unique personality and appearance."
+        }
+      },
+      "description": "Specifications for depicting the character in motion, whether in animation or sequential art, to ensure consistency with their personality and physical traits."
+    }
+  }
+}

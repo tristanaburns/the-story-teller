@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location/time_variants",
+  "title": "Location Time Variants Schema",
+  "description": "Schema for defining how a location changes across different time periods within the narrative timeline.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "time_period": {
+        "$ref": "../common/time_period_schema.json",
+        "description": "The specific era or period when this variant of the location exists."
+      },
+      "name": {
+        "type": "string",
+        "description": "What the location was called during this time period, if different from its current name."
+      },
+      "physical_description": {
+        "type": "string",
+        "description": "How the location appeared during this time period, focusing on its physical characteristics and atmosphere."
+      },
+      "significant_differences": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Specific ways this time variant differs from the location's current or primary state."
+      },
+      "historical_context": {
+        "type": "string",
+        "description": "The broader historical situation surrounding this location during this time period, providing context for its state and significance."
+      },
+      "key_features": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name or brief description of a notable feature of the location during this time period."
+            },
+            "description": {
+              "type": "string",
+              "description": "Detailed information about this feature and its significance to the location during this time period."
+            }
+          },
+          "required": ["name", "description"]
+        },
+        "description": "Notable landmarks, structures, or natural elements that defined the location during this time period."
+      },
+      "events": {
+        "type": "array",
+        "items": {
+          "$ref": "../common/references_schema.json"
+        },
+        "description": "Historical events that occurred at this location during this time period, influencing its development or significance."
+      },
+      "inhabitants": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "entity_reference": {
+              "$ref": "../common/references_schema.json"
+            },
+            "relationship": {
+              "type": "string",
+              "description": "How this character or group related to the location during this time period (e.g., 'ruler', 'resident', 'invader')."
+            }
+          },
+          "required": ["entity_reference"]
+        },
+        "description": "Characters or groups that occupied or had significant connections to the location during this time period."
+      },
+      "transition_causes": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Factors that led to changes in the location between this time period and the next recorded variant."
+      },
+      "visual_representation": {
+        "$ref": "../common/visual_representation_schema.json",
+        "description": "Guidelines for depicting this version of the location in visual media."
+      }
+    },
+    "required": ["time_period", "physical_description"]
+  }
+}

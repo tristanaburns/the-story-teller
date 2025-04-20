@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/character_arc",
+  "title": "Character Arc Schema",
+  "description": "The character's internal and external journey throughout the narrative, tracking their development, growth, and transformation.",
+  "type": "object",
+  "properties": {
+    "arc_type": {
+      "type": "string",
+      "enum": ["transformation", "growth", "fall", "flat", "corruption", "redemption", "tragic", "coming_of_age", "education", "testing"],
+      "description": "The fundamental pattern of change (or constancy) that defines this character's journey through the narrative."
+    },
+    "starting_state": {
+      "type": "object",
+      "properties": {
+        "worldview": {
+          "type": "string",
+          "description": "The character's initial perspective on life, the world, and their place in it."
+        },
+        "flaws": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Character weaknesses, blind spots, or negative traits that create internal or external conflict."
+        },
+        "strengths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Positive traits or capabilities that the character possesses from the beginning."
+        },
+        "desires": {
+          "type": "string",
+          "description": "What the character consciously wants or believes they want at the start of their journey."
+        },
+        "needs": {
+          "type": "string",
+          "description": "What the character actually requires for fulfillment or growth, which may differ from their conscious desires."
+        }
+      },
+      "description": "The character's condition, beliefs, and attributes at the beginning of their narrative journey, establishing the baseline from which they will change (or resist change)."
+    },
+    "key_moments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A brief title for this pivotal moment in the character's development."
+          },
+          "event_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Optional reference to a specific event object if this moment corresponds to a documented historical event."
+          },
+          "description": {
+            "type": "string",
+            "description": "What happens during this moment and how it affects the character."
+          },
+          "impact": {
+            "type": "string",
+            "description": "How this moment changes the character's beliefs, goals, relationships, or capabilities."
+          },
+          "arc_position": {
+            "type": "string",
+            "enum": ["inciting_incident", "first_threshold", "midpoint", "crisis", "climax", "resolution"],
+            "description": "Where this moment falls within the traditional structure of a character arc."
+          }
+        },
+        "required": ["name", "description", "impact"]
+      },
+      "description": "Significant events or decisions that mark important shifts or revelations in the character's development."
+    },
+    "internal_conflict": {
+      "type": "string",
+      "description": "The primary psychological, moral, or philosophical struggle occurring within the character throughout their arc."
+    },
+    "external_conflict": {
+      "type": "string",
+      "description": "The main obstacle, antagonist, or opposing force that challenges the character from outside."
+    },
+    "resolution": {
+      "type": "object",
+      "properties": {
+        "outcome": {
+          "type": "string",
+          "description": "How the character's arc concludes or the current state of their ongoing development."
+        },
+        "transformation": {
+          "type": "string",
+          "description": "How the character has changed from their starting state through their experiences."
+        },
+        "realization": {
+          "type": "string",
+          "description": "The key insight, truth, or self-knowledge the character gains by the end of their arc."
+        },
+        "unresolved_elements": {
+          "type": "string",
+          "description": "Aspects of the character's journey that remain incomplete or open-ended, potentially setting up future development."
+        }
+      },
+      "description": "The culmination of the character's journey and the state they reach by the end of their arc (or its current point if ongoing)."
+    },
+    "theme": {
+      "type": "string",
+      "description": "The central idea or message illustrated through this character's journey and transformation."
+    }
+  },
+  "required": ["arc_type", "starting_state"]
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/timeline",
+  "title": "Character Timeline Schema",
+  "description": "Chronological tracking of a character's appearances and significance throughout the narrative.",
+  "type": "object",
+  "properties": {
+    "first_appearance": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "$ref": "common/timestamp_schema.json"
+        },
+        "volume": {
+          "type": "string",
+          "description": "The story volume where this character is first introduced to readers or viewers."
+        },
+        "chapter": {
+          "type": "string",
+          "description": "The specific chapter within the volume where this character makes their debut."
+        },
+        "scene_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Reference to the specific scene where this character first appears."
+        }
+      }
+    },
+    "last_appearance": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "$ref": "common/timestamp_schema.json"
+        },
+        "volume": {
+          "type": "string",
+          "description": "The story volume where this character makes their final appearance."
+        },
+        "chapter": {
+          "type": "string",
+          "description": "The specific chapter within the volume containing the character's final appearance."
+        },
+        "scene_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Reference to the specific scene containing the character's final appearance."
+        }
+      }
+    },
+    "key_appearances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "$ref": "common/timestamp_schema.json"
+          },
+          "scene_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Reference to the scene containing this significant moment."
+          },
+          "significance": {
+            "type": "string",
+            "enum": ["major", "minor", "cameo", "reference"],
+            "description": "The level of importance this appearance has in the narrative."
+          },
+          "development": {
+            "type": "string",
+            "description": "Description of how this appearance advances the character's development or the broader storyline."
+          }
+        }
+      },
+      "description": "Collection of particularly significant or pivotal appearances by this character throughout the narrative."
+    }
+  }
+}

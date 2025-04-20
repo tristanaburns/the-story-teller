@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/metadata/document_metadata",
+  "title": "Document Metadata Schema",
+  "description": "Schema for recording information specific to narrative documents within The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The headline or name of this document."
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "A secondary title that provides additional context or framing."
+    },
+    "byline": {
+      "type": "string",
+      "description": "Attribution line indicating who created the document."
+    },
+    "word_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The total number of words in the document."
+    },
+    "reading_time": {
+      "type": "object",
+      "properties": {
+        "minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Estimated minutes required to read the document."
+        },
+        "seconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59,
+          "description": "Additional seconds beyond the minute estimate."
+        }
+      },
+      "description": "Approximate time needed to read the document."
+    },
+    "narrative_structure": {
+      "type": "object",
+      "properties": {
+        "pov": {
+          "$ref": "../common/narrative_pov_schema.json",
+          "description": "The point of view from which the narrative is told."
+        },
+        "tense": {
+          "type": "string",
+          "enum": ["past", "present", "future", "mixed"],
+          "description": "The primary verb tense used in the narrative."
+        },
+        "narrative_style": {
+          "type": "string",
+          "description": "The distinctive approach to storytelling used in the document."
+        },
+        "tone": {
+          "$ref": "../common/story_tone_schema.json",
+          "description": "The emotional quality or attitude conveyed by the narrative."
+        }
+      },
+      "description": "Information about the narrative approach and structure of the document."
+    },
+    "genre": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/genre_type_schema.json"
+      },
+      "description": "The literary or narrative categories that best describe this document."
+    },
+    "content_warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alerts about potentially sensitive or triggering content within the document."
+    },
+    "canonical_status": {
+      "type": "string",
+      "enum": ["canon", "alternate_timeline", "what_if", "non_canon", "draft"],
+      "description": "Whether this document represents official canon in The Shadow Team Chronicles universe."
+    },
+    "timeline_position": {
+      "$ref": "../common/time_period_schema.json",
+      "description": "When the events described in the document occur within the narrative timeline."
+    },
+    "narrative_elements": {
+      "$ref": "../common/writing_elements_schema.json",
+      "description": "Key storytelling components used in this document."
+    }
+  },
+  "required": ["title"]
+}

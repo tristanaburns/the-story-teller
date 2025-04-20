@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/skills",
+  "title": "Character Skills Schema",
+  "description": "The learned abilities, talents, and areas of expertise that define what the character can accomplish within the narrative.",
+  "type": "object",
+  "properties": {
+    "combat_skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The specific combat technique, style, or weapon proficiency."
+          },
+          "proficiency": {
+            "type": "string",
+            "enum": ["novice", "trained", "expert", "master", "legendary"],
+            "description": "The character's level of skill and experience with this combat ability."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of this combat skill's techniques, applications, and how the character utilizes it."
+          },
+          "source": {
+            "type": "string",
+            "description": "How and where the character learned this skill, which may connect to their backstory or relationships."
+          }
+        },
+        "required": ["name", "proficiency"]
+      },
+      "description": "The character's abilities related to physical conflict, including weapon use, martial arts, and tactical knowledge."
+    },
+    "technical_skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The specific technical ability or area of expertise."
+          },
+          "proficiency": {
+            "type": "string",
+            "enum": ["novice", "trained", "expert", "master", "legendary"],
+            "description": "The character's level of skill and experience with this technical ability."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of this technical skill's applications and how the character utilizes it."
+          },
+          "source": {
+            "type": "string",
+            "description": "How and where the character learned this skill, which may connect to their backstory or relationships."
+          }
+        },
+        "required": ["name", "proficiency"]
+      },
+      "description": "The character's practical abilities related to crafting, operating technology, or specialized professional knowledge."
+    },
+    "knowledge_skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The specific area of knowledge or academic discipline."
+          },
+          "proficiency": {
+            "type": "string",
+            "enum": ["novice", "trained", "expert", "master", "legendary"],
+            "description": "The character's level of education and expertise in this knowledge area."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of this knowledge area's scope and how the character applies it."
+          },
+          "source": {
+            "type": "string",
+            "description": "How and where the character acquired this knowledge, which may connect to their backstory or relationships."
+          }
+        },
+        "required": ["name", "proficiency"]
+      },
+      "description": "The character's intellectual expertise, academic education, and specialized information they possess."
+    },
+    "social_skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The specific interpersonal ability or social competency."
+          },
+          "proficiency": {
+            "type": "string",
+            "enum": ["novice", "trained", "expert", "master", "legendary"],
+            "description": "The character's level of skill and experience with this social ability."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of this social skill's techniques, applications, and how the character utilizes it."
+          },
+          "source": {
+            "type": "string",
+            "description": "How and where the character developed this skill, which may connect to their backstory or relationships."
+          }
+        },
+        "required": ["name", "proficiency"]
+      },
+      "description": "The character's abilities related to interacting with others, including persuasion, leadership, deception, or performance."
+    },
+    "supernatural_skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The specific magical or superhuman ability."
+          },
+          "proficiency": {
+            "type": "string",
+            "enum": ["novice", "trained", "expert", "master", "legendary"],
+            "description": "The character's level of skill and experience with this supernatural ability."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of how this supernatural skill works, its limitations, and how the character utilizes it."
+          },
+          "source": {
+            "type": "string",
+            "description": "How and where the character acquired this ability, which may connect to their backstory, genetics, or supernatural events."
+          }
+        },
+        "required": ["name", "proficiency", "description"]
+      },
+      "description": "The character's abilities that transcend normal human limitations, including magic, psychic powers, or other extraordinary talents."
+    },
+    "situational_skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The specific situational competency or specialized knowledge."
+          },
+          "proficiency": {
+            "type": "string",
+            "enum": ["novice", "trained", "expert", "master", "legendary"],
+            "description": "The character's level of skill and experience with this situational ability."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of when this skill applies and how the character utilizes it."
+          },
+          "source": {
+            "type": "string",
+            "description": "How and where the character learned this skill, which may connect to their backstory or experiences."
+          }
+        },
+        "required": ["name", "proficiency"]
+      },
+      "description": "The character's abilities that are valuable in specific contexts or scenarios, such as survival skills, infiltration, or crisis management."
+    }
+  }
+}

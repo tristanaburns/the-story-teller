@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/voice",
+  "title": "Character Voice Schema",
+  "description": "The distinctive speech patterns, language use, and communicative style that define how a character expresses themselves throughout the narrative.",
+  "type": "object",
+  "properties": {
+    "speech_characteristics": {
+      "type": "object",
+      "properties": {
+        "vocal_qualities": {
+          "type": "object",
+          "properties": {
+            "tone": {
+              "type": "string",
+              "description": "The general sound and emotional quality of the character's voice (e.g., 'deep and resonant', 'high-pitched and nervous', 'smooth and melodious')."
+            },
+            "pitch": {
+              "type": "string",
+              "description": "Where the character's voice sits on the spectrum from low to high, including any distinctive variations."
+            },
+            "volume": {
+              "type": "string",
+              "description": "The character's typical speaking loudness and how it varies with emotional state or context."
+            },
+            "rhythm": {
+              "type": "string",
+              "description": "The character's speaking tempo, including tendencies toward rapid speech, measured pacing, or distinctive pauses."
+            },
+            "distinctive_sounds": {
+              "type": "string",
+              "description": "Any unusual sounds or vocal tics the character makes when speaking, such as stuttering, throat clearing, or unique pronunciations."
+            }
+          },
+          "description": "The auditory characteristics of the character's voice."
+        },
+        "accent_dialect": {
+          "type": "object",
+          "properties": {
+            "accent": {
+              "type": "string",
+              "description": "The character's pronunciation pattern that might indicate regional or cultural origin."
+            },
+            "dialect": {
+              "type": "string",
+              "description": "The character's variant of language including specific vocabulary, grammatical structures, or idioms tied to a particular region or social group."
+            },
+            "code_switching": {
+              "type": "string",
+              "description": "How the character might alter their speech patterns in different contexts or with different conversation partners."
+            }
+          },
+          "description": "The regional, cultural, or social influences on the character's speech patterns."
+        }
+      },
+      "description": "The physical and auditory qualities of how the character speaks."
+    },
+    "language_patterns": {
+      "type": "object",
+      "properties": {
+        "vocabulary": {
+          "type": "string",
+          "description": "The character's typical word choice, including the range, sophistication, and specialization of their vocabulary."
+        },
+        "sentence_structure": {
+          "type": "string",
+          "description": "The character's typical syntax, including preferences for simple or complex sentences, fragments, or distinctive grammatical patterns."
+        },
+        "favorite_phrases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Recurring expressions, catchphrases, or verbal tics that the character uses frequently."
+        },
+        "metaphor_choices": {
+          "type": "string",
+          "description": "The types of imagery or comparisons the character tends to use, which often reveal their background, interests, or worldview."
+        }
+      },
+      "description": "The textual and linguistic elements of the character's speech."
+    },
+    "communication_style": {
+      "type": "object",
+      "properties": {
+        "directness": {
+          "type": "string",
+          "description": "How straightforwardly the character expresses thoughts and opinions, from blunt honesty to nuanced implication."
+        },
+        "formality": {
+          "type": "string",
+          "description": "The level of ceremony or casualness in the character's typical speech."
+        },
+        "emotional_expression": {
+          "type": "string",
+          "description": "How openly or reservedly the character communicates emotions through speech."
+        },
+        "adaptability": {
+          "type": "string",
+          "description": "How much the character's speech style changes based on their conversation partner or context."
+        }
+      },
+      "description": "The social and interpersonal aspects of how the character communicates with others."
+    },
+    "interior_voice": {
+      "type": "object",
+      "properties": {
+        "thought_patterns": {
+          "type": "string",
+          "description": "The character's internal monologue style, which may differ significantly from how they speak aloud."
+        },
+        "self_perception": {
+          "type": "string",
+          "description": "How the character thinks about themselves, revealed through interior language and focus."
+        },
+        "unconscious_themes": {
+          "type": "string",
+          "description": "Recurring ideas, concerns, or blind spots that appear in the character's thoughts but may not be consciously recognized."
+        }
+      },
+      "description": "The character's inner voice and thought processes, particularly relevant for viewpoint characters or narratives with internal monologue."
+    },
+    "written_voice": {
+      "type": "object",
+      "properties": {
+        "style": {
+          "type": "string",
+          "description": "The character's writing style if they author letters, journals, reports, or other written content within the narrative."
+        },
+        "differences_from_speech": {
+          "type": "string",
+          "description": "How the character's written communication differs from their verbal communication, which may reveal education level, careful thought, or different personas."
+        }
+      },
+      "description": "The character's distinctive patterns when communicating through writing rather than speech."
+    },
+    "evolution": {
+      "type": "object",
+      "properties": {
+        "initial_voice": {
+          "type": "string",
+          "description": "How the character spoke at the beginning of their narrative arc."
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "trigger": {
+                "type": "string",
+                "description": "The event, relationship, or growth that caused a shift in how the character speaks."
+              },
+              "vocal_change": {
+                "type": "string",
+                "description": "How specifically the character's speech patterns changed as a result."
+              }
+            }
+          },
+          "description": "Significant evolutions in the character's speech patterns throughout the narrative."
+        }
+      },
+      "description": "How the character's voice changes over time as they develop throughout the narrative."
+    }
+  },
+  "required": ["speech_characteristics", "language_patterns"]
+}

@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/event_type",
+  "title": "Event Type Schema",
+  "description": "Standardized enumeration of all possible event types in The Shadow Team Chronicles universe, categorized by their nature and impact.",
+  "type": "string",
+  "enum": [
+    "battle",
+    "war",
+    "revolution",
+    "coronation",
+    "assassination",
+    "treaty_signing",
+    "discovery",
+    "invention",
+    "natural_disaster",
+    "plague",
+    "founding",
+    "destruction",
+    "migration",
+    "religious_event",
+    "cultural_movement",
+    "technological_breakthrough",
+    "first_contact",
+    "political_reform",
+    "economic_collapse",
+    "economic_boom",
+    "social_movement",
+    "expedition",
+    "public_announcement",
+    "trial",
+    "celebration",
+    "diplomatic_incident",
+    "scientific_discovery",
+    "magical_phenomenon",
+    "reality_shift",
+    "dimensional_incursion"
+  ],
+  "categoryMapping": {
+    "type": "object",
+    "description": "Grouping of event types by their functional category (not part of the enum, provided for documentation)",
+    "properties": {
+      "military": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["battle", "war", "revolution", "assassination"]
+        },
+        "description": "Events primarily involving armed conflicts or violence with political/military implications."
+      },
+      "political": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["coronation", "treaty_signing", "political_reform", "founding", "diplomatic_incident", "trial"]
+        },
+        "description": "Events related to governance, leadership, and formal political processes."
+      },
+      "natural": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["natural_disaster", "plague"]
+        },
+        "description": "Events caused by natural forces or biological phenomena rather than direct human action."
+      },
+      "social": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["migration", "cultural_movement", "social_movement", "celebration"]
+        },
+        "description": "Events that primarily impact cultural norms, social structures, or population movements."
+      },
+      "technological": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["discovery", "invention", "technological_breakthrough", "scientific_discovery"]
+        },
+        "description": "Events focused on advances in knowledge, science, and technological capability."
+      },
+      "economic": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["economic_collapse", "economic_boom"]
+        },
+        "description": "Events primarily involving significant economic changes or impacts."
+      },
+      "supernatural": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["magical_phenomenon", "reality_shift", "dimensional_incursion"]
+        },
+        "description": "Events involving magical, metaphysical, or reality-altering phenomena."
+      }
+    }
+  },
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each event type (not part of the enum, provided for documentation)",
+    "properties": {
+      "battle": {
+        "type": "string",
+        "description": "A specific military engagement between opposing forces, usually occurring in a specific location over a limited timeframe."
+      },
+      "war": {
+        "type": "string",
+        "description": "A prolonged armed conflict between states, nations, or organized groups, typically spanning multiple battles and campaigns."
+      },
+      "revolution": {
+        "type": "string",
+        "description": "A forcible overthrow of a government or social order in favor of a new system, often involving widespread popular uprising."
+      },
+      "coronation": {
+        "type": "string",
+        "description": "The formal ceremony marking the investiture of a monarch or ruler with regal power and authority."
+      },
+      "assassination": {
+        "type": "string",
+        "description": "The deliberate killing of a prominent figure, typically for political, religious, or ideological reasons."
+      },
+      "treaty_signing": {
+        "type": "string",
+        "description": "A formal agreement between political entities, typically marking the end of conflict or establishing new political relationships."
+      },
+      "discovery": {
+        "type": "string",
+        "description": "The finding or uncovering of something previously unknown or hidden, such as lands, artifacts, or knowledge."
+      },
+      "invention": {
+        "type": "string",
+        "description": "The creation of a new device, process, or method that did not previously exist."
+      },
+      "natural_disaster": {
+        "type": "string",
+        "description": "A catastrophic event caused by natural processes of the Earth, including floods, earthquakes, volcanic eruptions, etc."
+      },
+      "plague": {
+        "type": "string",
+        "description": "A widespread epidemic disease that causes high mortality and significant social disruption."
+      },
+      "founding": {
+        "type": "string",
+        "description": "The establishment of a new settlement, city, institution, or organization that persists as a significant entity."
+      },
+      "destruction": {
+        "type": "string",
+        "description": "The complete or substantial demolition of a significant place, structure, or cultural entity."
+      },
+      "migration": {
+        "type": "string",
+        "description": "The mass movement of people from one region or country to another, often due to political, economic, or environmental factors."
+      },
+      "religious_event": {
+        "type": "string",
+        "description": "An occurrence of spiritual or theological significance that impacts religious practice, belief, or organization."
+      },
+      "cultural_movement": {
+        "type": "string",
+        "description": "A shift in artistic, literary, musical, or philosophical trends that defines a period or generation."
+      },
+      "technological_breakthrough": {
+        "type": "string",
+        "description": "A significant advancement that fundamentally changes technological capabilities and their applications in society."
+      },
+      "first_contact": {
+        "type": "string",
+        "description": "The initial meeting between previously isolated groups, species, or civilizations."
+      },
+      "political_reform": {
+        "type": "string",
+        "description": "A significant change to the political system, governance structure, or legal framework of a society."
+      },
+      "economic_collapse": {
+        "type": "string",
+        "description": "A severe contraction in economic activity leading to widespread financial hardship and social consequences."
+      },
+      "economic_boom": {
+        "type": "string",
+        "description": "A period of rapid economic expansion, prosperity, and growth in wealth or technological capacity."
+      },
+      "social_movement": {
+        "type": "string",
+        "description": "An organized effort by a significant group of people to achieve specific social or political change."
+      },
+      "expedition": {
+        "type": "string",
+        "description": "An organized journey for a specific purpose, such as exploration, scientific research, or military objectives."
+      },
+      "public_announcement": {
+        "type": "string",
+        "description": "A formal declaration or reveal with significant impact on public opinion, politics, or social norms."
+      },
+      "trial": {
+        "type": "string",
+        "description": "A formal legal proceeding with significant political, social, or historical implications beyond the case itself."
+      },
+      "celebration": {
+        "type": "string",
+        "description": "A commemorative event, festival, or holiday that holds cultural or historical significance."
+      },
+      "diplomatic_incident": {
+        "type": "string",
+        "description": "An occurrence that strains relations between political entities, potentially leading to conflict or requiring diplomatic resolution."
+      },
+      "scientific_discovery": {
+        "type": "string",
+        "description": "The establishment of new knowledge through observation, research, or experimentation that significantly advances understanding."
+      },
+      "magical_phenomenon": {
+        "type": "string",
+        "description": "An occurrence involving supernatural forces, magical energy, or mystical causation with significant impact."
+      },
+      "reality_shift": {
+        "type": "string",
+        "description": "A fundamental alteration in the metaphysical rules or physical constants governing the world or universe."
+      },
+      "dimensional_incursion": {
+        "type": "string",
+        "description": "An instance where beings, energy, or matter from one dimension or reality enters another, causing significant disruption."
+      }
+    }
+  }
+}

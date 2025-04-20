@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location/history",
+  "title": "Location History Schema",
+  "description": "The chronological development and significant past events that have shaped a location's current state and identity.",
+  "type": "object",
+  "properties": {
+    "founding": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "$ref": "../common/time_period_schema.json",
+          "description": "When this location was initially established or settled."
+        },
+        "founders": {
+          "type": "array",
+          "items": {
+            "$ref": "../common/references_schema.json"
+          },
+          "description": "Characters or organizations responsible for establishing this location."
+        },
+        "circumstances": {
+          "type": "string",
+          "description": "The historical context and reasons behind the location's creation or settlement."
+        },
+        "original_name": {
+          "type": "string",
+          "description": "What the location was first called, if different from its current name."
+        }
+      },
+      "description": "Information about the location's origins and establishment."
+    },
+    "major_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Link to a historical event that significantly affected this location."
+          },
+          "impact": {
+            "type": "string",
+            "description": "How this event changed the location, its inhabitants, or its role in the broader world."
+          },
+          "physical_evidence": {
+            "type": "string",
+            "description": "What visible signs or remnants of this event can still be found in the location."
+          }
+        },
+        "required": ["event_reference", "impact"]
+      },
+      "description": "Significant historical occurrences that have shaped the location's development over time."
+    },
+    "historical_significance": {
+      "$ref": "../common/historical_significance_schema.json",
+      "description": "How this location figures into the broader history of the narrative world."
+    },
+    "development_phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "period_name": {
+            "type": "string",
+            "description": "A descriptive title for this period in the location's history."
+          },
+          "start_year": {
+            "type": "number",
+            "description": "When this historical phase began."
+          },
+          "end_year": {
+            "type": "number",
+            "description": "When this historical phase concluded (if applicable)."
+          },
+          "description": {
+            "type": "string",
+            "description": "What defined this period and how the location changed during it."
+          },
+          "key_developments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specific changes, constructions, or shifts that occurred during this period."
+          },
+          "leadership": {
+            "type": "string",
+            "description": "Who controlled or governed the location during this phase."
+          }
+        },
+        "required": ["period_name", "description"]
+      },
+      "description": "Distinct eras or stages in the location's evolution over time."
+    },
+    "ruins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "What these ruins are called or known as."
+          },
+          "original_purpose": {
+            "type": "string",
+            "description": "What the structure or area was used for before it became ruins."
+          },
+          "destruction_cause": {
+            "type": "string",
+            "description": "What led to the ruin of this structure or area."
+          },
+          "current_state": {
+            "type": "string",
+            "description": "The present condition and appearance of these ruins."
+          },
+          "significance": {
+            "type": "string",
+            "description": "Why these ruins matter to the current location or story."
+          },
+          "occupation": {
+            "type": "string",
+            "description": "Whether any beings currently inhabit or use these ruins, and if so, who and how."
+          }
+        },
+        "required": ["name", "current_state"]
+      },
+      "description": "Remnants of previous structures, settlements, or features that have fallen into disrepair."
+    },
+    "archaeological_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "discovery": {
+            "type": "string",
+            "description": "What was found or uncovered through archaeological investigation."
+          },
+          "location": {
+            "type": "string",
+            "description": "Where within the broader location this finding was discovered."
+          },
+          "date_found": {
+            "type": "string",
+            "description": "When this archaeological finding was unearthed or identified."
+          },
+          "estimated_age": {
+            "type": "string",
+            "description": "How old the finding is believed to be."
+          },
+          "significance": {
+            "type": "string",
+            "description": "What this discovery reveals about the location's history or previous inhabitants."
+          },
+          "current_disposition": {
+            "type": "string",
+            "description": "Where the finding currently is and how it's being preserved or displayed."
+          }
+        },
+        "required": ["discovery", "significance"]
+      },
+      "description": "Objects, structures, or evidence uncovered that provide insight into the location's past."
+    },
+    "former_names": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A previous name by which this location was known."
+          },
+          "period": {
+            "type": "string",
+            "description": "When the location was known by this name."
+          },
+          "reason_for_change": {
+            "type": "string",
+            "description": "Why the name was changed to something else."
+          }
+        },
+        "required": ["name"]
+      },
+      "description": "Previous designations or titles the location has held throughout its history."
+    },
+    "legends": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The name of this legend or folk tale."
+          },
+          "narrative": {
+            "type": "string",
+            "description": "The story as it is commonly told."
+          },
+          "origin": {
+            "type": "string",
+            "description": "How and when this legend emerged."
+          },
+          "factual_basis": {
+            "type": "string",
+            "description": "Which elements of the legend, if any, are based on historical fact."
+          },
+          "significance": {
+            "type": "string",
+            "description": "How this legend influences current perceptions or behaviors related to the location."
+          }
+        },
+        "required": ["title", "narrative"]
+      },
+      "description": "Myths, stories, or folklore associated with the location that may or may not have a basis in historical fact."
+    }
+  }
+}

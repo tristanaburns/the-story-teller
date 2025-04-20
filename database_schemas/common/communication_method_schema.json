@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/communication_method",
+  "title": "Communication Method Schema",
+  "description": "Standardized enumeration of methods organizations use for internal and external communications in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "digital_network",
+    "encrypted_messaging",
+    "physical_documents",
+    "verbal_directives",
+    "public_announcements",
+    "coded_language",
+    "telepathic_link",
+    "courier_service",
+    "ritual_communion",
+    "holographic_projection",
+    "neural_interface",
+    "dead_drops",
+    "satellite_transmission",
+    "subspace_relay",
+    "magical_sending",
+    "proxies_and_cutouts",
+    "augmented_reality",
+    "virtual_reality_space",
+    "physical_gathering",
+    "public_media_channel",
+    "quantum_entanglement",
+    "dreams_and_visions"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each communication method (not part of the enum, provided for documentation)",
+    "properties": {
+      "digital_network": {
+        "type": "string",
+        "description": "Electronic systems for transmitting information through computers, mobile devices, or other digital platforms."
+      },
+      "encrypted_messaging": {
+        "type": "string",
+        "description": "Secure communications protected through cryptographic methods to prevent unauthorized access."
+      },
+      "physical_documents": {
+        "type": "string",
+        "description": "Tangible papers, files, or written materials exchanged through direct handling."
+      },
+      "verbal_directives": {
+        "type": "string",
+        "description": "Spoken instructions or information delivered in person or through audio channels."
+      },
+      "public_announcements": {
+        "type": "string",
+        "description": "Open declarations made to large audiences without attempt at secrecy."
+      },
+      "coded_language": {
+        "type": "string",
+        "description": "Communication using phrases, terms, or references with hidden meanings known only to insiders."
+      },
+      "telepathic_link": {
+        "type": "string",
+        "description": "Direct mind-to-mind connection allowing thoughts to be transmitted without physical means."
+      },
+      "courier_service": {
+        "type": "string",
+        "description": "Trusted messengers who physically transport information between locations."
+      },
+      "ritual_communion": {
+        "type": "string",
+        "description": "Ceremonial practices that establish spiritual or mystical connections between participants."
+      },
+      "holographic_projection": {
+        "type": "string",
+        "description": "Three-dimensional light-based displays that can transmit visual information remotely."
+      },
+      "neural_interface": {
+        "type": "string",
+        "description": "Direct connection between human nervous systems and technological networks for information exchange."
+      },
+      "dead_drops": {
+        "type": "string",
+        "description": "Secret locations where information can be deposited and retrieved without direct contact."
+      },
+      "satellite_transmission": {
+        "type": "string",
+        "description": "Signals sent via orbiting relay stations to connect distant locations."
+      },
+      "subspace_relay": {
+        "type": "string",
+        "description": "Fictional technology that sends information through alternate dimensions for faster-than-light communication."
+      },
+      "magical_sending": {
+        "type": "string",
+        "description": "Supernatural methods that transmit messages through arcane forces or enchantments."
+      },
+      "proxies_and_cutouts": {
+        "type": "string",
+        "description": "Intermediaries who relay messages while obscuring the connection between source and recipient."
+      },
+      "augmented_reality": {
+        "type": "string",
+        "description": "Digital overlays on physical environments that can contain messages or information."
+      },
+      "virtual_reality_space": {
+        "type": "string",
+        "description": "Simulated environments where members can gather and interact despite physical separation."
+      },
+      "physical_gathering": {
+        "type": "string",
+        "description": "In-person meetings, assemblies, or events where information is shared directly."
+      },
+      "public_media_channel": {
+        "type": "string",
+        "description": "Broadcasts, publications, or online platforms accessible to general audiences."
+      },
+      "quantum_entanglement": {
+        "type": "string",
+        "description": "Advanced technology using paired particles for instantaneous communication regardless of distance."
+      },
+      "dreams_and_visions": {
+        "type": "string",
+        "description": "Supernatural transmission of information through dreamstates or prophetic experiences."
+      }
+    }
+  },
+  "securityLevels": {
+    "type": "object",
+    "description": "Classification of communication methods by typical security (not part of the enum, provided for documentation)",
+    "properties": {
+      "high": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["encrypted_messaging", "telepathic_link", "dead_drops", "quantum_entanglement", "proxies_and_cutouts"]
+        },
+        "description": "Methods that provide strong protection against interception or unauthorized access."
+      },
+      "moderate": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["coded_language", "courier_service", "neural_interface", "physical_documents", "magical_sending", "ritual_communion"]
+        },
+        "description": "Methods with reasonable security that requires specific skills or resources to compromise."
+      },
+      "low": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["digital_network", "verbal_directives", "physical_gathering", "holographic_projection", "dreams_and_visions"]
+        },
+        "description": "Methods that may be vulnerable to various forms of interception or monitoring."
+      },
+      "public": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["public_announcements", "public_media_channel", "augmented_reality", "virtual_reality_space"]
+        },
+        "description": "Methods designed to reach wide audiences rather than maintain confidentiality."
+      }
+    }
+  }
+}

@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location/features",
+  "title": "Location Features Schema",
+  "description": "The distinctive elements, structures, and areas that define a location's character and functionality.",
+  "type": "object",
+  "properties": {
+    "landmarks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name or title by which this landmark is known."
+          },
+          "location": {
+            "type": "object",
+            "properties": {
+              "coordinates": {
+                "type": "object",
+                "properties": {
+                  "latitude": {
+                    "type": "number",
+                    "description": "The north-south positioning of the landmark."
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "description": "The east-west positioning of the landmark."
+                  }
+                }
+              },
+              "district": {
+                "type": "string",
+                "description": "The named area within the broader location where this landmark is found."
+              },
+              "relative_position": {
+                "type": "string",
+                "description": "Where this landmark is situated in relation to other notable features or directions (e.g., 'northwestern quarter', 'atop the central hill')."
+              }
+            },
+            "description": "Where within the location this landmark can be found."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed physical description of the landmark, including its appearance, size, and distinctive features."
+          },
+          "significance": {
+            "type": "string",
+            "description": "Why this landmark matters to the location's identity, history, or functionality."
+          },
+          "accessibility": {
+            "type": "string",
+            "description": "How and by whom this landmark can be accessed, including any restrictions or special requirements."
+          },
+          "history": {
+            "type": "string",
+            "description": "The origin or past events associated with this landmark that contribute to its current meaning or status."
+          },
+          "interaction_points": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The label for this specific area or element within the landmark."
+                },
+                "function": {
+                  "type": "string",
+                  "description": "What activities can occur at this interaction point or what purpose it serves."
+                }
+              },
+              "required": ["name", "function"]
+            },
+            "description": "Specific elements or areas within the landmark where visitors can engage with or experience something notable."
+          }
+        },
+        "required": ["name", "description"],
+        "description": "A significant or recognizable physical structure, natural formation, or site within the location."
+      },
+      "description": "Distinctive features of the location that serve as points of interest, orientation, or cultural significance."
+    },
+    "infrastructure": {
+      "type": "object",
+      "properties": {
+        "transportation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "system_name": {
+                "type": "string",
+                "description": "The name of this transportation network or system."
+              },
+              "description": {
+                "type": "string",
+                "description": "Details about how this transportation system functions and what it looks like."
+              },
+              "coverage": {
+                "type": "string",
+                "description": "The areas or percentage of the location served by this transportation system."
+              },
+              "efficiency": {
+                "type": "string",
+                "description": "How well the system functions in terms of reliability, speed, and capacity."
+              },
+              "restrictions": {
+                "type": "string",
+                "description": "Any limitations on who can use the system or where/when it operates."
+              }
+            },
+            "required": ["system_name", "description"]
+          },
+          "description": "The methods and systems by which people and goods move within and through the location."
+        },
+        "power": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "system_name": {
+                "type": "string",
+                "description": "The name or type of this energy generation or distribution system."
+              },
+              "description": {
+                "type": "string",
+                "description": "How this power system works, what it looks like, and its key characteristics."
+              },
+              "source": {
+                "type": "string",
+                "description": "The primary resource or principle used to generate energy (e.g., 'coal', 'solar', 'fusion', 'magical crystals')."
+              },
+              "capacity": {
+                "type": "string",
+                "description": "The amount of energy this system can produce and how it compares to the location's needs."
+              },
+              "reliability": {
+                "type": "string",
+                "enum": ["flawless", "highly_reliable", "generally_reliable", "intermittent", "unreliable", "failing"],
+                "description": "How consistently and dependably this power system functions."
+              }
+            },
+            "required": ["description"]
+          },
+          "description": "The systems that generate, store, and distribute energy throughout the location."
+        },
+        "water": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "system_name": {
+                "type": "string",
+                "description": "The name of this water management system."
+              },
+              "description": {
+                "type": "string",
+                "description": "How water is collected, purified, distributed, or disposed of in this system."
+              },
+              "source": {
+                "type": "string",
+                "description": "Where the water for this system comes from."
+              },
+              "coverage": {
+                "type": "string",
+                "description": "Which areas or what percentage of the location has access to this water system."
+              }
+            },
+            "required": ["description"]
+          },
+          "description": "The methods and systems for supplying, treating, and removing water within the location."
+        },
+        "communication": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "system_name": {
+                "type": "string",
+                "description": "The name or type of this communication network or technology."
+              },
+              "description": {
+                "type": "string",
+                "description": "How information is transmitted and received using this system."
+              },
+              "prevalence": {
+                "type": "string",
+                "description": "How widely available or commonly used this communication method is within the location."
+              },
+              "restrictions": {
+                "type": "string",
+                "description": "Any limitations on who can use this communication system or how it can be accessed."
+              }
+            },
+            "required": ["description"]
+          },
+          "description": "The methods and technologies used for exchanging information within the location."
+        },
+        "defensive_structures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of this defensive element or system."
+              },
+              "description": {
+                "type": "string",
+                "description": "What this defensive structure looks like and how it functions."
+              },
+              "purpose": {
+                "type": "string",
+                "description": "What specific threats this structure is designed to address."
+              },
+              "effectiveness": {
+                "type": "string",
+                "description": "How well this defensive element accomplishes its intended purpose."
+              }
+            },
+            "required": ["name", "description"]
+          },
+          "description": "Fortifications, barriers, or security systems designed to protect the location from threats."
+        }
+      },
+      "description": "The physical systems and networks that support daily life and activities within the location."
+    },
+    "districts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The official or colloquial name of this district or area."
+          },
+          "level": {
+            "type": "string",
+            "description": "The vertical positioning of this district if the location has three-dimensional stratification."
+          },
+          "boundaries": {
+            "type": "string",
+            "description": "What defines the edges or limits of this district, whether physical or notional."
+          },
+          "character": {
+            "type": "string",
+            "description": "The overall feeling, atmosphere, or defining traits of this district."
+          },
+          "primary_function": {
+            "type": "string",
+            "description": "The main purpose or activity this district serves (e.g., 'residential', 'commercial', 'industrial', 'administrative')."
+          },
+          "population": {
+            "type": "string",
+            "description": "Who lives in or frequents this district, in terms of number, density, or demographics."
+          },
+          "notable_for": {
+            "type": "string",
+            "description": "What makes this district particularly famous, infamous, or distinctive within the location."
+          },
+          "location_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "If this district has its own detailed location entry, a reference to that entity."
+          }
+        },
+        "required": ["name"]
+      },
+      "description": "Distinct areas or neighborhoods within the location that have their own character and identity."
+    },
+    "hidden_features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The identifier for this concealed or little-known feature."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["passage", "structure", "area", "mechanism", "resource", "magical_feature", "technological_feature"],
+            "description": "The category of hidden feature this represents."
+          },
+          "description": {
+            "type": "string",
+            "description": "What this hidden feature is and what it looks like when discovered."
+          },
+          "location": {
+            "type": "string",
+            "description": "Where within the broader location this hidden feature can be found."
+          },
+          "access_method": {
+            "type": "string",
+            "description": "How one can discover or gain entry to this hidden feature."
+          },
+          "known_by": {
+            "type": "string",
+            "description": "Who is aware of this hidden feature's existence."
+          },
+          "purpose": {
+            "type": "string",
+            "description": "Why this feature exists and what function it serves or served historically."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Secret, obscure, or concealed elements of the location that are not widely known or easily discovered."
+    },
+    "natural_features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of this natural element within the location."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["waterway", "park", "garden", "forest", "hill", "valley", "cave", "spring", "geological_formation"],
+            "description": "The category of natural feature this represents."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed physical description of this natural element and its surroundings."
+          },
+          "significance": {
+            "type": "string",
+            "description": "How this natural feature affects the location's character, function, or inhabitants."
+          },
+          "integration": {
+            "type": "string",
+            "description": "How this natural element coexists with constructed or artificial features in the location."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Environmental or geographical elements within the location that were not created by intelligent beings."
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/visual_representation",
+  "title": "Visual Representation Schema",
+  "description": "Guidelines and specifications for the consistent visual depiction of entities across different media forms and artistic styles.",
+  "type": "object",
+  "properties": {
+    "primary_reference": {
+      "type": "object",
+      "properties": {
+        "image_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Direct link to the canonical image that best represents the entity's definitive appearance."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed explanation of why this image serves as the primary visual reference, highlighting the key aspects that should be preserved in all representations."
+        },
+        "creator": {
+          "type": "string",
+          "description": "The artist or creator who developed this canonical visual representation."
+        }
+      },
+      "required": ["description"],
+      "description": "The definitive visual representation of the entity that serves as the baseline for all other depictions."
+    },
+    "essential_visual_elements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "type": "string",
+            "description": "A specific visual feature that is essential to the entity's recognizable appearance."
+          },
+          "importance": {
+            "type": "string",
+            "enum": ["defining", "major", "minor", "contextual"],
+            "description": "How critical this visual element is to the entity's identity and recognizability."
+          },
+          "description": {
+            "type": "string",
+            "description": "Precise details about this visual element, including appearance, positioning, origin, and significance."
+          }
+        },
+        "required": ["element", "importance", "description"]
+      },
+      "description": "The specific visual characteristics that should be maintained across all representations of the entity to ensure consistency and recognizability."
+    },
+    "style_guidelines": {
+      "type": "object",
+      "properties": {
+        "color_palette": {
+          "type": "object",
+          "properties": {
+            "primary_colors": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Color specification in hex code or descriptive format that represents the entity's primary color scheme."
+              }
+            },
+            "accent_colors": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Secondary or highlight colors associated with the entity."
+              }
+            },
+            "color_symbolism": {
+              "type": "string",
+              "description": "The thematic or emotional meaning behind the entity's color associations."
+            }
+          },
+          "description": "The entity's distinctive color scheme that should be preserved or referenced across different visual representations."
+        },
+        "artistic_style": {
+          "type": "string",
+          "description": "The preferred artistic approach for depicting this entity, which may range from realistic to highly stylized depending on the entity's nature and story context."
+        }
+      },
+      "description": "Specifications for the artistic treatment of the entity to ensure consistency with its nature, role, and thematic associations."
+    },
+    "image_generation_prompts": {
+      "type": "object",
+      "properties": {
+        "standard_prompt": {
+          "type": "string",
+          "description": "A detailed descriptive prompt optimized for AI image generation tools to create the entity's standard appearance."
+        },
+        "style_notes": {
+          "type": "string",
+          "description": "Additional guidance on artistic style, lighting, composition, and mood that should be included when generating images."
+        }
+      },
+      "description": "Ready-to-use text prompts for generating consistent visual representations of the entity using AI image generation tools."
+    }
+  },
+  "required": ["essential_visual_elements"]
+}

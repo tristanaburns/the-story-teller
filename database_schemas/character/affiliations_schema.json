@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/affiliations",
+  "title": "Character Affiliations Schema",
+  "description": "The character's connections to organizations, groups, and formal institutions within the narrative world.",
+  "type": "object",
+  "properties": {
+    "primary_affiliation": {
+      "type": "object",
+      "properties": {
+        "organization_reference": {
+          "$ref": "common/references_schema.json"
+        },
+        "role": {
+          "type": "string",
+          "description": "The character's position or function within this organization."
+        },
+        "loyalty_level": {
+          "type": "string",
+          "enum": ["fanatical", "strong", "moderate", "conflicted", "tenuous", "covert"],
+          "description": "How strongly the character identifies with and is committed to this organization's goals and values."
+        },
+        "public_recognition": {
+          "type": "boolean",
+          "description": "Whether the character's affiliation with this organization is publicly known or kept secret."
+        },
+        "significance": {
+          "type": "string",
+          "description": "How this affiliation shapes the character's identity, motivations, and narrative arc."
+        }
+      },
+      "required": ["organization_reference", "role"],
+      "description": "The organization with which the character is most closely associated, forming a core part of their identity and social position."
+    },
+    "secondary_affiliations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "organization_reference": {
+            "$ref": "common/references_schema.json"
+          },
+          "role": {
+            "type": "string",
+            "description": "The character's position or function within this organization."
+          },
+          "influence": {
+            "type": "string",
+            "description": "How this affiliation affects the character's actions, opportunities, and constraints within the narrative."
+          }
+        },
+        "required": ["organization_reference"]
+      },
+      "description": "Additional organizations to which the character belongs that have less centrality to their identity than their primary affiliation."
+    },
+    "former_affiliations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "organization_reference": {
+            "$ref": "common/references_schema.json"
+          },
+          "departure_reason": {
+            "type": "string",
+            "description": "Why the character left this organization or was removed from it."
+          },
+          "departure_circumstances": {
+            "type": "string",
+            "enum": ["amicable", "conflicted", "dishonorable", "violent", "forced", "secretive"],
+            "description": "The nature of the character's separation from this organization."
+          },
+          "lasting_impact": {
+            "type": "string",
+            "description": "How this former affiliation continues to influence the character's current situation, relationships, or psychology."
+          }
+        },
+        "required": ["organization_reference", "departure_reason"]
+      },
+      "description": "Organizations that the character was once part of but has since left, possibly affecting their current status or motivations."
+    },
+    "political_alignment": {
+      "type": "string",
+      "description": "The character's general political stance within the power structures of their world, such as their allegiance to particular factions, ideologies, or sovereign powers."
+    },
+    "religious_affiliations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "organization_reference": {
+            "$ref": "common/references_schema.json"
+          },
+          "devotion_level": {
+            "type": "string",
+            "enum": ["devout", "practicing", "casual", "lapsed", "skeptical", "antagonistic"],
+            "description": "How strongly the character adheres to the beliefs and practices of this religion."
+          },
+          "role": {
+            "type": "string",
+            "description": "Any formal position the character holds within this religious organization."
+          }
+        },
+        "required": ["organization_reference", "devotion_level"]
+      },
+      "description": "The character's connections to religious institutions, faiths, or spiritual traditions that influence their worldview and actions."
+    },
+    "social_circles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The designation for this social group, class, or informal network."
+          },
+          "description": {
+            "type": "string",
+            "description": "Details about this social circle's composition, influence, and typical activities."
+          },
+          "character_status": {
+            "type": "string",
+            "description": "The character's standing or reputation within this social circle."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Informal groups, social classes, or networks that the character moves within, affecting their access to information, resources, and opportunities."
+    }
+  }
+}

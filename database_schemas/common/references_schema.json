@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/references",
+  "title": "References Schema",
+  "description": "Standard format for referencing other objects across all schema types in The Shadow Team Chronicles universe, enabling consistent cross-referencing and relationship modeling.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier (UUID v4) of the referenced object. This is the primary key used to locate the exact object being referenced."
+    },
+    "name": {
+      "type": "string",
+      "description": "The primary name or title of the referenced object as it appears in the database. This provides human-readable context without needing to perform a separate lookup operation."
+    },
+    "object_type": {
+      "$ref": "object_type_schema.json",
+      "description": "The categorical classification of the referenced object, indicating which database collection or schema type contains the complete object definition."
+    },
+    "relationship": {
+      "type": "string",
+      "description": "The nature of the relationship between the parent object and this referenced object (e.g., 'creator', 'location', 'component', 'ally', 'enemy', 'mentor')."
+    },
+    "significance": {
+      "type": "string",
+      "enum": ["primary", "secondary", "notable", "mentioned", "implied"],
+      "description": "The importance of this reference to the parent object."
+    },
+    "temporal_context": {
+      "type": "object",
+      "description": "Optional time-bound context for references that are only valid or relevant during specific periods.",
+      "properties": {
+        "time_period_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Optional reference to a time period during which this relationship is/was valid."
+        },
+        "started": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this relationship began within the narrative timeline."
+        },
+        "ended": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this relationship ended within the narrative timeline, if applicable."
+        },
+        "is_current": {
+          "type": "boolean",
+          "description": "Whether this relationship is active in the current narrative present."
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional information about the reference that may be useful for specific applications.",
+      "properties": {
+        "modified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of when this reference was last updated."
+        },
+        "narrative_position": {
+          "type": "object",
+          "description": "Optional information about where in the narrative structure this reference is established or becomes relevant.",
+          "properties": {
+            "story_id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The story where this reference is established."
+            },
+            "chapter": {
+              "type": "integer",
+              "description": "The chapter where this reference is established."
+            },
+            "passage": {
+              "type": "integer",
+              "description": "The passage where this reference is established."
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["id", "object_type"],
+  "additionalProperties": false
+}

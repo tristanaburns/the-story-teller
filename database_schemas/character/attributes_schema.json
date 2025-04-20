@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/attributes",
+  "title": "Character Attributes Schema",
+  "description": "The character's physical and psychological traits, capabilities, and defining characteristics.",
+  "type": "object",
+  "properties": {
+    "physical_traits": {
+      "type": "object",
+      "properties": {
+        "appearance": {
+          "type": "object",
+          "properties": {
+            "height": {
+              "type": "string",
+              "description": "The character's vertical measurement, whether expressed precisely or comparatively."
+            },
+            "build": {
+              "type": "string",
+              "description": "The character's body type and general physical structure."
+            },
+            "hair": {
+              "type": "string",
+              "description": "The color, style, length, and texture of the character's hair (if applicable)."
+            },
+            "eyes": {
+              "type": "string",
+              "description": "The color, shape, and any notable characteristics of the character's eyes."
+            },
+            "skin": {
+              "type": "string",
+              "description": "The tone, texture, and any notable features of the character's skin."
+            },
+            "distinctive_features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Notable physical characteristics that make this character visually memorable or recognizable."
+            },
+            "typical_attire": {
+              "type": "string",
+              "description": "The clothing, accessories, or equipment the character typically wears or carries."
+            }
+          },
+          "description": "The character's visual characteristics and presentation."
+        },
+        "physical_capabilities": {
+          "type": "object",
+          "properties": {
+            "strength": {
+              "type": "string",
+              "description": "The character's muscle power and ability to exert physical force."
+            },
+            "agility": {
+              "type": "string",
+              "description": "The character's nimbleness, flexibility, and coordination."
+            },
+            "endurance": {
+              "type": "string",
+              "description": "The character's stamina and ability to sustain physical activity."
+            },
+            "health": {
+              "type": "string",
+              "description": "The character's overall physical condition and resistance to illness or injury."
+            },
+            "special_abilities": {
+              "$ref": "../common/abilities_schema.json"
+            }
+          },
+          "description": "The character's physical abilities, limitations, and exceptional talents."
+        }
+      },
+      "description": "The character's physical form, appearance, and bodily capabilities."
+    },
+    "psychological_traits": {
+      "type": "object",
+      "properties": {
+        "personality": {
+          "type": "object",
+          "properties": {
+            "dominant_traits": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The most prominent aspects of the character's typical behavior and temperament."
+            },
+            "virtues": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Positive character qualities that guide the character's actions and decisions."
+            },
+            "flaws": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Negative character traits that create problems for the character or others."
+            },
+            "defense_mechanisms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Psychological strategies the character uses to protect themselves from uncomfortable emotions or threats."
+            }
+          },
+          "description": "The character's distinctive behavioral patterns, emotional tendencies, and interpersonal style."
+        },
+        "motivations": {
+          "type": "object",
+          "properties": {
+            "primary_drives": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The fundamental needs or desires that most strongly influence the character's decisions and actions."
+            },
+            "short_term_goals": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Immediate objectives the character is currently pursuing."
+            },
+            "long_term_goals": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Major life aspirations or ambitions that guide the character's broader life choices."
+            },
+            "fears": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Anxieties, phobias, or concerns that the character actively avoids or that motivate their protective behaviors."
+            }
+          },
+          "description": "The internal forces that drive the character's actions and decisions."
+        },
+        "cognitive_traits": {
+          "type": "object",
+          "properties": {
+            "intelligence": {
+              "type": "string",
+              "description": "The character's intellectual capabilities, problem-solving style, and knowledge base."
+            },
+            "perception": {
+              "type": "string",
+              "description": "The character's awareness of their environment and ability to notice details or read situations."
+            },
+            "decision_making": {
+              "type": "string",
+              "description": "How the character typically approaches choices and resolves dilemmas."
+            },
+            "creativity": {
+              "type": "string",
+              "description": "The character's imaginative capabilities and innovative thinking."
+            },
+            "analytical_skills": {
+              "type": "string",
+              "description": "The character's ability to break down complex problems and recognize patterns."
+            }
+          },
+          "description": "The character's mental abilities, thought patterns, and information processing style."
+        }
+      },
+      "description": "The character's internal mental and emotional landscape that shapes their behavior and decisions."
+    },
+    "beliefs_and_values": {
+      "type": "object",
+      "properties": {
+        "moral_code": {
+          "type": "string",
+          "description": "The ethical framework that guides the character's decisions about right and wrong."
+        },
+        "worldview": {
+          "type": "string",
+          "description": "The character's fundamental understanding of how the world works and their place in it."
+        },
+        "religious_beliefs": {
+          "type": "string",
+          "description": "The character's spiritual convictions and religious practices, if any."
+        },
+        "political_ideology": {
+          "type": "string",
+          "description": "The character's views on power, governance, authority, and social organization."
+        },
+        "core_values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The principles or ideals the character holds most sacred and would be reluctant to compromise."
+        }
+      },
+      "description": "The character's ideological framework and value system that guide their judgment and priorities."
+    },
+    "skills": {
+      "$ref": "skills_schema.json"
+    }
+  }
+}

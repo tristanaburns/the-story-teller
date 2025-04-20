@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/leadership_structure",
+  "title": "Leadership Structure Schema",
+  "description": "Standardized enumeration of organizational leadership structures within The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "hierarchical",
+    "flat",
+    "democratic",
+    "autocratic",
+    "council_based",
+    "cellular",
+    "meritocratic",
+    "dynastic",
+    "technocratic",
+    "dual_leadership",
+    "collective",
+    "leaderless",
+    "rotating",
+    "matrix",
+    "theocratic",
+    "ai_directed"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each leadership structure (not part of the enum, provided for documentation)",
+    "properties": {
+      "hierarchical": {
+        "type": "string",
+        "description": "Multi-level chain of command with clear reporting relationships and progressively narrowing authority toward the top."
+      },
+      "flat": {
+        "type": "string",
+        "description": "Minimal management layers with most members having similar authority and responsibility levels."
+      },
+      "democratic": {
+        "type": "string",
+        "description": "Leadership determined through voting or consensus-building among members or stakeholders."
+      },
+      "autocratic": {
+        "type": "string",
+        "description": "Power concentrated in a single individual who makes decisions with minimal consultation."
+      },
+      "council_based": {
+        "type": "string",
+        "description": "Leadership vested in a group of individuals who make decisions collaboratively."
+      },
+      "cellular": {
+        "type": "string",
+        "description": "Organization divided into semi-autonomous units with local leadership and limited central coordination."
+      },
+      "meritocratic": {
+        "type": "string",
+        "description": "Leadership positions earned through demonstrated skill, achievement, or contribution."
+      },
+      "dynastic": {
+        "type": "string",
+        "description": "Leadership passed down through family lines or designated successors."
+      },
+      "technocratic": {
+        "type": "string",
+        "description": "Leadership determined by technical expertise or specialized knowledge."
+      },
+      "dual_leadership": {
+        "type": "string",
+        "description": "Power shared between two distinct leaders or offices, often with different but complementary responsibilities."
+      },
+      "collective": {
+        "type": "string",
+        "description": "Decision-making distributed across the entire membership with emphasis on full participation."
+      },
+      "leaderless": {
+        "type": "string",
+        "description": "No formal leadership positions, with coordination emerging from member interactions and shared principles."
+      },
+      "rotating": {
+        "type": "string",
+        "description": "Leadership positions that change hands periodically according to predetermined schedules or criteria."
+      },
+      "matrix": {
+        "type": "string",
+        "description": "Complex structure where individuals report to multiple leaders across different functional areas."
+      },
+      "theocratic": {
+        "type": "string",
+        "description": "Leadership derived from religious authority or divine mandate."
+      },
+      "ai_directed": {
+        "type": "string",
+        "description": "Key strategic or operational decisions made or heavily influenced by artificial intelligence systems."
+      }
+    }
+  }
+}

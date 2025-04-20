@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/enums/description_focus",
+  "title": "Description Focus Schema",
+  "description": "Standardized enumeration of descriptive focus approaches for narrative content in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "visual_primary",
+    "auditory_primary",
+    "tactile_primary",
+    "olfactory_primary",
+    "kinesthetic",
+    "environmental",
+    "technological",
+    "character_centric",
+    "temporal",
+    "atmospheric",
+    "psychological_interior"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each descriptive focus (not part of the enum, provided for documentation)",
+    "properties": {
+      "visual_primary": {
+        "type": "string",
+        "description": "Description that prioritizes visual elements including color, light, shape, and movement as the dominant sensory information.",
+        "implementation_tips": [
+          "Use color terminology with precision and purpose",
+          "Create visual contrasts to highlight important elements",
+          "Describe light sources and how they affect visibility"
+        ],
+        "example": "Crimson emergency lights swept across the corridor in rhythmic pulses, casting hard-edged shadows that stretched and compressed with each rotation. The blueprints flickered on her retinal display, overlaid on the physical space in translucent cyan outlines."
+      },
+      "auditory_primary": {
+        "type": "string",
+        "description": "Description that prioritizes sounds including volume, pitch, rhythm, and audio texture as the dominant sensory information.",
+        "implementation_tips": [
+          "Use onomatopoeia selectively for impact",
+          "Describe both foreground and background sounds to create layers",
+          "Consider the acoustic properties of different environments"
+        ],
+        "example": "The server farm hummed with the layered chorus of cooling systems—high-pitched fans overlaid on the deeper thrum of liquid cooling pumps. Each footstep echoed differently on the raised floor panels, some hollow, others solid. From somewhere in the maze of racks came an arrhythmic clicking, growing faster as they approached."
+      },
+      "tactile_primary": {
+        "type": "string",
+        "description": "Description that prioritizes touch sensations including texture, temperature, pressure, and physical interaction as the dominant sensory information.",
+        "implementation_tips": [
+          "Include temperature variations and air movement",
+          "Describe textures of objects characters interact with",
+          "Incorporate bodily sensations (muscle tension, pain, comfort)"
+        ],
+        "example": "The gritty residue of concrete dust coated Reza's fingertips as he felt his way along the wall. Cold air leaked through hairline fractures in the barrier, raising goosebumps on his forearms. Each breath drew the metallic tang of blood-tinged air deep into his lungs, the damp chill making his cracked ribs throb in protest."
+      },
+      "olfactory_primary": {
+        "type": "string",
+        "description": "Description that prioritizes smells and tastes as the dominant sensory information, often evoking memory and emotional responses.",
+        "implementation_tips": [
+          "Connect scents to specific memories or associations",
+          "Layer multiple smells to create environmental complexity",
+          "Use taste as an extension of smell for complete sensory experience"
+        ],
+        "example": "The lower levels of Sector 7 assaulted Mei's senses with their signature bouquet: the sweet-rotting undertone of black market biofarms, the acrid bite of jury-rigged electrical systems, and the ever-present metallic tang of recycled air. Underneath it all lay a newer scent—the unmistakable chemical sweetness of synthetic pheromones, expensive and out of place in this sector."
+      },
+      "kinesthetic": {
+        "type": "string",
+        "description": "Description that prioritizes movement, balance, momentum, and bodily awareness as the central focus.",
+        "implementation_tips": [
+          "Detail the mechanics of movement and physical effort",
+          "Include awareness of gravity, balance, and physical limitations",
+          "Show how characters' bodies respond to their environments"
+        ],
+        "example": "Keiko's muscles burned as she traversed the maintenance shaft horizontally, back pressed against one wall, feet against the other. Each incremental shift required precise counterbalancing—pressure from her shoulders allowing her legs to slide forward, then core muscles tensing to hold position while her arms found new purchase on the textured surface."
+      },
+      "environmental": {
+        "type": "string",
+        "description": "Description that prioritizes the surrounding landscape, architecture, or broader setting as the central focus.",
+        "implementation_tips": [
+          "Create relationship between built and natural environments",
+          "Show how the environment shapes human behavior",
+          "Include historical layers visible in the setting"
+        ],
+        "example": "The Fallen District emerged from the fog like a cautionary tale made physical—ancient towers leaning precariously against one another, their once-proud superstructures now serving as reluctant support beams. Nature reclaimed lower levels where sunlight never penetrated, creating vertical strata: moss and fungal colonies below, desperate human adaptation in the middle zones, and drone-tended luxury apartments near the tops where actual sunlight still reached."
+      },
+      "technological": {
+        "type": "string",
+        "description": "Description that prioritizes technological systems, interfaces, and mechanisms as the central focus.",
+        "implementation_tips": [
+          "Balance technical precision with understandable language",
+          "Show how technology interfaces with human biology",
+          "Include both functioning and malfunctioning aspects of tech"
+        ],
+        "example": "The neural link initialized in cascading stages: first the proprioceptive alignment that mapped her physical body to the system's parameters, then the sensory overlay that replaced her natural inputs with the drone's feed, and finally the cognitive handshake—that peculiar doubled awareness as the AI co-pilot embedded its processing patterns alongside her own thought structures. Status indicators blossomed in her peripheral vision, each a different shade of functional green."
+      },
+      "character_centric": {
+        "type": "string",
+        "description": "Description that prioritizes a character's physical appearance, mannerisms, expressions, and presence as the central focus.",
+        "implementation_tips": [
+          "Reveal character through selected physical details",
+          "Include habitual gestures and microexpressions",
+          "Show how other characters react to the person's presence"
+        ],
+        "example": "Director Chen occupied space like she owned it—not just the physical volume her compact frame displaced, but the attention field that extended meters in every direction. Her left hand constantly adjusted the neural interface at her temple, a habit from decades ago when the technology was still unstable. The right remained perfectly still except when making decisive gestures that somehow silenced rooms of louder, larger men."
+      },
+      "temporal": {
+        "type": "string",
+        "description": "Description that prioritizes the passage of time, its effects, or anomalies as the central focus.",
+        "implementation_tips": [
+          "Show contrasts between different time periods",
+          "Use physical markers to indicate time's passage",
+          "Create subjective experiences of time (slowing, accelerating)"
+        ],
+        "example": "The abandoned research wing existed in multiple timeframes simultaneously: cutting-edge technology from three decades ago now covered in dust; calendar displays forever frozen on evacuation day; perishable samples long since transformed into unintended experiments in decay. In one lab, a quantum stasis field had preserved a single workstation in perfect condition—coffee still steaming in its cup while everything around it had aged thirty years."
+      },
+      "atmospheric": {
+        "type": "string",
+        "description": "Description that prioritizes mood, ambiance, and emotional texture of a scene as the central focus.",
+        "implementation_tips": [
+          "Blend multiple sensory elements to create unified mood",
+          "Use weather and lighting as emotional amplifiers",
+          "Create contrast between atmosphere and character state"
+        ],
+        "example": "Tension pervaded the command center like an electrical charge—visible in whitened knuckles around styluses, audible in the controlled, too-precise communications, palpable in the rigid postures before flickering screens. Even the air felt different, recycled too many times through filters struggling to manage the stress pheromones of thirty operatives facing potential catastrophe."
+      },
+      "psychological_interior": {
+        "type": "string",
+        "description": "Description that prioritizes a character's inner mental and emotional state as the central focus.",
+        "implementation_tips": [
+          "Use physical sensations to manifest emotional states",
+          "Create thought patterns specific to character psychology",
+          "Balance explicit and implicit emotional indicators"
+        ],
+        "example": "Takeshi's thoughts fragmented like overloaded circuits—each attempt at logical analysis interrupted by memory flashes of his daughter's face. His augmented intelligence routines tried desperately to compartmentalize, creating mental subsections to contain the grief, but the emotion leaked through every firewall he constructed. Behind his carefully maintained expression, a war raged between enhanced cognitive processing and fundamental human vulnerability."
+      }
+    }
+  },
+  "sceneTypeCompatibility": {
+    "type": "object",
+    "description": "Recommended descriptive focuses for different scene types (not part of the enum, provided for documentation)",
+    "properties": {
+      "action_sequence": ["kinesthetic", "visual_primary", "auditory_primary", "tactical_primary"],
+      "character_introduction": ["character_centric", "visual_primary", "psychological_interior"],
+      "dialogue_driven": ["character_centric", "auditory_primary", "psychological_interior"],
+      "exposition_worldbuilding": ["environmental", "technological", "temporal"],
+      "internal_reflection": ["psychological_interior", "temporal", "sensory_memory"],
+      "investigation_discovery": ["visual_primary", "tactical_primary", "olfactory_primary"],
+      "tension_buildup": ["atmospheric", "auditory_primary", "kinesthetic"],
+      "horror_suspense": ["atmospheric", "auditory_primary", "olfactory_primary"],
+      "mystery_revelation": ["visual_primary", "psychological_interior", "atmospheric"]
+    }
+  },
+  "writingStyleCompatibility": {
+    "type": "object",
+    "description": "Recommended descriptive focuses for different writing styles (not part of the enum, provided for documentation)",
+    "properties": {
+      "cinematic_precise": ["visual_primary", "kinesthetic", "character_centric"],
+      "mythic_poetic": ["atmospheric", "temporal", "environmental"],
+      "controlled_chaos": ["kinesthetic", "auditory_primary", "psychological_interior"],
+      "emotional_measured": ["psychological_interior", "character_centric", "tactile_primary"],
+      "narrative_historian": ["temporal", "environmental", "technological"],
+      "atmospheric_immersive": ["environmental", "atmospheric", "olfactory_primary"],
+      "dreamlike_fragmented": ["psychological_interior", "visual_primary", "temporal"]
+    }
+  }
+}

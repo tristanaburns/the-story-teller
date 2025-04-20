@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/influence_sphere",
+  "title": "Influence Sphere Schema",
+  "description": "Standardized enumeration of domains where organizations may exert power or control in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "economic",
+    "political",
+    "military",
+    "technological",
+    "social",
+    "religious",
+    "cultural",
+    "criminal",
+    "media",
+    "academic",
+    "intelligence",
+    "environmental",
+    "magical",
+    "infrastructure",
+    "healthcare",
+    "legal",
+    "digital",
+    "entertainment",
+    "transportation",
+    "energy",
+    "food_supply",
+    "real_estate",
+    "financial",
+    "manufacturing",
+    "educational"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each influence sphere (not part of the enum, provided for documentation)",
+    "properties": {
+      "economic": {
+        "type": "string",
+        "description": "Influence over markets, commerce, trade, or financial systems."
+      },
+      "political": {
+        "type": "string",
+        "description": "Power within governance structures, policy-making, or electoral processes."
+      },
+      "military": {
+        "type": "string",
+        "description": "Control over armed forces, security operations, or capacity for organized violence."
+      },
+      "technological": {
+        "type": "string",
+        "description": "Authority in development, distribution, or standards of technological systems."
+      },
+      "social": {
+        "type": "string",
+        "description": "Ability to shape interpersonal dynamics, class structures, or community relations."
+      },
+      "religious": {
+        "type": "string",
+        "description": "Power within spiritual practices, theological interpretation, or faith communities."
+      },
+      "cultural": {
+        "type": "string",
+        "description": "Influence over arts, entertainment, traditions, language, or collective identity."
+      },
+      "criminal": {
+        "type": "string",
+        "description": "Control of illicit activities, underground economies, or extralegal power structures."
+      },
+      "media": {
+        "type": "string",
+        "description": "Authority over information channels, news distribution, or narrative framing."
+      },
+      "academic": {
+        "type": "string",
+        "description": "Power within educational institutions, research priorities, or knowledge validation."
+      },
+      "intelligence": {
+        "type": "string",
+        "description": "Control over information gathering, surveillance, or covert operations capabilities."
+      },
+      "environmental": {
+        "type": "string",
+        "description": "Influence over natural resources, ecological policies, or environmental management."
+      },
+      "magical": {
+        "type": "string",
+        "description": "Authority over supernatural forces, arcane knowledge, or mystical practices."
+      },
+      "infrastructure": {
+        "type": "string",
+        "description": "Control of physical systems like roads, utilities, communications networks, or public facilities."
+      },
+      "healthcare": {
+        "type": "string",
+        "description": "Power within medical systems, treatment protocols, pharmaceutical development, or healthcare access."
+      },
+      "legal": {
+        "type": "string",
+        "description": "Influence over laws, regulations, enforcement, or judicial proceedings."
+      },
+      "digital": {
+        "type": "string",
+        "description": "Authority within virtual spaces, digital platforms, online communities, or data systems."
+      },
+      "entertainment": {
+        "type": "string",
+        "description": "Control over recreational activities, venues, performances, or leisure industries."
+      },
+      "transportation": {
+        "type": "string",
+        "description": "Power over movement systems including shipping, transit, vehicle production, or travel networks."
+      },
+      "energy": {
+        "type": "string",
+        "description": "Influence over power generation, fuel sources, distribution systems, or energy policies."
+      },
+      "food_supply": {
+        "type": "string",
+        "description": "Control of agricultural production, food processing, distribution networks, or nutritional standards."
+      },
+      "real_estate": {
+        "type": "string",
+        "description": "Authority over land ownership, property development, housing, or spatial organization."
+      },
+      "financial": {
+        "type": "string",
+        "description": "Power within banking systems, investment networks, monetary policy, or wealth management."
+      },
+      "manufacturing": {
+        "type": "string",
+        "description": "Influence over production processes, industrial capacity, supply chains, or material goods."
+      },
+      "educational": {
+        "type": "string",
+        "description": "Control of learning institutions, curriculum development, training programs, or certification systems."
+      }
+    }
+  }
+}

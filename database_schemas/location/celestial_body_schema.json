@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location/celestial_body",
+  "title": "Celestial Body Schema",
+  "description": "Details about planetary bodies, moons, space stations, or other celestial objects where locations may exist.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The official designation of the planet, moon, or space station where this location exists."
+    },
+    "classification": {
+      "type": "string",
+      "enum": ["planet", "moon", "asteroid", "space station", "orbital structure", "dimension", "realm"],
+      "description": "The categorical type of the celestial body, determining its fundamental physical properties and relationship to other bodies."
+    },
+    "latitude": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90,
+      "description": "The geographic latitude in decimal degrees, measured from the celestial body's equator. Positive values indicate northern hemisphere, negative values indicate southern hemisphere."
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": -180,
+      "maximum": 180,
+      "description": "The geographic longitude in decimal degrees, measured from the celestial body's prime meridian. Positive values indicate eastern hemisphere, negative values indicate western hemisphere."
+    },
+    "altitude": {
+      "type": "number",
+      "description": "The elevation above or below the reference zero point (e.g., sea level) in meters. Negative values indicate subterranean or underwater locations."
+    },
+    "reference_frame": {
+      "type": "string",
+      "description": "The coordinate system or reference point used for positioning on this celestial body."
+    }
+  },
+  "required": ["name", "classification"]
+}

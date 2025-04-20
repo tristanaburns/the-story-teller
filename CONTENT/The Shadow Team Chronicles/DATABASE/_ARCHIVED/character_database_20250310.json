@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "id": "ef28a16b-3e7c-4a39-b8c7-d56e48f714e2",
+    "name": "The Shadow Team Chronicles - Character Database",
+    "description": "Centralized database of all characters appearing in The Shadow Team Chronicles",
+    "last_updated": "2025-03-09T12:00:00Z",
+    "version": "1.0",
+    "schema_reference": "character_json_schema.json"
+  },
+  "characters": [
+    {
+      "id": "7f4b1c2d-e5a6-47b8-9c0d-1e2f3a4b5c6d",
+      "name": "Yoshi",
+      "aliases": ["The Shadow Warrior", "The Hawk"],
+      "description": "A masterful warrior with a code of honor from Japan Reforged, skilled with his katana and possessing heightened reflexes and perception.",
+      "status": "alive",
+      "role": "protagonist",
+      "timeline": {
+        "first_appearance": {
+          "timestamp": "1200-10-05T00:00:00Z",
+          "volume": "1",
+          "chapter": "1",
+          "scene_id": "8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d"
+        },
+        "appearances": [
+          {
+            "scene_id": "8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d",
+            "timestamp": "1200-10-05T00:00:00Z",
+            "volume": "1",
+            "chapter": "1",
+            "significance": "major",
+            "character_development": [
+              "First appearance on the bridge"
+            ]
+          }
+        ]
+      },
+      "affiliations": [
+        {
+          "name": "Japan Reforged",
+          "role": "warrior",
+          "start_timestamp": "1175-01-01T00:00:00Z",
+          "current": true
+        }
+      ],
+      "character_arc": {
+        "starting_state": "Disciplined warrior bound by a strict code of honor",
+        "current_state": "Disciplined warrior bound by a strict code of honor",
+        "goal": "To restore honor and preserve tradition against the encroaching machines"
+      },
+      "attributes": {
+        "physical": {
+          "height": "5'11\"",
+          "build": "Athletic, lean",
+          "distinctive_features": "Hawk-like gaze, composed demeanor"
+        },
+        "skills": [
+          {
+            "name": "Master Swordsman",
+            "description": "Exceptional skill with his katana, capable of defeating multiple opponents",
+            "proficiency": "master"
+          },
+          {
+            "name": "Strategic Combat",
+            "description": "Ability to analyze and exploit weaknesses in opponents' techniques",
+            "proficiency": "expert"
+          }
+        ],
+        "equipment": [
+          {
+            "name": "Neo-Kusanagi",
+            "description": "A traditional katana blade with modern enhancements",
+            "current_status": "possessed"
+          }
+        ]
+      },
+      "tags": [
+        { "key": "origin", "value": "Japan Reforged" },
+        { "key": "archetype", "value": "honorable warrior" },
+        { "key": "fighting_style", "value": "samurai" }
+      ]
+    },
+    {
+      "id": "a1b2c3d4-e5f6-7a8b-9c0d-e1f2a3b4c5d6",
+      "name": "Benkei",
+      "aliases": ["The Bear"],
+      "description": "A towering warrior-monk with incredible strength and unwavering loyalty, carrying a massive naginata and known for his imposing presence.",
+      "status": "alive",
+      "role": "protagonist",
+      "timeline": {
+        "first_appearance": {
+          "timestamp": "1200-10-05T00:00:00Z",
+          "volume": "1",
+          "chapter": "1",
+          "scene_id": "8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d"
+        },
+        "appearances": [
+          {
+            "scene_id": "8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d",
+            "timestamp": "1200-10-05T00:00:00Z",
+            "volume": "1",
+            "chapter": "1",
+            "significance": "major",
+            "character_development": [
+              "First encounter with Yoshi at the bridge"
+            ],
+            "relationships_affected": [
+              {
+                "character_id": "7f4b1c2d-e5a6-47b8-9c0d-1e2f3a4b5c6d",
+                "change": "initiated",
+                "description": "First meeting with Yoshi that led to their partnership"
+              }
+            ]
+          }
+        ]
+      },
+      "relationships": [
+        {
+          "character_id": "7f4b1c2d-e5a6-47b8-9c0d-1e2f3a4b5c6d",
+          "relationship_type": "ally",
+          "dynamic": "Loyal companion and foil to Yoshi's more precise fighting style",
+          "first_met": {
+            "scene_id": "8a9b0c1d-2e3f-4a5b-6c7d-8e9f0a1b2c3d",
+            "timestamp": "1200-10-05T00:00:00Z"
+          },
+          "current_status": "ally"
+        }
+      ],
+      "character_arc": {
+        "starting_state": "Powerful warrior seeking a worthy cause",
+        "current_state": "Powerful warrior seeking a worthy cause",
+        "goal": "To find purpose through service to a worthy master"
+      },
+      "attributes": {
+        "physical": {
+          "height": "6'7\"",
+          "build": "Massive, muscular",
+          "distinctive_features": "Imposing stature, monk-like appearance"
+        },
+        "skills": [
+          {
+            "name": "Overwhelming Strength",
+            "description": "Capable of feats of strength that seem superhuman",
+            "proficiency": "master"
+          },
+          {
+            "name": "Naginata Combat",
+            "description": "Highly skilled with his signature polearm weapon",
+            "proficiency": "master"
+          }
+        ],
+        "equipment": [
+          {
+            "name": "Great Naginata",
+            "description": "An oversized naginata that most warriors couldn't even lift",
+            "current_status": "possessed"
+          }
+        ]
+      },
+      "tags": [
+        { "key": "origin", "value": "Mountain Monastery" },
+        { "key": "archetype", "value": "loyal guardian" },
+        { "key": "fighting_style", "value": "overwhelming power" }
+      ]
+    }
+  ]
+}

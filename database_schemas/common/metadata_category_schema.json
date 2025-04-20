@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/metadata_category",
+  "title": "Metadata Category Schema",
+  "description": "Standardized enumeration of categories for organizing metadata in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "authorship",
+    "narrative_structure",
+    "technical_attributes",
+    "publication_details",
+    "version_control",
+    "workflow_status",
+    "classification",
+    "ai_generation",
+    "references",
+    "analytics",
+    "localization",
+    "permissions",
+    "chronology",
+    "multiverse_position"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each metadata category (not part of the enum, provided for documentation)",
+    "properties": {
+      "authorship": {
+        "type": "string",
+        "description": "Information about who created or contributed to the content."
+      },
+      "narrative_structure": {
+        "type": "string",
+        "description": "Details about storytelling approach, perspective, tense, and style."
+      },
+      "technical_attributes": {
+        "type": "string",
+        "description": "File formats, sizes, word counts, and other metrics."
+      },
+      "publication_details": {
+        "type": "string",
+        "description": "When and how content was or will be released or presented."
+      },
+      "version_control": {
+        "type": "string",
+        "description": "Change history, versioning, and branch information."
+      },
+      "workflow_status": {
+        "type": "string",
+        "description": "Where content stands in production pipeline and who is assigned to it."
+      },
+      "classification": {
+        "type": "string",
+        "description": "Categories, tags, genres, and other organizational labels."
+      },
+      "ai_generation": {
+        "type": "string",
+        "description": "Parameters, models, and techniques used in AI-assisted content."
+      },
+      "references": {
+        "type": "string",
+        "description": "Links to other content, external sources, or research materials."
+      },
+      "analytics": {
+        "type": "string",
+        "description": "Performance metrics, user engagement, and other measurement data."
+      },
+      "localization": {
+        "type": "string",
+        "description": "Translation status, regional variants, and cultural adaptation information."
+      },
+      "permissions": {
+        "type": "string",
+        "description": "Access controls, copyright, and usage rights."
+      },
+      "chronology": {
+        "type": "string",
+        "description": "Timeline positioning and temporal relationships within the narrative universe."
+      },
+      "multiverse_position": {
+        "type": "string",
+        "description": "Where content fits within parallel universes or alternate reality structures."
+      }
+    }
+  }
+}

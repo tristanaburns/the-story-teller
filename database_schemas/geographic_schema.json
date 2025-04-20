@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Geographic Schema",
+  "description": "Schema for defining locations across multiple universes, planetary bodies, and interstellar space. This enables precise tracking of where events occur and objects exist throughout narratives spanning different worlds.",
+  "type": "object",
+  "properties": {
+    "universe": {
+      "type": "string",
+      "description": "The specific universe or multiverse where this location exists, allowing for separation between parallel realities or entirely different fictional worlds."
+    },
+    "galaxy": {
+      "type": "string",
+      "description": "The galactic structure containing this location, relevant for space-based narratives spanning multiple star systems."
+    },
+    "celestial_body": {
+      "$ref": "location/celestial_body_schema.json"
+    },
+    "space_coordinates": {
+      "type": "object",
+      "description": "Coordinates for locations in deep space not bound to any particular celestial object.",
+      "properties": {
+        "galactic_x": {
+          "type": "number",
+          "description": "The X-coordinate position in the galactic reference frame, measured in light years or parsecs from the defined origin point."
+        },
+        "galactic_y": {
+          "type": "number",
+          "description": "The Y-coordinate position in the galactic reference frame, measured in light years or parsecs from the defined origin point."
+        },
+        "galactic_z": {
+          "type": "number",
+          "description": "The Z-coordinate position in the galactic reference frame, measured in light years or parsecs from the defined origin point."
+        },
+        "sector": {
+          "type": "string",
+          "description": "The named sector or region of space where this location exists, using in-universe terminology for navigation or political boundaries."
+        },
+        "star_system": {
+          "type": "string",
+          "description": "The name of the nearest or containing star system, particularly important for interstellar narratives."
+        }
+      }
+    }
+  }
+}

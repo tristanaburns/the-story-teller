@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/historical_event/location_data",
+  "title": "Historical Event Location Data Schema",
+  "description": "Geographic and spatial information about where a historical event occurred.",
+  "type": "object",
+  "properties": {
+    "primary_location": {
+      "$ref": "../common/references_schema.json",
+      "description": "The main location where the historical event took place."
+    },
+    "secondary_locations": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/references_schema.json"
+      },
+      "description": "Additional locations involved in the historical event beyond the primary site."
+    },
+    "geographic_scope": {
+      "type": "string",
+      "enum": ["site_specific", "local", "regional", "national", "continental", "global", "multi_realm", "dimensional"],
+      "description": "The geographical extent or reach of the event's immediate occurrence."
+    },
+    "impact_radius": {
+      "type": "object",
+      "properties": {
+        "distance": {
+          "type": "number",
+          "description": "The numerical measurement of how far the event's direct effects reached."
+        },
+        "unit": {
+          "type": "string",
+          "enum": ["meters", "kilometers", "miles", "leagues", "realms"],
+          "description": "The unit of measurement for the impact radius."
+        }
+      },
+      "description": "The measured extent of the event's direct physical impact, if applicable."
+    },
+    "terrain_changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Details of how the landscape or environment was altered by the event."
+          },
+          "magnitude": {
+            "$ref": "../common/impact_magnitude_schema.json",
+            "description": "The severity or extent of the change to the terrain."
+          },
+          "permanence": {
+            "type": "string",
+            "enum": ["temporary", "semi_permanent", "permanent", "escalating"],
+            "description": "How lasting the change to the terrain has been or is expected to be."
+          }
+        },
+        "required": ["description"]
+      },
+      "description": "Alterations to the physical landscape caused directly by this historical event."
+    },
+    "territorial_changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "territory_name": {
+            "type": "string",
+            "description": "The name of the region or land area whose political control changed."
+          },
+          "previous_controller": {
+            "$ref": "../common/references_schema.json",
+            "description": "The political entity that controlled the territory before the event."
+          },
+          "new_controller": {
+            "$ref": "../common/references_schema.json",
+            "description": "The political entity that gained control of the territory as a result of the event."
+          }
+        },
+        "required": ["territory_name"]
+      },
+      "description": "Changes in political control over territories resulting from this historical event."
+    },
+    "accessibility": {
+      "type": "object",
+      "properties": {
+        "current_status": {
+          "type": "string",
+          "enum": ["accessible", "restricted", "dangerous", "quarantined", "destroyed", "lost", "mythical"],
+          "description": "The present-day accessibility of the event location."
+        },
+        "changes": {
+          "type": "string",
+          "description": "How the location's accessibility has changed over time since the event occurred."
+        }
+      },
+      "description": "Information about whether and how the event location can be visited or accessed in the current narrative time."
+    }
+  },
+  "required": ["primary_location"]
+}

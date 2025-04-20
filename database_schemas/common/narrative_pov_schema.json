@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/narrative_pov",
+  "title": "Narrative Point of View Schema",
+  "description": "Standardized enumeration of narrative perspective approaches in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "first_person",
+    "second_person",
+    "third_person_limited",
+    "third_person_omniscient",
+    "multi_perspective",
+    "unreliable_narrator",
+    "objective_observer",
+    "epistolary",
+    "stream_of_consciousness",
+    "collective_voice"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each narrative point of view (not part of the enum, provided for documentation)",
+    "properties": {
+      "first_person": {
+        "type": "string",
+        "description": "Narration from one character's perspective using 'I' and 'we', limited to that character's knowledge and observations."
+      },
+      "second_person": {
+        "type": "string",
+        "description": "Narration that addresses the reader as 'you', placing them directly in the story as a participant."
+      },
+      "third_person_limited": {
+        "type": "string",
+        "description": "Narration using 'he', 'she', 'they' that follows one character closely, limited to that character's thoughts and perceptions."
+      },
+      "third_person_omniscient": {
+        "type": "string",
+        "description": "Narration that has access to the thoughts, feelings, and motivations of any character in the story."
+      },
+      "multi_perspective": {
+        "type": "string",
+        "description": "Narration that alternates between different character viewpoints, typically in different chapters or sections."
+      },
+      "unreliable_narrator": {
+        "type": "string",
+        "description": "Narration from a perspective that cannot be fully trusted, due to bias, dishonesty, or limited understanding."
+      },
+      "objective_observer": {
+        "type": "string",
+        "description": "Third-person narration that reports only external observations without access to any character's thoughts or feelings."
+      },
+      "epistolary": {
+        "type": "string",
+        "description": "Narration composed of documents such as letters, diary entries, news articles, or other records."
+      },
+      "stream_of_consciousness": {
+        "type": "string",
+        "description": "Narration that attempts to replicate the natural flow of thoughts, impressions, and associations in a character's mind."
+      },
+      "collective_voice": {
+        "type": "string",
+        "description": "Narration that speaks from the perspective of a group or community using 'we'."
+      }
+    }
+  },
+  "usageGuidelines": {
+    "type": "object",
+    "description": "Recommendations for when to use different points of view (not part of the enum, provided for documentation)",
+    "properties": {
+      "first_person": {
+        "type": "string",
+        "description": "Best for character-driven narratives, personal accounts, and creating immediate emotional connection. Provides authenticity but limits the reader to one perspective."
+      },
+      "third_person_limited": {
+        "type": "string",
+        "description": "Most versatile POV, offering balance between character intimacy and narrative flexibility. Excellent for stories focusing on character development."
+      },
+      "third_person_omniscient": {
+        "type": "string",
+        "description": "Ideal for complex narratives with multiple key characters or when societal/historical context is important. Requires careful handling to avoid confusing perspective shifts."
+      },
+      "multi_perspective": {
+        "type": "string",
+        "description": "Suited for storylines with multiple central characters, particularly when showing contrasting viewpoints of the same events is important."
+      }
+    }
+  }
+}

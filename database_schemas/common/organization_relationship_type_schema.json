@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/organization_relationship_type",
+  "title": "Organization Relationship Type Schema",
+  "description": "Standardized enumeration of relationships between organizations within The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "alliance",
+    "rivalry",
+    "subsidiary",
+    "parent",
+    "supplier",
+    "customer",
+    "partnership",
+    "hostile",
+    "neutral",
+    "covert_connection",
+    "regulatory_oversight",
+    "tributary",
+    "ideological_alignment",
+    "ideological_opposition",
+    "historical_connection",
+    "competing_interests",
+    "mutual_defense",
+    "trade_partners",
+    "shared_membership",
+    "infiltration",
+    "puppet"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each relationship type (not part of the enum, provided for documentation)",
+    "properties": {
+      "alliance": {
+        "type": "string",
+        "description": "Formal or informal cooperative agreement for mutual benefit."
+      },
+      "rivalry": {
+        "type": "string",
+        "description": "Ongoing competition or contention, typically for resources, influence, or dominance."
+      },
+      "subsidiary": {
+        "type": "string",
+        "description": "Organization controlled by or dependent on another (from perspective of the subject organization)."
+      },
+      "parent": {
+        "type": "string",
+        "description": "Organization that controls or owns another (from perspective of the subject organization)."
+      },
+      "supplier": {
+        "type": "string",
+        "description": "Provider of goods, services, or resources to another organization."
+      },
+      "customer": {
+        "type": "string",
+        "description": "Recipient of goods, services, or resources from another organization."
+      },
+      "partnership": {
+        "type": "string",
+        "description": "Formally established cooperative relationship with shared goals or projects."
+      },
+      "hostile": {
+        "type": "string",
+        "description": "Openly antagonistic or aggressive stance, potentially including violent conflict."
+      },
+      "neutral": {
+        "type": "string",
+        "description": "Neither allied nor opposed, maintaining distance or impartiality."
+      },
+      "covert_connection": {
+        "type": "string",
+        "description": "Hidden relationship not known to the public or most members."
+      },
+      "regulatory_oversight": {
+        "type": "string",
+        "description": "Authority to monitor, restrict, or approve activities of another organization."
+      },
+      "tributary": {
+        "type": "string",
+        "description": "Regular payment, service, or resource transfer made in acknowledgment of subordination."
+      },
+      "ideological_alignment": {
+        "type": "string",
+        "description": "Shared beliefs, values, or philosophies creating natural affinity."
+      },
+      "ideological_opposition": {
+        "type": "string",
+        "description": "Conflict based on fundamentally incompatible beliefs, values, or goals."
+      },
+      "historical_connection": {
+        "type": "string",
+        "description": "Relationship defined by significant past interactions or common origins."
+      },
+      "competing_interests": {
+        "type": "string",
+        "description": "Pursuing similar goals in ways that create conflict without outright hostility."
+      },
+      "mutual_defense": {
+        "type": "string",
+        "description": "Agreement to protect each other against external threats."
+      },
+      "trade_partners": {
+        "type": "string",
+        "description": "Regular exchange of goods, services, or resources for mutual benefit."
+      },
+      "shared_membership": {
+        "type": "string",
+        "description": "Individuals belonging to or representing both organizations simultaneously."
+      },
+      "infiltration": {
+        "type": "string",
+        "description": "Covert placement of agents or members within another organization."
+      },
+      "puppet": {
+        "type": "string",
+        "description": "Organization that appears independent but is secretly controlled by another."
+      }
+    }
+  },
+  "relationshipPairs": {
+    "type": "object",
+    "description": "Complementary relationship types (not part of the enum, provided for documentation)",
+    "properties": {
+      "parent": "subsidiary",
+      "subsidiary": "parent",
+      "supplier": "customer",
+      "customer": "supplier",
+      "ideological_alignment": "ideological_alignment",
+      "ideological_opposition": "ideological_opposition",
+      "alliance": "alliance",
+      "rivalry": "rivalry",
+      "hostile": "hostile",
+      "infiltration": "infiltration target",
+      "puppet": "puppet master"
+    }
+  }
+}

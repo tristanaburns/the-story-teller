@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/relationships",
+  "title": "Character Relationships Schema",
+  "description": "Connections between the character and other individuals within the narrative world, defining their interpersonal dynamics and social network.",
+  "type": "object",
+  "properties": {
+    "family": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_reference": {
+            "$ref": "common/references_schema.json"
+          },
+          "relationship_type": {
+            "type": "string",
+            "description": "The familial connection between these characters (e.g., 'parent', 'sibling', 'spouse', 'child')."
+          },
+          "dynamics": {
+            "type": "string",
+            "description": "The emotional quality and patterns of interaction that define this family relationship."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "estranged", "deceased", "unknown"],
+            "description": "The current state of this family relationship."
+          }
+        },
+        "required": ["character_reference", "relationship_type"]
+      },
+      "description": "Blood relatives, adopted family members, and marriage relations to the character."
+    },
+    "allies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_reference": {
+            "$ref": "common/references_schema.json"
+          },
+          "relationship_type": {
+            "type": "string",
+            "description": "The nature of this alliance (e.g., 'friend', 'mentor', 'loyal follower', 'business partner')."
+          },
+          "trust_level": {
+            "type": "string",
+            "enum": ["absolute", "high", "moderate", "cautious", "tenuous"],
+            "description": "How much the character trusts this ally."
+          },
+          "history": {
+            "type": "string",
+            "description": "Brief account of how this alliance formed and significant events that have shaped it."
+          }
+        },
+        "required": ["character_reference", "relationship_type"]
+      },
+      "description": "Characters who generally work with or support the character, including friends, mentors, and associates."
+    },
+    "adversaries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_reference": {
+            "$ref": "common/references_schema.json"
+          },
+          "relationship_type": {
+            "type": "string",
+            "description": "The nature of this adversarial relationship (e.g., 'rival', 'enemy', 'betrayer', 'antagonist')."
+          },
+          "conflict_source": {
+            "type": "string",
+            "description": "The origin or primary cause of the conflict between these characters."
+          },
+          "threat_level": {
+            "type": "string",
+            "enum": ["mortal", "serious", "moderate", "minor", "potential"],
+            "description": "How dangerous or threatening this adversary is to the character."
+          }
+        },
+        "required": ["character_reference", "relationship_type"]
+      },
+      "description": "Characters who oppose or conflict with the character in some way."
+    },
+    "romantic": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_reference": {
+            "$ref": "common/references_schema.json"
+          },
+          "relationship_type": {
+            "type": "string",
+            "description": "The nature of this romantic connection (e.g., 'spouse', 'lover', 'former partner', 'unrequited')."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["current", "former", "complicated", "unrequited", "potential"],
+            "description": "The current state of this romantic relationship."
+          },
+          "narrative_significance": {
+            "type": "string",
+            "description": "How this romantic relationship affects the character's arc and decisions within the narrative."
+          }
+        },
+        "required": ["character_reference", "relationship_type", "status"]
+      },
+      "description": "Characters with whom the character has, had, or might have a romantic connection."
+    },
+    "professional": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_reference": {
+            "$ref": "common/references_schema.json"
+          },
+          "relationship_type": {
+            "type": "string",
+            "description": "The professional connection between these characters (e.g., 'superior', 'subordinate', 'colleague', 'client')."
+          },
+          "context": {
+            "type": "string",
+            "description": "The organizational or workplace setting in which this professional relationship exists."
+          }
+        },
+        "required": ["character_reference", "relationship_type"]
+      },
+      "description": "Work-related connections that define the character's professional network."
+    },
+    "mentorships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_reference": {
+            "$ref": "common/references_schema.json"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["mentor", "mentee"],
+            "description": "Whether this character is a mentor to the main character or is mentored by them."
+          },
+          "domain": {
+            "type": "string",
+            "description": "The area of knowledge, skill, or wisdom being transferred in this mentorship (e.g., 'combat training', 'magical studies', 'political strategy')."
+          },
+          "impact": {
+            "type": "string",
+            "description": "How this mentorship has influenced the character's development or capabilities."
+          }
+        },
+        "required": ["character_reference", "role", "domain"]
+      },
+      "description": "Teaching, guidance, or apprenticeship relationships that contribute to the character's growth or to the growth of others under their tutelage."
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/metadata/system_metadata",
+  "title": "System Metadata Schema",
+  "description": "Schema for recording workflow and organizational information about content items within The Shadow Team Chronicles development environment.",
+  "type": "object",
+  "properties": {
+    "content_status": {
+      "$ref": "../common/content_status_schema.json",
+      "description": "The current state of this content in the workflow pipeline."
+    },
+    "workflow_stage": {
+      "type": "string",
+      "description": "The specific project phase or development stage associated with this content."
+    },
+    "access_level": {
+      "type": "string",
+      "enum": ["public", "restricted", "private", "confidential"],
+      "description": "Who can view or access this content within the system."
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["critical", "high", "medium", "low", "backlog"],
+      "description": "The importance or urgency of addressing this content item."
+    },
+    "assigned_to": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Individuals responsible for the current workflow stage of this content."
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/references_schema.json"
+      },
+      "description": "Other content items that must be completed or resolved before this item can progress."
+    },
+    "notifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "../common/notification_type_schema.json",
+            "description": "The category of this notification."
+          },
+          "message": {
+            "type": "string",
+            "description": "The content of the notification."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When this notification was generated."
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Who should receive this notification."
+          },
+          "resolved": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether this notification has been addressed or acknowledged."
+          }
+        },
+        "required": ["type", "message", "timestamp"]
+      },
+      "description": "Alerts, reminders, or messages related to this content item."
+    },
+    "project_specific": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Custom metadata fields specific to particular projects or workflows."
+    },
+    "review_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reviewer": {
+            "type": "string",
+            "description": "Name or identifier of the person who reviewed this content."
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the review was conducted."
+          },
+          "outcome": {
+            "type": "string",
+            "enum": ["approved", "approved_with_changes", "revisions_needed", "rejected"],
+            "description": "The result of the review."
+          },
+          "comments": {
+            "type": "string",
+            "description": "Feedback or notes provided during the review."
+          }
+        },
+        "required": ["reviewer", "date", "outcome"]
+      },
+      "description": "History of content reviews and feedback."
+    },
+    "content_identifiers": {
+      "type": "object",
+      "properties": {
+        "file_path": {
+          "type": "string",
+          "description": "The location of the file within the system."
+        },
+        "database_id": {
+          "type": "string",
+          "description": "Database-specific identifier for this content."
+        },
+        "external_references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "system": {
+                "type": "string",
+                "description": "The external system where this content is referenced."
+              },
+              "identifier": {
+                "type": "string",
+                "description": "The ID or reference used in that external system."
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "description": "A direct link to the content in the external system, if applicable."
+              }
+            },
+            "required": ["system", "identifier"]
+          },
+          "description": "References to this content item in other systems or platforms."
+        }
+      },
+      "description": "System-specific identifiers and references for this content."
+    },
+    "metadata_categories": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/metadata_category_schema.json"
+      },
+      "description": "Classification of what types of metadata are present in this content item."
+    }
+  }
+}

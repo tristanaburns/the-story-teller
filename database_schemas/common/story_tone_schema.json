@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/story_tone",
+  "title": "Story Tone Schema",
+  "description": "Standardized enumeration of tone descriptors for narrative content within The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "adventurous",
+    "bleak",
+    "comedic",
+    "cynical",
+    "dark",
+    "disturbing",
+    "dramatic",
+    "dreamy",
+    "epic",
+    "hopeful",
+    "horrific",
+    "inspirational",
+    "introspective",
+    "ironic",
+    "lighthearted",
+    "melancholic",
+    "mysterious",
+    "nihilistic",
+    "nostalgic",
+    "optimistic",
+    "paranoid",
+    "philosophical",
+    "romantic",
+    "satirical",
+    "serious",
+    "somber",
+    "suspenseful",
+    "tense",
+    "tragic",
+    "uplifting",
+    "whimsical"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each tone (not part of the enum, provided for documentation)",
+    "properties": {
+      "adventurous": {
+        "type": "string",
+        "description": "Exciting, focused on exploration and discovery, with an emphasis on action and the unknown."
+      },
+      "bleak": {
+        "type": "string",
+        "description": "Hopeless, stark, and devoid of optimism, presenting a grim view of events or existence."
+      },
+      "comedic": {
+        "type": "string",
+        "description": "Humorous and amusing, intended to evoke laughter or lighthearted entertainment."
+      },
+      "cynical": {
+        "type": "string",
+        "description": "Distrustful of human sincerity or goodness, often presenting characters or situations with skepticism."
+      },
+      "dark": {
+        "type": "string",
+        "description": "Focusing on disturbing aspects of human nature or society, often with morbid or pessimistic undertones."
+      },
+      "disturbing": {
+        "type": "string",
+        "description": "Unsettling and uncomfortable, designed to provoke unease or distress in the audience."
+      },
+      "dramatic": {
+        "type": "string",
+        "description": "Characterized by intense emotions, conflicts, or serious situations with significant stakes."
+      },
+      "dreamy": {
+        "type": "string",
+        "description": "Surreal, ethereal, or reminiscent of dreams with fluid reality and evocative imagery."
+      },
+      "epic": {
+        "type": "string",
+        "description": "Grand in scale, heroic, and significant, often involving sweeping narratives or world-changing events."
+      },
+      "hopeful": {
+        "type": "string",
+        "description": "Expressing belief in positive possibilities or outcomes despite challenges or obstacles."
+      },
+      "horrific": {
+        "type": "string",
+        "description": "Designed to invoke fear, dread, or disgust, often featuring supernatural or extreme human darkness."
+      },
+      "inspirational": {
+        "type": "string",
+        "description": "Uplifting and motivating, often showcasing triumph over adversity or positive transformations."
+      },
+      "introspective": {
+        "type": "string",
+        "description": "Focused on internal thoughts, personal growth, and self-examination of characters."
+      },
+      "ironic": {
+        "type": "string",
+        "description": "Using contrast between expectation and reality for effect, often with elements contrary to what might be expected."
+      },
+      "lighthearted": {
+        "type": "string",
+        "description": "Cheerful and carefree, avoiding serious or weighty themes in favor of enjoyment and amusement."
+      },
+      "melancholic": {
+        "type": "string",
+        "description": "Tinged with sorrow or thoughtful sadness, often reflective about loss or the passage of time."
+      },
+      "mysterious": {
+        "type": "string",
+        "description": "Enigmatic and puzzling, featuring unknown elements or secrets that drive curiosity and intrigue."
+      },
+      "nihilistic": {
+        "type": "string",
+        "description": "Expressing the belief that life is meaningless or that traditional values lack foundation."
+      },
+      "nostalgic": {
+        "type": "string",
+        "description": "Evoking fond memories or longing for the past, often with bittersweet emotional undertones."
+      },
+      "optimistic": {
+        "type": "string",
+        "description": "Emphasizing positive aspects of situations and characters' ability to overcome challenges."
+      },
+      "paranoid": {
+        "type": "string",
+        "description": "Characterized by suspicion, fear of conspiracy, and a sense that unseen forces control events."
+      },
+      "philosophical": {
+        "type": "string",
+        "description": "Contemplative and thought-provoking, exploring deeper questions about existence, ethics, or society."
+      },
+      "romantic": {
+        "type": "string",
+        "description": "Focusing on love, passion, and emotional connections between characters."
+      },
+      "satirical": {
+        "type": "string",
+        "description": "Using irony, humor, or exaggeration to criticize or comment on societal issues or human flaws."
+      },
+      "serious": {
+        "type": "string",
+        "description": "Straightforward and earnest, addressing topics with gravity and minimal levity."
+      },
+      "somber": {
+        "type": "string",
+        "description": "Serious and grave in tone, often subdued and reflecting on weighty matters."
+      },
+      "suspenseful": {
+        "type": "string",
+        "description": "Creating tension through uncertainty about outcomes, with emphasis on anticipation."
+      },
+      "tense": {
+        "type": "string",
+        "description": "Maintaining high levels of anxiety, pressure, or strain throughout the narrative."
+      },
+      "tragic": {
+        "type": "string",
+        "description": "Depicting downfall, suffering, or catastrophe, often focusing on characters' flaws or fate."
+      },
+      "uplifting": {
+        "type": "string",
+        "description": "Raising spirits and creating positive emotional responses through hopeful or triumphant elements."
+      },
+      "whimsical": {
+        "type": "string",
+        "description": "Playfully quaint or fanciful, often with unusual or capricious elements that create wonder."
+      }
+    }
+  }
+}

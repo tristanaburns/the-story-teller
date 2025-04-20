@@ -1,0 +1,335 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Storyline References Schema",
+  "description": "Schema for tracking when and where world-building elements appear within actual story narratives, creating direct links between the world database and written content.",
+  "type": "object",
+  "properties": {
+    "story_references": {
+      "type": "object",
+      "description": "Details about where this object appears or is mentioned within the narrative content.",
+      "properties": {
+        "story_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier for the story or book where this object is referenced or appears."
+        },
+        "sequence_data": {
+          "type": "object",
+          "description": "Precise tracking of where this reference or appearance occurs in the narrative structure, using both numerical tracking and descriptive context for maximum clarity.",
+          "properties": {
+            "numerical_tracking": {
+              "type": "object",
+              "description": "Numerical identifiers for precise positioning within the narrative hierarchy, allowing for programmatic sorting and organization.",
+              "properties": {
+                "act": { 
+                  "type": "integer", 
+                  "minimum": 1, 
+                  "description": "The act number within the storyline. Acts represent major narrative arcs with their own beginning, middle, and end." 
+                },
+                "volume": { 
+                  "type": "integer", 
+                  "minimum": 1, 
+                  "description": "The volume number within the storyline. Volumes collect related stories into thematic units." 
+                },
+                "story": { 
+                  "type": "integer", 
+                  "minimum": 1, 
+                  "description": "The story number within the volume. Stories are complete narrative units." 
+                },
+                "chapter": { 
+                  "type": "integer", 
+                  "minimum": 1, 
+                  "description": "The chapter number within the story. Chapters divide stories into manageable, focused sections." 
+                },
+                "passage": { 
+                  "type": "integer", 
+                  "minimum": 1, 
+                  "description": "The passage number within the chapter. Passages represent cinematic moments or significant scenes." 
+                },
+                "part": { 
+                  "type": "integer", 
+                  "minimum": 1, 
+                  "description": "The part number within the passage. Parts divide passages into discrete moments or beats." 
+                }
+              },
+              "required": ["chapter"]
+            },
+            "descriptive_context": {
+              "type": "object",
+              "description": "Human-readable descriptions of where this reference occurs, providing narrative context beyond simple numbers.",
+              "properties": {
+                "volume_title": { 
+                  "type": "string", 
+                  "description": "The title of the volume where this reference appears, providing thematic context for the appearance." 
+                },
+                "act_title": { 
+                  "type": "string", 
+                  "description": "The title of the act where this reference appears, indicating the broader narrative phase." 
+                },
+                "story_title": { 
+                  "type": "string", 
+                  "description": "The title of the specific story containing this reference, establishing its narrative container." 
+                },
+                "chapter_title": { 
+                  "type": "string", 
+                  "description": "The title of the chapter where this reference appears, providing more specific narrative context." 
+                },
+                "passage_title": { 
+                  "type": "string", 
+                  "description": "The title of the specific passage or scene containing this reference." 
+                },
+                "part_description": { 
+                  "type": "string", 
+                  "description": "A brief description of the exact moment or beat where this reference occurs." 
+                }
+              },
+              "required": ["chapter_title"]
+            }
+          },
+          "required": ["numerical_tracking", "descriptive_context"]
+        },
+        "event": {
+          "type": "string",
+          "description": "A brief summary of what happens with this object in this particular story reference."
+        },
+        "significance": {
+          "type": "string",
+          "enum": ["major", "minor", "background", "mentioned"],
+          "description": "The level of importance this object has in this particular story reference, indicating whether it's central to the scene or merely mentioned in passing."
+        },
+        "writing_style": {
+          "$ref": "common/writing_elements_schema.json"
+        }
+      },
+      "required": ["story_id", "sequence_data", "significance"]
+    },
+    "appearances": {
+      "type": "array",
+      "description": "A comprehensive record of all appearances this object makes throughout the narrative.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scene_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier for the specific scene where this object appears."
+          },
+          "timestamp": {
+            "type": "object",
+            "description": "When in the narrative timeline this appearance occurs, with both absolute and relative positioning.",
+            "properties": {
+              "absolute_date": {
+                "$ref": "common/timestamp_schema.json"
+              },
+              "relative_position": {
+                "type": "string",
+                "description": "Where this appearance falls in relation to other major events (e.g., 'Three days before the Battle of Kyoto', 'During the Great Storm')."
+              },
+              "era": {
+                "type": "string",
+                "description": "The broader historical period in which this appearance takes place, providing macroscopic temporal context."
+              }
+            }
+          },
+          "timeline_reference": {
+            "type": "object",
+            "description": "Connection to the timeline_references schema, linking narrative occurrences to their chronological positioning in the story universe.",
+            "properties": {
+              "temporal_positioning_id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Reference to the specific temporal positioning record in timeline_references, establishing when in universe time this narrative appearance occurs."
+              },
+              "time_state_variant_id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "If this appearance shows a specific temporal variant of the object, links to that variant's definition in the timeline references."
+              },
+              "synchronization_notes": {
+                "type": "string",
+                "description": "Any special considerations regarding how this narrative appearance aligns with the object's timeline, particularly for non-linear narratives or time manipulation scenarios."
+              }
+            }
+          },
+          "character_development": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "character_id": {
+                  "type": "string", 
+                  "format": "uuid",
+                  "description": "Reference to a character involved in this appearance."
+                },
+                "development_aspect": {
+                  "type": "string",
+                  "description": "The specific trait, belief, relationship, or skill that evolves through this appearance."
+                },
+                "development_description": {
+                  "type": "string",
+                  "description": "Detailed explanation of how the character changes or grows through interaction with this object."
+                }
+              },
+              "required": ["character_id", "development_description"]
+            },
+            "description": "Tracking of how characters evolve through their interaction with this object during this appearance."
+          },
+          "narrative_function": {
+            "type": "string",
+            "enum": ["plot_advancement", "character_development", "world_building", "foreshadowing", "thematic_reinforcement", "climactic_moment", "revelation", "transition"],
+            "description": "The primary storytelling purpose this appearance serves in the narrative structure."
+          }
+        },
+        "required": ["scene_id"]
+      }
+    },
+    "interactions": {
+      "type": "array",
+      "description": "Details about how this object interacts with others within the narrative.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "interaction_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "A unique identifier for this specific interaction event."
+          },
+          "participants": {
+            "type": "array",
+            "description": "Details about entities involved in this interaction.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "participant_id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "description": "The unique identifier for a character or object involved in this interaction."
+                },
+                "role": {
+                  "type": "string",
+                  "description": "The function or position this participant had in the interaction (e.g., 'attacker', 'defender', 'witness')."
+                },
+                "impact_received": {
+                  "type": "string",
+                  "description": "How this participant was affected by the interaction, tracking consequences and changes they experienced."
+                }
+              },
+              "required": ["participant_id", "role"]
+            }
+          },
+          "interaction_type": {
+            "type": "string",
+            "description": "The nature of the interaction (e.g., 'battle', 'negotiation', 'discovery', 'destruction')."
+          },
+          "interaction_description": {
+            "type": "string",
+            "description": "A detailed account of what happened between these objects or characters."
+          },
+          "sequence_reference": {
+            "type": "object",
+            "description": "Reference to where in the narrative structure this interaction occurs.",
+            "properties": {
+              "story_id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "The unique identifier for the story containing this interaction."
+              },
+              "chapter": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The chapter number where this interaction takes place."
+              },
+              "passage": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "The passage number where this interaction takes place."
+              }
+            },
+            "required": ["story_id"]
+          }
+        },
+        "required": ["interaction_id", "participants", "interaction_type"]
+      }
+    },
+    "thematic_connections": {
+      "type": "array",
+      "description": "How this object relates to and reinforces the major themes of the narrative.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "string",
+            "description": "The specific thematic concept this object helps explore or illuminate."
+          },
+          "representation": {
+            "type": "string",
+            "description": "How this object embodies or symbolizes aspects of the theme within the narrative."
+          },
+          "development": {
+            "type": "string",
+            "description": "How the thematic connection evolves or is reinforced throughout the story."
+          }
+        },
+        "required": ["theme", "representation"]
+      }
+    },
+    "chronological_view": {
+      "type": "object",
+      "description": "Information on how this object's narrative appearances relate to chronological time in the story world.",
+      "properties": {
+        "narrative_chronology": {
+          "type": "string",
+          "enum": ["linear", "non_linear", "fragmented", "reverse", "cyclical", "multiple_timelines"],
+          "description": "How this object's appearances in the narrative relate to the actual chronological sequence of events in the story universe."
+        },
+        "flashbacks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scene_id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Reference to a scene that depicts events from an earlier point in the timeline than the current narrative present."
+              },
+              "temporal_shift": {
+                "type": "string",
+                "description": "How far back in time this flashback goes, relative to the current narrative present."
+              },
+              "timeline_reference_id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Reference to the specific point in the timeline_references schema that this flashback represents."
+              }
+            }
+          },
+          "description": "Narrative scenes that depict past events, out of chronological sequence."
+        },
+        "flash_forwards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scene_id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Reference to a scene that depicts events from a later point in the timeline than the current narrative present."
+              },
+              "temporal_shift": {
+                "type": "string",
+                "description": "How far forward in time this flash-forward goes, relative to the current narrative present."
+              },
+              "timeline_reference_id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Reference to the specific point in the timeline_references schema that this flash-forward represents."
+              }
+            }
+          },
+          "description": "Narrative scenes that depict future events, out of chronological sequence."
+        }
+      }
+    }
+  },
+  "required": ["story_references"]
+}

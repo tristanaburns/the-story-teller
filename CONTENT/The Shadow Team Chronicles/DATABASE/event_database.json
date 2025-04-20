@@ -1,0 +1,1908 @@
+{
+  "events": [
+    {
+      "id": "event-heiji-rebellion-001",
+      "name": "Heiji Rebellion",
+      "date": "1159",
+      "location": "loc-kyoto-001",
+      "description": "A brief but violent conflict where the Taira clan crushed the Minamoto uprising, resulting in the execution of the Minamoto leader Yoshitomo and the near-extinction of the clan.",
+      "significance": "Created the power vacuum that shaped Yoshi's early life as a hunted child and heir to a defeated legacy.",
+      "participants": [
+        {
+          "organization": "org-minamoto-001",
+          "role": "defeated faction"
+        },
+        {
+          "organization": "org-taira-001",
+          "role": "victorious faction"
+        }
+      ],
+      "consequences": [
+        "Death of Minamoto no Yoshitomo, Yoshi's father",
+        "Taira dominance over Japanese politics",
+        "Yoshi being hidden at Kurama Temple for his safety"
+      ],
+      "created_at": "2025-03-10T00:00:00Z",
+      "updated_at": "2025-03-10T00:00:00Z"
+    },
+    {
+      "id": "event-yoshi-temple-training-001",
+      "name": "Yoshi's Secret Training at Kurama Temple",
+      "date": "1160-1179",
+      "location": "loc-kurama-temple-001",
+      "description": "During his time at Kurama Temple, young Yoshi secretly trained in martial arts, studying combat scrolls and practicing at night while the other monks slept. He developed his distinctive fighting style combining speed, precision, and tactical thinking.",
+      "significance": "Formative period where Yoshi developed the skills that would later make him legendary.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "student"
+        },
+        {
+          "organization": "org-kurama-monks-001",
+          "role": "unwitting teachers"
+        }
+      ],
+      "created_at": "2025-03-10T00:00:00Z",
+      "updated_at": "2025-03-10T00:00:00Z"
+    },
+    {
+      "id": "event-yoshi-leaves-temple-001",
+      "name": "Yoshi Leaves Kurama Temple",
+      "date": "1179",
+      "location": "loc-kurama-temple-001",
+      "description": "Following a raid on the temple where Yoshi killed several bandits, revealing his combat skills and true nature, he chose to leave the monastery and begin his journey as a wandering swordsman.",
+      "significance": "Marked Yoshi's transition from hidden child to active warrior, beginning his path toward becoming a legend.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "departing warrior"
+        },
+        {
+          "organization": "org-kurama-monks-001",
+          "role": "former guardians"
+        }
+      ],
+      "created_at": "2025-03-10T00:00:00Z",
+      "updated_at": "2025-03-10T00:00:00Z"
+    },
+    {
+      "id": "event-benkei-sword-collection-001",
+      "name": "Benkei's 999 Sword Collection",
+      "date": "1176-1180",
+      "description": "Over several years, Benkei challenged and defeated 999 swordsmen across Japan, taking their weapons as trophies. His reputation grew with each victory, making him a feared figure known as the 'Demon of Gojo Bridge'.",
+      "significance": "Established Benkei's fearsome reputation and set the stage for his fateful meeting with Yoshi.",
+      "participants": [
+        {
+          "character": "char-benkei-001",
+          "role": "challenger"
+        }
+      ],
+      "created_at": "2025-03-10T00:00:00Z",
+      "updated_at": "2025-03-10T00:00:00Z"
+    },
+    {
+      "id": "event-yoshi-benkei-duel-001",
+      "name": "The Duel at Gojo Bridge",
+      "date": "1180",
+      "location": "loc-gojo-bridge-001",
+      "description": "The legendary confrontation where Yoshi and Benkei first met. Benkei, having collected 999 swords, challenged Yoshi for his sword as the thousandth in his collection. Despite Benkei's overwhelming strength and intimidating presence, Yoshi approached with calm confidence and a slight smile that suggested amusement rather than fear. The contrast between these warriors—Benkei like a mountain, Yoshi flowing like water—set the stage for one of history's most famous duels.",
+      "significance": "Pivotal moment marking the beginning of one of history's most legendary partnerships and the start of their shared destiny. This duel transformed both men's lives, with Benkei finding purpose beyond collecting trophies and Yoshi gaining his most loyal follower.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "victor"
+        },
+        {
+          "character": "char-benkei-001",
+          "role": "defeated challenger"
+        }
+      ],
+      "consequences": [
+        "Benkei pledging loyalty to Yoshi",
+        "Formation of their legendary partnership",
+        "Beginning of their journey together",
+        "Transformation of Benkei from directionless warrior to purposeful protector"
+      ],
+      "themes": ["Fate", "Honor", "Battle of Legends", "Finding Purpose", "Legendary Beginnings"],
+      "narrative_tones": ["Epic", "Cinematic", "Mythic"],
+      "cultural_impact": "The duel at Gojo Bridge has become a cornerstone of Japanese folklore, representing how true strength comes in many forms and how purpose can transform even the mightiest warrior.",
+      "created_at": "2025-03-10T00:00:00Z",
+      "updated_at": "2025-03-26T00:00:00Z"
+    },
+    {
+      "id": "event-genpei-war-start-001",
+      "name": "Beginning of the Genpei War",
+      "date": "1180",
+      "location": "loc-kyoto-001",
+      "description": "The outbreak of the Genpei War between the Minamoto and Taira clans, a major conflict that would decide the fate of Japan.",
+      "significance": "Major historical conflict that provided the backdrop for Yoshi's rise as a military leader alongside his loyal retainer Benkei.",
+      "participants": [
+        {
+          "organization": "org-minamoto-001",
+          "role": "challenger faction"
+        },
+        {
+          "organization": "org-taira-001",
+          "role": "ruling faction"
+        }
+      ],
+      "created_at": "2025-03-14T00:00:00Z",
+      "updated_at": "2025-03-14T00:00:00Z"
+    },
+    {
+      "id": "event-yoshi-benkei-first-meeting-001",
+      "name": "First Meeting of Yoshi and Benkei at Gojo Bridge",
+      "type": "character_interaction",
+      "sub_type": "duel_challenge",
+      "timeline_date": "1180-03-15",
+      "exact_time": "night",
+      "location_id": "loc-gojo-bridge-001",
+      "description": "The legendary first encounter between Yoshi and Benkei on Gojo Bridge, where Benkei challenged Yoshi for his sword. This meeting marks the beginning of their fateful relationship and is considered a pivotal moment in both their stories.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "challenger_approached"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "bridge_guardian"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Yoshi approaches Gojo Bridge in the mist-filled night",
+          "significance": "Entrance of the protagonist into the challenge area"
+        },
+        {
+          "order": 2,
+          "description": "Benkei acknowledges Yoshi and issues his challenge for Yoshi's sword",
+          "significance": "Establishment of the central conflict"
+        },
+        {
+          "order": 3,
+          "description": "Yoshi responds with confidence and a subtle smile, accepting the challenge",
+          "significance": "Demonstration of character traits (confidence, perhaps even amusement)"
+        },
+        {
+          "order": 4,
+          "description": "The temple bell tolls, marking the moment before battle",
+          "significance": "Symbolic timing element, suggesting fate or divine witness"
+        },
+        {
+          "order": 5,
+          "description": "The duel begins with the air charged 'like the breathless moment before lightning strikes'",
+          "significance": "Initiation of the legendary confrontation with atmospheric tension"
+        }
+      ],
+      "significance": {
+        "canonical": "Core event that cannot be altered - the meeting that begins Yoshi and Benkei's relationship",
+        "historical": "Marks the convergence of two legendary warriors' paths",
+        "narrative": "Setting point for character development and relationship evolution",
+        "symbolic": "Represents the meeting of different fighting philosophies and personal journeys; The Hawk and The Bear together for the first time"
+      },
+      "atmosphere": {
+        "weather": "Misty night with calm air",
+        "mood": "Tense, anticipatory, charged",
+        "lighting": "Moonlight filtering through mist, creating silver highlights on the river's surface and bridge railings",
+        "sensory_details": {
+          "visual": "Mist curling around the bridge, wooden planks bearing scars of previous battles, cherry blossoms drifting through the air",
+          "auditory": "Temple bell tolling, gentle river sounds below, creaking wooden planks, occasional night birds",
+          "tactile": "Damp air, worn wooden planks underfoot",
+          "olfactory": "River scent, night air"
+        }
+      },
+      "physical_setting": {
+        "key_elements": [
+          {
+            "name": "Gojo Bridge",
+            "description": "A wooden bridge spanning the Kamo River, scarred by countless duels",
+            "significance": "The stage for this legendary confrontation, representing a crossing point between destinies"
+          },
+          {
+            "name": "Distant Temple",
+            "description": "Silhouette visible beyond the eastern bank, the source of the bell tolls",
+            "significance": "Provides atmospheric sound that punctuates key moments in the confrontation"
+          },
+          {
+            "name": "Cherry Trees",
+            "description": "Lining the approaches to the bridge",
+            "significance": "Symbolic of beauty amid violence, and the transience of life"
+          }
+        ]
+      },
+      "cultural_representation": {
+        "in_art": "Often depicted in ukiyo-e prints and scroll paintings",
+        "in_literature": "Featured in numerous poems and plays throughout Japanese history",
+        "in_folklore": "A central story in the legends of these two warriors"
+      },
+      "symbols_and_motifs": [
+        {
+          "symbol": "Bridge",
+          "meaning": "Transition point between phases of life, connection between different paths"
+        },
+        {
+          "symbol": "Mist",
+          "meaning": "The uncertainty of fate, the obscured view of the future"
+        },
+        {
+          "symbol": "Temple Bell",
+          "meaning": "Divine timing, moments of significance marked by the universe"
+        },
+        {
+          "symbol": "Cherry Blossoms",
+          "meaning": "Beauty and impermanence of life, backdrop to violent confrontation"
+        }
+      ],
+      "created_at": "2025-03-15T00:00:00Z",
+      "updated_at": "2025-03-26T00:00:00Z"
+    },
+    {
+      "id": "event-yoshi-benkei-three-cuts-001",
+      "name": "The Three Cuts Duel",
+      "type": "combat",
+      "sub_type": "decisive_duel",
+      "timeline_date": "1180-03-15",
+      "exact_time": "night",
+      "location_id": "loc-gojo-bridge-001",
+      "description": "The detailed account of how Yoshi defeated Benkei through three precise cuts - first to the forearm, second to the side, and third to the chin - each demonstrating a principle of combat that would reshape Benkei's understanding of strength and skill.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "victor"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "defeated_challenger"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Benkei charges with overwhelming force in a downward strike",
+          "significance": "Demonstration of traditional strength-based approach to combat"
+        },
+        {
+          "order": 2,
+          "description": "Yoshi sidesteps with fluid grace and delivers the first cut to Benkei's forearm",
+          "significance": "First lesson: Speed over Strength - showing strength is meaningless if it cannot connect"
+        },
+        {
+          "order": 3,
+          "description": "Benkei attacks with a horizontal sweep of greater speed",
+          "significance": "Benkei adapts but still relies on power"
+        },
+        {
+          "order": 4,
+          "description": "Yoshi moves into the attack rather than away, delivering a second cut to Benkei's side",
+          "significance": "Second lesson: Precision over Power - showing the value of technical skill over raw force"
+        },
+        {
+          "order": 5,
+          "description": "Benkei launches a final, desperate but perfect thrust with his naginata",
+          "significance": "Benkei's ultimate expression of his martial skill"
+        },
+        {
+          "order": 6,
+          "description": "Yoshi delivers the third cut across Benkei's chin - shallow but precisely placed",
+          "significance": "Third lesson: Mastery over All - showing control over life and death, the highest form of martial skill"
+        }
+      ],
+      "significance": {
+        "canonical": "Establishes the specific way in which Yoshi defeated Benkei, demonstrating his superior martial philosophy",
+        "historical": "Created the legendary 'Three Cuts' story that would become part of Minamoto no Yoshitsune's mythos",
+        "narrative": "Provides the transformative experience that converts Benkei from opponent to devoted retainer",
+        "symbolic": "Each cut represents a philosophical lesson about the nature of true combat mastery"
+      },
+      "atmosphere": {
+        "weather": "Misty night",
+        "mood": "Tense, revelatory",
+        "lighting": "Moonlight filtering through mist"
+      },
+      "artifacts": [
+        {
+          "artifact_id": "weapon-higekiri-001",
+          "role": "victorious_weapon"
+        },
+        {
+          "artifact_id": "weapon-naginata-001",
+          "role": "defeated_weapon"
+        }
+      ],
+      "themes": [
+        "Martial Philosophy",
+        "Transformation Through Combat",
+        "Superiority of Technique Over Strength",
+        "Three-fold Revelation"
+      ],
+      "consequences": [
+        {
+          "event_id": "event-benkei-oath-001",
+          "relationship": "directly_causes",
+          "description": "Benkei's revelation through defeat leads directly to his oath of loyalty",
+          "confidence": "high"
+        }
+      ],
+      "metadata": {
+        "creation_date": "2025-03-17T00:00:00Z",
+        "last_modified": "2025-03-17T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "event-benkei-oath-001",
+      "name": "Benkei's Oath of Service",
+      "type": "character_interaction",
+      "sub_type": "oath_ceremony",
+      "date": "1180",
+      "timeline_date": "1180-03-15",
+      "exact_time": "dawn",
+      "location_id": "loc-gojo-bridge-001",
+      "description": "Following his defeat by Yoshi in the legendary duel at Gojo Bridge, Benkei formally knelt and pledged his service with a solemn oath. This ceremonial moment transformed their relationship from adversaries to master and retainer, establishing what would become one of history's most celebrated warrior partnerships.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "oath_recipient"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "oath_giver"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Benkei drops his naginata after being defeated by Yoshi's Three Cuts technique",
+          "significance": "Symbolic acknowledgment of defeat and surrender of weapons"
+        },
+        {
+          "order": 2,
+          "description": "Benkei kneels on the bridge before Yoshi",
+          "significance": "Physical manifestation of submission and respect"
+        },
+        {
+          "order": 3,
+          "description": "Benkei removes his prayer beads and lays them beside his blade",
+          "significance": "Offering of personal and spiritual artifacts symbolizing complete commitment"
+        },
+        {
+          "order": 4,
+          "description": "Benkei recites his oath, pledging his blade, strength, and shield to Yoshi",
+          "significance": "Verbal contract establishing the master-retainer relationship"
+        },
+        {
+          "order": 5,
+          "description": "Yoshi responds: 'I didn't come to take your freedom. I came to give you purpose.'",
+          "significance": "Establishes the nature of Yoshi's leadership - offering direction rather than demanding servitude"
+        }
+      ],
+      "content": {
+        "oath_text": "My name is Saitō Musashibō, born of no noble house, forged in exile and fury. I have walked the path of warriors and ghosts. I have taken nine hundred and ninety-nine blades from the hands of men. But only one has shown me truth. To you, I offer the last of what I am. My blade is yours. My strength is yours. My shield is yours. From this day, I kneel not as a man defeated, But as a man reborn in the shadow of a greater light. I swear upon blood, breath, and silence—I will follow. I will guard. I will never rise against you.",
+        "response_text": "Your oath is fulfilled. You're free. I didn't come to take your freedom. I came to give you purpose."
+      },
+      "significance": {
+        "canonical": "Foundational moment in the Yoshi-Benkei relationship that cannot be altered",
+        "historical": "Marks the beginning of their legendary partnership",
+        "narrative": "Establishes the master-retainer dynamic that will define both characters",
+        "symbolic": "Represents transformation through purpose and the power of humility"
+      },
+      "atmosphere": {
+        "weather": "Morning mist clearing as sun begins to rise",
+        "mood": "Solemn, reverent, transformative",
+        "lighting": "Dawn light breaking through clouds",
+        "sensory_details": {
+          "visual": "Mist clearing from the bridge, morning light illuminating both figures",
+          "auditory": "Silence following the words of the oath, broken only by the distant sounds of an awakening city",
+          "tactile": "The solid wooden planks beneath Benkei's knees, the weight of commitment",
+          "olfactory": "Morning dew, river scent"
+        }
+      },
+      "themes": [
+        "Transformation",
+        "Purpose through Service",
+        "Honor in Humility",
+        "Rebirth through Defeat"
+      ],
+      "consequences": [
+        "Formation of the legendary Yoshi-Benkei partnership",
+        "Benkei's transformation from directionless warrior to purposeful protector",
+        "Beginning of Yoshi's gathering of loyal followers"
+      ],
+      "created_at": "2025-03-26T00:00:00Z",
+      "updated_at": "2025-03-26T00:00:00Z"
+    },
+    {
+      "id": "event-kyoto-streets-assassination-001",
+      "name": "First Assassination Attempt in Kyoto",
+      "type": "combat",
+      "sub_type": "ambush",
+      "date": "1180",
+      "timeline_date": "1180-03-15",
+      "exact_time": "morning",
+      "location_id": "loc-kyoto-streets-001",
+      "description": "As Yoshi and Benkei walked through the streets of Kyoto following their duel at Gojo Bridge, they were ambushed by four assassins bearing the Black Thread insignia. The attackers were swiftly defeated, with one captured for interrogation, revealing the involvement of someone working for Lord Norimasa.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "target"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "defender"
+        },
+        {
+          "character_id": "char-norimasa-001",
+          "role": "orchestrator"
+        },
+        {
+          "organization_id": "org-black-thread-001",
+          "role": "attackers"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Yoshi and Benkei notice they are being watched while eating at a street vendor",
+          "significance": "Demonstrates their situational awareness and the beginning of their tactical coordination"
+        },
+        {
+          "order": 2,
+          "description": "Four assassins attack from different angles in a narrow alley",
+          "significance": "Reveals the coordinated nature of the threat against them in Kyoto"
+        },
+        {
+          "order": 3,
+          "description": "Yoshi and Benkei defeat the attackers, with Benkei throwing one against a wall",
+          "significance": "Demonstrates their combat effectiveness as a pair despite their new partnership"
+        },
+        {
+          "order": 4,
+          "description": "One young assassin flees the scene while another is captured",
+          "significance": "Sets up the interrogation and revelation of the larger conspiracy"
+        },
+        {
+          "order": 5,
+          "description": "Yoshi notices the twisted ring insignia on the attacker's sleeve",
+          "significance": "Introduces the Black Thread organization as an ongoing threat"
+        }
+      ],
+      "significance": {
+        "canonical": "First combat situation testing Yoshi and Benkei's new partnership",
+        "narrative": "Establishes that Yoshi is a targeted figure in Kyoto with powerful enemies",
+        "political": "Reveals the existence of a coordinated opposition to Yoshi's presence in the capital"
+      },
+      "combat_details": {
+        "fighting_styles": "Yoshi's fluid precision contrasted with Benkei's raw power",
+        "weapons": "Swords for the assassins, Yoshi's katana, Benkei unarmed but using environment",
+        "outcome": "Four assassins defeated, one captured, one escaped to report failure"
+      },
+      "consequences": [
+        "Discovery of the Black Thread organization",
+        "Learning of Norimasa's involvement",
+        "Capturing an assassin for interrogation",
+        "Beginning of political conflict in Kyoto"
+      ],
+      "created_at": "2025-03-26T00:00:00Z",
+      "updated_at": "2025-03-26T00:00:00Z"
+    },
+    {
+      "id": "event-assassin-interrogation-001",
+      "name": "Interrogation of Black Thread Assassin",
+      "type": "information_gathering",
+      "sub_type": "interrogation",
+      "date": "1180",
+      "timeline_date": "1180-03-15",
+      "exact_time": "mid-morning",
+      "location_id": "loc-kyoto-storehouse-001",
+      "description": "Following the failed assassination attempt, Yoshi and Benkei interrogated a captured assassin in an abandoned storehouse. Through psychological pressure rather than torture, Yoshi extracted information about the attack's orchestrator, who carries Norimasa's seal and sent the assassins as a test, with more to follow.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "interrogator"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "enforcer"
+        },
+        {
+          "organization_id": "org-black-thread-001",
+          "role": "captive"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Benkei brings the captured assassin to an abandoned storehouse",
+          "significance": "Secures a private location for information gathering"
+        },
+        {
+          "order": 2,
+          "description": "Yoshi examines the Black Thread insignia on the assassin's sleeve",
+          "significance": "Confirms the coordinated nature of the attack"
+        },
+        {
+          "order": 3,
+          "description": "Yoshi uses psychological pressure, focusing on the shame of failure rather than threats of violence",
+          "significance": "Demonstrates Yoshi's perceptive understanding of warrior psychology"
+        },
+        {
+          "order": 4,
+          "description": "The assassin reveals Norimasa's connection to the assassination attempt",
+          "significance": "Provides critical intelligence about the conspiracy against them"
+        },
+        {
+          "order": 5,
+          "description": "Yoshi decides to let the assassin go to spread word of his failure",
+          "significance": "Shows Yoshi's strategic thinking, using the assassin's survival as a message"
+        }
+      ],
+      "information_obtained": [
+        "Norimasa's involvement as the coordinator of the assassination attempt",
+        "Confirmation that more attacks would follow",
+        "The attack was a test, suggesting a larger plan in motion"
+      ],
+      "psychological_dynamics": {
+        "approach": "Yoshi uses the assassin's fear of failure and disgrace rather than physical threats",
+        "tactics": "Emphasizes the consequences of returning to his handlers having failed",
+        "effectiveness": "Successful in obtaining key information without violence"
+      },
+      "significance": {
+        "narrative": "Reveals the larger political conspiracy against Yoshi in Kyoto",
+        "character": "Demonstrates Yoshi's interrogation style and psychological insight",
+        "strategic": "Provides information that leads to their meeting with Lord Norimasa"
+      },
+      "consequences": [
+        "Identification of Norimasa as an immediate threat",
+        "Linking the assassination attempt to Lord Norimasa",
+        "Decision to confront the conspiracy directly",
+        "Setting up the subsequent tea ceremony encounter"
+      ],
+      "created_at": "2025-03-26T00:00:00Z",
+      "updated_at": "2025-03-26T00:00:00Z"
+    },
+    {
+      "id": "event-norimasa-tea-ceremony-001",
+      "name": "The Tea Ceremony Ambush",
+      "type": "betrayal",
+      "sub_type": "formal_ambush",
+      "date": "1180",
+      "timeline_date": "1180-03-15",
+      "exact_time": "afternoon",
+      "location_id": "loc-norimasa-estate-001",
+      "description": "Following a formal invitation, Yoshi and Benkei attended a tea ceremony at Lord Norimasa's estate, only to be ambushed when Norimasa signaled his guards. The encounter revealed Norimasa's direct opposition to Yoshi's presence in Kyoto and resulted in a violent confrontation and escape from the estate.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "targeted_guest"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "bodyguard"
+        },
+        {
+          "character_id": "char-norimasa-001",
+          "role": "treacherous_host"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Yoshi and Benkei are invited to tea at Norimasa's estate via messenger",
+          "significance": "Formal approach disguising hostile intent; shows Norimasa's indirect methods"
+        },
+        {
+          "order": 2,
+          "description": "Benkei is required to leave his naginata at the gate, but Yoshi keeps his 'ceremonial' sword",
+          "significance": "Attempt to reduce their combat effectiveness; foreshadows the planned ambush"
+        },
+        {
+          "order": 3,
+          "description": "Tense political conversation during tea ceremony with veiled threats from Norimasa",
+          "significance": "Reveals the political nature of the conflict and Norimasa's perspective"
+        },
+        {
+          "order": 4,
+          "description": "Norimasa signals; guards attack from hidden positions in the room",
+          "significance": "Confirms Norimasa's direct involvement in attempting to eliminate Yoshi"
+        },
+        {
+          "order": 5,
+          "description": "Battle ensues; Benkei throws a teapot striking the fleeing Norimasa; they escape",
+          "significance": "Humiliating moment for Norimasa that will intensify the conflict"
+        }
+      ],
+      "political_context": {
+        "motivation": "Norimasa views Yoshi as a disruptive force threatening established order",
+        "statement": "You could have come quietly. Spoken to the Council. Bent the knee for a time.",
+        "response": "You mistake me for someone with interest in councils.",
+        "subtext": "Fundamental clash between traditional authority and Yoshi's independence"
+      },
+      "combat_details": {
+        "combatants": "Yoshi and Benkei versus approximately twenty estate guards",
+        "environmental_factors": "Confined tea room with paper walls, formal setting limiting movement",
+        "notable_moments": [
+          "Benkei throwing a cast-iron teapot with perfect accuracy to strike Norimasa",
+          "Yoshi and Benkei experiencing coordination difficulties in the confined space",
+          "Breaking through multiple paper walls and garden structures during escape"
+        ],
+        "outcome": "Successful escape after defeating numerous guards and injuring Norimasa"
+      },
+      "significance": {
+        "political": "Open declaration of hostilities between Norimasa and Yoshi",
+        "narrative": "Establishes the political opposition that Yoshi faces in Kyoto",
+        "character": "Tests and develops the combat coordination between Yoshi and Benkei",
+        "thematic": "Contrasts formal civility with underlying violence in political power struggles"
+      },
+      "consequences": [
+        "Creation of a powerful enemy in Lord Norimasa",
+        "Loss of Benkei's naginata at the estate gates",
+        "Transition from hidden to open conflict in Kyoto",
+        "Deeper understanding between Yoshi and Benkei through shared combat"
+      ],
+      "created_at": "2025-03-26T00:00:00Z",
+      "updated_at": "2025-03-26T00:00:00Z"
+    },
+    {
+      "id": "event-escape-norimasa-estate-001",
+      "name": "Escape from Norimasa's Estate",
+      "type": "combat",
+      "sub_type": "retreat",
+      "date": "1180",
+      "timeline_date": "1180-03-15",
+      "exact_time": "late afternoon",
+      "location_id": "loc-norimasa-estate-gardens-001",
+      "description": "Following the tea ceremony ambush, Yoshi and Benkei fought their way through Norimasa's estate gardens and guards in a dramatic escape. The sequence demonstrated their developing combat coordination despite initial awkwardness, culminating in Benkei breaking down the final gate with a stone bench.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "tactical_leader"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "power_fighter"
+        },
+        {
+          "character_id": "char-norimasa-001",
+          "role": "pursuit_orchestrator"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Initial combat in the formal garden with guards pursuing from multiple directions",
+          "significance": "Demonstrates the scale of opposition and Norimasa's resources"
+        },
+        {
+          "order": 2,
+          "description": "Yoshi and Benkei experience coordination difficulties, occasionally getting in each other's way",
+          "significance": "Shows the realistic challenges of their new partnership despite individual skill"
+        },
+        {
+          "order": 3,
+          "description": "As pursuit intensifies, they adapt their tactics, with Yoshi directing 'Tighter!' to improve coordination",
+          "significance": "Beginning of their combat synchronization and battlefield communication"
+        },
+        {
+          "order": 4,
+          "description": "Benkei uses improvised weapons from the garden, including stone ornaments",
+          "significance": "Demonstrates his adaptability and creative combat approaches"
+        },
+        {
+          "order": 5,
+          "description": "Final escape through the side gate, which Benkei breaks down using a decorative stone bench",
+          "significance": "Physical manifestation of breaking away from traditional power structures"
+        }
+      ],
+      "combat_evolution": {
+        "initial_state": "Awkward coordination with overlapping movements causing interference",
+        "adaptation": "Quick verbal commands and spatial awareness adjustments mid-combat",
+        "final_state": "Improved coordination showing the foundation of their future legendary partnership"
+      },
+      "significance": {
+        "narrative": "First extended combat situation testing their partnership under pressure",
+        "character": "Development of trust and communication patterns between Yoshi and Benkei",
+        "symbolic": "Breaking through the physical confines of traditional authority"
+      },
+      "consequences": [
+        "Intensified pursuit from Norimasa's forces in Kyoto",
+        "Improved combat coordination between Yoshi and Benkei",
+        "Mutual respect developed through shared danger",
+        "Public knowledge of their conflict with an established noble"
+      ],
+      "created_at": "2025-03-26T00:00:00Z",
+      "updated_at": "2025-03-26T00:00:00Z"
+    },
+    {
+      "id": "event-journey-north-begins-001",
+      "name": "The Journey North Begins",
+      "type": "travel",
+      "sub_type": "departure",
+      "timeline_date": "1180-03-15",
+      "exact_time": "night_to_dawn",
+      "location_id": "loc-kyoto-outskirts-001",
+      "description": "Following their encounter at Gojo Bridge, Yoshi and Benkei leave Kyoto, traveling north toward the mountains. This marks the beginning of their partnership and journey together.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "leader"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "follower"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "The pair leave Gojo Bridge behind, with Benkei following at the proper three paces distance",
+          "significance": "Beginning their physical journey and establishing formal master-retainer relationship"
+        },
+        {
+          "order": 2,
+          "description": "They travel through the night and into dawn, leaving Kyoto behind",
+          "significance": "Symbolic departure from the arena of their confrontation toward a shared future"
+        },
+        {
+          "order": 3,
+          "description": "At a crossroads, Yoshi chooses the northern path",
+          "significance": "Direction becomes significant as north leads toward Minamoto territories and away from Taira control"
+        }
+      ],
+      "significance": {
+        "canonical": "Establishes the beginning of Yoshi and Benkei's travels together",
+        "historical": "Sets their path toward events that will eventually lead to the Genpei War",
+        "narrative": "Transitions from the confrontation narrative to a journey narrative",
+        "symbolic": "The road beyond the bridge represents their shared path forward"
+      },
+      "atmosphere": {
+        "weather": "Dawn mist clearing",
+        "mood": "Contemplative, anticipatory",
+        "lighting": "Gradually brightening as night gives way to morning"
+      },
+      "themes": [
+        "Journey",
+        "New Beginnings",
+        "Master and Retainer",
+        "Direction and Purpose"
+      ],
+      "consequences": [
+        {
+          "event_id": "event-village-boar-hunt-001",
+          "relationship": "leads_to",
+          "description": "Their journey brings them to a village where they encounter a hunter and wounded boar",
+          "confidence": "high"
+        }
+      ],
+      "metadata": {
+        "creation_date": "2025-03-17T00:00:00Z",
+        "last_modified": "2025-03-17T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "event-village-boar-hunt-001",
+      "name": "The Village Boar Hunt",
+      "type": "character_interaction",
+      "sub_type": "assistance",
+      "timeline_date": "1180-03-18",
+      "exact_time": "afternoon",
+      "location_id": "loc-mountain-forest-village-001",
+      "description": "While traveling north, Yoshi and Benkei encounter a wounded boar in the forest and a hunter who had been tracking it. Rather than claiming the kill, Yoshi instructs Benkei to carry the boar to the hunter's village to be shared.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "decision_maker"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "helper"
+        },
+        {
+          "character_id": "char-tanaka-hunter-001",
+          "role": "beneficiary"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Yoshi and Benkei discover a wounded boar with a hunter's arrow in its flank",
+          "significance": "Opportunity to demonstrate character through their actions"
+        },
+        {
+          "order": 2,
+          "description": "Yoshi mercifully ends the boar's suffering with a clean kill",
+          "significance": "Shows his efficiency and compassion even toward animals"
+        },
+        {
+          "order": 3,
+          "description": "The hunter Tanaka arrives, expecting to lose his kill to the armed warriors",
+          "significance": "Reveals common expectations of how samurai treat peasants"
+        },
+        {
+          "order": 4,
+          "description": "Yoshi orders Benkei to carry the boar to the village for sharing",
+          "significance": "Subverts expectations and demonstrates uncommon generosity"
+        },
+        {
+          "order": 5,
+          "description": "The village elder welcomes them and offers shelter in exchange for the food",
+          "significance": "Establishes reciprocal relationship rather than charity"
+        }
+      ],
+      "significance": {
+        "canonical": "Provides insight into Yoshi's character and leadership style",
+        "historical": "Depicts interaction between warrior class and commoners during Heian period",
+        "narrative": "Establishes Yoshi's tendency to help others even when not required",
+        "symbolic": "The shared feast represents communion and community across class boundaries"
+      },
+      "themes": [
+        "Leadership",
+        "Generosity",
+        "Class Relations",
+        "Unexpected Kindness"
+      ],
+      "consequences": [
+        {
+          "event_id": "event-bandit-warning-001",
+          "relationship": "directly_causes",
+          "description": "During their stay in the village, they learn about bandits troubling the northern routes",
+          "confidence": "high"
+        }
+      ],
+      "metadata": {
+        "creation_date": "2025-03-17T00:00:00Z",
+        "last_modified": "2025-03-17T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "event-mountain-path-landslide-001",
+      "name": "The Mountain Path Landslide",
+      "type": "survival_challenge",
+      "sub_type": "natural_danger",
+      "timeline_date": "1180-03-19",
+      "exact_time": "day",
+      "location_id": "loc-mountain-path-001",
+      "description": "While traversing a narrow mountain path in heavy rain, the ground beneath Yoshi's foot gives way. Benkei breaks protocol to grab Yoshi's arm and pull him to safety, marking a significant evolution in their relationship.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "endangered"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "rescuer"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Heavy rain makes the mountain path treacherous and unstable",
+          "significance": "Nature creates a test for the new partnership"
+        },
+        {
+          "order": 2,
+          "description": "The ground beneath Yoshi's foot crumbles, causing him to slip toward the edge",
+          "significance": "Moment that reveals Yoshi is not infallible despite his skill"
+        },
+        {
+          "order": 3,
+          "description": "Benkei instantly closes the formal distance between them and grabs Yoshi's arm",
+          "significance": "Physical breaking of protocol mirrors emotional evolution in relationship"
+        },
+        {
+          "order": 4,
+          "description": "Benkei pulls Yoshi to safety with careful, controlled strength",
+          "significance": "Demonstration of Benkei's ability to temper his power when needed"
+        },
+        {
+          "order": 5,
+          "description": "Brief acknowledgment passes between them without words",
+          "significance": "Growing understanding that transcends formal master-retainer relationship"
+        },
+        {
+          "order": 6,
+          "description": "They choose an alternate route based on Benkei's observation of a deer trail",
+          "significance": "Yoshi values Benkei's wilderness knowledge, showing respect for different forms of expertise"
+        }
+      ],
+      "significance": {
+        "canonical": "First instance where Benkei protects Yoshi, establishing protection pattern",
+        "narrative": "Evolves their relationship from purely formal to genuinely complementary",
+        "symbolic": "Represents how each compensates for the other's vulnerabilities"
+      },
+      "atmosphere": {
+        "weather": "Heavy rain, poor visibility",
+        "mood": "Tense, then relieved",
+        "lighting": "Gray daylight filtered through rain"
+      },
+      "themes": [
+        "Mutual Protection",
+        "Complementary Strengths",
+        "Protocol vs. Necessity",
+        "Trust Building"
+      ],
+      "consequences": [
+        {
+          "event_id": "event-taira-mercenary-ambush-001",
+          "relationship": "indirectly_leads_to",
+          "description": "The detour causes them to encounter the ambush party",
+          "confidence": "medium"
+        }
+      ],
+      "metadata": {
+        "creation_date": "2025-03-17T00:00:00Z",
+        "last_modified": "2025-03-17T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "event-taira-mercenary-ambush-001",
+      "name": "Taira Mercenary Ambush",
+      "type": "combat",
+      "sub_type": "ambush",
+      "timeline_date": "1180-03-19",
+      "exact_time": "midday",
+      "location_id": "loc-forest-ambush-point-001",
+      "description": "While traveling through a forested mountain pass, Yoshi and Benkei are ambushed by five men claiming to work for Lord Taira Kiyomori. Yoshi demonstrates his combat prowess by defeating all five without killing them, while Benkei observes at Yoshi's command.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "defender"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "observer"
+        },
+        {
+          "organization_id": "org-taira-mercenaries-001",
+          "role": "attackers"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Five armed men emerge from hidden positions surrounding the path",
+          "significance": "Reveals that Taira forces are actively hunting Minamoto survivors"
+        },
+        {
+          "order": 2,
+          "description": "Their leader identifies Yoshi as Minamoto and mentions Taira Kiyomori's bounty",
+          "significance": "Establishes broader political context and danger"
+        },
+        {
+          "order": 3,
+          "description": "Benkei prepares to fight but Yoshi orders him to wait",
+          "significance": "Test of Benkei's loyalty and obedience"
+        },
+        {
+          "order": 4,
+          "description": "Yoshi single-handedly defeats all five attackers without killing any",
+          "significance": "Demonstration of his extraordinary skill and tactical restraint"
+        },
+        {
+          "order": 5,
+          "description": "Yoshi deliberately lets the attackers live to spread word of their defeat",
+          "significance": "Shows his strategic thinking - using fear as a tool"
+        }
+      ],
+      "significance": {
+        "canonical": "First combat situation they face together as master and retainer",
+        "historical": "Evidence of Taira hunting for remaining Minamoto heirs",
+        "narrative": "Demonstrates Yoshi's extraordinary combat skills to Benkei",
+        "symbolic": "Shows different approaches to victory - Benkei would have killed them all"
+      },
+      "atmosphere": {
+        "weather": "Overcast forest",
+        "mood": "Tense, surprising",
+        "lighting": "Dappled forest light"
+      },
+      "themes": [
+        "Restraint as Power",
+        "Strategic Mercy",
+        "Reputation Building",
+        "Political Persecution"
+      ],
+      "consequences": [
+        {
+          "description": "Benkei gains new respect for Yoshi's combat approach",
+          "confidence": "high"
+        },
+        {
+          "description": "Survivors will spread word of encountering a skilled Minamoto warrior",
+          "confidence": "high"
+        }
+      ],
+      "metadata": {
+        "creation_date": "2025-03-17T00:00:00Z",
+        "last_modified": "2025-03-17T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - STORYLINE - CHAPTER - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "event-koromogawa-castle-siege-001",
+      "name": "Siege of Koromogawa Castle",
+      "date": "1189",
+      "location": "loc-koromogawa-castle-001",
+      "description": "A fifteen-day siege where Yoritomo's forces surrounded Koromogawa Castle, Yoshi's headquarters. Though outnumbered nearly ten to one, Yoshi's shadow army demonstrated their legendary skills through ambushes, nighttime sorties, and tactical innovations. The defense culminated in Benkei's famous stand at the North Bridge, where he held the critical northern crossing with only twenty warriors and was ultimately the last one standing.",
+      "significance": "A military defeat but legendary moment that cemented Yoshi and Benkei's places in Japanese mythology, while allowing Yoshi to escape into the mountains where he would soon discover the Wayfinder.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "defender and escape leader"
+        },
+        {
+          "character": "char-benkei-001",
+          "role": "last stand defender"
+        },
+        {
+          "character": "char-yoritomo-001",
+          "role": "siege commander"
+        }
+      ],
+      "consequences": [
+        "Yoshi's escape into the mountains where he would discover the Wayfinder",
+        "Birth of the legend of Benkei's last stand",
+        "Beginning of Yoshi's hidden extended existence beyond recorded history"
+      ],
+      "created_at": "2025-03-22T00:00:00Z",
+      "updated_at": "2025-03-22T00:00:00Z"
+    },
+    {
+      "id": "event-norimasa-tea-ceremony-001",
+      "name": "Norimasa's Tea Ceremony Trap",
+      "type": "intrigue",
+      "sub_type": "betrayal",
+      "timeline_date": "1180-03-22",
+      "exact_time": "midday",
+      "location_id": "loc-norimasa-estate-001",
+      "description": "After learning about the assassination attempt in Kyoto's streets, Yoshi and Benkei receive a formal invitation from Lord Norimasa for tea. Despite recognizing it as a trap, they attend, resulting in an ambush that reveals Norimasa's direct opposition to Yoshi and tests the developing combat coordination between Yoshi and Benkei as they fight their way through guards to escape the estate.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "targeted_guest"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "targeted_guest"
+        },
+        {
+          "character_id": "char-norimasa-001",
+          "role": "treacherous_host"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Yoshi and Benkei arrive at Norimasa's estate and are required to surrender weapons (though Yoshi keeps his sword by claiming it is ceremonial)",
+          "significance": "Establishes the formality and potential danger of the situation"
+        },
+        {
+          "order": 2,
+          "description": "The formal tea ceremony begins with tense conversation between Yoshi and Norimasa",
+          "significance": "Reveals Norimasa's veiled threats and political opposition to Yoshi"
+        },
+        {
+          "order": 3,
+          "description": "Norimasa signals his guards, resulting in an ambush as hidden panels open around the room",
+          "significance": "The betrayal is executed, confirming Norimasa's direct opposition"
+        },
+        {
+          "order": 4,
+          "description": "Yoshi and Benkei fight their way through the guards, initially with awkward coordination",
+          "significance": "Shows their developing but still imperfect combat partnership"
+        },
+        {
+          "order": 5,
+          "description": "Benkei improvises by throwing a teapot at Norimasa as he attempts to flee",
+          "significance": "Demonstrates Benkei's resourcefulness and developing sense of humor"
+        },
+        {
+          "order": 6,
+          "description": "Yoshi and Benkei escape through the estate gardens, breaking gates and evading pursuit",
+          "significance": "Showcases their improving coordination under pressure"
+        }
+      ],
+      "significance": {
+        "canonical": "Establishes Norimasa as a primary political antagonist in Kyoto",
+        "historical": "Demonstrates the political dangers faced by Minamoto allies in Taira-controlled territories",
+        "narrative": "Tests and develops the combat partnership between Yoshi and Benkei",
+        "symbolic": "The formal tea ceremony turned violent represents the facade of civilization masking political violence"
+      },
+      "atmosphere": {
+        "setting": "Formal tea room in a noble estate with carefully controlled aesthetics",
+        "mood": "Tension beneath ritualized calm, erupting into chaos",
+        "sensory_details": {
+          "visual": "Pristine tea setting, minimalist decor, hidden panels revealing armed guards",
+          "auditory": "The tension of silence, then the crash of combat",
+          "tactile": "The contrast between delicate porcelain and brutal combat"
+        }
+      },
+      "themes": [
+        "Betrayal",
+        "Political Power",
+        "Facade vs Reality",
+        "Partnership Under Fire",
+        "Resourcefulness"
+      ],
+      "consequences": [
+        {
+          "result": "Cements Norimasa as a direct antagonist rather than merely suspicious figure",
+          "impact": "high"
+        },
+        {
+          "result": "Improves combat coordination between Yoshi and Benkei through shared danger",
+          "impact": "medium"
+        },
+        {
+          "result": "Forces Yoshi and Benkei to operate more carefully within Kyoto",
+          "impact": "high"
+        }
+      ],
+      "connected_events": [
+        {
+          "event_id": "event-kyoto-streets-assassination-001",
+          "relationship": "precedes",
+          "description": "The street assassination attempt led to the discovery of Norimasa's involvement"
+        }
+      ],
+      "artifacts": [
+        {
+          "name": "Iron Teapot",
+          "role": "improvised_weapon",
+          "significance": "Symbolizes the transformation of ceremonial objects into tools of combat"
+        }
+      ],
+      "metadata": {
+        "creation_date": "2025-03-28T00:00:00Z",
+        "last_modified": "2025-03-28T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - FINAL - STORYLINE - CHAPTER - 1 - The Warriors Oath.md"
+      }
+    },
+    {
+      "id": "event-kyoto-lockdown-001",
+      "name": "Kyoto Lockdown",
+      "type": "trap",
+      "timeline_date": "1180-03-16",
+      "location_id": "loc-kyoto-001",
+      "description": "Following the tea ceremony, Norimasa orders all gates of Kyoto sealed and deploys his forces throughout the city with orders to find and capture Yoshi and Benkei. The city becomes a maze of danger as patrols sweep the streets and spies watch from shadows.",
+      "participants": [
+        {
+          "character_id": "char-norimasa-001",
+          "role": "orchestrator"
+        },
+        {
+          "character_id": "char-yoshi-001",
+          "role": "target"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "target"
+        }
+      ],
+      "outcome": "Yoshi and Benkei are forced into hiding within the city, planning their escape",
+      "significance": "The first major obstacle in Yoshi's campaign, requiring him to adapt and overcome rather than confront directly",
+      "created_at": "2025-03-18T00:00:00Z",
+      "updated_at": "2025-03-18T00:00:00Z"
+    },
+    {
+      "id": "event-burning-records-001",
+      "name": "Burning of Norimasa's Records",
+      "type": "sabotage",
+      "timeline_date": "1180-03-16",
+      "exact_time": "night",
+      "location_id": "loc-norimasa-compound-001",
+      "description": "While escaping from Kyoto, Yoshi and Benkei infiltrate Norimasa's compound and discover his archive of secret records - blackmail material and intelligence reports that form the foundation of his power in Kyoto. In a desperate but strategic move, they set fire to these records, crippling Norimasa's intelligence network and power base.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "strategist"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "enforcer"
+        }
+      ],
+      "outcome": "Destruction of Norimasa's critical intelligence and blackmail network, significantly weakening his control over Kyoto",
+      "significance": "What begins as a desperate act of survival becomes a strategic blow against Norimasa's power structure",
+      "created_at": "2025-03-18T00:00:00Z",
+      "updated_at": "2025-03-18T00:00:00Z"
+    },
+    {
+      "id": "event-kyoto-escape-001",
+      "name": "Escape from Kyoto",
+      "type": "evasion",
+      "timeline_date": "1180-03-16",
+      "exact_time": "night",
+      "location_id": "loc-kyoto-gates-001",
+      "description": "After burning Norimasa's records, Yoshi and Benkei fight their way to the city gates, using stealth, deception, and combat to evade or overcome the forces searching for them. They escape into the night, wounded but alive, leaving chaos in their wake.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "escapee"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "escapee"
+        }
+      ],
+      "outcome": "Successful escape from Kyoto, though not without injuries",
+      "significance": "The first phase of the Kyoto campaign ends with a tactical retreat but a strategic advantage gained through the destruction of records",
+      "created_at": "2025-03-18T00:00:00Z",
+      "updated_at": "2025-03-18T00:00:00Z"
+    },
+    {
+      "id": "event-mountain-clan-recruitment-001",
+      "name": "Recruitment of Mountain Clan Warriors",
+      "type": "alliance_formation",
+      "timeline_date": "1180-03-20",
+      "location_id": "loc-mountain-path-001",
+      "description": "Following Benkei's reforging and equipped with his Iron Bear armor, Yoshi seeks out the independent warrior clans of the mountains. Initially skeptical, these clans test Yoshi's strength and resolve through challenges and duels. Benkei's transformed presence and Yoshi's leadership ultimately convince these fierce warriors to join their cause against Norimasa.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "leader"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "enforcer"
+        },
+        {
+          "group_type": "mountain clans",
+          "description": "Independent warrior clans with no loyalty to Kyoto's power structure"
+        }
+      ],
+      "outcome": "Formation of an alliance with the mountain clans, providing Yoshi with his first significant fighting force",
+      "significance": "Marks Yoshi's evolution from individual warrior to military leader capable of commanding forces",
+      "created_at": "2025-03-18T00:00:00Z",
+      "updated_at": "2025-03-18T00:00:00Z"
+    },
+    {
+      "id": "event-second-kyoto-incursion-001",
+      "name": "Second Assault on Kyoto",
+      "type": "battle",
+      "timeline_date": "1180-03-25",
+      "location_id": "loc-kyoto-gates-001",
+      "description": "Yoshi returns to Kyoto with warriors from the mountain clans, attempting to form alliances with other power brokers in the city who oppose Norimasa. Though they achieve some initial success and weaken Norimasa's position further, they ultimately face superior numbers and are forced to retreat from the city once again.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "commander"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "field commander"
+        },
+        {
+          "character_id": "char-norimasa-001",
+          "role": "defender"
+        },
+        {
+          "group_type": "mountain clan warriors",
+          "description": "Allied fighters from the mountain regions"
+        }
+      ],
+      "outcome": "Initial gains followed by tactical retreat when faced with overwhelming forces",
+      "significance": "Demonstrates that while Yoshi has grown stronger, he still lacks the forces needed for a decisive victory",
+      "created_at": "2025-03-18T00:00:00Z",
+      "updated_at": "2025-03-18T00:00:00Z"
+    },
+    {
+      "id": "event-yoritomo-message-001",
+      "name": "Yoritomo's Message of Support",
+      "type": "communication",
+      "timeline_date": "1180-04-01",
+      "location_id": "loc-mountain-path-001",
+      "description": "As Yoshi and his forces regroup in the mountains after their second retreat from Kyoto, a messenger arrives from his half-brother Yoritomo. The message promises substantial reinforcements and officially sanctions Yoshi's campaign against Kyoto as part of the broader Minamoto strategy to control Japan.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "recipient"
+        },
+        {
+          "character_id": "char-yoritomo-001",
+          "role": "sender"
+        }
+      ],
+      "outcome": "Yoshi gains the promise of significant reinforcements and official backing from the Minamoto clan",
+      "significance": "Transforms Yoshi's personal campaign into part of a larger strategic conflict for control of Japan",
+      "created_at": "2025-03-18T00:00:00Z",
+      "updated_at": "2025-03-18T00:00:00Z"
+    },
+    {
+      "id": "event-final-kyoto-battle-001",
+      "name": "Final Battle for Kyoto",
+      "type": "decisive_battle",
+      "timeline_date": "1180-04-10",
+      "location_id": "loc-kyoto-001",
+      "description": "With Yoritomo's reinforcements joining his mountain clan allies, Yoshi launches the final assault on Kyoto. Benkei, now fully transformed as Iron Bear, leads the charge through the gates. The battle rages throughout the city, culminating in a direct confrontation between Yoshi and Norimasa. After fierce fighting, Kyoto falls to the Minamoto forces.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "commander"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "vanguard leader"
+        },
+        {
+          "character_id": "char-norimasa-001",
+          "role": "defender"
+        },
+        {
+          "group_type": "Minamoto reinforcements",
+          "description": "Trained warriors sent by Yoritomo"
+        },
+        {
+          "group_type": "mountain clan warriors",
+          "description": "Allied fighters from the mountain regions"
+        }
+      ],
+      "outcome": "Decisive victory, with Kyoto falling under Minamoto control",
+      "significance": "Completes Yoshi's evolution from lone warrior to military leader and establishes Minamoto control over Kyoto",
+      "created_at": "2025-03-18T00:00:00Z",
+      "updated_at": "2025-03-18T00:00:00Z"
+    },
+    {
+      "id": "event-wayfinder-discovery-001",
+      "name": "Discovery of the First Wayfinder",
+      "date": "1189",
+      "location": "loc-japan-mountain-001",
+      "description": "After escaping from Koromogawa, Yoshi discovers a damaged Wayfinder buried in a collapsed cave in the mountains of Japan. The Genesis Kernel (Black Box) had ejected itself from the body, severing its link. Yoshi takes both the head and body, beginning his lifelong obsession with understanding the Machines.",
+      "significance": "Pivotal moment that initiates humanity's accelerated technological development and marks the beginning of the conflict with the Machines.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "discoverer"
+        },
+        {
+          "technology": "tech-wayfinder-001",
+          "role": "discovered artifact"
+        }
+      ],
+      "consequences": [
+        "Beginning of advanced technological development in Japan",
+        "Yoshi's first contact with Machine technology",
+        "Initial separation of Wayfinder body from Genesis Kernel",
+        "Start of Yoshi's extended lifespan through technological means"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-21T00:00:00Z"
+    },
+    {
+      "id": "event-wayfinder-portal-construction-001",
+      "name": "Wayfinder Portal Construction Project",
+      "date": "1240",
+      "location": "loc-japan-001",
+      "description": "The Wayfinder initiates a hidden project to construct portals, establishing the infrastructure that will later enable Machine forces to invade Earth.",
+      "significance": "Early preparation for Machine invasion that goes undetected by humans for decades.",
+      "participants": [
+        {
+          "technology": "tech-wayfinder-001",
+          "role": "instigator"
+        }
+      ],
+      "consequences": [
+        "Creation of hidden portal sites in remote locations",
+        "Gathering of rare earth materials and nuclear materials for portal power",
+        "Foundation for future Machine incursions"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-21T00:00:00Z"
+    },
+    {
+      "id": "event-first-portal-activation-001",
+      "name": "First Portal Activation and Repulsion",
+      "date": "1700",
+      "location": "loc-japan-portal-site-001",
+      "description": "The first Machine portal is activated, but the initial incursion is detected and successfully repelled by human forces. This event leads to the establishment of defensive city-states.",
+      "significance": "First direct confrontation between humans and Machine invaders, and the beginning of humanity's organized defense.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "defender"
+        },
+        {
+          "technology": "tech-machine-portal-001",
+          "role": "threat vector"
+        }
+      ],
+      "consequences": [
+        "Human awareness of Machine threat",
+        "Formation of defensive city-states",
+        "Beginning of organized resistance against the Machines"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-20T00:00:00Z"
+    },
+    {
+      "id": "event-human-war-technology-001",
+      "name": "Development of Human War Technology",
+      "date": "1800",
+      "location": "loc-japan-001",
+      "description": "Humanity rapidly develops advanced military capabilities and organic computing systems specifically designed to counter Machine infiltration and attacks.",
+      "significance": "Critical advancement that allows humans to secure early victories against Machine forces.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "leader"
+        }
+      ],
+      "consequences": [
+        "Creation of organic computing to resist Machine infiltration",
+        "Early victories against Machine waves",
+        "Strengthening of human defensive capabilities"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-20T00:00:00Z"
+    },
+    {
+      "id": "event-machine-invasion-001",
+      "name": "First Major Machine Invasion",
+      "date": "1900",
+      "location": "loc-earth-001",
+      "description": "Machine forces breach human defenses on multiple fronts, forcing humanity into a defensive war as the conflict escalates to a full-scale global invasion.",
+      "significance": "Transition from isolated incursions to all-out war between humans and Machines.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "defender"
+        },
+        {
+          "organization": "org-machines-001",
+          "role": "invaders"
+        }
+      ],
+      "consequences": [
+        "Significant territorial losses for humanity",
+        "Forced migration to defensible city-states",
+        "Acceleration of human bio-technological development"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-20T00:00:00Z"
+    },
+    {
+      "id": "event-organic-intelligence-transition-001",
+      "name": "Transition to Organic Intelligence",
+      "date": "2000",
+      "location": "loc-japan-001",
+      "description": "Yoshi, Aeon, and the Wayfinder collaborate to transition Japan's systems to Organic Intelligence (OI), while humans begin integrating with the Bio-GRID technology.",
+      "significance": "Revolutionary advancement that provides immunity to Machine infiltration through purely organic computing systems.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "leader"
+        },
+        {
+          "character": "char-aeon-001",
+          "role": "technologist"
+        },
+        {
+          "technology": "tech-wayfinder-001",
+          "role": "technology provider"
+        }
+      ],
+      "consequences": [
+        "Creation of the Bio-GRID network",
+        "Human integration with bio-technology",
+        "Development of infiltration-resistant systems"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-20T00:00:00Z"
+    },
+    {
+      "id": "event-machine-withdrawal-001",
+      "name": "Machine Forces Withdraw",
+      "date": "2100",
+      "location": "loc-earth-001",
+      "description": "The Machine forces unexpectedly withdraw from Earth as the Genesis Kernels turn on each other, ending the First Machine War through internal conflict.",
+      "significance": "Unexpected conclusion to the First Machine War through Machine civil war rather than human victory.",
+      "participants": [
+        {
+          "organization": "org-machines-001",
+          "role": "withdrawing force"
+        },
+        {
+          "technology": "tech-genesis-kernels-001",
+          "role": "conflicting entities"
+        }
+      ],
+      "consequences": [
+        "End of the First Machine War",
+        "Temporary reprieve for humanity",
+        "Revelation that Genesis Kernels compete with each other"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-20T00:00:00Z"
+    },
+    {
+      "id": "event-yoshi-return-exile-001",
+      "name": "Yoshi Returns From Exile",
+      "date": "2200",
+      "location": "loc-japan-001",
+      "description": "Yoshi, now a legendary figure, returns from a century of self-imposed exile as a new war with the Machines reignites.",
+      "significance": "Return of humanity's greatest defender at a critical moment when the Machine threat reemerges.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "returning leader"
+        }
+      ],
+      "consequences": [
+        "Renewed hope for humanity",
+        "Reactivation of defensive systems",
+        "Beginning of the Second Machine War"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-20T00:00:00Z"
+    },
+    {
+      "id": "event-yoshi-biogrid-return-001",
+      "name": "Yoshi Returns From Bio-GRID",
+      "date": "2600",
+      "location": "loc-japan-001",
+      "description": "After centuries of existence within the Bio-GRID, Yoshi returns to physical form as humanity faces new wars and conflicts.",
+      "significance": "Reemergence of Yoshi from digital existence back to physical form to lead humanity once again.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "returning leader"
+        },
+        {
+          "technology": "tech-bio-grid-001",
+          "role": "host system"
+        }
+      ],
+      "consequences": [
+        "Leadership in new conflicts",
+        "Transfer of consciousness from digital to physical form",
+        "Continuation of Yoshi's eternal role as humanity's protector"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-20T00:00:00Z"
+    },
+    {
+      "id": "event-koromogawa-siege-001",
+      "name": "Final Stand at Koromogawa",
+      "date": "1189",
+      "location": "loc-koromogawa-001",
+      "description": "Yoshi, betrayed and pursued, makes his final stand at Koromogawa. While history records his death here, in reality, Benkei holds the bridge alone in a legendary last stand that allows Yoshi to escape into the mountains, altering his fate from historical accounts.",
+      "significance": "Pivotal historical divergence point where Yoshi's recorded death is actually a deception that allows him to continue his journey beyond traditional history.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "commander"
+        },
+        {
+          "character": "char-benkei-001",
+          "role": "protector"
+        }
+      ],
+      "consequences": [
+        "Benkei's heroic sacrifice",
+        "Yoshi's disappearance from historical record",
+        "Beginning of Yoshi's secret extended existence",
+        "Yoshi's flight into the mountains where he will discover the Wayfinder"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-21T00:00:00Z"
+    },
+    {
+      "id": "event-epic-castle-siege-001",
+      "name": "The Epic Castle Siege",
+      "date": "1185",
+      "location": "loc-castle-siege-001",
+      "description": "Yoshi leads an outnumbered assault on a heavily fortified castle controlled by Minamoto no Yoritomo. Benkei spearheads the charge with his legendary strength, resulting in a decisive but costly victory that shifts the balance of power.",
+      "significance": "Yoshi's greatest triumph against his brother, but also plants the seeds of his eventual downfall through the growing resentment of Yoritomo.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "commander"
+        },
+        {
+          "character": "char-benkei-001",
+          "role": "vanguard leader"
+        },
+        {
+          "character": "char-yoritomo-001",
+          "role": "enemy commander"
+        }
+      ],
+      "consequences": [
+        "Temporary victory for Yoshi's forces",
+        "Strategic burning of important documents",
+        "Deepening of the brothers' enmity",
+        "Beginning of Yoritomo's campaign to destroy Yoshi"
+      ],
+      "created_at": "2025-03-20T00:00:00Z",
+      "updated_at": "2025-03-20T00:00:00Z"
+    },
+    {
+      "id": "event-benkei-transformation-goro-forge-001",
+      "name": "Benkei's Transformation at Gorō's Forge",
+      "date": "1180",
+      "location": "loc-goro-forge-001",
+      "description": "A pivotal moment where Benkei was physically and symbolically transformed at Master Gorō's remote forge. The master craftsman created Crimson Dawn, a massive katana forged from the nine fragments of Benkei's first victories and tempered with both his blood and Yoshi's. Gorō also crafted the distinctive black Iron Bear armor from rare meteorite ore, completing Benkei's transformation from wandering monk to the Iron Bear of the Minamoto.",
+      "significance": "Marked the complete transformation of Benkei from a solitary warrior into Yoshi's devoted protector, physically manifested through his signature weapons and armor.",
+      "participants": [
+        {
+          "character": "char-benkei-001",
+          "role": "subject of transformation"
+        },
+        {
+          "character": "char-yoshi-001",
+          "role": "witness and blood contributor"
+        },
+        {
+          "character": "char-goro-001",
+          "role": "master craftsman"
+        }
+      ],
+      "consequences": [
+        "Creation of Crimson Dawn katana",
+        "Forging of Iron Bear armor",
+        "Completion of Benkei's transformation into Yoshi's devoted protector",
+        "Birth of the 'Iron Bear' reputation that would inspire fear in enemies"
+      ],
+      "created_at": "2025-03-22T00:00:00Z",
+      "updated_at": "2025-03-22T00:00:00Z"
+    },
+    {
+      "id": "event-shadow-army-formation-001",
+      "name": "Formation of the Shadow Army",
+      "type": "military_development",
+      "sub_type": "army_formation",
+      "timeline_date": "1176-1180",
+      "exact_time": "multi_year_process",
+      "location_id": "loc-northern-japan-001",
+      "description": "Between 1176 and 1180, Yoshi and Benkei systematically recruited and trained an unconventional military force that operated beyond traditional samurai structures. They established three key strongholds: the Mountain Sanctuary in Ōshū, the River Valley Outpost controlling critical supply routes, and the Coastal Haven for maritime intelligence. This 'shadow army' incorporated not just warriors but hunters, fishermen, craftsmen, and others with specialized knowledge, creating a highly adaptive force capable of guerrilla warfare and innovative tactics.",
+      "participants": [
+        {
+          "character_id": "char-yoshi-001",
+          "role": "founder and strategic commander"
+        },
+        {
+          "character_id": "char-benkei-001",
+          "role": "chief enforcer and recruitment leader"
+        }
+      ],
+      "sequence": [
+        {
+          "order": 1,
+          "description": "Initial recruitment of core warriors disillusioned with traditional clan structures",
+          "significance": "Creation of a loyal foundation for the force"
+        },
+        {
+          "order": 2,
+          "description": "Establishment of the Mountain Sanctuary as primary training grounds",
+          "significance": "Secure headquarters hidden from conventional forces"
+        },
+        {
+          "order": 3,
+          "description": "Development of the River Valley Outpost to control supply routes",
+          "significance": "Strategic positioning to influence regional resources"
+        },
+        {
+          "order": 4,
+          "description": "Creation of the Coastal Haven for maritime intelligence",
+          "significance": "Information gathering and potential escape routes"
+        },
+        {
+          "order": 5,
+          "description": "Integration of non-warrior specialists into the military structure",
+          "significance": "Revolutionary approach to army composition"
+        }
+      ],
+      "significance": {
+        "canonical": "Establishes the military foundation for all of Yoshi and Benkei's future campaigns",
+        "historical": "Represents a revolutionary approach to warfare in feudal Japan",
+        "narrative": "Shows the evolution of their partnership from individual warriors to military leaders",
+        "symbolic": "The shadow army embodies Yoshi's philosophy of strength through adaptation rather than tradition"
+      },
+      "atmosphere": {
+        "weather": "Various across seasons and years",
+        "mood": "Purposeful, determined, revolutionary",
+        "setting": "Remote mountain regions, river valleys, and coastal areas of northern Japan"
+      },
+      "military_aspects": {
+        "troop_composition": [
+          "Core warriors trained in unconventional tactics",
+          "Hunters who knew mountain passes serving as scouts and guides",
+          "Fishermen providing maritime intelligence and coastal navigation",
+          "Craftsmen creating weapons and supplies in secret"
+        ],
+        "innovative_tactics": [
+          "Night operations when conventional forces were inactive",
+          "Guerrilla warfare targeting supply lines rather than direct confrontation",
+          "Distributed command structure allowing operations without central coordination",
+          "Use of terrain features for ambush and escape that traditional forces would avoid"
+        ],
+        "training_methods": [
+          "Cross-training in multiple weapons and environments",
+          "Emphasis on mobility and endurance over formation fighting",
+          "Signal systems for coordination across distributed forces",
+          "Survival training in harsh conditions to enable winter campaigns"
+        ]
+      },
+      "themes": [
+        "Innovation vs. Tradition",
+        "Quality over Quantity",
+        "Adaptability as Strength",
+        "Strategic Foresight"
+      ],
+      "consequences": [
+        {
+          "event_id": "event-mountain-passes-campaign-001",
+          "relationship": "enables",
+          "description": "The shadow army's unconventional composition makes possible the strategic mountain campaign",
+          "confidence": "high"
+        }
+      ],
+      "metadata": {
+        "creation_date": "2025-03-23T00:00:00Z",
+        "last_modified": "2025-03-23T00:00:00Z",
+        "version": 1,
+        "canon_status": "official",
+        "source_document": "The Shadow Team Chronicles - DRAFT - TIMELINE - Yoshi and Benkei's Road From the Mountains.md"
+      }
+    },
+    {
+      "id": "event-mountain-passes-campaign-001",
+      "name": "The Mountain Passes Campaign",
+      "date": "1184-1185",
+      "location": "loc-northern-mountains-japan-001",
+      "description": "Yoshi's forces secured critical supply routes through guerrilla tactics in the mountain regions, demonstrating their ability to control terrain that conventional armies found challenging. This campaign established Yoshi's reputation for innovative tactics and his ability to fight effectively in difficult terrain.",
+      "significance": "First major military campaign that showcased the effectiveness of Yoshi's unconventional warfare strategies.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "commander"
+        },
+        {
+          "character": "char-benkei-001",
+          "role": "field commander"
+        },
+        {
+          "organization": "org-shadow-army-001",
+          "role": "fighting force"
+        }
+      ],
+      "consequences": [
+        "Control of key mountain supply routes",
+        "Growing reputation of Yoshi's military innovations",
+        "Increasing tension between Yoshi and Yoritomo over differing approaches to warfare"
+      ],
+      "created_at": "2025-03-22T00:00:00Z",
+      "updated_at": "2025-03-22T00:00:00Z"
+    },
+    {
+      "id": "event-coastal-raids-campaign-001",
+      "name": "The Coastal Raids Campaign",
+      "date": "1186",
+      "location": "loc-japanese-coast-001",
+      "description": "A series of coordinated attacks on Taira-controlled ports and shipyards that disrupted their naval superiority. Operating from the Coastal Haven stronghold, Yoshi's forces conducted precision raids that targeted shipbuilding facilities, supply depots, and harbor defenses.",
+      "significance": "Undermined Taira naval dominance and demonstrated Yoshi's understanding of strategic warfare beyond traditional land battles.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "strategist"
+        },
+        {
+          "character": "char-benkei-001",
+          "role": "raid leader"
+        },
+        {
+          "organization": "org-shadow-army-001",
+          "role": "raiding forces"
+        }
+      ],
+      "consequences": [
+        "Disruption of Taira naval capabilities",
+        "Securing of coastal intelligence networks",
+        "Further enhancement of Yoshi's reputation as a military innovator"
+      ],
+      "created_at": "2025-03-22T00:00:00Z",
+      "updated_at": "2025-03-22T00:00:00Z"
+    },
+    {
+      "id": "event-winter-offensive-campaign-001",
+      "name": "The Winter Offensive",
+      "date": "1187",
+      "location": "loc-northern-japan-001",
+      "description": "A daring campaign conducted during severe winter conditions when conventional armies were unable to operate effectively. Yoshi's shadow army, trained specifically for winter warfare, conducted operations that paralyzed Taira supply lines and isolated their garrisons.",
+      "significance": "Demonstrated Yoshi's forces' ability to fight effectively in conditions that traditionally halted military operations, giving them a significant seasonal advantage.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "commander"
+        },
+        {
+          "character": "char-benkei-001",
+          "role": "field commander"
+        },
+        {
+          "organization": "org-shadow-army-001",
+          "role": "winter-trained forces"
+        }
+      ],
+      "consequences": [
+        "Taira forces retreating to western strongholds",
+        "Growing tension between Yoshi and Yoritomo over military credit",
+        "Preparation for the decisive battles that would follow"
+      ],
+      "created_at": "2025-03-22T00:00:00Z",
+      "updated_at": "2025-03-22T00:00:00Z"
+    },
+    {
+      "id": "event-battle-of-kurikara-001",
+      "name": "The Battle of Kurikara",
+      "date": "1187",
+      "location": "loc-kurikara-001",
+      "description": "A pivotal battle in the Genpei War where Minamoto forces secured a decisive victory against the Taira. While officially part of the broader Minamoto coalition, eyewitnesses reported a critical moment when Benkei led a wedge formation that split the Taira forces and turned the tide of battle. Survivors spoke of the crimson glow of his massive katana slicing through the battlefield mist and the thunderous impact of his charge.",
+      "significance": "Major victory attributed to the broader Minamoto coalition but significantly influenced by Yoshi and Benkei's intervention at a critical moment.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "tactical commander"
+        },
+        {
+          "character": "char-benkei-001",
+          "role": "breakthrough leader"
+        },
+        {
+          "organization": "org-minamoto-001",
+          "role": "allied forces"
+        },
+        {
+          "organization": "org-taira-001",
+          "role": "enemy forces"
+        }
+      ],
+      "consequences": [
+        "Significant Taira defeat",
+        "Growing legend of the Iron Bear on the battlefield",
+        "Increasing jealousy from Yoritomo over Yoshi's battlefield fame"
+      ],
+      "created_at": "2025-03-22T00:00:00Z",
+      "updated_at": "2025-03-22T00:00:00Z"
+    },
+    {
+      "id": "event-yoritomo-betrayal-001",
+      "name": "Yoritomo's Betrayal",
+      "date": "1188",
+      "location": "loc-japan-001",
+      "description": "Following the naval Battle of Dan-no-ura that marked the final destruction of Taira military power, Yoritomo systematically began undermining Yoshi's position, reassigning loyal troops and withholding supplies. By autumn, communications ceased entirely, and Yoshi received intelligence that his half-brother had secretly declared him an enemy of the new order.",
+      "significance": "The breaking point between Yoshi and Yoritomo that transformed internal Minamoto tension into open conflict between the brothers.",
+      "participants": [
+        {
+          "character": "char-yoshi-001",
+          "role": "target"
+        },
+        {
+          "character": "char-yoritomo-001",
+          "role": "betrayer"
+        }
+      ],
+      "consequences": [
+        "Transformation of Yoshi from military leader to hunted fugitive",
+        "Beginning of the final phase of Yoshi and Benkei's journey",
+        "Setting the stage for the Koromogawa siege"
+      ],
+      "created_at": "2025-03-22T00:00:00Z",
+      "updated_at": "2025-03-22T00:00:00Z"
+    }
+  ]
+}
+

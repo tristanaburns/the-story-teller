@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/genre_type",
+  "title": "Genre Type Schema",
+  "description": "Standardized enumeration of all possible genre classifications for content within The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "action",
+    "adventure",
+    "comedy",
+    "crime",
+    "cyberpunk",
+    "drama",
+    "dystopian",
+    "espionage",
+    "fantasy",
+    "hard_scifi",
+    "historical",
+    "horror",
+    "military",
+    "mystery",
+    "noir",
+    "paranormal",
+    "political",
+    "post_apocalyptic",
+    "psychological",
+    "romance",
+    "satire",
+    "science_fantasy",
+    "science_fiction",
+    "slice_of_life",
+    "steampunk",
+    "supernatural",
+    "superhero",
+    "techno_thriller",
+    "thriller",
+    "urban_fantasy",
+    "war",
+    "western"
+  ],
+  "categoryMapping": {
+    "type": "object",
+    "description": "Grouping of genre types by broad category (not part of the enum, provided for documentation)",
+    "properties": {
+      "speculative_fiction": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "science_fiction", 
+            "hard_scifi", 
+            "cyberpunk", 
+            "science_fantasy", 
+            "dystopian", 
+            "post_apocalyptic", 
+            "steampunk"
+          ]
+        },
+        "description": "Genres that explore speculative concepts, typically involving futuristic or alternative technological developments."
+      },
+      "fantasy_realms": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "fantasy", 
+            "urban_fantasy", 
+            "paranormal", 
+            "supernatural"
+          ]
+        },
+        "description": "Genres involving magical elements, fantastic worlds, or supernatural phenomena."
+      },
+      "thriller_crime": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "thriller", 
+            "crime", 
+            "mystery", 
+            "noir", 
+            "espionage", 
+            "techno_thriller"
+          ]
+        },
+        "description": "Genres focusing on suspense, investigation, criminal activity, or high-stakes conflict."
+      },
+      "action_adventure": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "action", 
+            "adventure", 
+            "military", 
+            "war", 
+            "western", 
+            "superhero"
+          ]
+        },
+        "description": "Genres emphasizing physical challenges, combat, exploration, or heroic feats."
+      },
+      "character_driven": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "drama", 
+            "psychological", 
+            "romance", 
+            "slice_of_life", 
+            "comedy"
+          ]
+        },
+        "description": "Genres that focus primarily on character development, relationships, or emotional journeys."
+      },
+      "thematic": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "historical", 
+            "political", 
+            "satire", 
+            "horror"
+          ]
+        },
+        "description": "Genres defined largely by their thematic content, setting, or intended emotional impact."
+      }
+    }
+  }
+}

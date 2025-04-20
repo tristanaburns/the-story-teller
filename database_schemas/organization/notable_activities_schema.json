@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/notable_activities",
+  "title": "Organization Notable Activities Schema",
+  "description": "Significant actions, operations, and events conducted by or associated with an organization.",
+  "type": "object",
+  "properties": {
+    "recurring_activities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "activity_type": {
+            "$ref": "../common/organizational_activity_schema.json",
+            "description": "The category of organizational activity this represents."
+          },
+          "name": {
+            "type": "string",
+            "description": "A specific identifier or title for this recurring activity."
+          },
+          "description": {
+            "type": "string",
+            "description": "Details about what this activity involves and how it is conducted."
+          },
+          "frequency": {
+            "type": "string",
+            "description": "How often this activity takes place."
+          },
+          "participants": {
+            "type": "string",
+            "description": "Who is typically involved in conducting or experiencing this activity."
+          },
+          "significance": {
+            "type": "string",
+            "description": "Why this activity matters to the organization's identity, operations, or goals."
+          },
+          "public_awareness": {
+            "type": "string",
+            "enum": ["unknown", "rumored", "partially_known", "public_knowledge", "highly_publicized"],
+            "description": "The extent to which outsiders are aware of this activity."
+          }
+        },
+        "required": ["activity_type", "description"]
+      },
+      "description": "Regular or periodic activities that the organization conducts as part of its normal operations."
+    },
+    "historical_operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "activity_type": {
+            "$ref": "../common/organizational_activity_schema.json",
+            "description": "The category of organizational activity this represents."
+          },
+          "name": {
+            "type": "string",
+            "description": "The title or code name of this specific operation or event."
+          },
+          "event_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Link to a historical event entry if this operation has its own detailed record."
+          },
+          "date": {
+            "$ref": "../common/time_period_schema.json",
+            "description": "When this operation or event occurred."
+          },
+          "description": {
+            "type": "string",
+            "description": "What happened during this operation and what it involved."
+          },
+          "outcome": {
+            "type": "string",
+            "description": "The results or consequences of this operation, including successes and failures."
+          },
+          "impact_on_organization": {
+            "type": "string",
+            "description": "How this operation affected the organization itself, including changes to its capabilities, reputation, or direction."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Past operations, campaigns, or events of significance conducted by the organization."
+    },
+    "planned_initiatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "activity_type": {
+            "$ref": "../common/organizational_activity_schema.json",
+            "description": "The category of organizational activity this represents."
+          },
+          "name": {
+            "type": "string",
+            "description": "The title or designation for this planned activity."
+          },
+          "description": {
+            "type": "string",
+            "description": "Details about what this initiative will involve and how it will be conducted."
+          },
+          "timeline": {
+            "type": "string",
+            "description": "When this initiative is scheduled to begin or occur."
+          },
+          "objective": {
+            "type": "string",
+            "description": "What the organization hopes to achieve through this activity."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["conceptual", "in_planning", "approved", "in_progress", "on_hold", "canceled"],
+            "description": "The current stage of development or implementation of this initiative."
+          },
+          "secrecy_level": {
+            "type": "string",
+            "enum": ["open", "limited_distribution", "confidential", "secret", "top_secret", "compartmentalized"],
+            "description": "How restricted information about this initiative is within and outside the organization."
+          }
+        },
+        "required": ["name", "description", "objective"]
+      },
+      "description": "Future operations or initiatives that the organization is preparing or considering."
+    },
+    "public_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The title or designation for this public-facing event."
+          },
+          "activity_type": {
+            "$ref": "../common/organizational_activity_schema.json",
+            "description": "The category of organizational activity this represents."
+          },
+          "description": {
+            "type": "string",
+            "description": "What this event involves and how it is presented to the public."
+          },
+          "frequency": {
+            "type": "string",
+            "description": "How often this event is held, if it is recurring."
+          },
+          "location": {
+            "type": "string",
+            "description": "Where this event typically takes place."
+          },
+          "attendance": {
+            "type": "string",
+            "description": "Who attends this event and approximately how many participants it attracts."
+          },
+          "true_purpose": {
+            "type": "string",
+            "description": "The organization's actual goals for this event, which may differ from its public presentation."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Events that the organization conducts with public visibility or participation."
+    },
+    "signature_methods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The title or identifier for this distinctive approach or methodology."
+          },
+          "description": {
+            "type": "string",
+            "description": "What makes this method unique to the organization and how it functions."
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The types of situations or objectives for which this method is typically employed."
+          },
+          "development": {
+            "type": "string",
+            "description": "How the organization created or acquired this methodology."
+          },
+          "recognition": {
+            "type": "string",
+            "description": "How readily outsiders can identify the organization's involvement based on this method."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Distinctive techniques, approaches, or calling cards that characterize the organization's activities."
+    }
+  }
+}

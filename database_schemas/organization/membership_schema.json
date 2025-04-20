@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/membership",
+  "title": "Organization Membership Schema",
+  "description": "Details about who belongs to an organization, how they join, and what membership entails.",
+  "type": "object",
+  "properties": {
+    "size_category": {
+      "type": "string",
+      "enum": ["tiny", "small", "medium", "large", "massive", "global"],
+      "description": "The relative scale of the organization's membership compared to others in the narrative world, providing context for its influence and presence."
+    },
+    "composition": {
+      "type": "object",
+      "properties": {
+        "primary_demographics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The main social, cultural, or species groups that make up the organization's membership, helping to characterize its identity and values."
+        },
+        "specializations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Common skills, abilities, or areas of expertise found among the organization's members, indicating its capabilities and focus areas."
+        }
+      },
+      "description": "The makeup of the organization's membership in terms of skills, demographics, and backgrounds."
+    },
+    "recruitment": {
+      "type": "object",
+      "properties": {
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The typical ways in which new members are brought into the organization, such as invitation, application, birth, conscription, or rituals."
+        },
+        "requirements": {
+          "type": "string",
+          "description": "The qualifications, characteristics, or conditions that individuals must meet to join the organization, establishing its exclusivity or inclusivity."
+        },
+        "initiation_process": {
+          "type": "string",
+          "description": "The steps, rituals, or tests that new members must undergo before being fully accepted into the organization."
+        }
+      },
+      "description": "The processes by which new members are identified, evaluated, and incorporated into the organization."
+    },
+    "notable_members": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Reference to a character who is a significant member of the organization but not necessarily in leadership."
+          },
+          "role": {
+            "type": "string",
+            "description": "The function or position this member serves within the organization."
+          },
+          "significance": {
+            "type": "string",
+            "description": "Why this individual is particularly important to the organization despite not being in its highest leadership."
+          }
+        },
+        "required": ["character_id", "significance"]
+      },
+      "description": "Individuals within the organization who are especially noteworthy for their skills, influence, or other distinguishing characteristics."
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "requirement": {
+            "$ref": "../common/membership_requirement_schema.json",
+            "description": "A condition or qualification necessary for joining the organization."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed explanation of how this requirement is implemented or evaluated."
+          },
+          "strictness": {
+            "type": "string",
+            "enum": ["absolute", "typical", "flexible", "waivable", "situational"],
+            "description": "How rigidly this requirement is enforced when considering potential members."
+          }
+        },
+        "required": ["requirement", "description"]
+      },
+      "description": "Conditions that must be met to become a member of the organization."
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/enums/narrative_pacing",
+  "title": "Narrative Pacing Schema",
+  "description": "Standardized enumeration of pacing types for narrative content in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "breakneck",
+    "urgent",
+    "brisk",
+    "measured",
+    "deliberate",
+    "languid",
+    "contemplative"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each pacing type (not part of the enum, provided for documentation)",
+    "properties": {
+      "breakneck": {
+        "type": "string",
+        "description": "Extremely fast pacing with rapid succession of events, minimal description, short sentences, and heightened intensity. Used for extreme action or crisis moments."
+      },
+      "urgent": {
+        "type": "string",
+        "description": "Quick pacing with focused forward momentum and limited but essential detail. Used for high-stakes situations requiring immediate action."
+      },
+      "brisk": {
+        "type": "string",
+        "description": "Relatively fast pacing that maintains momentum while including important descriptive elements. Used for standard action sequences or tense scenarios."
+      },
+      "measured": {
+        "type": "string",
+        "description": "Balanced pacing that gives equal weight to action and description. Used for standard narrative flow with moderate tension or importance."
+      },
+      "deliberate": {
+        "type": "string",
+        "description": "Moderately slow pacing that allows for detailed observation and character reflection. Used for important discoveries or emotionally significant moments."
+      },
+      "languid": {
+        "type": "string",
+        "description": "Slow, expansive pacing with rich descriptive elements and atmospheric development. Used for immersive world-building or character exploration."
+      },
+      "contemplative": {
+        "type": "string",
+        "description": "Very slow, introspective pacing with extensive internal monologue or philosophical exploration. Used for pivotal character development or thematic exploration."
+      }
+    }
+  },
+  "sceneTypeMapping": {
+    "type": "object",
+    "description": "Recommended pacing types for different scene types (not part of the enum, provided for documentation)",
+    "properties": {
+      "action_sequence": ["breakneck", "urgent", "brisk"],
+      "character_introduction": ["measured", "deliberate"],
+      "dialogue_driven": ["measured", "deliberate"],
+      "exposition_worldbuilding": ["deliberate", "languid"],
+      "internal_reflection": ["languid", "contemplative"],
+      "investigation_discovery": ["brisk", "measured", "deliberate"],
+      "tension_buildup": ["measured", "deliberate"],
+      "emotional_revelation": ["deliberate", "contemplative"],
+      "philosophical_debate": ["deliberate", "contemplative"],
+      "transitions_travel": ["brisk", "measured"],
+      "flashback_memory": ["languid", "contemplative"],
+      "horror_suspense": ["measured", "deliberate"],
+      "mystery_revelation": ["deliberate"],
+      "social_political_interaction": ["measured", "deliberate"],
+      "technological_demonstration": ["measured", "brisk"],
+      "ambient_atmosphere": ["languid", "contemplative"]
+    }
+  }
+}

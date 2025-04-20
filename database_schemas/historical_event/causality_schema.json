@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/historical_event/causality",
+  "title": "Historical Event Causality Schema",
+  "description": "Details of what caused the historical event and its subsequent effects on the narrative world.",
+  "type": "object",
+  "properties": {
+    "root_causes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cause": {
+            "type": "string",
+            "description": "A fundamental factor that led to the historical event."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["political", "economic", "social", "environmental", "technological", "magical", "divine", "personal"],
+            "description": "The nature or category of this causal factor."
+          },
+          "timeframe": {
+            "type": "string",
+            "description": "When this cause began to influence events leading to the historical event."
+          }
+        },
+        "required": ["cause"]
+      },
+      "description": "The underlying factors or conditions that made the historical event possible or inevitable."
+    },
+    "triggering_incidents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "incident": {
+            "type": "string",
+            "description": "A specific occurrence that directly precipitated the historical event."
+          },
+          "key_actors": {
+            "type": "array",
+            "items": {
+              "$ref": "../common/references_schema.json"
+            },
+            "description": "Individuals or entities whose actions constituted the triggering incident."
+          },
+          "intentionality": {
+            "type": "string",
+            "enum": ["deliberate", "accidental", "natural", "manipulated", "inevitable"],
+            "description": "Whether the trigger was intentional or unintentional, and by whom."
+          }
+        },
+        "required": ["incident"]
+      },
+      "description": "Immediate events or actions that directly triggered the historical event, as distinct from longer-term causes."
+    },
+    "immediate_effects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "effect": {
+            "type": "string",
+            "description": "A direct consequence that occurred during or immediately after the historical event."
+          },
+          "scope": {
+            "type": "string",
+            "enum": ["local", "regional", "national", "global", "dimensional"],
+            "description": "The geographical or dimensional reach of this immediate effect."
+          },
+          "duration": {
+            "type": "string",
+            "description": "How long this immediate effect persisted."
+          }
+        },
+        "required": ["effect"]
+      },
+      "description": "Direct and short-term consequences of the historical event."
+    },
+    "long_term_consequences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "consequence": {
+            "type": "string",
+            "description": "An enduring result or change stemming from the historical event."
+          },
+          "domain": {
+            "type": "string",
+            "enum": ["political", "economic", "social", "cultural", "technological", "environmental", "magical"],
+            "description": "The sphere or aspect of society most affected by this consequence."
+          },
+          "magnitude": {
+            "$ref": "../common/impact_magnitude_schema.json",
+            "description": "The significance or severity of this long-term consequence."
+          },
+          "resultant_events": {
+            "type": "array",
+            "items": {
+              "$ref": "../common/references_schema.json"
+            },
+            "description": "Subsequent historical events that occurred as a result of this consequence."
+          }
+        },
+        "required": ["consequence"]
+      },
+      "description": "Enduring effects of the historical event that shaped the future of the narrative world."
+    },
+    "causality_debates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "The specific aspect of causality that is debated or uncertain."
+          },
+          "perspectives": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "view": {
+                  "type": "string",
+                  "description": "A particular interpretation or theory about the cause or effect."
+                },
+                "proponents": {
+                  "type": "string",
+                  "description": "Groups or scholars who subscribe to this interpretation."
+                },
+                "evidence": {
+                  "type": "string",
+                  "description": "Information that supports this interpretation."
+                }
+              },
+              "required": ["view"]
+            },
+            "description": "Different viewpoints on the debated aspect of causality."
+          }
+        },
+        "required": ["topic", "perspectives"]
+      },
+      "description": "Scholarly or popular disagreements about the causes or effects of the historical event, representing uncertainty or complexity in the historical record."
+    }
+  },
+  "required": ["root_causes", "immediate_effects"]
+}

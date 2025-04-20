@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/timeline/time_bound_history",
+  "title": "Time Bound History Schema",
+  "description": "Schema for defining historical context, trends, and developments during specific chronological periods in The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "$ref": "../metadata/base_metadata_schema.json",
+      "description": "Standard metadata for this historical record."
+    },
+    "title": {
+      "type": "string",
+      "description": "The name or heading of this historical period or era."
+    },
+    "description": {
+      "type": "string",
+      "description": "A general overview of this time period and its significance."
+    },
+    "time_period": {
+      "type": "object",
+      "properties": {
+        "start_date": {
+          "$ref": "../common/time_period_schema.json",
+          "description": "When this historical period begins."
+        },
+        "end_date": {
+          "$ref": "../common/time_period_schema.json",
+          "description": "When this historical period ends."
+        },
+        "era": {
+          "$ref": "../common/timeline_era_schema.json",
+          "description": "The broader historical era this period belongs to."
+        },
+        "duration_context": {
+          "type": "string",
+          "description": "Additional information about the timespan's significance or boundaries."
+        }
+      },
+      "required": ["start_date"],
+      "description": "The chronological boundaries of this historical period."
+    },
+    "geographic_scope": {
+      "type": "object",
+      "properties": {
+        "primary_regions": {
+          "type": "array",
+          "items": {
+            "$ref": "../common/references_schema.json"
+          },
+          "description": "The main geographical areas involved in or affected by this historical period."
+        },
+        "regional_variations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "region": {
+                "$ref": "../common/references_schema.json",
+                "description": "Reference to a specific geographic area."
+              },
+              "variation": {
+                "type": "string",
+                "description": "How historical developments in this region differed from the general pattern."
+              }
+            },
+            "required": ["region", "variation"]
+          },
+          "description": "Differences in how this historical period manifested in different locations."
+        }
+      },
+      "description": "The spatial boundaries and regional aspects of this historical period."
+    },
+    "major_trends": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "trend_type": {
+            "$ref": "../common/historical_trend_type_schema.json",
+            "description": "The category of historical development this represents."
+          },
+          "name": {
+            "type": "string",
+            "description": "A title or designation for this specific trend."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of the pattern of change or continuity."
+          },
+          "affected_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The areas of society, culture, politics, etc. impacted by this trend."
+          },
+          "trajectory": {
+            "type": "string",
+            "enum": ["ascending", "declining", "fluctuating", "stable", "transforming", "cyclical"],
+            "description": "The general direction or pattern of this trend over time."
+          },
+          "causal_factors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Key forces or developments that drove or influenced this trend."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Significant patterns of change or continuity that characterized this historical period."
+    },
+    "key_events": {
+      "type": "array",
+      "items": {
+        "$ref": "../common/references_schema.json"
+      },
+      "description": "Important occurrences that defined or punctuated this historical period."
+    },
+    "social_conditions": {
+      "type": "object",
+      "properties": {
+        "power_structures": {
+          "type": "string",
+          "description": "How authority and influence were distributed among different groups."
+        },
+        "class_dynamics": {
+          "type": "string",
+          "description": "Relationships between different social or economic strata."
+        },
+        "demographic_patterns": {
+          "type": "string",
+          "description": "Notable characteristics of population distribution, movement, or composition."
+        },
+        "cultural_climate": {
+          "type": "string",
+          "description": "Prevailing attitudes, values, and shared beliefs of the period."
+        },
+        "technological_context": {
+          "type": "string",
+          "description": "Level of technological development and its impact on society."
+        },
+        "economic_situation": {
+          "type": "string",
+          "description": "General state of prosperity, trade, production, and resource distribution."
+        }
+      },
+      "description": "General state of society during this historical period."
+    },
+    "influential_entities": {
+      "type": "object",
+      "properties": {
+        "key_individuals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "entity_reference": {
+                "$ref": "../common/references_schema.json",
+                "description": "Reference to a character who was important during this period."
+              },
+              "role": {
+                "type": "string",
+                "description": "How this individual influenced or was affected by the historical context."
+              },
+              "significance": {
+                "type": "string",
+                "description": "Why this individual's actions or experiences matter to understanding the period."
+              }
+            },
+            "required": ["entity_reference"]
+          },
+          "description": "Important people who shaped or were shaped by this historical period."
+        },
+        "prominent_organizations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "entity_reference": {
+                "$ref": "../common/references_schema.json",
+                "description": "Reference to an organization that was important during this period."
+              },
+              "influence": {
+                "type": "string",
+                "description": "How this organization affected historical developments during this period."
+              },
+              "evolution": {
+                "type": "string",
+                "description": "How this organization changed over the course of this historical period."
+              }
+            },
+            "required": ["entity_reference"]
+          },
+          "description": "Notable groups that wielded power or influence during this historical period."
+        }
+      },
+      "description": "Characters and organizations that played significant roles during this period."
+    },
+    "historical_debate": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "The subject of historical disagreement or multiple interpretations."
+          },
+          "perspectives": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "viewpoint": {
+                  "type": "string",
+                  "description": "A particular interpretation or argument about this historical topic."
+                },
+                "proponents": {
+                  "type": "string",
+                  "description": "Who advances or believes this perspective."
+                },
+                "evidence": {
+                  "type": "string",
+                  "description": "The basis for this historical interpretation."
+                }
+              },
+              "required": ["viewpoint"]
+            },
+            "description": "Different ways of understanding or explaining this aspect of the historical period."
+          }
+        },
+        "required": ["topic", "perspectives"]
+      },
+      "description": "Areas where understanding of this historical period is contested or ambiguous."
+    },
+    "legacy": {
+      "type": "object",
+      "properties": {
+        "immediate_aftermath": {
+          "type": "string",
+          "description": "Direct consequences that followed the end of this period."
+        },
+        "long_term_impact": {
+          "type": "string",
+          "description": "How this period influenced later historical developments."
+        },
+        "cultural_memory": {
+          "type": "string",
+          "description": "How this period is remembered and commemorated in later times."
+        },
+        "historical_lessons": {
+          "type": "string",
+          "description": "What insights about history, society, or human nature this period reveals."
+        }
+      },
+      "description": "The lasting significance and influence of this historical period."
+    },
+    "additional_resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resource_type": {
+            "type": "string",
+            "enum": ["primary_source", "historical_account", "analysis", "connected_timeline", "cultural_artifact", "database_entry"],
+            "description": "The category of resource being referenced."
+          },
+          "reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Link to the resource or content item."
+          },
+          "relevance": {
+            "type": "string",
+            "description": "How this resource contributes to understanding the historical period."
+          }
+        },
+        "required": ["resource_type"]
+      },
+      "description": "Other content that provides context or detail about this historical period."
+    }
+  },
+  "required": ["metadata", "title", "description", "time_period"]
+}

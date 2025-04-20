@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/timeline_consequence_type",
+  "title": "Timeline Consequence Type Schema",
+  "description": "Standardized enumeration of outcome types that follow from significant events in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "immediate_aftermath",
+    "delayed_reaction",
+    "cascading_effect",
+    "systemic_transformation",
+    "paradigm_shift",
+    "power_realignment",
+    "cultural_impact",
+    "technological_advancement",
+    "resource_redistribution",
+    "social_movement",
+    "knowledge_revelation",
+    "martial_outcome",
+    "environmental_change",
+    "policy_reform",
+    "collective_trauma",
+    "ideological_reinforcement",
+    "ideological_challenge",
+    "precedent_establishment",
+    "mythology_formation"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each consequence type (not part of the enum, provided for documentation)",
+    "properties": {
+      "immediate_aftermath": {
+        "type": "string",
+        "description": "Direct and prompt results occurring in the short term following an event."
+      },
+      "delayed_reaction": {
+        "type": "string",
+        "description": "Effects that emerge after a notable time lag from the triggering event."
+      },
+      "cascading_effect": {
+        "type": "string",
+        "description": "A sequence of secondary and tertiary consequences that flow from the initial impact."
+      },
+      "systemic_transformation": {
+        "type": "string",
+        "description": "Fundamental changes to established structures, systems, or institutions."
+      },
+      "paradigm_shift": {
+        "type": "string",
+        "description": "Radical change in foundational ideas, perspectives, or ways of understanding."
+      },
+      "power_realignment": {
+        "type": "string",
+        "description": "Redistribution of influence, authority, or control between different entities."
+      },
+      "cultural_impact": {
+        "type": "string",
+        "description": "Effects on collective values, practices, expressions, or social norms."
+      },
+      "technological_advancement": {
+        "type": "string",
+        "description": "Development or application of new tools, techniques, or scientific capabilities."
+      },
+      "resource_redistribution": {
+        "type": "string",
+        "description": "Changes in how valuable materials, assets, or opportunities are allocated."
+      },
+      "social_movement": {
+        "type": "string",
+        "description": "Organized collective action emerging in response to an event or condition."
+      },
+      "knowledge_revelation": {
+        "type": "string",
+        "description": "Discovery, disclosure, or wider recognition of previously unknown information."
+      },
+      "martial_outcome": {
+        "type": "string",
+        "description": "Results related to military actions, security operations, or physical conflicts."
+      },
+      "environmental_change": {
+        "type": "string",
+        "description": "Alterations to physical surroundings, ecosystems, or habitable spaces."
+      },
+      "policy_reform": {
+        "type": "string",
+        "description": "Modifications to official rules, procedures, laws, or governance approaches."
+      },
+      "collective_trauma": {
+        "type": "string",
+        "description": "Shared psychological impact affecting group identity, memory, or behavior."
+      },
+      "ideological_reinforcement": {
+        "type": "string",
+        "description": "Strengthening of existing belief systems, worldviews, or philosophical frameworks."
+      },
+      "ideological_challenge": {
+        "type": "string",
+        "description": "Questioning or undermining of established belief systems or worldviews."
+      },
+      "precedent_establishment": {
+        "type": "string",
+        "description": "Creating a model or standard that influences how future similar situations are handled."
+      },
+      "mythology_formation": {
+        "type": "string",
+        "description": "Development of narratives, symbols, or cultural stories that frame understanding of the event."
+      }
+    }
+  },
+  "timeframeMapping": {
+    "type": "object",
+    "description": "Classification of consequence types by typical timeframe (not part of the enum, provided for documentation)",
+    "properties": {
+      "short_term": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["immediate_aftermath", "martial_outcome", "knowledge_revelation"]
+        },
+        "description": "Consequences typically manifesting within days or weeks of the event"
+      },
+      "medium_term": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["delayed_reaction", "resource_redistribution", "policy_reform", "collective_trauma", "social_movement"]
+        },
+        "description": "Consequences typically developing over months or a few years"
+      },
+      "long_term": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "systemic_transformation", 
+            "paradigm_shift", 
+            "cultural_impact", 
+            "technological_advancement", 
+            "environmental_change", 
+            "ideological_reinforcement", 
+            "ideological_challenge",
+            "mythology_formation",
+            "precedent_establishment"
+          ]
+        },
+        "description": "Consequences that may take years or decades to fully manifest"
+      },
+      "multi_phase": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["cascading_effect", "power_realignment"]
+        },
+        "description": "Consequences that unfold in distinct stages across different timeframes"
+      }
+    }
+  }
+}

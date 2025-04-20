@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/enums/emotional_tone",
+  "title": "Emotional Tone Schema",
+  "description": "Standardized enumeration of emotional tones for narrative content in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "ominous",
+    "melancholic",
+    "tense",
+    "hopeful",
+    "triumphant",
+    "desperate",
+    "contemplative",
+    "detached",
+    "intimate",
+    "manic",
+    "serene"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each emotional tone (not part of the enum, provided for documentation)",
+    "properties": {
+      "ominous": {
+        "type": "string",
+        "description": "A foreboding tone that suggests impending danger or disaster, characterized by subtle threat cues and atmospheric elements that create unease.",
+        "implementation_tips": [
+          "Use environmental elements as threat signals",
+          "Incorporate sensory details that suggest wrongness",
+          "Employ restrained foreshadowing rather than explicit danger"
+        ],
+        "example": "The city lights flickered erratically below, patterns shifting in ways that seemed almost deliberate—as though the megacity itself were sending a warning through its nervous system of neon and LED."
+      },
+      "melancholic": {
+        "type": "string",
+        "description": "A tone of reflective sadness, often tinged with nostalgia or resignation, focusing on loss and the beauty of what has passed.",
+        "implementation_tips": [
+          "Reference memories and past experiences",
+          "Use weather and environment to mirror emotional state",
+          "Balance sadness with moments of beauty or meaning"
+        ],
+        "example": "Rain traced patterns on the window like forgotten tears, each droplet catching fragments of the neon signs that had once meant home. The city remembered, even if its people did not."
+      },
+      "tense": {
+        "type": "string",
+        "description": "A tone of heightened alertness and anxiety, where pressure builds and resolution is uncertain, focusing on immediate threats or challenges.",
+        "implementation_tips": [
+          "Use short, punchy sentences during key moments",
+          "Incorporate physical manifestations of tension in characters",
+          "Create environmental elements that constrain or pressure"
+        ],
+        "example": "The security drone paused. Its sensors pivoted. Yuri held his breath, pressed against the wall. One movement would trigger the scan. One breath too loud would activate audio detection. The seconds stretched."
+      },
+      "hopeful": {
+        "type": "string",
+        "description": "A tone that suggests possibility and positive change, often emerging from difficult circumstances but focusing on resilience and potential.",
+        "implementation_tips": [
+          "Contrast current challenges with glimpses of better possibilities",
+          "Use imagery of light, growth, or dawn",
+          "Show small victories or connections that hint at larger positive outcomes"
+        ],
+        "example": "Through the cracked dome overhead, actual sunlight penetrated the perpetual haze of Neo-Tokyo for the first time in months. It caught the edge of Maya's blade, transforming the weapon into something that, just for a moment, looked like a beacon."
+      },
+      "triumphant": {
+        "type": "string",
+        "description": "A tone of victory and accomplishment, celebrating overcoming obstacles while acknowledging their cost and significance.",
+        "implementation_tips": [
+          "Balance the victory with acknowledgment of sacrifice",
+          "Use sensory details that convey expansion and release",
+          "Show both external success and internal transformation"
+        ],
+        "example": "The command center erupted in ragged cheers as the final firewall collapsed. Bloodshot eyes met across terminals, hands shaking from stims and exhaustion reached out to grasp shoulders. They'd done it—paid for in sleepless nights and lost comrades, but they'd done it."
+      },
+      "desperate": {
+        "type": "string",
+        "description": "A tone of extreme urgency and limited options, where characters are pushed to their limits with diminishing hope of success.",
+        "implementation_tips": [
+          "Create situations with rapidly closing options",
+          "Show increasing physical and emotional toll on characters",
+          "Use environment and time constraints as additional pressure"
+        ],
+        "example": "Blood seeped between his fingers as he worked the bypass. Three minutes of oxygen remained. The facility's structural integrity warnings blared. No extraction team was coming. Every path led to failure except the impossible one before him."
+      },
+      "contemplative": {
+        "type": "string",
+        "description": "A reflective tone focused on meaning-making and understanding, where action slows to allow for deeper consideration of events and implications.",
+        "implementation_tips": [
+          "Balance external observation with internal processing",
+          "Use metaphors that connect immediate experience to larger themes",
+          "Allow space for unresolved questions and ambiguity"
+        ],
+        "example": "The augmentation clinic was silent now, its clients and staff long gone. Kira studied her reflection in the deactivated surgical display. What did it mean to be human in a world where every part could be replaced, enhanced, upgraded? Perhaps identity wasn't in the parts at all, but in the questions one chose to ask."
+      },
+      "detached": {
+        "type": "string",
+        "description": "A clinical, observational tone that maintains emotional distance, often used for technical processes or characters disconnecting from overwhelming circumstances.",
+        "implementation_tips": [
+          "Use precise, technical language with minimal emotional cues",
+          "Focus on observable details rather than interpretations",
+          "Create contrast between emotional content and detached presentation"
+        ],
+        "example": "Subject displays increased adrenal response. Heart rate elevated to one-hundred forty-seven beats per minute. Pupil dilation at seventy percent. Test chamber temperature remains constant at twenty degrees Celsius. The subject's daughter continues screaming behind the one-way glass."
+      },
+      "intimate": {
+        "type": "string",
+        "description": "A close, personal tone that brings readers into characters' inner experiences, creating a sense of connection and vulnerability.",
+        "implementation_tips": [
+          "Include sensory details that would only be noticed at close range",
+          "Reveal private thoughts and vulnerabilities",
+          "Use physical proximity and environmental constraints to create closeness"
+        ],
+        "example": "Miko's breath fogged the glass between them, a small cloud that appeared and vanished with each exhale. Ren noticed the tiny scar above her eyebrow, the slight asymmetry of her pupils—augmented, certainly, but the imperfection made them more beautiful. Neither spoke; the silence communicated more than words could contain."
+      },
+      "manic": {
+        "type": "string",
+        "description": "A frenetic, intensely energetic tone that borders on chaotic, often reflecting altered states or extreme situations where normal limits are exceeded.",
+        "implementation_tips": [
+          "Use rapid transitions between ideas and observations",
+          "Create sensory overload through layered descriptions",
+          "Employ unusual connections and associations that suggest altered perception"
+        ],
+        "example": "The combat stims hit all at once—colors sharpened, sounds separated into distinct layers, time stretched like taffy. Kenji's laughter bubbled up unbidden as bullets traced beautiful arcs through the air. He could count their rotations, could almost reach out and pluck them from their trajectories. Everything was hilarious and terrifying and perfect and too much and not enough."
+      },
+      "serene": {
+        "type": "string",
+        "description": "A calm, peaceful tone that suggests acceptance and balance, often used for rare moments of respite or resolution amid chaos.",
+        "implementation_tips": [
+          "Contrast the serenity with the surrounding world's chaos",
+          "Use natural elements and rhythms to enhance the peacefulness",
+          "Create space in the prose through deliberate pacing"
+        ],
+        "example": "Dawn arrived without fanfare, a gentle transition from darkness to pale light that touched the abandoned garden with unexpected tenderness. For the first time in weeks, Hiro sat without checking the perimeter sensors. The weight of his decisions remained, but in this moment, they seemed less immediate, held at bay by the simple act of watching dew collect on spider webs strung between forgotten plants."
+      }
+    }
+  },
+  "sceneTypeCompatibility": {
+    "type": "object",
+    "description": "Recommended emotional tones for different scene types (not part of the enum, provided for documentation)",
+    "properties": {
+      "action_sequence": ["tense", "desperate", "manic", "triumphant"],
+      "character_introduction": ["detached", "intimate", "contemplative"],
+      "dialogue_driven": ["intimate", "tense", "contemplative"],
+      "exposition_worldbuilding": ["detached", "ominous", "serene"],
+      "internal_reflection": ["contemplative", "melancholic", "intimate"],
+      "investigation_discovery": ["tense", "ominous", "contemplative"],
+      "tension_buildup": ["ominous", "tense", "desperate"],
+      "emotional_revelation": ["intimate", "melancholic", "hopeful", "desperate"],
+      "philosophical_debate": ["contemplative", "intimate", "detached"],
+      "transitions_travel": ["serene", "contemplative", "ominous"],
+      "flashback_memory": ["melancholic", "intimate", "detached"],
+      "horror_suspense": ["ominous", "tense", "desperate"],
+      "mystery_revelation": ["tense", "triumphant", "ominous"],
+      "social_political_interaction": ["tense", "detached", "intimate"],
+      "technological_demonstration": ["detached", "manic", "ominous"]
+    }
+  },
+  "writingStyleCompatibility": {
+    "type": "object",
+    "description": "Recommended emotional tones for different writing styles (not part of the enum, provided for documentation)",
+    "properties": {
+      "cinematic_precise": ["tense", "triumphant", "desperate", "ominous"],
+      "mythic_poetic": ["serene", "melancholic", "triumphant", "ominous"],
+      "controlled_chaos": ["manic", "desperate", "tense"],
+      "emotional_measured": ["intimate", "melancholic", "contemplative", "hopeful"],
+      "narrative_historian": ["detached", "contemplative", "melancholic"],
+      "atmospheric_immersive": ["ominous", "serene", "melancholic", "tense"],
+      "dreamlike_fragmented": ["manic", "contemplative", "intimate", "ominous"]
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/enums/prose_variation_technique",
+  "title": "Prose Variation Technique Schema",
+  "description": "Standardized enumeration of prose variation techniques for creating natural, non-repetitive writing in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "sentence_structure_variation",
+    "descriptive_vocabulary_diversification",
+    "perspective_shift",
+    "rhythm_modulation",
+    "focused_detail_alternation",
+    "emotional_tone_adjustment",
+    "temporal_flow_variation",
+    "dialogue_style_adaptation",
+    "metaphor_refreshing",
+    "paragraph_length_variation"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each prose variation technique (not part of the enum, provided for documentation)",
+    "properties": {
+      "sentence_structure_variation": {
+        "type": "string",
+        "description": "Alternating between simple, compound, complex, and compound-complex sentences to create natural rhythm and avoid monotony.",
+        "implementation_tips": [
+          "Use simple sentences for impact or clarity",
+          "Employ compound sentences to connect related ideas",
+          "Include complex sentences for nuance and depth",
+          "Mix sentence types deliberately rather than in obvious patterns"
+        ],
+        "example": "The door slid open. [Simple] Security alarms flashed red and sirens wailed throughout the facility. [Compound] When the final firewall fell, Maya's expression shifted from concentration to grim satisfaction. [Complex] The data streamed across her display, revealing corporate secrets that would change everything, but she knew the extraction window was closing rapidly. [Compound-complex]"
+      },
+      "descriptive_vocabulary_diversification": {
+        "type": "string",
+        "description": "Using varied word choices when describing recurring elements or settings to avoid monotonous repetition.",
+        "implementation_tips": [
+          "Create a pool of alternative descriptors for recurring elements",
+          "Consider connotations and context when varying vocabulary",
+          "Use domain-specific terminology appropriate to viewpoint character",
+          "Avoid using the same distinctive adjectives in close proximity"
+        ],
+        "example": "First description: 'The megacity's towers gleamed like artificial stars, their neon displays pulsing with hypnotic intensity.'\nLater reference: 'The urban spires pierced the low clouds, their illuminated facades creating a disorienting tapestry of light and shadow.'"
+      },
+      "perspective_shift": {
+        "type": "string",
+        "description": "Adjusting narrative focus between different sensory priorities or between external observation and internal perspective.",
+        "implementation_tips": [
+          "Move between different sensory channels (visual, auditory, tactile)",
+          "Shift from external observation to internal reflection",
+          "Adjust narrative distance (close personal vs. detached)",
+          "Consider different scales of focus (macro environment to micro detail)"
+        ],
+        "example": "External perspective: 'The laboratory equipment hummed with barely contained energy.'\nInternal shift: 'Maya felt the vibration through the floor, an uneasy reminder of the unstable power source beneath them.'"
+      },
+      "rhythm_modulation": {
+        "type": "string",
+        "description": "Controlling sentence pace through length and punctuation adjustments to match narrative needs and create reading rhythm.",
+        "implementation_tips": [
+          "Use short sentences to create tension or urgency",
+          "Employ longer sentences for descriptive immersion",
+          "Create deliberate patterns that accelerate or decelerate reading speed",
+          "Match sentence rhythm to the emotional tone of the scene"
+        ],
+        "example": "Accelerating rhythm: 'She moved carefully. The sensors swept the corridor. Fifty seconds remained. The lock resisted. Footsteps approached. She worked faster.'"
+      },
+      "focused_detail_alternation": {
+        "type": "string",
+        "description": "Shifting between different types of details (physical, historical, emotional) when describing recurring elements.",
+        "implementation_tips": [
+          "Alternate between physical characteristics and historical context",
+          "Shift focus between environmental details and emotional reactions",
+          "Move between micro details and macro implications",
+          "Change emphasis based on immediate narrative relevance"
+        ],
+        "example": "First description: 'The neural implant's titanium housing gleamed against his temple, its connection ports precisely aligned with his neural pathways.'\nLater reference: 'The implant had been military-grade once, repurposed from fallen soldiers after the Corporate Wars and modified for civilian use.'"
+      },
+      "emotional_tone_adjustment": {
+        "type": "string",
+        "description": "Modifying emotional register to reflect character development or changed perspective on recurring elements.",
+        "implementation_tips": [
+          "Evolve descriptive language to match character emotional arc",
+          "Adjust connotations from negative to positive (or vice versa)",
+          "Reflect changing relationships through adjusted language",
+          "Use subtle word choice shifts to indicate emotional change"
+        ],
+        "example": "Initial view: 'The AI's presence felt cold and calculating, analyzing her every move with mechanical precision.'\nAfter development: 'The AI's presence had become almost comforting, its analytical patterns now familiar as it anticipated her needs.'"
+      },
+      "temporal_flow_variation": {
+        "type": "string",
+        "description": "Alternating between compressed time, real-time, and expanded moments to create natural storytelling rhythm through pacing changes.",
+        "implementation_tips": [
+          "Compress routine or transitional activities",
+          "Expand critical moments through enhanced detail",
+          "Use real-time narration for high-tension sequences",
+          "Indicate temporal shifts through paragraph breaks or transitional phrases"
+        ],
+        "example": "Compressed time: 'The next three days passed in a blur of preparation and planning.'\nExpanded moment: 'The five seconds it took for the security scan to complete seemed to stretch into infinity. Each pulse of the scanner's light revealed another contour of her false identity.'"
+      },
+      "dialogue_style_adaptation": {
+        "type": "string",
+        "description": "Varying conversation structure, tag placement, and integration to avoid repetitive dialogue patterns.",
+        "implementation_tips": [
+          "Alternate between direct tags, action beats, and unattributed dialogue",
+          "Vary placement of dialogue tags (before, during, after speech)",
+          "Integrate dialogue with action sequences differently each time",
+          "Adjust dialogue formatting based on emotional intensity"
+        ],
+        "example": "Standard tags: \"We need to move,\" Maya said.\nAction integration: Maya checked the security feed. \"We need to move.\"\nTag-free sequence: \"We need to move.\" \"Now?\" \"Now.\""
+      },
+      "metaphor_refreshing": {
+        "type": "string",
+        "description": "Developing new comparative frameworks for recurring situations rather than reusing identical figurative language.",
+        "implementation_tips": [
+          "Create domain-specific metaphors tied to character background",
+          "Evolve metaphors as characters develop new experiences",
+          "Use contrasting metaphorical frameworks for different viewpoints",
+          "Ensure metaphors align with the technological level of the setting"
+        ],
+        "example": "Initial metaphor: 'The corporate security system was a digital fortress, all walls and locked gates.'\nRefreshed approach: 'The security system revealed itself as a living organism, adaptive and reactive, sensing intrusions like antibodies detecting infection.'"
+      },
+      "paragraph_length_variation": {
+        "type": "string",
+        "description": "Structuring paragraphs of different lengths for visual rhythm; using single-sentence paragraphs for impact, longer ones for immersion.",
+        "implementation_tips": [
+          "Use single-sentence paragraphs for impact or emphasis",
+          "Create medium-length paragraphs for standard narration",
+          "Develop longer paragraphs for immersive description",
+          "Match paragraph length to content type (action vs. description)"
+        ],
+        "example": "Impact (single sentence): 'Everything changed in that moment.'\nStandard narration (medium): 'Maya navigated through the security protocols with practiced efficiency. Each barrier fell to her specialized software, leaving no trace of her intrusion. The classified files appeared on her display, exactly as their informant had promised.'\nImmersive (longer): 'The abandoned laboratory stretched before them, equipment still arranged as if the scientists had simply stepped away for lunch rather than evacuating during the corporate raid five years earlier. Dust covered the workstations in varying thicknesses, telling a story of air currents and minor leaks in the supposedly sealed environment. Coffee cups had fossilized, their contents transformed into hardened discs of organic material that no longer resembled anything consumable. Someone's family photo remained lodged in a terminal's personalization slot, the smiling faces now faded to pastel ghosts by the constant low-level radiation that permeated the facility.'"
+      }
+    }
+  },
+  "styleCompatibility": {
+    "type": "object",
+    "description": "Recommended prose variation techniques for different writing styles (not part of the enum, provided for documentation)",
+    "properties": {
+      "cinematic_precise": ["sentence_structure_variation", "rhythm_modulation", "focused_detail_alternation"],
+      "mythic_poetic": ["metaphor_refreshing", "rhythm_modulation", "paragraph_length_variation"],
+      "controlled_chaos": ["sentence_structure_variation", "rhythm_modulation", "perspective_shift"],
+      "emotional_measured": ["emotional_tone_adjustment", "dialogue_style_adaptation", "perspective_shift"],
+      "narrative_historian": ["temporal_flow_variation", "descriptive_vocabulary_diversification", "paragraph_length_variation"],
+      "atmospheric_immersive": ["descriptive_vocabulary_diversification", "focused_detail_alternation", "paragraph_length_variation"],
+      "dreamlike_fragmented": ["perspective_shift", "temporal_flow_variation", "metaphor_refreshing"]
+    }
+  },
+  "sceneTypeCompatibility": {
+    "type": "object",
+    "description": "Recommended prose variation techniques for different scene types (not part of the enum, provided for documentation)",
+    "properties": {
+      "action_sequence": ["rhythm_modulation", "sentence_structure_variation", "paragraph_length_variation"],
+      "character_introduction": ["descriptive_vocabulary_diversification", "perspective_shift", "focused_detail_alternation"],
+      "dialogue_driven": ["dialogue_style_adaptation", "emotional_tone_adjustment", "paragraph_length_variation"],
+      "exposition_worldbuilding": ["descriptive_vocabulary_diversification", "paragraph_length_variation", "temporal_flow_variation"],
+      "internal_reflection": ["perspective_shift", "emotional_tone_adjustment", "metaphor_refreshing"],
+      "investigation_discovery": ["focused_detail_alternation", "rhythm_modulation", "sentence_structure_variation"]
+    }
+  },
+  "implementationMethod": {
+    "type": "object",
+    "description": "How to document prose variation technique implementation in metadata (not part of the enum, provided for documentation)",
+    "example": {
+      "prose_variation_techniques": [
+        {
+          "technique": "sentence_structure_variation",
+          "implementation": "Used short sentences during tense moments of the security breach, longer compound sentences for system descriptions, and complex sentences for character reactions."
+        },
+        {
+          "technique": "rhythm_modulation",
+          "implementation": "Created accelerating rhythm during the countdown sequence through progressively shorter sentences and truncated phrases."
+        },
+        {
+          "technique": "paragraph_length_variation",
+          "implementation": "Employed short, impactful paragraphs for key revelations, and longer immersive paragraphs for the digital landscape exploration."
+        }
+      ]
+    }
+  }
+}

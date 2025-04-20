@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/timeline_relationship",
+  "title": "Timeline Relationship Schema",
+  "description": "Standardized enumeration of relationships between timelines in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "parent",
+    "child",
+    "precursor",
+    "successor",
+    "alternate_version",
+    "contains",
+    "contained_by",
+    "intersects",
+    "mirrors",
+    "contradicts",
+    "merged_from",
+    "splits_into",
+    "influences",
+    "parallel",
+    "meta"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each timeline relationship (not part of the enum, provided for documentation)",
+    "properties": {
+      "parent": {
+        "type": "string",
+        "description": "This timeline is the source from which the referenced timeline branches."
+      },
+      "child": {
+        "type": "string",
+        "description": "This timeline is a branch derived from the referenced timeline."
+      },
+      "precursor": {
+        "type": "string",
+        "description": "This timeline chronologically precedes and leads into the referenced timeline."
+      },
+      "successor": {
+        "type": "string",
+        "description": "This timeline chronologically follows and continues from the referenced timeline."
+      },
+      "alternate_version": {
+        "type": "string",
+        "description": "This timeline depicts the same events as the referenced timeline but with significant differences."
+      },
+      "contains": {
+        "type": "string",
+        "description": "This timeline fully encompasses the referenced timeline, which represents a subset of its events."
+      },
+      "contained_by": {
+        "type": "string",
+        "description": "This timeline is a subset of events within the larger referenced timeline."
+      },
+      "intersects": {
+        "type": "string",
+        "description": "This timeline shares certain events with the referenced timeline but diverges in others."
+      },
+      "mirrors": {
+        "type": "string",
+        "description": "This timeline features parallel events to the referenced timeline with reflective or contrasting outcomes."
+      },
+      "contradicts": {
+        "type": "string",
+        "description": "This timeline presents events that are logically incompatible with those in the referenced timeline."
+      },
+      "merged_from": {
+        "type": "string",
+        "description": "This timeline is created by combining elements of the referenced timeline with others."
+      },
+      "splits_into": {
+        "type": "string",
+        "description": "This timeline divides into the referenced timeline and others at certain points."
+      },
+      "influences": {
+        "type": "string",
+        "description": "Events in this timeline affect or cause changes in the referenced timeline despite being separate."
+      },
+      "parallel": {
+        "type": "string",
+        "description": "This timeline runs alongside the referenced timeline with neither directly affecting the other."
+      },
+      "meta": {
+        "type": "string",
+        "description": "This timeline exists at a higher conceptual level that contains or frames the referenced timeline."
+      }
+    }
+  },
+  "opposingPairs": {
+    "type": "object",
+    "description": "Relationships that are conceptual opposites (not part of the enum, provided for documentation)",
+    "properties": {
+      "parent": "child",
+      "precursor": "successor",
+      "contains": "contained_by"
+    }
+  }
+}

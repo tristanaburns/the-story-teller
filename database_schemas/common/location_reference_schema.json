@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/location_reference",
+  "title": "Location Reference Schema",
+  "description": "Standard format for referencing location objects across all schema types.",
+  "type": "object",
+  "properties": {
+    "location_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Reference to a complete location object in the database."
+    },
+    "significance": {
+      "type": "string",
+      "enum": ["primary", "secondary", "mentioned", "implied"],
+      "description": "The importance of this location to the referencing object."
+    },
+    "description": {
+      "type": "string",
+      "description": "Contextual details about how this location relates specifically to the referencing object."
+    }
+  },
+  "required": ["location_id"]
+}

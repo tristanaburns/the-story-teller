@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/creator_role",
+  "title": "Creator Role Schema",
+  "description": "Standardized enumeration of all possible content creator roles within The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "narrative_designer",
+    "world_builder",
+    "character_designer",
+    "editor",
+    "ai_assistant",
+    "gm",
+    "player",
+    "lore_keeper",
+    "scene_writer",
+    "illustrator",
+    "game_designer",
+    "translator",
+    "content_reviewer",
+    "consultant",
+    "developer",
+    "archivist",
+    "researcher"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each creator role (not part of the enum, provided for documentation)",
+    "properties": {
+      "narrative_designer": {
+        "type": "string",
+        "description": "Responsible for developing story arcs, plot structures, and narrative flow within the world."
+      },
+      "world_builder": {
+        "type": "string",
+        "description": "Focuses on creating settings, locations, cultures, technologies, and the larger fictional universe."
+      },
+      "character_designer": {
+        "type": "string",
+        "description": "Specializes in creating, developing, and defining characters, their personalities, backgrounds, and relationships."
+      },
+      "editor": {
+        "type": "string",
+        "description": "Refines, polishes, and ensures consistency in created content, potentially making revisions and adjustments."
+      },
+      "ai_assistant": {
+        "type": "string",
+        "description": "AI tool or system that helped generate or refine content through various prompting techniques."
+      },
+      "gm": {
+        "type": "string",
+        "description": "Game Master who runs and oversees tabletop roleplaying game sessions set in the universe."
+      },
+      "player": {
+        "type": "string",
+        "description": "Participant in tabletop roleplaying games who contributes character actions and decisions."
+      },
+      "lore_keeper": {
+        "type": "string",
+        "description": "Maintains continuity and chronicles the comprehensive background history, legends, and accumulated knowledge of the world."
+      },
+      "scene_writer": {
+        "type": "string",
+        "description": "Creates specific narrative scenes, dialogues, and moment-to-moment story beats."
+      },
+      "illustrator": {
+        "type": "string",
+        "description": "Produces visual artwork, concept designs, or illustrations related to the narrative content."
+      },
+      "game_designer": {
+        "type": "string",
+        "description": "Develops game mechanics, systems, and playable scenarios set in the universe."
+      },
+      "translator": {
+        "type": "string",
+        "description": "Converts content between languages while preserving narrative intent and meaning."
+      },
+      "content_reviewer": {
+        "type": "string",
+        "description": "Evaluates existing content for quality, consistency, and alignment with established canon."
+      },
+      "consultant": {
+        "type": "string",
+        "description": "Provides specialized knowledge or expertise in specific domains relevant to the content."
+      },
+      "developer": {
+        "type": "string",
+        "description": "Works on technical implementations, tools, or systems that support the narrative content."
+      },
+      "archivist": {
+        "type": "string",
+        "description": "Organizes, catalogs, and maintains the database of narrative content and related materials."
+      },
+      "researcher": {
+        "type": "string",
+        "description": "Conducts historical, scientific, or cultural research to inform and enhance the authenticity of narrative elements."
+      }
+    }
+  }
+}

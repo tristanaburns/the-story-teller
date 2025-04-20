@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/unified_character",
+  "title": "Unified Character Schema",
+  "description": "Comprehensive schema for defining characters within The Shadow Team Chronicles universe, merging database tracking, metadata attributes, and narrative significance.",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "base_metadata_schema.json"
+    }
+  ],
+  "properties": {
+    "object_type": {
+      "const": "character",
+      "description": "Fixed value indicating this is a character object. This constrains the general object_type property from the base schema."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["alive", "deceased", "unknown", "transformed", "ascended"],
+      "description": "The character's current living state as of the latest point in the narrative timeline."
+    },
+    "role": {
+      "type": "string",
+      "enum": ["protagonist", "antagonist", "supporting", "neutral", "faction_leader", "primary antagonist", "mentor", "ally", "traitor"],
+      "description": "The character's primary narrative function within the story structure, determining how they interact with main plot elements and other characters."
+    },
+    "identity": {
+      "$ref": "character/identity_schema.json"
+    },
+    "timeline": {
+      "$ref": "character/timeline_schema.json"
+    },
+    "relationships": {
+      "$ref": "character/relationships_schema.json"
+    },
+    "affiliations": {
+      "$ref": "character/affiliations_schema.json"
+    },
+    "character_arc": {
+      "$ref": "character/character_arc_schema.json"
+    },
+    "physical_traits": {
+      "$ref": "character/physical_traits_schema.json"
+    },
+    "psychological_profile": {
+      "$ref": "character/psychological_profile_schema.json"
+    },
+    "backstory": {
+      "type": "string",
+      "description": "The character's relevant history prior to the current narrative. Focus on formative events that explain current motivations and relationships."
+    },
+    "skills": {
+      "$ref": "character/skills_schema.json"
+    },
+    "equipment": {
+      "$ref": "character/equipment_schema.json"
+    },
+    "voice": {
+      "$ref": "character/voice_schema.json"
+    },
+    "narrative_function": {
+      "$ref": "character/narrative_function_schema.json"
+    },
+    "visual_representation": {
+      "$ref": "character/visual_representation_schema.json"
+    },
+    "multimedia": {
+      "$ref": "multimedia_schema.json#/properties/multimedia"
+    },
+    "tags": {
+      "$ref": "base_metadata_schema.json#/properties/tags"
+    }
+  },
+  "required": ["id", "name", "description", "status", "role"]
+}

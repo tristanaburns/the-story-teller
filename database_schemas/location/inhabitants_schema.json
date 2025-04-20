@@ -1,0 +1,309 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location/inhabitants",
+  "title": "Location Inhabitants Schema",
+  "description": "The beings that live in, control, or frequent a location, including population data and cultural dynamics.",
+  "type": "object",
+  "properties": {
+    "population": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number",
+          "description": "The approximate number of permanent inhabitants in this location."
+        },
+        "density": {
+          "type": "string",
+          "description": "How concentrated the population is, which may be expressed as a number per unit area or in comparative terms."
+        },
+        "demographics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "group": {
+                "type": "string",
+                "description": "A distinct population segment defined by species, ethnicity, origin, or other significant characteristics."
+              },
+              "percentage": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100,
+                "description": "The approximate portion of the total population represented by this group."
+              },
+              "distribution": {
+                "type": "string",
+                "description": "How this demographic group is physically distributed within the location."
+              },
+              "status": {
+                "type": "string",
+                "description": "The social, economic, or political position of this group relative to others."
+              }
+            },
+            "required": ["group"]
+          },
+          "description": "The composition of the population broken down by relevant categories."
+        },
+        "growth_trend": {
+          "type": "string",
+          "enum": ["rapidly_growing", "growing", "stable", "declining", "rapidly_declining", "fluctuating"],
+          "description": "The current trajectory of population change at this location."
+        },
+        "non_human_population": {
+          "type": "string",
+          "description": "Details about supernatural, alien, or non-human intelligent beings that inhabit this location."
+        },
+        "transient_population": {
+          "type": "string",
+          "description": "Information about visitors, travelers, or temporary residents who pass through this location."
+        }
+      },
+      "description": "Statistical and demographic information about who inhabits this location."
+    },
+    "major_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to the organization or group that has significant presence in this location."
+          },
+          "presence": {
+            "type": "string",
+            "description": "How this group manifests in the location, including physical facilities, activities, or visible signs of their presence."
+          },
+          "influence": {
+            "type": "string",
+            "enum": ["dominant", "major", "moderate", "minor", "minimal"],
+            "description": "The degree of power or control this group exerts over events, policies, or daily life in this location."
+          },
+          "areas_controlled": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specific parts of the location where this group holds particular sway or authority."
+          },
+          "relationship_to_governance": {
+            "type": "string",
+            "enum": ["is_governing_body", "openly_allied", "tacitly_supported", "neutral", "tolerated", "opposed", "openly_hostile", "banned"],
+            "description": "How this group relates to the official governing authorities of the location."
+          }
+        },
+        "required": ["entity_reference"]
+      },
+      "description": "Organizations, factions, or collectives that have significant presence or influence in this location."
+    },
+    "notable_inhabitants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "entity_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to the character who is a significant inhabitant of this location."
+          },
+          "role": {
+            "type": "string",
+            "description": "The position or function this person serves in the location."
+          },
+          "residence": {
+            "type": "string",
+            "description": "Where within the location this person lives or is typically found."
+          },
+          "significance": {
+            "type": "string",
+            "description": "Why this inhabitant is particularly important to the location's identity or narrative."
+          }
+        },
+        "required": ["entity_reference"]
+      },
+      "description": "Individual characters who are integral to this location's identity or narrative importance."
+    },
+    "cultural_dynamics": {
+      "type": "object",
+      "properties": {
+        "dominant_cultures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The primary cultural identities or traditions that shape life and society in this location."
+        },
+        "social_structure": {
+          "type": "string",
+          "description": "How the society in this location is organized in terms of class, caste, or other social divisions."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "A principle, belief, or quality that is particularly prized in this location's culture."
+              },
+              "expression": {
+                "type": "string",
+                "description": "How this value manifests in daily life, customs, or institutions."
+              }
+            },
+            "required": ["value"]
+          },
+          "description": "Core beliefs and principles that are particularly esteemed by the inhabitants of this location."
+        },
+        "taboos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "taboo": {
+                "type": "string",
+                "description": "An action, subject, or behavior that is forbidden or strongly disapproved of in this location."
+              },
+              "consequence": {
+                "type": "string",
+                "description": "What typically happens if someone violates this taboo."
+              }
+            },
+            "required": ["taboo"]
+          },
+          "description": "Actions or subjects that are culturally forbidden or considered deeply improper in this location."
+        },
+        "social_tensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "conflict": {
+                "type": "string",
+                "description": "A source of discord or unresolved tension between groups within this location."
+              },
+              "manifestation": {
+                "type": "string",
+                "description": "How this tension appears in daily life or social interactions."
+              },
+              "severity": {
+                "$ref": "../common/impact_magnitude_schema.json",
+                "description": "How serious or impactful this tension is on the location's functioning and inhabitants' wellbeing."
+              }
+            },
+            "required": ["conflict", "manifestation"]
+          },
+          "description": "Significant points of friction, disagreement, or conflict between different groups or interests within the location."
+        },
+        "cultural_events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The title of this festival, celebration, or cultural observance."
+              },
+              "frequency": {
+                "type": "string",
+                "description": "How often this event occurs."
+              },
+              "description": {
+                "type": "string",
+                "description": "Details about what happens during this event and its significance to the inhabitants."
+              }
+            },
+            "required": ["name", "description"]
+          },
+          "description": "Recurring ceremonies, festivals, or gatherings that are culturally significant to the location's inhabitants."
+        }
+      },
+      "description": "The social fabric, cultural norms, and community dynamics that characterize interaction among the location's inhabitants."
+    },
+    "economy": {
+      "type": "object",
+      "properties": {
+        "economic_system": {
+          "type": "string",
+          "description": "The overarching economic model or framework that governs exchange and resource allocation."
+        },
+        "primary_industries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The main economic activities that generate wealth or sustenance for this location."
+        },
+        "trade_relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "partner": {
+                "type": "string",
+                "description": "Another location or entity with which this location conducts significant trade."
+              },
+              "exports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Goods or services sent from this location to the trade partner."
+              },
+              "imports": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Goods or services received by this location from the trade partner."
+              },
+              "balance": {
+                "type": "string",
+                "enum": ["heavily_favorable", "favorable", "balanced", "unfavorable", "heavily_unfavorable"],
+                "description": "Whether this trading relationship economically benefits this location, the partner, or both equally."
+              }
+            },
+            "required": ["partner"]
+          },
+          "description": "Significant economic connections with other locations or entities."
+        },
+        "currency": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the primary monetary unit used in this location."
+            },
+            "forms": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The physical forms or denominations in which currency exists."
+            },
+            "stability": {
+              "type": "string",
+              "description": "How reliable or volatile the currency's value is."
+            },
+            "alternative_currencies": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Other forms of exchange used alongside or instead of the official currency."
+            }
+          },
+          "description": "The monetary system and unit of exchange used in this location."
+        },
+        "prosperity_level": {
+          "type": "string",
+          "enum": ["utopian", "wealthy", "comfortable", "adequate", "struggling", "impoverished", "destitute"],
+          "description": "The general level of material wealth and economic wellbeing in this location."
+        },
+        "wealth_distribution": {
+          "type": "string",
+          "description": "How evenly or unevenly wealth and resources are distributed among the inhabitant population."
+        }
+      },
+      "description": "The economic activities, systems, and conditions that shape life and commerce in this location."
+    }
+  }
+}

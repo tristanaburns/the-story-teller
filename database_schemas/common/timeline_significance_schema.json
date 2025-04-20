@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/timeline_significance",
+  "title": "Timeline Significance Schema",
+  "description": "Standardized enumeration of significance levels for timeline events in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "world_changing",
+    "major",
+    "significant",
+    "moderate",
+    "minor",
+    "local_impact",
+    "personal"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each significance level (not part of the enum, provided for documentation)",
+    "properties": {
+      "world_changing": {
+        "type": "string",
+        "description": "Event fundamentally alters the course of history on a global or interplanetary scale, affecting most aspects of civilization."
+      },
+      "major": {
+        "type": "string",
+        "description": "Event has far-reaching consequences for multiple regions, cultures, or organizations, with long-lasting effects."
+      },
+      "significant": {
+        "type": "string",
+        "description": "Event substantially impacts a specific region, organization, or demographic, with effects lasting for generations."
+      },
+      "moderate": {
+        "type": "string",
+        "description": "Event has notable impact on local affairs with consequences that last for years or decades."
+      },
+      "minor": {
+        "type": "string",
+        "description": "Event has limited scope but still warrants inclusion in historical records due to its relevance to specific groups or later developments."
+      },
+      "local_impact": {
+        "type": "string",
+        "description": "Event primarily affects a small area, community, or organization with little wider impact, but provides important context."
+      },
+      "personal": {
+        "type": "string",
+        "description": "Event primarily concerns individual characters but is included in the timeline due to those characters' importance to broader narrative arcs."
+      }
+    }
+  },
+  "visualPriority": {
+    "type": "object",
+    "description": "Suggested rendering importance when displaying timeline events (not part of the enum, provided for documentation)",
+    "properties": {
+      "world_changing": 1,
+      "major": 2,
+      "significant": 3,
+      "moderate": 4,
+      "minor": 5,
+      "local_impact": 6,
+      "personal": 7
+    }
+  }
+}

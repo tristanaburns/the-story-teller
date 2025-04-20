@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/object_reference",
+  "title": "Object Reference Schema",
+  "description": "Standard format for cross-referencing objects throughout the database.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the referenced object."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["character", "location", "organization", "artifact", "historical_event", "technology"],
+      "description": "The type of object being referenced."
+    },
+    "relationship": {
+      "type": "string",
+      "description": "The nature of the relationship between the parent object and this referenced object."
+    }
+  },
+  "required": ["id", "type"]
+}

@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/membership_requirement",
+  "title": "Membership Requirement Schema",
+  "description": "Standardized enumeration of common requirements for joining organizations in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "skill_demonstration",
+    "financial_contribution",
+    "background_verification",
+    "loyalty_oath",
+    "bloodline_connection",
+    "sponsorship",
+    "trial_period",
+    "physical_testing",
+    "intelligence_assessment",
+    "magical_aptitude",
+    "technological_proficiency",
+    "credential_possession",
+    "character_references",
+    "ideological_alignment",
+    "secrecy_agreement",
+    "initiation_ritual",
+    "age_requirement",
+    "resource_contribution",
+    "territory_residence",
+    "special_attribute",
+    "identity_verification",
+    "medical_screening",
+    "psychological_evaluation"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each membership requirement (not part of the enum, provided for documentation)",
+    "properties": {
+      "skill_demonstration": {
+        "type": "string",
+        "description": "Proving practical ability in areas relevant to the organization's activities."
+      },
+      "financial_contribution": {
+        "type": "string",
+        "description": "Payment of dues, fees, investments, or other monetary commitments."
+      },
+      "background_verification": {
+        "type": "string",
+        "description": "Investigation of personal history, prior affiliations, or criminal record."
+      },
+      "loyalty_oath": {
+        "type": "string",
+        "description": "Formal pledge of allegiance, commitment, or dedication to the organization."
+      },
+      "bloodline_connection": {
+        "type": "string",
+        "description": "Family relationship to existing members or specific genetic heritage."
+      },
+      "sponsorship": {
+        "type": "string",
+        "description": "Endorsement by one or more existing members who vouch for the candidate."
+      },
+      "trial_period": {
+        "type": "string",
+        "description": "Temporary membership during which the candidate must prove their worth."
+      },
+      "physical_testing": {
+        "type": "string",
+        "description": "Evaluation of bodily capabilities, strength, endurance, or other physical attributes."
+      },
+      "intelligence_assessment": {
+        "type": "string",
+        "description": "Measurement of mental acuity, knowledge, problem-solving, or reasoning abilities."
+      },
+      "magical_aptitude": {
+        "type": "string",
+        "description": "Demonstration of capacity to perform, resist, or understand supernatural forces."
+      },
+      "technological_proficiency": {
+        "type": "string",
+        "description": "Proven ability to use, create, or maintain specific technologies."
+      },
+      "credential_possession": {
+        "type": "string",
+        "description": "Holding specific licenses, degrees, certifications, or formal qualifications."
+      },
+      "character_references": {
+        "type": "string",
+        "description": "Testimonials from trusted sources regarding the candidate's reputation or qualities."
+      },
+      "ideological_alignment": {
+        "type": "string",
+        "description": "Demonstrated agreement with the organization's belief system, goals, or values."
+      },
+      "secrecy_agreement": {
+        "type": "string",
+        "description": "Commitment to confidentiality regarding organizational information."
+      },
+      "initiation_ritual": {
+        "type": "string",
+        "description": "Participation in a symbolic or transformative ceremony that marks entry."
+      },
+      "age_requirement": {
+        "type": "string",
+        "description": "Meeting minimum or maximum age thresholds for eligibility."
+      },
+      "resource_contribution": {
+        "type": "string",
+        "description": "Provision of specific non-monetary assets valuable to the organization."
+      },
+      "territory_residence": {
+        "type": "string",
+        "description": "Living within a particular geographic area or domain."
+      },
+      "special_attribute": {
+        "type": "string",
+        "description": "Possessing unusual traits, abilities, or characteristics deemed valuable."
+      },
+      "identity_verification": {
+        "type": "string",
+        "description": "Confirmation of who the candidate claims to be through documentation or other means."
+      },
+      "medical_screening": {
+        "type": "string",
+        "description": "Health evaluation to confirm fitness, absence of conditions, or presence of specific traits."
+      },
+      "psychological_evaluation": {
+        "type": "string",
+        "description": "Assessment of mental health, personality traits, or cognitive patterns."
+      }
+    }
+  }
+}

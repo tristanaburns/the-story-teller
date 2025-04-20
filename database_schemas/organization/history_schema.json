@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/history",
+  "title": "Organization History Schema",
+  "description": "The organization's development over time, including key events that shaped its identity, structure, and goals.",
+  "type": "object",
+  "properties": {
+    "key_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Reference to a historical event that significantly affected this organization."
+          },
+          "impact": {
+            "type": "string",
+            "description": "How this event changed the organization, whether altering its structure, leadership, goals, or public standing."
+          }
+        }
+      },
+      "description": "Significant historical occurrences that shaped the organization's development."
+    },
+    "transformation_periods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A descriptive title for this era in the organization's history."
+          },
+          "start_date": {
+            "type": "string",
+            "description": "When this period of transformation began."
+          },
+          "end_date": {
+            "type": "string",
+            "description": "When this transformative era concluded."
+          },
+          "description": {
+            "type": "string",
+            "description": "Explanation of what changed during this period and what factors drove the transformation."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Extended periods of significant change within the organization's history."
+    }
+  }
+}

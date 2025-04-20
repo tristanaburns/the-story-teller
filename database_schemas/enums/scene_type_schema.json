@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/enums/scene_type",
+  "title": "Scene Type Schema",
+  "description": "Standardized enumeration of scene types in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "action_sequence",
+    "character_introduction",
+    "dialogue_driven",
+    "exposition_worldbuilding",
+    "internal_reflection",
+    "investigation_discovery",
+    "tension_buildup",
+    "emotional_revelation",
+    "philosophical_debate",
+    "transitions_travel",
+    "flashback_memory",
+    "horror_suspense",
+    "mystery_revelation",
+    "social_political_interaction",
+    "technological_demonstration",
+    "ambient_atmosphere"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each scene type (not part of the enum, provided for documentation)",
+    "properties": {
+      "action_sequence": {
+        "type": "string",
+        "description": "Dynamic scenes focused on physical activity, conflict, or movement, designed to create excitement and demonstrate character capabilities.",
+        "recommended_styles": ["cinematic_precise", "controlled_chaos"],
+        "recommended_pacing": ["breakneck", "urgent", "brisk"],
+        "example": "Maya dodged the security drone's targeting laser, rolling beneath the overpass as concrete shards rained down from the impact point. Three more drones converged on her position, their weapons systems whirring to life."
+      },
+      "character_introduction": {
+        "type": "string",
+        "description": "Scenes that establish or reveal a character's presence, personality, abilities, and narrative significance.",
+        "recommended_styles": ["cinematic_precise", "atmospheric_immersive"],
+        "recommended_pacing": ["measured", "deliberate"],
+        "example": "The knife danced between his fingers, more an extension of his hand than a separate object. Director Chen waited for the display to end, unimpressed by the theatrics but noting the exceptional dexterity. 'Are you finished, Agent Takashi? Or would you prefer to audition for the circus instead?'"
+      },
+      "dialogue_driven": {
+        "type": "string",
+        "description": "Scenes where conversation is the primary vehicle for advancing the plot, revealing character, or establishing conflict.",
+        "recommended_styles": ["emotional_measured"],
+        "recommended_pacing": ["measured", "deliberate"],
+        "example": "\"You knew,\" Lin said, her voice perfectly steady despite the betrayal burning behind her eyes. \"You knew and you said nothing.\"\n\nYuri couldn't meet her gaze. \"What would that have accomplished? You would have tried to save him. And you would have failed. Like I did.\""
+      },
+      "exposition_worldbuilding": {
+        "type": "string",
+        "description": "Scenes focused on revealing setting details, history, or context essential for understanding the world and its systems.",
+        "recommended_styles": ["narrative_historian"],
+        "recommended_pacing": ["deliberate", "languid"],
+        "example": "Neo-Tokyo hadn't always been an island. Before the Corporate Wars and the subsequent rising seas, the megacity had sprawled across what was once Tokyo Bay. Now, only the tallest structures from that era remained visible, creating the jagged artificial reef that protected the eastern harbor."
+      },
+      "internal_reflection": {
+        "type": "string",
+        "description": "Scenes centered on character thoughts, emotional processing, and internal conflicts that reveal deeper motivations or struggles.",
+        "recommended_styles": ["emotional_measured", "dreamlike_fragmented"],
+        "recommended_pacing": ["languid", "contemplative"],
+        "example": "Maya stared at her reflection in the rain-slicked window. The augmented eye—NexusCorp property, technically—stared back with its unnatural blue glow. How much of her was still human? How much was corporate technology, borrowed but never truly hers? The line had blurred years ago."
+      },
+      "investigation_discovery": {
+        "type": "string",
+        "description": "Scenes focused on characters seeking information, solving problems, or making significant discoveries that advance the plot.",
+        "recommended_styles": ["cinematic_precise"],
+        "recommended_pacing": ["brisk", "measured", "deliberate"],
+        "example": "The encrypted files yielded to Yuri's decryption software, revealing layer after layer of corporate documentation. Shipment logs, personnel files, security protocols—but it was the medical research data that made his blood run cold. Project LAZARUS wasn't developing treatments. It was developing weapons."
+      },
+      "tension_buildup": {
+        "type": "string",
+        "description": "Scenes that gradually increase anxiety, anticipation, or conflict, setting the stage for future confrontation or revelation.",
+        "recommended_styles": ["atmospheric_immersive"],
+        "recommended_pacing": ["measured", "deliberate"],
+        "example": "The maintenance corridor should have been empty at this hour. The security rotation had been meticulously logged for weeks—no deviations. Yet there were fresh boot prints in the dust. And the access panel showed signs of recent use. Someone else was here. Someone who shouldn't be."
+      },
+      "emotional_revelation": {
+        "type": "string",
+        "description": "Scenes where significant emotional truths are disclosed or breakthrough moments occur that transform relationships or character understanding.",
+        "recommended_styles": ["emotional_measured"],
+        "recommended_pacing": ["deliberate", "contemplative"],
+        "example": "\"It was you,\" Hiro whispered, the personnel file trembling in his hand. \"You were the supervising officer who approved the enhancement procedures.\" His father's face, older in person than in memory, showed no reaction beyond a slight tightening around the eyes. \"I was following orders,\" the old man said, as though that explained everything. As though it justified what they'd done to the children."
+      },
+      "philosophical_debate": {
+        "type": "string",
+        "description": "Scenes that explore complex moral, ethical, or existential questions through character interactions and conflicts.",
+        "recommended_styles": ["emotional_measured", "mythic_poetic"],
+        "recommended_pacing": ["deliberate", "contemplative"],
+        "example": "\"The Machines simply evolved beyond us,\" Director Chen said, studying the artificial intelligence housing with clinical detachment. \"Is that not the natural order? For the created to surpass the creator?\"\n\n\"There's nothing natural about abdicating our responsibility,\" Yuri countered. \"We built them. Their flaws are our flaws, amplified and encoded into their very being.\""
+      },
+      "transitions_travel": {
+        "type": "string",
+        "description": "Scenes that bridge locations, time periods, or narrative segments while advancing character development or plot.",
+        "recommended_styles": ["narrative_historian", "atmospheric_immersive"],
+        "recommended_pacing": ["brisk", "measured"],
+        "example": "The maglev train cut through the agricultural sectors, a silver needle threading through patches of engineered green. Maya watched familiar landmarks disappear behind them—the twisted spire of Old Tokyo Tower, the massive hydroponics arrays that fed the city, the gleaming wall that separated corporate territory from the free zones."
+      },
+      "flashback_memory": {
+        "type": "string",
+        "description": "Scenes that revisit past events through character memory or historical narrative to provide context for present situations.",
+        "recommended_styles": ["dreamlike_fragmented", "emotional_measured"],
+        "recommended_pacing": ["languid", "contemplative"],
+        "example": "The scent hit him first—antiseptic and ozone—pulling him back twenty years to the enhancement chambers. White walls. The restraints that weren't called restraints. 'Stabilization supports,' the technicians had said. The children had known better. Their screams when the neural connectors were implanted without anesthesia. The tender age of seven, when reflexes were most adaptable to the combat programming."
+      },
+      "horror_suspense": {
+        "type": "string",
+        "description": "Scenes designed to create fear, dread, or extreme tension through threatening situations or disturbing revelations.",
+        "recommended_styles": ["atmospheric_immersive", "controlled_chaos"],
+        "recommended_pacing": ["measured", "deliberate"],
+        "example": "The abandoned research level shouldn't have had power. Or atmosphere. Or the soft, wet sounds coming from behind the laboratory doors. The security footage had shown nothing alive down here for months. Mei's tactical display showed no heat signatures. Yet something was moving in the darkness ahead, dragging what sounded like metal implements across the floor."
+      },
+      "mystery_revelation": {
+        "type": "string",
+        "description": "Scenes where puzzles are solved, truths uncovered, or significant revelations made that recontextualize previous understanding.",
+        "recommended_styles": ["cinematic_precise", "emotional_measured"],
+        "recommended_pacing": ["deliberate"],
+        "example": "\"The timestamps don't match,\" Maya said suddenly, comparing the security logs to the medical records. \"Director Chen couldn't have authorized the procedure. She was on the other side of the city when this was signed.\" Yuri's expression hardened as the pieces fell into place. \"She's being framed. Which means...\"\n\n\"The real authority came from someone higher,\" Maya finished."
+      },
+      "social_political_interaction": {
+        "type": "string",
+        "description": "Scenes focused on social hierarchies, political maneuvering, or interpersonal dynamics within organizational structures.",
+        "recommended_styles": ["narrative_historian", "cinematic_precise"],
+        "recommended_pacing": ["measured", "deliberate"],
+        "example": "The corporate boardroom operated by rules more ancient than the technology that surrounded them. Senior Directors sat closest to the CEO, their augmented reality displays more sophisticated than those of lower-ranking members. Speaking order was determined by stock ownership percentages. And Director Yamato had just broken protocol by interrupting the CFO—a move that sent ripples of barely concealed surprise around the table."
+      },
+      "technological_demonstration": {
+        "type": "string",
+        "description": "Scenes that showcase innovative technology, its applications, limitations, or consequences within the narrative world.",
+        "recommended_styles": ["cinematic_precise", "atmospheric_immersive"],
+        "recommended_pacing": ["measured", "brisk"],
+        "example": "\"The neural bridge operates on three principles,\" Dr. Chen explained, activating the demonstration. Above the table, a holographic model displayed colored pathways between two brain structures. \"First, the synthetic synapses create a baseline connection between subjects. Then, the quantum entanglement stabilizes the data transfer. Finally, the memetic encoders translate subjective experience into shareable information packets.\""
+      },
+      "ambient_atmosphere": {
+        "type": "string",
+        "description": "Scenes that prioritize mood, setting, and sensory experience to immerse readers in the world or establish emotional context.",
+        "recommended_styles": ["atmospheric_immersive", "dreamlike_fragmented"],
+        "recommended_pacing": ["languid", "contemplative"],
+        "example": "Rain fell on Neo-Tokyo, not in drops but in sheets that distorted the neon advertisements into watercolor smears across the night sky. Steam rose from overworked cooling systems, creating a perpetual fog in the lower levels. The city breathed—expanding and contracting with the rhythms of its inhabitants, pulse points of activity in the commercial districts contrasting with the dead zones where only scavengers ventured."
+      }
+    }
+  }
+}

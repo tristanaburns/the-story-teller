@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/identity",
+  "title": "Character Identity Schema",
+  "description": "Core identification and descriptive data for a character, encompassing both formal identification and essential defining characteristics.",
+  "type": "object",
+  "properties": {
+    "legal_identity": {
+      "type": "object",
+      "properties": {
+        "full_name": {
+          "type": "string",
+          "description": "The character's complete, formal name as it would appear on official records or formal introductions."
+        },
+        "birth_name": {
+          "type": "string",
+          "description": "The character's original name at birth, if different from their current name."
+        },
+        "legal_aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Officially recognized alternative names, including married names, legally changed names, or registered professional pseudonyms."
+        },
+        "identification_codes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id_type": {
+                "type": "string",
+                "description": "The type of identification (e.g., 'citizen ID', 'military service number', 'guild registration')."
+              },
+              "id_value": {
+                "type": "string",
+                "description": "The actual identification number or code."
+              },
+              "issuing_authority": {
+                "type": "string",
+                "description": "The organization or government body that issued this identification."
+              }
+            }
+          },
+          "description": "Official identification numbers or codes assigned to the character within the legal systems of their world."
+        },
+        "citizenship_status": {
+          "type": "string",
+          "description": "The character's official standing within their primary nation or political entity."
+        }
+      },
+      "description": "The character's official, documented identity as recognized by authorities in their world."
+    },
+    "social_identity": {
+      "type": "object",
+      "properties": {
+        "titles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "The formal designation or honorific."
+              },
+              "source": {
+                "type": "string",
+                "description": "Where or from whom this title was bestowed."
+              },
+              "significance": {
+                "type": "string",
+                "description": "What this title means to the character and how others perceive it."
+              }
+            },
+            "required": ["title"]
+          },
+          "description": "Honorifics, ranks, or formal designations that indicate the character's social position or achievements."
+        },
+        "nicknames": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The informal name or nickname."
+              },
+              "used_by": {
+                "type": "string",
+                "description": "Who typically uses this name when addressing or referring to the character."
+              },
+              "origin": {
+                "type": "string",
+                "description": "How this nickname came about and what it references about the character."
+              }
+            },
+            "required": ["name"]
+          },
+          "description": "Informal names given to the character by others, which often reveal relationships or notable traits."
+        },
+        "reputation": {
+          "type": "object",
+          "properties": {
+            "public_perception": {
+              "type": "string",
+              "description": "How the general population perceives and thinks about this character."
+            },
+            "infamous_for": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Notorious actions, traits, or events for which the character is widely known."
+            },
+            "revered_for": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Respected or admired actions, traits, or qualities for which the character is recognized."
+            }
+          },
+          "description": "How the character is known and perceived by different groups within their world."
+        },
+        "class_status": {
+          "type": "string",
+          "description": "The character's position within the social hierarchy of their world, whether formal or informal."
+        }
+      },
+      "description": "How the character is known, addressed, and perceived in social contexts within their world."
+    },
+    "personal_identity": {
+      "type": "object",
+      "properties": {
+        "self_perception": {
+          "type": "string",
+          "description": "How the character sees and thinks about themselves, which may differ from their public image or legal identity."
+        },
+        "core_identifiers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The fundamental aspects of self that the character considers most central to who they are."
+        },
+        "personal_mottos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Sayings, quotes, or principles that the character lives by or frequently expresses."
+        },
+        "identity_conflicts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Areas where the character experiences tension or uncertainty about who they are or should be."
+        }
+      },
+      "description": "The character's internal sense of self and personal identity, including how they define themselves."
+    },
+    "biographical_summary": {
+      "type": "string",
+      "description": "A concise overview of the character's life story and defining experiences that provides context for understanding their current identity."
+    },
+    "personal_timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "When this significant event occurred in the character's life."
+          },
+          "event": {
+            "type": "string",
+            "description": "What happened that significantly shaped the character's identity or life course."
+          },
+          "impact": {
+            "type": "string",
+            "description": "How this event affected the character's sense of self or life direction."
+          }
+        },
+        "required": ["event"]
+      },
+      "description": "Key moments in the character's history that have shaped their current identity and life circumstances."
+    },
+    "cultural_identity": {
+      "type": "object",
+      "properties": {
+        "heritage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "culture": {
+                "type": "string",
+                "description": "A specific cultural tradition that has influenced the character."
+              },
+              "connection": {
+                "type": "string",
+                "description": "How the character is connected to this culture (e.g., ancestry, upbringing, adoption, immersion)."
+              },
+              "significance": {
+                "type": "string",
+                "description": "How this cultural background influences the character's identity, values, or behaviors."
+              }
+            },
+            "required": ["culture"]
+          },
+          "description": "The cultural backgrounds and traditions that have shaped the character."
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "language": {
+                "type": "string",
+                "description": "The name of the language."
+              },
+              "fluency": {
+                "type": "string",
+                "enum": ["native", "fluent", "conversational", "basic", "rudimentary"],
+                "description": "The character's level of proficiency in this language."
+              },
+              "context": {
+                "type": "string",
+                "description": "When and where the character uses this language, and its personal significance."
+              }
+            },
+            "required": ["language", "fluency"]
+          },
+          "description": "Languages the character speaks and their relationship to those languages."
+        },
+        "religious_practices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tradition": {
+                "type": "string",
+                "description": "The specific religious or spiritual tradition."
+              },
+              "observance_level": {
+                "type": "string",
+                "enum": ["devout", "observant", "casual", "lapsed", "rejected"],
+                "description": "How strictly or regularly the character follows this tradition."
+              },
+              "personal_meaning": {
+                "type": "string",
+                "description": "What this spiritual practice means to the character personally."
+              }
+            }
+          },
+          "description": "The character's spiritual beliefs and religious practices that contribute to their identity."
+        }
+      },
+      "description": "The cultural traditions, languages, and beliefs that form part of the character's identity."
+    }
+  },
+  "required": ["biographical_summary"]
+}

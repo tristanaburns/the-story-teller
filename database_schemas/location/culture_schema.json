@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location/culture",
+  "title": "Location Culture Schema",
+  "description": "Cultural aspects, traditions, arts, and social practices unique to or prevalent in a location.",
+  "type": "object",
+  "properties": {
+    "cultural_identity": {
+      "type": "object",
+      "properties": {
+        "primary_cultures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The main cultural identities that define or influence this location."
+        },
+        "cultural_blending": {
+          "type": "string",
+          "description": "How different cultural influences interact, merge, or remain distinct within this location."
+        },
+        "cultural_symbols": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "symbol": {
+                "type": "string",
+                "description": "A physical object, gesture, color, or concept that holds special meaning in this location's culture."
+              },
+              "meaning": {
+                "type": "string",
+                "description": "What this symbol represents to the inhabitants of this location."
+              },
+              "usage": {
+                "type": "string",
+                "description": "How and when this symbol is typically displayed, referenced, or invoked."
+              }
+            },
+            "required": ["symbol", "meaning"]
+          },
+          "description": "Important emblems, objects, or concepts that represent the location's cultural identity."
+        }
+      },
+      "description": "The defining cultural characteristics and identity markers of this location."
+    },
+    "artistic_traditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "art_form": {
+            "type": "string",
+            "description": "The medium or category of artistic expression (e.g., 'music', 'literature', 'visual art', 'dance', 'architecture')."
+          },
+          "distinctive_features": {
+            "type": "string",
+            "description": "What makes this location's approach to this art form unique or recognizable."
+          },
+          "notable_works": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "The name of this artistic work."
+                },
+                "creator": {
+                  "type": "string",
+                  "description": "Who made this work, if known."
+                },
+                "significance": {
+                  "type": "string",
+                  "description": "Why this work is important to the location's cultural identity or history."
+                }
+              },
+              "required": ["title"]
+            },
+            "description": "Significant artistic creations associated with this location."
+          },
+          "current_practice": {
+            "type": "string",
+            "description": "How this art form continues to be practiced or preserved in the present day."
+          }
+        },
+        "required": ["art_form"]
+      },
+      "description": "The creative expressions and artistic practices that flourish in or are associated with this location."
+    },
+    "customs_and_traditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The title or commonly used name for this custom or tradition."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed explanation of what this custom entails and how it is practiced."
+          },
+          "origin": {
+            "type": "string",
+            "description": "How this tradition began and how long it has been practiced."
+          },
+          "significance": {
+            "type": "string",
+            "description": "Why this custom matters to the location's inhabitants and what values or beliefs it reflects."
+          },
+          "variations": {
+            "type": "string",
+            "description": "How this custom might differ across different demographics or areas within the location."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Regular practices, ceremonies, and behaviors that form part of this location's cultural life."
+    },
+    "cultural_sites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of this culturally significant place."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "religious_site",
+              "memorial",
+              "historical_monument",
+              "artistic_venue",
+              "educational_institution",
+              "traditional_marketplace",
+              "ceremonial_grounds",
+              "heritage_site"
+            ],
+            "description": "The category of cultural site this represents."
+          },
+          "location_reference": {
+            "$ref": "../common/references_schema.json",
+            "description": "Reference to this site's detailed location entry if it exists separately in the database."
+          },
+          "description": {
+            "type": "string",
+            "description": "The physical appearance and atmosphere of this cultural site."
+          },
+          "cultural_function": {
+            "type": "string",
+            "description": "What role this site plays in the cultural life of the location."
+          },
+          "access": {
+            "type": "string",
+            "description": "Who may visit or use this site and under what circumstances."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Places within the location that hold special cultural, religious, or social significance."
+    },
+    "cuisine": {
+      "type": "object",
+      "properties": {
+        "staple_foods": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The basic, everyday foods that form the foundation of the local diet."
+        },
+        "signature_dishes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of this distinctive food or drink."
+              },
+              "description": {
+                "type": "string",
+                "description": "What this dish consists of and how it is prepared."
+              },
+              "cultural_context": {
+                "type": "string",
+                "description": "When this dish is typically eaten and what significance it might have."
+              }
+            },
+            "required": ["name", "description"]
+          },
+          "description": "Dishes or foods that are particularly associated with this location."
+        },
+        "culinary_practices": {
+          "type": "string",
+          "description": "Distinctive methods of food preparation, serving, or consumption that characterize this location's approach to food."
+        },
+        "dining_customs": {
+          "type": "string",
+          "description": "Social norms and etiquette related to eating and drinking in this location."
+        }
+      },
+      "description": "The food culture and culinary traditions of this location."
+    },
+    "attire": {
+      "type": "object",
+      "properties": {
+        "traditional_clothing": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of this garment or style of dress."
+              },
+              "description": {
+                "type": "string",
+                "description": "What this clothing looks like and how it is worn."
+              },
+              "who_wears": {
+                "type": "string",
+                "description": "Which demographic groups typically wear this clothing and on what occasions."
+              },
+              "symbolism": {
+                "type": "string",
+                "description": "What the design, colors, or elements of this attire represent."
+              }
+            },
+            "required": ["name", "description"]
+          },
+          "description": "Distinctive garments or styles of dress that are culturally significant to this location."
+        },
+        "contemporary_fashion": {
+          "type": "string",
+          "description": "Current clothing trends and norms in this location, including how traditional elements might be incorporated into modern attire."
+        },
+        "status_indicators": {
+          "type": "string",
+          "description": "How clothing, accessories, or other adornments are used to signify social position, wealth, occupation, or other status markers."
+        }
+      },
+      "description": "The clothing styles, fashion norms, and dress customs of this location."
+    },
+    "language": {
+      "type": "object",
+      "properties": {
+        "primary_languages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of this language."
+              },
+              "prevalence": {
+                "type": "string",
+                "description": "How widely this language is spoken in this location."
+              },
+              "status": {
+                "type": "string",
+                "description": "The official or unofficial standing of this language in the location."
+              },
+              "dialects": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Regional or social variants of this language found within the location."
+              }
+            },
+            "required": ["name"]
+          },
+          "description": "The main languages spoken in this location."
+        },
+        "writing_systems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The methods used to write languages in this location."
+        },
+        "linguistic_quirks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "feature": {
+                "type": "string",
+                "description": "A distinctive aspect of language use in this location, such as unique idioms, slang, or linguistic patterns."
+              },
+              "usage": {
+                "type": "string",
+                "description": "How this linguistic feature is employed in communication."
+              },
+              "origin": {
+                "type": "string",
+                "description": "Where this linguistic feature came from or how it developed."
+              }
+            },
+            "required": ["feature"]
+          },
+          "description": "Distinctive elements of language or communication unique to this location."
+        }
+      },
+      "description": "The linguistic landscape of this location, including languages spoken and communication norms."
+    }
+  }
+}

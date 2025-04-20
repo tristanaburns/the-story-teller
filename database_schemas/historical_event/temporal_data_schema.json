@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/historical_event/temporal_data",
+  "title": "Historical Event Temporal Data Schema",
+  "description": "Temporal specifications for historical events, including duration, chronological positioning, and time-related properties.",
+  "type": "object",
+  "properties": {
+    "start_date": {
+      "$ref": "../common/time_period_schema.json",
+      "description": "When the historical event began."
+    },
+    "end_date": {
+      "$ref": "../common/time_period_schema.json",
+      "description": "When the historical event concluded, if it has a definite end."
+    },
+    "duration": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "The numerical length of time the event spanned."
+        },
+        "unit": {
+          "type": "string",
+          "enum": ["minutes", "hours", "days", "weeks", "months", "years", "decades", "centuries", "millennia", "eons"],
+          "description": "The time unit for measuring the event's duration."
+        },
+        "precision": {
+          "type": "string",
+          "enum": ["exact", "approximate", "estimated", "contested"],
+          "description": "How precisely the duration is known or recorded."
+        }
+      },
+      "description": "How long the historical event lasted from beginning to end."
+    },
+    "periodicity": {
+      "type": "object",
+      "properties": {
+        "recurs": {
+          "type": "boolean",
+          "description": "Whether this event repeats at regular intervals."
+        },
+        "frequency": {
+          "type": "string",
+          "description": "How often the event recurs, if applicable."
+        },
+        "pattern": {
+          "type": "string",
+          "description": "Any notable pattern to the event's recurrence, such as intensification or changes in character over time."
+        }
+      },
+      "description": "Information about whether and how the event repeats over time."
+    },
+    "temporal_anomalies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "The nature of the time distortion or anomaly associated with this event."
+          },
+          "effects": {
+            "type": "string",
+            "description": "How this anomaly affected participants or the surrounding area."
+          },
+          "persistence": {
+            "type": "string",
+            "enum": ["temporary", "recurring", "permanent", "cascading"],
+            "description": "Whether and how the temporal anomaly continues to exist after the event."
+          }
+        },
+        "required": ["description"]
+      },
+      "description": "Any unusual temporal phenomena associated with the historical event, such as time dilation, temporal loops, or causality violations."
+    },
+    "historical_era": {
+      "type": "object",
+      "properties": {
+        "era_name": {
+          "type": "string",
+          "description": "The named historical period during which the event occurred."
+        },
+        "significance_to_era": {
+          "type": "string",
+          "description": "How the event relates to or exemplifies the defining characteristics of its historical era."
+        },
+        "era_transition": {
+          "type": "boolean",
+          "description": "Whether this event marked or contributed to a transition between historical eras."
+        }
+      },
+      "description": "The event's positioning within the broader timeline of the narrative world."
+    },
+    "calendar_systems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "calendar_name": {
+            "type": "string",
+            "description": "The name of the calendar system used to date this event."
+          },
+          "date_notation": {
+            "type": "string",
+            "description": "How the event's date is recorded in this calendar system."
+          },
+          "cultural_context": {
+            "type": "string",
+            "description": "Which cultures or peoples use this calendar system."
+          }
+        },
+        "required": ["calendar_name", "date_notation"]
+      },
+      "description": "Different dating systems used to record or commemorate the historical event."
+    }
+  },
+  "required": ["start_date"]
+}

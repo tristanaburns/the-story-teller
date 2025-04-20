@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Writing Metadata Schema",
+  "description": "Defines the structure for metadata tracking in The Shadow Team Chronicles.",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Encapsulates all metadata properties for tracking and execution.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "A globally unique identifier (UUID v4) for this object."
+        },
+        "name": {
+          "type": "string",
+          "description": "The title or name of this object."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed summary or description of this object."
+        },
+        "object_type": {
+          "type": "string",
+          "enum": [
+            "storyline", "volume", "act", "story", "chapter", 
+            "passage", "part", "technology", "character", "location", 
+            "category", "image", "video", "audio", "map"
+          ],
+          "description": "The classification of this object."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "final"],
+          "description": "The current progression state of this object."
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "Indicates whether this object has been reviewed and confirmed."
+        },
+        "setting": {
+          "type": "string",
+          "description": "Defined setting/location for this object."
+        },
+        "writing_style": {
+          "type": "object",
+          "description": "Defines the writing style and format for this object.",
+          "properties": {
+            "tone": {
+              "type": "string",
+              "enum": ["Epic", "Cinematic", "Mythic"],
+              "description": "The overarching tone of the narrative."
+            },
+            "theme": {
+              "type": "string",
+              "enum": ["Fate", "Honor", "Battle of Legends"],
+              "description": "The central theme of the narrative."
+            },
+            "events": {
+              "type": "array",
+              "description": "Key events that shape the narrative.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "event": { "type": "string" },
+                  "importance": { "type": "string" },
+                  "impact": { "type": "string" }
+                },
+                "required": ["event", "importance", "impact"]
+              }
+            }
+          },
+          "required": ["tone", "theme", "events"]
+        },
+        "sequence": {
+          "type": "object",
+          "description": "Tracking for story progression, combining numerical identifiers and descriptive context.",
+          "properties": {
+            "tracking": {
+              "type": "object",
+              "description": "Numerical tracking for story progression.",
+              "properties": {
+                "act": { "type": "integer", "minimum": 1, "description": "The act number within the storyline." },
+                "volume": { "type": "integer", "minimum": 1, "description": "The volume number within the storyline." },
+                "story": { "type": "integer", "minimum": 1, "description": "The story number within the volume." },
+                "chapter": { "type": "integer", "minimum": 1, "description": "The chapter number within the story." },
+                "passage": { "type": "integer", "minimum": 1, "description": "The passage number within the chapter." },
+                "part": { "type": "integer", "minimum": 1, "description": "The part number within the passage." }
+              },
+              "required": ["act", "volume", "story", "chapter", "passage", "part"]
+            },
+            "description": {
+              "type": "object",
+              "description": "Descriptive details of the sequence progression, providing narrative clarity.",
+              "properties": {
+                "volume": { "type": "string", "description": "The larger thematic collection this story belongs to, e.g., 'Introduction'." },
+                "act": { "type": "string", "description": "The narrative act, defining major shifts in the story arc, e.g., 'Act I - Origins'." },
+                "story": { "type": "string", "description": "The individual story within the act, e.g., 'The Bridge of Fate'." },
+                "chapter": { "type": "string", "description": "A major event-based division within the story, e.g., 'Chapter 1 - The Duel at Gojo Bridge'." },
+                "passage": { "type": "string", "description": "A focused cinematic moment within the chapter, e.g., 'The Bridge That Would Decide Fate'." },
+                "part": { "type": "string", "description": "A smaller unit within the passage, covering specific actions, e.g., 'Opening Duel Between Yoshi and Benkei'." }
+              },
+              "required": ["act", "volume", "story", "chapter", "passage", "part"]
+            }
+          }
+        },
+        "characters": {
+          "type": "array",
+          "description": "List of characters involved in this object.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "alias": { "type": "string" },
+              "role": { "type": "string" },
+              "description": { "type": "string" },
+              "personality": { "type": "string" },
+              "skills": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "type": { "type": "string" },
+                    "description": { "type": "string" }
+                  },
+                  "required": ["name", "type", "description"]
+                }
+              },
+              "weapons": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "type": { "type": "string" },
+                    "description": { "type": "string" }
+                  },
+                  "required": ["name", "type", "description"]
+                }
+              }
+            },
+            "required": ["name", "alias", "role", "description", "personality", "skills", "weapons"]
+          }
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "description": { "type": "string" },
+            "historical_significance": { "type": "string" },
+            "geographical_coordinates": { "type": "string" },
+            "map_prompt": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": ["pending", "passed", "failed"],
+                  "description": "The status of the map generation process."
+                },
+                "map_prompt_text": {
+                  "type": "string",
+                  "description": "The dynamically generated prompt for creating a location map."
+                },
+                "timeline_integration": {
+                  "type": "string",
+                  "description": "Details how the map adjusts to different time periods."
+                }
+              },
+              "required": ["status", "map_prompt_text", "timeline_integration"]
+            }
+          },
+          "required": ["name", "description", "historical_significance", "geographical_coordinates", "map_prompt"]
+        },
+        "multimedia": {
+          "type": "object",
+          "properties": {
+            "image_generation": {
+              "type": "object",
+              "properties": {
+                "prompt_text": { "type": "string" },
+                "status": { 
+                  "type": "string",
+                  "enum": ["pending", "passed", "failed"]
+                },
+                "failure_reason": { 
+                  "type": ["string", "null"],
+                  "description": "Provided if status is 'failed'; null otherwise."
+                }
+              },
+              "required": ["prompt_text", "status"]
+            },
+            "video_generation": {
+              "type": "object",
+              "properties": {
+                "prompt_text": { "type": "string" },
+                "status": {
+                  "type": "string",
+                  "enum": ["pending", "passed", "failed"]
+                },
+                "failure_reason": { 
+                  "type": ["string", "null"],
+                  "description": "Provided if status is 'failed'; null otherwise."
+                }
+              },
+              "required": ["prompt_text", "status"]
+            }
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": { "type": "string" },
+              "value": { "type": "string" }
+            },
+            "required": ["key", "value"]
+          }
+        },
+        "source": {
+          "type": ["string", "null"],
+          "description": "Original source or external citation if applicable; null if original."
+        }
+      },
+      "required": [
+        "id", "name", "object_type", "status", "verified", "sequence", "tags", "writing_style"
+      ]
+    }
+  },
+  "required": ["metadata"]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/time_period",
+  "title": "Time Period Schema",
+  "description": "Standard format for representing a span of time across all schema types.",
+  "type": "object",
+  "properties": {
+    "start_date": {
+      "$ref": "timestamp_schema.json",
+      "description": "When this period begins."
+    },
+    "end_date": {
+      "$ref": "timestamp_schema.json",
+      "description": "When this period ends, if applicable."
+    },
+    "duration": {
+      "type": "string",
+      "description": "The length of this time period in appropriate units (minutes, days, years, etc)."
+    },
+    "era": {
+      "type": "string",
+      "description": "The broader historical era in which this time period falls."
+    }
+  },
+  "required": ["start_date"]
+}

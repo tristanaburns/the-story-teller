@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Clan War Database Schema",
+  "description": "Defines the structure for historical war records in The Shadow Team Chronicles universe.",
+  "type": "object",
+  "properties": {
+    "clan": {
+      "type": "object",
+      "description": "Information about the clan involved in the war.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the clan or faction."
+        },
+        "leader": {
+          "type": "string",
+          "description": "The primary leader of the clan during the war period."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Defeated", "Victorious", "Survived", "Dissolved"],
+          "description": "The final outcome for this clan after the war."
+        },
+        "defeated_by": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The names of individuals or clans responsible for defeating this clan, if applicable."
+        },
+        "defeat_details": {
+          "type": "object",
+          "description": "Specific information about the clan's defeat or victory.",
+          "properties": {
+            "war": {
+              "type": "string",
+              "description": "The official name of the war or conflict."
+            },
+            "key_battles": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the battle or conflict."
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "When the battle took place, in historical date format."
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "Where the battle occurred, referencing historical or present-day locations."
+                  },
+                  "outcome": {
+                    "type": "string",
+                    "description": "The result of the battle and its significance to the war."
+                  }
+                },
+                "required": ["name", "date", "outcome"]
+              },
+              "description": "The major battles that defined this clan's involvement in the war."
+            }
+          },
+          "required": ["war"]
+        }
+      },
+      "required": ["name", "status"]
+    }
+  },
+  "required": ["clan"]
+}

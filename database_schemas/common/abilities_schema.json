@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/abilities",
+  "title": "Abilities Schema",
+  "description": "Special or extraordinary capabilities that distinguish entities beyond normal limitations, applicable to characters, artifacts, locations or technologies.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "The title or name of this special ability."
+      },
+      "ability_type": {
+        "type": "string",
+        "enum": [
+          "innate_power",
+          "magical",
+          "technological",
+          "spiritual",
+          "physical_mutation",
+          "psychological",
+          "divine",
+          "cursed",
+          "hybrid"
+        ],
+        "description": "The fundamental nature or source of this ability, categorizing its origin and general properties."
+      },
+      "description": {
+        "type": "string",
+        "description": "A comprehensive explanation of what this ability allows the entity to do and how it functions. Should include both capabilities and limitations."
+      },
+      "origin": {
+        "type": "string",
+        "description": "How the entity acquired or developed this ability, which may be through inherent qualities, events, technological enhancement, etc."
+      },
+      "limitations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Specific restrictions, costs, or drawbacks associated with using this ability, providing narrative balance."
+      },
+      "manifestations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "context": {
+              "type": "string",
+              "description": "The specific situation or trigger that causes this manifestation of the ability."
+            },
+            "effect": {
+              "type": "string",
+              "description": "What happens when the ability activates in this context, including sensory details and physical impact."
+            }
+          }
+        },
+        "description": "Different ways the ability expresses itself in various situations or contexts."
+      },
+      "narrative_significance": {
+        "type": "string",
+        "description": "How this ability connects to narrative arcs, broader themes of the story, or major plot developments."
+      }
+    },
+    "required": ["name", "ability_type", "description"]
+  }
+}

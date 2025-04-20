@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/personal_data",
+  "title": "Character Personal Data Schema",
+  "description": "Basic identifying information and biological characteristics of the character.",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "description": "The complete formal name of the character, including titles, honorifics, and family names where culturally appropriate."
+    },
+    "birth_name": {
+      "type": "string",
+      "description": "The name given to this character at birth, if different from their current name. Important for characters who have changed their identity."
+    },
+    "titles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Formal designations, ranks, or honorifics associated with this character, such as 'Captain', 'Doctor', or 'Lady'."
+    },
+    "age": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": ["integer", "string"],
+          "description": "The character's chronological age. May be a specific number or a descriptive range for non-human or ageless characters."
+        },
+        "appearance": {
+          "type": "string",
+          "description": "How old the character appears to others, which may differ from their actual age due to species, magic, technology, or other factors."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional context about the character's age, such as unusual longevity, time displacement, or aging patterns."
+        }
+      },
+      "description": "Information about the character's age and apparent age, which may differ for supernatural or technologically enhanced beings."
+    },
+    "biological_sex": {
+      "type": "string",
+      "description": "The character's biological sex characteristics, if applicable and relevant to the narrative."
+    },
+    "gender_identity": {
+      "type": "string",
+      "description": "How the character identifies in terms of gender, which may be distinct from their biological sex."
+    },
+    "sexual_orientation": {
+      "type": "string",
+      "description": "The character's pattern of attraction, if relevant to the narrative."
+    },
+    "species": {
+      "type": "string",
+      "description": "The biological or metaphysical classification of the character, particularly important in fantasy, science fiction, or other speculative genres."
+    },
+    "ethnicity": {
+      "type": "string",
+      "description": "The character's cultural or genetic heritage within their species."
+    },
+    "nationality": {
+      "type": "string",
+      "description": "The character's citizenship, allegiance, or place of origin within the political structures of the narrative world."
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the language."
+          },
+          "fluency": {
+            "type": "string",
+            "enum": ["native", "fluent", "conversational", "basic", "rudimentary"],
+            "description": "How well the character understands and communicates in this language."
+          }
+        },
+        "required": ["name", "fluency"]
+      },
+      "description": "Languages the character speaks, reads, or understands, with indication of proficiency level."
+    },
+    "birth_place": {
+      "type": "object",
+      "properties": {
+        "location_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Reference to a location object representing where the character was born."
+        },
+        "description": {
+          "type": "string",
+          "description": "Textual description of the character's birthplace, providing context about how this origin influences the character."
+        }
+      },
+      "description": "Where the character was born or created, which may influence their identity, values, or abilities."
+    }
+  },
+  "required": ["full_name"]
+}

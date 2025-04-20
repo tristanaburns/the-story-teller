@@ -1,0 +1,295 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/equipment_type",
+  "title": "Equipment Type Schema",
+  "description": "Standardized enumeration of all possible equipment types in The Shadow Team Chronicles universe, categorized by function and purpose.",
+  "type": "string",
+  "enum": [
+    "melee_weapon",
+    "ranged_weapon",
+    "thrown_weapon",
+    "ammunition",
+    "light_armor",
+    "medium_armor",
+    "heavy_armor",
+    "shield",
+    "helmet",
+    "clothing",
+    "footwear",
+    "accessory",
+    "jewelry",
+    "magical_focus",
+    "magical_artifact",
+    "technological_device",
+    "cybernetic_enhancement",
+    "implant",
+    "tool",
+    "utility_device",
+    "medical_item",
+    "communications_device",
+    "surveillance_equipment",
+    "navigation_equipment",
+    "container",
+    "vehicle_component",
+    "mount_equipment",
+    "ritual_item",
+    "musical_instrument",
+    "scientific_instrument",
+    "data_storage",
+    "concealed_weapon",
+    "trap",
+    "disguise_kit",
+    "forgery_tools",
+    "climbing_equipment",
+    "survival_gear",
+    "currency",
+    "treasure",
+    "cultural_artifact",
+    "wearable_tech",
+    "consumable"
+  ],
+  "categoryMapping": {
+    "type": "object",
+    "description": "Grouping of equipment types by their functional category (not part of the enum, provided for documentation)",
+    "properties": {
+      "weapons": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["melee_weapon", "ranged_weapon", "thrown_weapon", "ammunition", "concealed_weapon"]
+        },
+        "description": "Items primarily designed for combat and inflicting damage."
+      },
+      "armor_protection": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["light_armor", "medium_armor", "heavy_armor", "shield", "helmet"]
+        },
+        "description": "Items designed to protect the wearer from damage or harm."
+      },
+      "apparel": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["clothing", "footwear", "accessory", "jewelry"]
+        },
+        "description": "Items worn primarily for practical, cultural, or aesthetic purposes rather than protection."
+      },
+      "magical_items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["magical_focus", "magical_artifact", "ritual_item"]
+        },
+        "description": "Items that channel, contain, or produce magical effects."
+      },
+      "technological_items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["technological_device", "cybernetic_enhancement", "implant", "communications_device", "surveillance_equipment", "data_storage", "wearable_tech"]
+        },
+        "description": "Items that utilize advanced technology to provide specific functions or capabilities."
+      },
+      "tools_utilities": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["tool", "utility_device", "medical_item", "navigation_equipment", "container", "scientific_instrument"]
+        },
+        "description": "Practical items used to perform specific tasks or functions."
+      },
+      "special_equipment": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["trap", "disguise_kit", "forgery_tools", "climbing_equipment", "survival_gear", "musical_instrument"]
+        },
+        "description": "Specialized items for specific scenarios, activities, or professions."
+      },
+      "valuable_items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["currency", "treasure", "cultural_artifact"]
+        },
+        "description": "Items primarily valued for their monetary worth, rarity, or cultural significance."
+      }
+    }
+  },
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each equipment type (not part of the enum, provided for documentation)",
+    "properties": {
+      "melee_weapon": {
+        "type": "string",
+        "description": "Weapons designed for close-quarters combat that require direct physical contact, including swords, axes, maces, and daggers."
+      },
+      "ranged_weapon": {
+        "type": "string",
+        "description": "Weapons that can strike targets at a distance, such as bows, crossbows, firearms, and energy weapons."
+      },
+      "thrown_weapon": {
+        "type": "string",
+        "description": "Weapons designed to be thrown by hand, including throwing knives, shurikens, javelins, and grenades."
+      },
+      "ammunition": {
+        "type": "string",
+        "description": "Consumable projectiles used with ranged weapons, such as arrows, bolts, bullets, energy cells, or spell components."
+      },
+      "light_armor": {
+        "type": "string",
+        "description": "Protective gear that offers basic protection with minimal restriction to mobility, such as leather armor or reinforced clothing."
+      },
+      "medium_armor": {
+        "type": "string",
+        "description": "Protective gear that balances defense and mobility, such as chainmail, scale armor, or tactical vests."
+      },
+      "heavy_armor": {
+        "type": "string",
+        "description": "Protective gear that prioritizes maximum defense at the cost of mobility, such as plate armor or powered exoskeletons."
+      },
+      "shield": {
+        "type": "string",
+        "description": "Defensive implements held or mounted to block attacks, including bucklers, riot shields, and energy barriers."
+      },
+      "helmet": {
+        "type": "string",
+        "description": "Protective headgear that may include additional features like enhanced vision, communications, or environmental protection."
+      },
+      "clothing": {
+        "type": "string",
+        "description": "Standard garments worn for practical, cultural, or aesthetic purposes, which may include special properties or hidden features."
+      },
+      "footwear": {
+        "type": "string",
+        "description": "Shoes, boots, or other foot coverings that may provide protection, enhance movement, or serve specialized functions."
+      },
+      "accessory": {
+        "type": "string",
+        "description": "Supplementary items worn or carried that enhance appearance or provide minor functional benefits, such as belts, gloves, or scarves."
+      },
+      "jewelry": {
+        "type": "string",
+        "description": "Decorative items worn on the body that may also contain magical or technological enhancements, such as rings, amulets, or circlets."
+      },
+      "magical_focus": {
+        "type": "string",
+        "description": "Items used to channel, direct, or enhance magical abilities, such as wands, staves, orbs, or spell components."
+      },
+      "magical_artifact": {
+        "type": "string",
+        "description": "Objects imbued with significant magical properties or powers, often unique or legendary in nature."
+      },
+      "technological_device": {
+        "type": "string",
+        "description": "Advanced equipment that uses scientific principles to perform specific functions, from simple gadgets to complex machines."
+      },
+      "cybernetic_enhancement": {
+        "type": "string",
+        "description": "Technological augmentations that interface with biological systems, providing enhanced capabilities or replacing lost functions."
+      },
+      "implant": {
+        "type": "string",
+        "description": "Devices installed within a body to provide internal enhancements, monitoring, or specialized capabilities."
+      },
+      "tool": {
+        "type": "string",
+        "description": "Implements designed for performing specific tasks, crafts, or professional activities, from lockpicks to surgical instruments."
+      },
+      "utility_device": {
+        "type": "string",
+        "description": "Multi-purpose items designed for practical use in various situations, such as multi-tools or environmental scanners."
+      },
+      "medical_item": {
+        "type": "string",
+        "description": "Equipment used for diagnosing, treating, or preventing injuries and ailments, from bandages to advanced regeneration devices."
+      },
+      "communications_device": {
+        "type": "string",
+        "description": "Equipment for transmitting or receiving information across distances, including radios, communicators, and telepathic enhancers."
+      },
+      "surveillance_equipment": {
+        "type": "string",
+        "description": "Devices used for monitoring, recording, or gathering intelligence, such as cameras, microphones, or magical scrying tools."
+      },
+      "navigation_equipment": {
+        "type": "string",
+        "description": "Items that assist with wayfinding, mapping, or tracking movement, from compasses to holographic positioning systems."
+      },
+      "container": {
+        "type": "string",
+        "description": "Items designed to hold, transport, or store other objects, which may have special properties like expanded capacity or preservation."
+      },
+      "vehicle_component": {
+        "type": "string",
+        "description": "Parts or accessories for vehicles that may enhance performance, add capabilities, or repair damage."
+      },
+      "mount_equipment": {
+        "type": "string",
+        "description": "Gear designed for animals or creatures used for transportation, including saddles, barding, or control interfaces."
+      },
+      "ritual_item": {
+        "type": "string",
+        "description": "Objects used in ceremonial or magical procedures, often requiring specific preparation or conditions for use."
+      },
+      "musical_instrument": {
+        "type": "string",
+        "description": "Devices that produce music or sound, which may have cultural significance or magical/technological properties."
+      },
+      "scientific_instrument": {
+        "type": "string",
+        "description": "Equipment used for observation, measurement, or analysis in scientific or scholarly pursuits."
+      },
+      "data_storage": {
+        "type": "string",
+        "description": "Devices that contain, protect, or transfer information, from scrolls and books to digital drives and neural storage."
+      },
+      "concealed_weapon": {
+        "type": "string",
+        "description": "Weapons designed to be hidden or disguised as ordinary objects, allowing for surprise attacks or bypassing security."
+      },
+      "trap": {
+        "type": "string",
+        "description": "Devices designed to be triggered by specific conditions to harm, capture, or impede targets."
+      },
+      "disguise_kit": {
+        "type": "string",
+        "description": "Collections of tools and materials used to alter appearance and identity, from makeup to holographic projectors."
+      },
+      "forgery_tools": {
+        "type": "string",
+        "description": "Specialized equipment for creating convincing copies or falsifications of documents, seals, or other authentication methods."
+      },
+      "climbing_equipment": {
+        "type": "string",
+        "description": "Gear designed to facilitate vertical movement and secure positioning on various surfaces and terrains."
+      },
+      "survival_gear": {
+        "type": "string",
+        "description": "Equipment that supports basic needs in harsh or wilderness environments, such as shelter, fire-starting, or water purification."
+      },
+      "currency": {
+        "type": "string",
+        "description": "Items that serve as a medium of exchange, store of value, or unit of account within economic systems."
+      },
+      "treasure": {
+        "type": "string",
+        "description": "Valuable items prized primarily for their worth rather than functional use, such as gems, precious metals, or collectibles."
+      },
+      "cultural_artifact": {
+        "type": "string",
+        "description": "Objects of significant historical, religious, or cultural importance that may confer social benefits or access."
+      },
+      "wearable_tech": {
+        "type": "string",
+        "description": "Technological devices designed to be worn on the body that provide information, enhancements, or specialized functions."
+      },
+      "consumable": {
+        "type": "string",
+        "description": "Single-use items that are expended when activated, such as potions, drugs, stimpacks, or spell scrolls."
+      }
+    }
+  }
+}

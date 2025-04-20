@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/historical_trend_type",
+  "title": "Historical Trend Type Schema",
+  "description": "Standardized enumeration of categories of significant historical developments over time in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "technological_evolution",
+    "social_transformation",
+    "political_restructuring",
+    "economic_shift",
+    "cultural_movement",
+    "ideological_spread",
+    "military_development",
+    "environmental_change",
+    "demographic_transition",
+    "scientific_revolution",
+    "artistic_renaissance",
+    "religious_reformation",
+    "organizational_emergence",
+    "global_integration",
+    "power_consolidation",
+    "resource_depletion",
+    "knowledge_advancement",
+    "conflict_escalation",
+    "infrastructure_expansion",
+    "communication_evolution",
+    "magical_awakening",
+    "consciousness_shift",
+    "rights_expansion",
+    "territorial_reorganization",
+    "space_exploration"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each historical trend type (not part of the enum, provided for documentation)",
+    "properties": {
+      "technological_evolution": {
+        "type": "string",
+        "description": "Progressive changes in tools, techniques, or systems that expand human capabilities."
+      },
+      "social_transformation": {
+        "type": "string",
+        "description": "Fundamental shifts in relationships, structures, or interactions within communities and populations."
+      },
+      "political_restructuring": {
+        "type": "string",
+        "description": "Reconfiguration of power distributions, governance systems, or decision-making processes."
+      },
+      "economic_shift": {
+        "type": "string",
+        "description": "Changes in patterns of production, distribution, exchange, or resource allocation."
+      },
+      "cultural_movement": {
+        "type": "string",
+        "description": "Development and spread of new artistic styles, values, traditions, or expressions."
+      },
+      "ideological_spread": {
+        "type": "string",
+        "description": "Expansion or contraction of specific belief systems, philosophies, or world-views."
+      },
+      "military_development": {
+        "type": "string",
+        "description": "Evolution in warfare capabilities, organization, doctrine, or technology."
+      },
+      "environmental_change": {
+        "type": "string",
+        "description": "Alterations in natural conditions, ecosystems, climate, or relationship between humans and environment."
+      },
+      "demographic_transition": {
+        "type": "string",
+        "description": "Shifts in population size, composition, distribution, or movement patterns."
+      },
+      "scientific_revolution": {
+        "type": "string",
+        "description": "Fundamental changes in knowledge paradigms, research methods, or understanding of natural phenomena."
+      },
+      "artistic_renaissance": {
+        "type": "string",
+        "description": "Flowering of creativity, innovation, or expression in literature, visual arts, music, or performance."
+      },
+      "religious_reformation": {
+        "type": "string",
+        "description": "Transformation of spiritual practices, theological interpretations, or religious institutions."
+      },
+      "organizational_emergence": {
+        "type": "string",
+        "description": "Rise of new institutional forms, collective structures, or ways of coordinating human activity."
+      },
+      "global_integration": {
+        "type": "string",
+        "description": "Increasing interconnection between previously separate regions, cultures, markets, or systems."
+      },
+      "power_consolidation": {
+        "type": "string",
+        "description": "Concentration of authority, influence, or control in fewer entities or centralized structures."
+      },
+      "resource_depletion": {
+        "type": "string",
+        "description": "Progressive reduction in availability of important materials, energy sources, or environmental capacities."
+      },
+      "knowledge_advancement": {
+        "type": "string",
+        "description": "Expansion of information, understanding, education, or expertise in specific domains."
+      },
+      "conflict_escalation": {
+        "type": "string",
+        "description": "Increasing tension, competition, or hostility between groups, nations, or factions."
+      },
+      "infrastructure_expansion": {
+        "type": "string",
+        "description": "Development of physical systems and networks that support societal functioning."
+      },
+      "communication_evolution": {
+        "type": "string",
+        "description": "Changes in methods, technologies, or patterns of information exchange and symbolic interaction."
+      },
+      "magical_awakening": {
+        "type": "string",
+        "description": "Emergence, increase, or transformation in supernatural forces, arcane practices, or mystical abilities."
+      },
+      "consciousness_shift": {
+        "type": "string",
+        "description": "Fundamental transformation in awareness, perception, or ways of understanding reality or identity."
+      },
+      "rights_expansion": {
+        "type": "string",
+        "description": "Extension of legal protections, freedoms, or recognized entitlements to additional groups or domains."
+      },
+      "territorial_reorganization": {
+        "type": "string",
+        "description": "Changing patterns of spatial control, boundary definitions, or jurisdictional arrangements."
+      },
+      "space_exploration": {
+        "type": "string",
+        "description": "Advancement into and utilization of extra-planetary environments by societies or organizations."
+      }
+    }
+  },
+  "categoryMapping": {
+    "type": "object",
+    "description": "Grouping of trend types by domain (not part of the enum, provided for documentation)",
+    "properties": {
+      "material_conditions": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "technological_evolution", 
+            "environmental_change", 
+            "resource_depletion", 
+            "infrastructure_expansion", 
+            "space_exploration"
+          ]
+        },
+        "description": "Trends related to the physical world and tools humans create."
+      },
+      "social_systems": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "social_transformation", 
+            "political_restructuring", 
+            "economic_shift", 
+            "organizational_emergence", 
+            "rights_expansion"
+          ]
+        },
+        "description": "Trends related to how people organize collectively and distribute power."
+      },
+      "ideational_elements": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "cultural_movement", 
+            "ideological_spread", 
+            "scientific_revolution", 
+            "artistic_renaissance", 
+            "religious_reformation", 
+            "knowledge_advancement", 
+            "consciousness_shift"
+          ]
+        },
+        "description": "Trends related to ideas, beliefs, knowledge, and expressions."
+      },
+      "power_relationships": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "military_development", 
+            "global_integration", 
+            "power_consolidation", 
+            "conflict_escalation", 
+            "territorial_reorganization"
+          ]
+        },
+        "description": "Trends related to control, competition, and cooperation between entities."
+      }
+    }
+  }
+}

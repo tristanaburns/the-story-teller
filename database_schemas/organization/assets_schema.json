@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/organization/assets",
+  "title": "Organization Assets Schema",
+  "description": "Resources, territories, and possessions controlled by an organization, defining its physical presence and material strength within the narrative world.",
+  "type": "object",
+  "properties": {
+    "territories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Reference to a location controlled by this organization."
+          },
+          "control_level": {
+            "type": "string",
+            "enum": ["complete", "dominant", "significant", "contested", "minimal", "covert"],
+            "description": "The degree to which the organization exercises authority over this territory."
+          }
+        }
+      },
+      "description": "Geographical areas over which the organization exerts control or influence."
+    },
+    "headquarters": {
+      "type": "object",
+      "properties": {
+        "location_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Reference to the primary base of operations for this organization."
+        },
+        "security_level": {
+          "type": "string",
+          "enum": ["impenetrable", "heavily_guarded", "secured", "moderate", "minimal", "hidden"],
+          "description": "Assessment of how well-protected the headquarters is against intrusion or attack."
+        }
+      },
+      "description": "The organization's primary base of operations."
+    },
+    "financial_resources": {
+      "type": "object",
+      "properties": {
+        "wealth_level": {
+          "type": "string",
+          "enum": ["destitute", "struggling", "modest", "wealthy", "abundant", "legendary"],
+          "description": "The general level of financial resources available to the organization, affecting its ability to fund operations, acquire assets, and influence others through economic means."
+        },
+        "income_sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The primary methods by which the organization acquires wealth or resources, such as taxation, trade, conquest, theft, or patronage."
+        },
+        "resource_stability": {
+          "type": "string",
+          "enum": ["unstable", "fluctuating", "stable", "growing", "declining"],
+          "description": "The reliability and sustainability of the organization's financial resources over time, indicating potential vulnerabilities or strengths in its economic foundation."
+        }
+      },
+      "description": "The economic and material wealth controlled by the organization, establishing its purchasing power and sustainability within the narrative."
+    },
+    "unique_possessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name or title of a significant artifact, relic, or unique item owned by the organization."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of this possession and its importance to the organization's identity, power, or operations."
+          },
+          "artifact_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Optional reference to a full artifact record if this possession has its own detailed entry in the artifact database."
+          }
+        },
+        "required": ["name", "description"]
+      },
+      "description": "Notable or unique items owned by the organization that contribute significantly to its power, prestige, or identity within the narrative world."
+    }
+  }
+}

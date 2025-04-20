@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Timeline References Schema",
+  "description": "Schema for tracking temporal positioning of elements within The Shadow Team Chronicles universe, providing consistent chronological reference capabilities across all object types.",
+  "type": "object",
+  "properties": {
+    "temporal_positioning": {
+      "$ref": "timeline/temporal_positioning_schema.json"
+    },
+    "timeline_alterations": {
+      "$ref": "timeline/timeline_alterations_schema.json"
+    },
+    "time_state_variants": {
+      "$ref": "timeline/time_state_variants_schema.json"
+    },
+    "temporal_significance": {
+      "$ref": "timeline/temporal_significance_schema.json"
+    },
+    "historical_context": {
+      "$ref": "timeline/historical_context_schema.json"
+    },
+    "parallel_timelines": {
+      "$ref": "timeline/parallel_timelines_schema.json"
+    },
+    "temporal_boundaries": {
+      "$ref": "timeline/temporal_boundaries_schema.json"
+    },
+    "chronological_systems": {
+      "$ref": "timeline/chronological_systems_schema.json"
+    },
+    "narrative_manifestations": {
+      "$ref": "timeline/narrative_manifestations_schema.json"
+    }
+  },
+  "required": ["temporal_positioning"]
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Base Metadata Schema",
+  "description": "Core schema defining the fundamental properties required for all world-building elements across stories and universes. This serves as the foundation for all other specialized schemas.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "A globally unique identifier (UUID v4) that uniquely identifies this object across all databases and systems. This should never be duplicated and remains constant throughout the object's lifecycle."
+    },
+    "name": {
+      "type": "string",
+      "description": "The primary name or title of the object as it is most commonly known in the narrative. This should be concise yet descriptive enough to be identifiable."
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alternative names or designations by which this object may be known across different regions, time periods, or contexts within the story world."
+    },
+    "description": {
+      "type": "string",
+      "description": "A comprehensive and detailed explanation of the object, including its history, purpose, significance, and distinguishing characteristics. This should provide sufficient context for understanding the object's role in the narrative."
+    },
+    "object_type": {
+      "$ref": "common/object_type_schema.json",
+      "description": "The primary classification category that defines what kind of entity this object represents within the world-building framework."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "destroyed", "missing", "unknown", "historical", "legendary"],
+      "description": "The current state of existence for this object within the narrative timeline, indicating whether it is currently accessible, destroyed, or otherwise unavailable."
+    },
+    "tags": {
+      "type": "object",
+      "description": "A flexible categorization system allowing for efficient search, filtering, and organization of world elements.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "A primary categorization term that groups this element with similar objects (e.g., 'warfare', 'governance', 'transportation')."
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of specific terms that can be used to locate this object in searches or to identify related elements."
+        }
+      }
+    },
+    "references": {
+      "type": "object",
+      "description": "Links to other objects within the world-building database, establishing a network of relationships without duplicating data.",
+      "properties": {
+        "related_objects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "The UUID of a related object in the database."
+              },
+              "relationship": {
+                "type": "string",
+                "description": "A description of how this object relates to the referenced object (e.g., 'creator', 'location', 'component')."
+              }
+            },
+            "required": ["id"]
+          },
+          "description": "A collection of references to other objects that have significant connections to this object."
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "author": {
+            "type": "string",
+            "description": "The person who added this note, useful for tracking the source of information."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When this note was added, in ISO 8601 format."
+          },
+          "content": {
+            "type": "string",
+            "description": "The text of the note, which may include additional context, reminders, or questions about this object."
+          }
+        },
+        "required": ["content"]
+      },
+      "description": "Additional information, questions, or clarifications about this object that don't fit elsewhere in the schema."
+    }
+  },
+  "required": ["id", "name", "description", "object_type"]
+}

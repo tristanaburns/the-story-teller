@@ -1,0 +1,363 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Chapter Information Schema",
+  "description": "Schema for documenting and analyzing narrative chapters within The Shadow Team Chronicles. Use this schema to maintain continuity, track character development, and support editorial analysis.",
+  "type": "object",
+  "required": ["id", "title", "chapter_number", "file_path", "status", "characters", "narrative_time", "key_events"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the chapter following the pattern chapter-[name]-[number]",
+      "pattern": "^chapter-[a-z0-9-]+-[0-9]{3}$",
+      "examples": ["chapter-warriors-oath-001", "chapter-digital-shadows-003"]
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the chapter as it appears in the narrative",
+      "examples": ["The Warriors Oath", "Digital Shadows"]
+    },
+    "chapter_number": {
+      "type": "number",
+      "description": "The sequential number of the chapter in the overall narrative, used for ordering and reference",
+      "examples": [2, 7]
+    },
+    "file_path": {
+      "type": "string",
+      "description": "Path to the file containing the chapter content, relative to project root",
+      "examples": ["CONTENT\\The Shadow Team Chronicles\\STORYLINE\\DRAFT\\2. The Warriors Oath.md"]
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 date when the chapter was first created",
+      "examples": ["2025-03-15T00:00:00Z"]
+    },
+    "last_modified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 date when the chapter was last modified",
+      "examples": ["2025-03-17T00:00:00Z"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "final", "published"],
+      "description": "Current development status of the chapter",
+      "examples": ["draft"]
+    },
+    "version": {
+      "type": "number",
+      "description": "Version number of the chapter"
+    },
+    "word_count": {
+      "type": "number",
+      "description": "Total number of words in the chapter"
+    },
+    "reading_time_minutes": {
+      "type": "number",
+      "description": "Estimated time to read the chapter in minutes"
+    },
+    "narrative_time": {
+      "type": "object",
+      "description": "When the events of the chapter take place",
+      "required": ["start_date"],
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "description": "When the chapter's events begin (YYYY-MM-DD format)"
+        },
+        "end_date": {
+          "type": "string",
+          "description": "When the chapter's events end (YYYY-MM-DD format)"
+        },
+        "time_span_description": {
+          "type": "string",
+          "description": "Human-readable description of the time period"
+        }
+      }
+    },
+    "previous_chapter": {
+      "type": ["object", "null"],
+      "description": "Reference to the chapter that comes before this one",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the previous chapter"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the previous chapter"
+        }
+      }
+    },
+    "next_chapter": {
+      "type": ["object", "null"],
+      "description": "Reference to the chapter that comes after this one",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the next chapter"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the next chapter"
+        }
+      }
+    },
+    "locations": {
+      "type": "array",
+      "description": "IDs of locations that appear in the chapter",
+      "items": {
+        "type": "string",
+        "description": "Location ID",
+        "pattern": "^loc-[a-z0-9-]+-[0-9]{3}$"
+      }
+    },
+    "characters": {
+      "type": "object",
+      "description": "Characters who appear in the chapter",
+      "properties": {
+        "primary": {
+          "type": "array",
+          "description": "Main characters central to the chapter's plot",
+          "items": {
+            "type": "string",
+            "pattern": "^char-[a-z0-9-]+-[0-9]{3}$"
+          }
+        },
+        "secondary": {
+          "type": "array",
+          "description": "Supporting characters with significant roles",
+          "items": {
+            "type": "string",
+            "pattern": "^char-[a-z0-9-]+-[0-9]{3}$"
+          }
+        },
+        "mentioned": {
+          "type": "array",
+          "description": "Characters referenced but not appearing directly",
+          "items": {
+            "type": "string",
+            "pattern": "^char-[a-z0-9-]+-[0-9]{3}$"
+          }
+        }
+      },
+      "required": ["primary"]
+    },
+    "point_of_view": {
+      "type": "string",
+      "description": "Narrative perspective (e.g., first-person, third-person-limited)",
+      "enum": [
+        "first-person",
+        "second-person",
+        "third-person-limited",
+        "third-person-omniscient",
+        "multiple"
+      ]
+    },
+    "narrative_style": {
+      "type": "string",
+      "description": "Stylistic approach to storytelling (e.g., historical-epic, noir, magical-realism)"
+    },
+    "primary_themes": {
+      "type": "array",
+      "description": "Major thematic elements explored in the chapter",
+      "items": {
+        "type": "string",
+        "pattern": "^theme-[a-z0-9-]+-[0-9]{3}$"
+      }
+    },
+    "secondary_themes": {
+      "type": "array",
+      "description": "Supporting thematic elements present in the chapter",
+      "items": {
+        "type": "string",
+        "pattern": "^theme-[a-z0-9-]+-[0-9]{3}$"
+      }
+    },
+    "key_events": {
+      "type": "array",
+      "description": "Major occurrences within the chapter",
+      "items": {
+        "type": "string",
+        "pattern": "^event-[a-z0-9-]+-[0-9]{3}$"
+      }
+    },
+    "event_chain": {
+      "type": "string",
+      "description": "ID of the event chain that connects the chapter's events",
+      "pattern": "^event-chain-[a-z0-9-]+-[0-9]{3}$"
+    },
+    "chapter_sections": {
+      "type": "array",
+      "description": "Structural breakdown of the chapter",
+      "items": {
+        "type": "object",
+        "required": ["title", "narrative_function"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Section title"
+          },
+          "narrative_function": {
+            "type": "string",
+            "description": "Purpose the section serves in the narrative"
+          }
+        }
+      }
+    },
+    "pacing": {
+      "type": "object",
+      "description": "Assessment of the narrative rhythm",
+      "properties": {
+        "overall": {
+          "type": "string",
+          "description": "General pacing of the chapter"
+        },
+        "action_scenes": {
+          "type": "string",
+          "description": "Pacing of action-oriented sequences"
+        },
+        "character_development": {
+          "type": "string",
+          "description": "Pacing of character growth moments"
+        },
+        "description": {
+          "type": "string",
+          "description": "Approach to descriptive passages"
+        }
+      }
+    },
+    "cultural_references": {
+      "type": "array",
+      "description": "Cultural elements incorporated in the chapter",
+      "items": {
+        "type": "string"
+      }
+    },
+    "character_arcs": {
+      "type": "object",
+      "description": "Documents how characters develop within the chapter, tracking their transformation and key moments",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["arc_type", "starting_state", "ending_state", "development_summary"],
+        "properties": {
+          "arc_type": {
+            "type": "string",
+            "description": "Type of character development (e.g., transformation, revelation, testing)",
+            "examples": ["transformation", "revelation", "testing", "growth"]
+          },
+          "starting_state": {
+            "type": "string",
+            "description": "Character's mindset/situation at chapter beginning - should match previous chapter's ending state if applicable",
+            "examples": ["Directionless warrior seeking purpose through empty victories"]
+          },
+          "ending_state": {
+            "type": "string",
+            "description": "Character's mindset/situation at chapter end - will become the starting state for their next appearance",
+            "examples": ["Devoted retainer finding meaning in service to a worthy master"]
+          },
+          "pivot_moment": {
+            "type": "string",
+            "description": "Event ID of the turning point in character development - must exist in the event database",
+            "examples": ["event-benkei-oath-001"]
+          },
+          "development_summary": {
+            "type": "string",
+            "description": "Concise summary of the character's growth or change during this chapter",
+            "examples": ["Benkei transforms from a collector of meaningless trophies to a purposeful protector."]
+          }
+        }
+      },
+      "examples": [
+        {
+          "char-benkei-001": {
+            "arc_type": "transformation",
+            "starting_state": "Directionless warrior seeking purpose",
+            "ending_state": "Devoted retainer finding meaning in service",
+            "pivot_moment": "event-benkei-oath-001",
+            "development_summary": "Benkei transforms from collecting trophies to finding purpose through service."
+          }
+        }
+      ]
+    },
+    "editorial_notes": {
+      "type": "object",
+      "description": "Comments on strengths and areas for improvement",
+      "properties": {
+        "strengths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "What works well in the chapter"
+        },
+        "areas_for_improvement": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "What could be enhanced or corrected"
+        },
+        "follow_up_chapters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Elements to address in subsequent chapters"
+        }
+      }
+    },
+    "setting_details": {
+      "type": "object",
+      "description": "Environmental and atmospheric elements",
+      "properties": {
+        "weather_conditions": {
+          "type": "string",
+          "description": "Weather patterns in the chapter"
+        },
+        "season": {
+          "type": "string",
+          "description": "Season or time of year"
+        },
+        "environmental_factors": {
+          "type": "string",
+          "description": "Notable environmental elements affecting the narrative"
+        },
+        "sensory_atmosphere": {
+          "type": "string",
+          "description": "Overall sensory experience created"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Administrative information about the database entry",
+      "required": ["creation_date", "last_modified", "version", "canon_status"],
+      "properties": {
+        "creation_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this database entry was created"
+        },
+        "last_modified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this database entry was last updated"
+        },
+        "version": {
+          "type": "number",
+          "description": "Version number of this database entry"
+        },
+        "canon_status": {
+          "type": "string",
+          "enum": ["official", "alternate", "deprecated"],
+          "description": "Whether this entry is part of the official canon"
+        },
+        "author": {
+          "type": "string",
+          "description": "Who created or last updated this entry"
+        }
+      }
+    }
+  }
+}

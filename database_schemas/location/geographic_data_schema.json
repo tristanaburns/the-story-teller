@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location/geographic_data",
+  "title": "Location Geographic Data Schema",
+  "description": "Physical characteristics, positioning, and environmental properties of a location.",
+  "type": "object",
+  "properties": {
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90,
+          "description": "North-South position on the globe, from -90° (South Pole) to 90° (North Pole)."
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180,
+          "description": "East-West position on the globe, from -180° to 180°."
+        },
+        "elevation": {
+          "type": "string",
+          "description": "Height above or below sea level, which may include a range or average for large locations."
+        },
+        "planar_coordinates": {
+          "type": "string",
+          "description": "For fictional worlds with non-Earth coordinate systems, the appropriate positioning information."
+        },
+        "dimensional_position": {
+          "type": "string",
+          "description": "For locations existing outside normal space-time, their position relative to other dimensions or planes."
+        }
+      },
+      "description": "The spatial positioning of this location, using the most appropriate coordinate system for its context."
+    },
+    "area": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "The numerical measurement of this location's physical area."
+        },
+        "unit": {
+          "type": "string",
+          "enum": ["square meters", "square kilometers", "hectares", "square miles", "acres"],
+          "description": "The unit of measurement for the area value."
+        }
+      },
+      "required": ["value", "unit"],
+      "description": "The physical size of this location."
+    },
+    "terrain": {
+      "type": "object",
+      "properties": {
+        "dominant_features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The primary physical characteristics that define this location's landscape."
+        },
+        "biome": {
+          "$ref": "../common/biome_type_schema.json",
+          "description": "The ecological community type that characterizes this location."
+        },
+        "notable_topography": {
+          "type": "string",
+          "description": "Distinctive aspects of the land's shape, elevation changes, or other physical features that make this location recognizable."
+        }
+      },
+      "description": "The physical environment and land characteristics of this location."
+    },
+    "climate": {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "type": "string",
+          "description": "The general climate category or type, which may follow standard classifications or use world-specific terminology."
+        },
+        "temperature_range": {
+          "type": "string",
+          "description": "The typical minimum and maximum temperatures experienced in this location, with seasonal variations if applicable."
+        },
+        "seasons": {
+          "type": "string", 
+          "description": "How the yearly climate cycle progresses in this location, including any unusual or magical seasonal patterns."
+        },
+        "notable_weather": {
+          "type": "string",
+          "description": "Distinctive weather phenomena or patterns that this location is known for."
+        }
+      },
+      "description": "The typical atmospheric conditions and weather patterns of this location."
+    },
+    "borders": {
+      "type": "object",
+      "properties": {
+        "natural_boundaries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "feature": {
+                "type": "string",
+                "description": "The geographic feature that forms a natural border (e.g., river, mountain range, ocean)."
+              },
+              "direction": {
+                "type": "string",
+                "description": "Which side of the location this feature borders."
+              },
+              "permeability": {
+                "type": "string",
+                "description": "How easily this boundary can be crossed."
+              }
+            },
+            "required": ["feature"]
+          }
+        },
+        "political_boundaries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "entity": {
+                "type": "string",
+                "description": "The political entity neighboring this location."
+              },
+              "direction": {
+                "type": "string",
+                "description": "Which side of the location this entity borders."
+              },
+              "relation": {
+                "type": "string",
+                "description": "The diplomatic relationship with this neighboring entity."
+              }
+            },
+            "required": ["entity"]
+          }
+        },
+        "dimensional_boundaries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "realm": {
+                "type": "string",
+                "description": "The dimension, plane, or alternate reality that interfaces with this location."
+              },
+              "nature": {
+                "type": "string",
+                "description": "How the boundary between dimensions manifests at this location."
+              },
+              "stability": {
+                "type": "string",
+                "description": "How consistent or changeable the boundary between realms is at this point."
+              }
+            },
+            "required": ["realm"]
+          }
+        }
+      },
+      "description": "Natural and artificial boundaries that define the edges of this location."
+    },
+    "connectivity": {
+      "type": "object",
+      "properties": {
+        "adjacent_locations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "$ref": "../common/references_schema.json"
+              },
+              "direction": {
+                "type": "string",
+                "description": "The orientation or spatial relationship between this location and the adjacent one."
+              },
+              "distance": {
+                "type": "string",
+                "description": "How far away the adjacent location is, in appropriate units."
+              }
+            },
+            "required": ["location"]
+          }
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The kind of pathway or route (e.g., 'highway', 'trail', 'underground tunnel', 'ley line')."
+              },
+              "connects_to": {
+                "$ref": "../common/references_schema.json"
+              },
+              "condition": {
+                "type": "string",
+                "description": "The state of repair or usability of this route."
+              },
+              "travel_time": {
+                "type": "string",
+                "description": "How long it typically takes to travel this route by conventional means."
+              }
+            },
+            "required": ["type"]
+          }
+        }
+      },
+      "description": "How this location connects to neighboring areas and the wider world."
+    }
+  }
+}

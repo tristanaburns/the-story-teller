@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/writing_elements",
+  "title": "Writing Elements Schema",
+  "description": "Common writing style and tone elements used across narrative schemas",
+  "type": "object",
+  "properties": {
+    "tone": {
+      "type": "string",
+      "enum": ["Epic", "Cinematic", "Mythic", "Intimate", "Analytical", "Mysterious"],
+      "description": "The emotional and atmospheric quality of the narrative presentation."
+    },
+    "style_type": {
+      "type": "string",
+      "enum": [
+        "Mythic & Poetic",
+        "Cinematic & Precise",
+        "Controlled Chaos",
+        "Emotional & Measured",
+        "Narrative Historian",
+        "Atmospheric & Immersive",
+        "Dreamlike & Fragmented"
+      ],
+      "description": "The specific narrative approach used in the writing."
+    },
+    "theme": {
+      "type": "string",
+      "description": "The central thematic element explored through the narrative."
+    }
+  }
+}

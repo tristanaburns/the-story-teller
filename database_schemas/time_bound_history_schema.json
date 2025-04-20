@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Time-Bound History Schema",
+  "description": "Schema defining how objects, locations, and entities change over time, allowing for tracking historical variants and evolution throughout a narrative timeline.",
+  "type": "object",
+  "properties": {
+    "time_period": {
+      "$ref": "common/time_period_schema.json"
+    },
+    "state_variants": {
+      "type": "object",
+      "description": "Details specific variations or states the object has existed in over its history.",
+      "properties": {
+        "variant_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "A unique identifier for this specific variant or state of the object, allowing for direct reference to this particular version."
+        },
+        "variant_name": {
+          "type": "string",
+          "description": "A distinctive name for this version of the object (e.g., 'Ruined Castle', 'Pre-War Configuration', 'Enchanted Form')."
+        },
+        "variant_description": {
+          "type": "string",
+          "description": "A thorough explanation of how this variant differs from other forms of the same object, including physical, functional, or contextual differences."
+        }
+      }
+    },
+    "historical_events": {
+      "type": "object",
+      "description": "Significant events in this object's history that shaped its development or importance.",
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier for this historical event, allowing for cross-referencing with other timeline elements."
+        },
+        "timestamp": {
+          "$ref": "common/timestamp_schema.json"
+        },
+        "event_name": {
+          "type": "string",
+          "description": "A short, descriptive title for the event."
+        },
+        "event_description": {
+          "type": "string",
+          "description": "A detailed account of what happened and how it affected this object or location."
+        }
+      }
+    }
+  },
+  "required": ["time_period"]
+}

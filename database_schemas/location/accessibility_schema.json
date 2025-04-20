@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/location/accessibility",
+  "title": "Location Accessibility Schema",
+  "description": "Details about how a location can be reached or entered, including both physical and metaphysical means of access.",
+  "type": "object",
+  "properties": {
+    "access_methods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "method_type": {
+            "type": "string",
+            "enum": [
+              "physical_path",
+              "portal",
+              "magical_ritual",
+              "technological",
+              "secret_passage",
+              "teleportation",
+              "mental_projection",
+              "dimensional_shift",
+              "conditional"
+            ],
+            "description": "The category of access method."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed explanation of how this method works to provide access to the location."
+          },
+          "requirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specific conditions, items, abilities, or knowledge needed to use this access method successfully."
+          },
+          "reliability": {
+            "type": "string",
+            "enum": ["permanent", "intermittent", "seasonal", "rare", "unpredictable", "one-time"],
+            "description": "How consistently this method can be used to access the location."
+          },
+          "known_by": {
+            "type": "string",
+            "enum": ["public", "restricted", "secret", "forgotten", "unique_individual"],
+            "description": "How widely knowledge of this access method is distributed."
+          }
+        },
+        "required": ["method_type", "description"]
+      },
+      "description": "The various ways in which this location can be reached or entered."
+    },
+    "physical_barriers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "barrier_type": {
+            "type": "string",
+            "description": "The nature of the obstacle preventing easy access (e.g., 'mountains', 'locked door', 'security system', 'magical ward')."
+          },
+          "difficulty": {
+            "$ref": "../common/impact_magnitude_schema.json",
+            "description": "How challenging it is to overcome this barrier, using the standard impact magnitude scale."
+          },
+          "bypass_methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Known ways to get past this barrier, if any exist."
+          }
+        },
+        "required": ["barrier_type"]
+      },
+      "description": "Natural or constructed obstacles that restrict or prevent access to the location."
+    },
+    "permissions_required": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "authority": {
+            "type": "string",
+            "description": "The person, organization, or entity that controls access to this location."
+          },
+          "condition": {
+            "type": "string",
+            "description": "What must be done or proven to gain permission for entry."
+          },
+          "enforcement": {
+            "type": "string",
+            "description": "How access restrictions are maintained and what happens to those who attempt unauthorized entry."
+          }
+        },
+        "required": ["authority", "condition"]
+      },
+      "description": "Social, political, or organizational restrictions on who may enter the location."
+    },
+    "navigation_challenges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "challenge_type": {
+            "type": "string",
+            "description": "The nature of the difficulty in moving around within the location (e.g., 'maze-like', 'shifting layout', 'extreme terrain', 'disorientation effect')."
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed explanation of how this challenge affects movement within the location."
+          },
+          "mitigation": {
+            "type": "string",
+            "description": "Methods or tools that can help overcome this navigation challenge."
+          }
+        },
+        "required": ["challenge_type", "description"]
+      },
+      "description": "Difficulties in traveling through or navigating within the location once access has been gained."
+    },
+    "temporal_access": {
+      "type": "object",
+      "properties": {
+        "time_restrictions": {
+          "type": "string",
+          "description": "Whether the location can only be accessed at specific times, under certain temporal conditions, or during particular celestial alignments."
+        },
+        "seasonal_variations": {
+          "type": "string",
+          "description": "How the changing seasons affect accessibility to the location."
+        }
+      },
+      "description": "Time-based factors that influence when the location can be reached."
+    },
+    "exit_conditions": {
+      "type": "string",
+      "description": "Any special requirements, challenges, or methods needed to leave the location, particularly if they differ from entry conditions."
+    }
+  },
+  "required": ["access_methods"]
+}

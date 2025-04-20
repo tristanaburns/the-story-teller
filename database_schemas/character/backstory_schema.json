@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/backstory",
+  "title": "Character Backstory Schema",
+  "description": "The character's history before the main narrative begins, providing context for their current situation, motivations, and relationships.",
+  "type": "object",
+  "properties": {
+    "origin_summary": {
+      "type": "string",
+      "description": "A concise overview of the character's background, hitting the major points that define who they are at the start of the narrative."
+    },
+    "childhood": {
+      "type": "object",
+      "properties": {
+        "family_circumstances": {
+          "type": "string",
+          "description": "The character's family structure, economic situation, and home environment during their formative years."
+        },
+        "key_relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "person": {
+                "type": "string",
+                "description": "The name or relationship of a person who significantly influenced the character's early development."
+              },
+              "nature": {
+                "type": "string",
+                "description": "The type of relationship and its emotional quality."
+              },
+              "impact": {
+                "type": "string",
+                "description": "How this relationship shaped the character's beliefs, behaviors, or personality."
+              }
+            },
+            "required": ["person", "impact"]
+          },
+          "description": "People who had formative influences on the character during their childhood."
+        },
+        "defining_experiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Significant events during childhood that established core aspects of the character's personality or worldview."
+        }
+      },
+      "description": "The character's early life experiences and environment, which laid the foundation for their development."
+    },
+    "education_training": {
+      "type": "object",
+      "properties": {
+        "formal_education": {
+          "type": "string",
+          "description": "The character's schooling, academic background, or organized instruction."
+        },
+        "mentors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of a teacher or mentor who guided the character's development in a specific area."
+              },
+              "field": {
+                "type": "string",
+                "description": "The area of knowledge, skill, or wisdom this mentor imparted."
+              },
+              "relationship": {
+                "type": "string",
+                "description": "The nature of the mentorship relationship and its impact on the character."
+              }
+            }
+          },
+          "description": "Key figures who provided guidance, instruction, or wisdom to the character."
+        },
+        "skills_acquired": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "skill": {
+                "type": "string",
+                "description": "A specific ability or area of knowledge the character gained."
+              },
+              "context": {
+                "type": "string",
+                "description": "How, where, and why the character acquired this skill."
+              }
+            }
+          },
+          "description": "Abilities or knowledge the character gained during their development that remain relevant to the narrative."
+        }
+      },
+      "description": "The character's learning experiences and skill acquisition prior to the main narrative."
+    },
+    "career_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "string",
+            "description": "The role, job, or occupation the character held."
+          },
+          "time_period": {
+            "type": "string",
+            "description": "When and for how long the character was in this position."
+          },
+          "significance": {
+            "type": "string",
+            "description": "How this position influenced the character's development or current situation."
+          }
+        },
+        "required": ["position"]
+      },
+      "description": "The character's professional history and work experience prior to the main narrative."
+    },
+    "key_past_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "description": "A significant occurrence in the character's past."
+          },
+          "timing": {
+            "type": "string",
+            "description": "When this event took place in relation to the main narrative."
+          },
+          "impact": {
+            "type": "string",
+            "description": "How this event changed the character or influenced their current situation."
+          }
+        },
+        "required": ["event", "impact"]
+      },
+      "description": "Major events in the character's life that directly connect to or influence the main narrative."
+    },
+    "secrets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "secret": {
+            "type": "string",
+            "description": "Information about the character's past that is hidden or unknown to others."
+          },
+          "significance": {
+            "type": "string",
+            "description": "Why this secret matters to the character and what impact it would have if revealed."
+          },
+          "knowledge": {
+            "type": "string",
+            "description": "Who knows or suspects this secret within the narrative."
+          }
+        },
+        "required": ["secret", "significance"]
+      },
+      "description": "Hidden aspects of the character's history that may create tension or drive plot developments if discovered."
+    }
+  },
+  "required": ["origin_summary"]
+}

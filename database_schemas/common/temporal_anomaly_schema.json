@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/common/temporal_anomaly",
+  "title": "Temporal Anomaly Schema",
+  "description": "Standardized enumeration of unusual time phenomena in The Shadow Team Chronicles universe.",
+  "type": "string",
+  "enum": [
+    "time_loop",
+    "temporal_displacement",
+    "time_dilation",
+    "alternate_timeline",
+    "paradox",
+    "convergence",
+    "temporal_echo",
+    "causality_violation",
+    "time_fragmentation",
+    "temporal_lock",
+    "time_acceleration",
+    "time_reversal",
+    "quantum_uncertainty",
+    "historic_divergence",
+    "synchronicity_event",
+    "timeline_collapse",
+    "temporal_overlay"
+  ],
+  "descriptions": {
+    "type": "object",
+    "description": "Detailed explanations of each temporal anomaly (not part of the enum, provided for documentation)",
+    "properties": {
+      "time_loop": {
+        "type": "string",
+        "description": "Event or period that repeats cyclically with participants experiencing the same sequence repeatedly."
+      },
+      "temporal_displacement": {
+        "type": "string",
+        "description": "Elements (people, objects, information) shifted from their original time period to another."
+      },
+      "time_dilation": {
+        "type": "string",
+        "description": "Differential flow of time where duration experiences vary between observers (slower/faster)."
+      },
+      "alternate_timeline": {
+        "type": "string",
+        "description": "Events occurring in or creating a different version of history that branches from the primary timeline."
+      },
+      "paradox": {
+        "type": "string",
+        "description": "Logical contradiction in temporal events, such as causality loops or grandfather paradoxes."
+      },
+      "convergence": {
+        "type": "string",
+        "description": "Multiple timelines or possibilities collapsing into a single outcome or reality."
+      },
+      "temporal_echo": {
+        "type": "string",
+        "description": "Residual impressions of past or future events manifesting as ghost-like phenomena."
+      },
+      "causality_violation": {
+        "type": "string",
+        "description": "Effects preceding their causes or other fundamental disruptions to cause-and-effect relationships."
+      },
+      "time_fragmentation": {
+        "type": "string",
+        "description": "Reality splitting into disconnected temporal shards with different rules or progressions."
+      },
+      "temporal_lock": {
+        "type": "string",
+        "description": "Area or event fixed outside normal time flow, remaining unchangeable or inaccessible."
+      },
+      "time_acceleration": {
+        "type": "string",
+        "description": "Rapid advancement of temporal processes, causing accelerated aging, development, or evolution."
+      },
+      "time_reversal": {
+        "type": "string",
+        "description": "Events occurring in backward sequence or systems running in reverse temporal direction."
+      },
+      "quantum_uncertainty": {
+        "type": "string",
+        "description": "Multiple temporal states existing simultaneously until observed or resolved."
+      },
+      "historic_divergence": {
+        "type": "string",
+        "description": "Point where timeline splits into multiple possible futures or where alternate histories branch."
+      },
+      "synchronicity_event": {
+        "type": "string",
+        "description": "Meaningful temporal coincidences that connect otherwise unrelated events or entities."
+      },
+      "timeline_collapse": {
+        "type": "string",
+        "description": "Disintegration of ordered temporal progression, causing chaotic overlapping of past, present, and future."
+      },
+      "temporal_overlay": {
+        "type": "string",
+        "description": "Multiple time periods coexisting in the same space simultaneously."
+      }
+    }
+  }
+}

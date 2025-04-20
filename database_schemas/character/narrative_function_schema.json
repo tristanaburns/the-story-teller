@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://storyteller.ai/schemas/character/narrative_function",
+  "title": "Character Narrative Function Schema",
+  "description": "The character's purpose and role within the broader story structure, defining how they serve the narrative's themes and progression.",
+  "type": "object",
+  "properties": {
+    "archetype": {
+      "type": "string",
+      "description": "The fundamental character pattern this character embodies or subverts (e.g., 'Hero', 'Mentor', 'Threshold Guardian', 'Shadow', 'Trickster')."
+    },
+    "story_role": {
+      "type": "string",
+      "enum": [
+        "protagonist",
+        "antagonist",
+        "deuteragonist",
+        "tritagonist",
+        "supporting",
+        "mentor",
+        "ally",
+        "foil",
+        "catalyst",
+        "comic_relief",
+        "love_interest",
+        "contagonist",
+        "guardian",
+        "temptress",
+        "herald",
+        "shapeshifter",
+        "trickster",
+        "shadow"
+      ],
+      "description": "The character's primary function within the story structure and plot development."
+    },
+    "thematic_representation": {
+      "$ref": "../common/narrative_significance_schema.json#/properties/thematic_representation"
+    },
+    "plot_functions": {
+      "$ref": "../common/narrative_significance_schema.json#/properties/plot_functions"
+    },
+    "character_relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "character_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Reference to another character with whom this character has a narratively significant relationship."
+          },
+          "relationship_type": {
+            "type": "string",
+            "enum": [
+              "mirror",
+              "contrast",
+              "enabler",
+              "inhibitor",
+              "mentor_mentee",
+              "rivals",
+              "allies",
+              "companions",
+              "lovers",
+              "family",
+              "antagonistic"
+            ],
+            "description": "The narrative nature of the relationship between these characters."
+          },
+          "narrative_purpose": {
+            "type": "string",
+            "description": "How this relationship contributes to character development, theme exploration, or plot advancement."
+          }
+        },
+        "required": ["character_id", "relationship_type"]
+      },
+      "description": "The character's connections to other characters that serve specific narrative purposes beyond the in-world relationship itself."
+    },
+    "audience_connection": {
+      "$ref": "../common/narrative_significance_schema.json#/properties/audience_connection"
+    },
+    "meta_significance": {
+      "type": "string",
+      "description": "The character's importance beyond the immediate story, such as their cultural significance, allegorical meaning, or role as a representative of larger concepts in the narrative universe."
+    },
+    "structural_necessity": {
+      "$ref": "../common/narrative_significance_schema.json#/properties/structural_necessity"
+    },
+    "narrative_arc_interaction": {
+      "type": "object",
+      "properties": {
+        "beats": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "story_beat": {
+                "type": "string",
+                "enum": [
+                  "inciting_incident",
+                  "first_threshold",
+                  "first_pinch_point",
+                  "midpoint",
+                  "second_pinch_point",
+                  "crisis",
+                  "climax",
+                  "resolution"
+                ],
+                "description": "The specific point in the standard narrative structure where this character's influence is particularly important."
+              },
+              "contribution": {
+                "type": "string",
+                "description": "How the character's actions, decisions, or mere presence affects this structural beat of the story."
+              }
+            },
+            "required": ["story_beat", "contribution"]
+          }
+        }
+      },
+      "description": "How the character's journey interfaces with the broader structural beats of the narrative, highlighting their role in key moments of the story structure."
+    }
+  },
+  "required": ["story_role"]
+}
