@@ -1,251 +1,142 @@
 /**
- * logQuery.ts
- * 
- * Utilities for querying and analyzing logs
+ * Log query service for fetching and analyzing logs
  */
 
-import { MongoClient, Collection } from 'mongodb';
-import { ObjectId } from 'mongodb';
-import { createLogger } from './logger';
+import { MongoClient, Collection, ObjectId } from 'mongodb';
+import { createLogger, LogMethod } from './logger';
+import { LogEntry, LogQueryParams, LogStatisticsSummary } from './types';
 
-// Create a logger for this module
-const logger = createLogger('LogQuery');
-
-// Rename the import to avoid conflict
-import { LogEntry as TransportLogEntry } from './transports';
+// Initialize logger
+const logger = createLogger('LogQueryService');
 
 /**
- * Query parameters for log retrieval
+ * Service for querying and analyzing log data
  */
-export interface LogQueryParams {
-  startDate?: Date;
-  endDate?: Date;
-  level?: string | string[];
-  context?: string | string[];
-  correlationId?: string;
-  userId?: string;
-  search?: string;
-  component?: string;
-  method?: string;
-  path?: string;
-  statusCode?: number;
-  mcpServer?: string;
-  limit?: number;
-  skip?: number;
-  sort?: Record<string, 1 | -1>;
-}
-
-/**
- * Log summary response structure
- */
-export interface LogSummary {
-  totalLogs: number;
-  countByLevel: Record<string, number>;
-  countByContext: Record<string, number>;
-  averageDuration?: number;
-  errorRate?: number;
-  topSlowest?: Array<{
-    path: string;
-    method: string;
-    averageDuration: number;
-    count: number;
-  }>;
-  slowestRequests?: Array<{
-    path: string;
-    method: string;
-    averageDuration: number;
-    count: number;
-  }>;
-  mostFrequentErrors?: Array<{
-    message: string;
-    count: number;
-  }>;
-  requestsByHour?: Array<{
-    hour: number;
-    count: number;
-  }>;
-  timeDistribution?: Array<{
-    hour: number;
-    count: number;
-  }>;
-}
-
-interface LogAggregationResult {
-  _id: string | number | ObjectId;
-  count: number;
-  averageDuration?: number;
-}
-
-interface LogEntry {
-  _id: string | ObjectId;
-  timestamp: Date;
-  level: string;
-  message: string;
-  context: Record<string, any>;
-  count?: number;
-  averageDuration?: number;
-  source?: string;
-}
-
-/**
- * Create a query builder for the logs collection
- */
-export class LogQuery {
-  private connectionString: string;
-  private databaseName: string;
-  private collectionName: string;
+class LogQueryService {
   private client: MongoClient | null = null;
-  private collection: Collection<TransportLogEntry> | null = null;
+  private collectionName: string = 'logs';
+  private dbName: string = '';
+  private mongoUri: string = '';
   
-  /**
-   * Constructor
-   */
-  constructor(
-    connectionString: string,
-    databaseName: string = 'logs',
-    collectionName: string = 'logs'
-  ) {
-    this.connectionString = connectionString;
-    this.databaseName = databaseName;
-    this.collectionName = collectionName;
+  constructor() {
+    this.mongoUri = process.env.MONGODB_URI || '';
+    this.dbName = process.env.MONGODB_DB || 'the_story_teller';
   }
   
   /**
-   * Connect to the MongoDB database
+   * Connect to MongoDB client
    */
-  private async connect(): Promise<void> {
-    if (this.client) {
-      return;
-    }
-    
-    try {
-      logger.debug('Connecting to MongoDB for log query');
-      this.client = new MongoClient(this.connectionString);
+  @LogMethod()
+  private async getCollection(): Promise<Collection<LogEntry>> {
+    if (!this.client) {
+      this.client = new MongoClient(this.mongoUri);
       await this.client.connect();
-      
-      const db = this.client.db(this.databaseName);
-      this.collection = db.collection<TransportLogEntry>(this.collectionName);
-      
-      logger.debug('Connected to MongoDB logs database');
-    } catch (error) {
-      logger.error('Failed to connect to MongoDB logs database', error);
-      throw error;
+      logger.debug('Connected to MongoDB for log queries');
     }
+    
+    return this.client.db(this.dbName).collection<LogEntry>(this.collectionName);
   }
   
   /**
-   * Build a MongoDB filter from query parameters
+   * Build MongoDB query from query parameters
    */
-  private buildFilter(params: LogQueryParams): Record<string, any> {
-    const filter: Record<string, any> = {};
+  private buildQuery(params: LogQueryParams): Record<string, any> {
+    const query: Record<string, any> = {};
     
-    // Date range
+    // Filter by level
+    if (params.level) {
+      query.level = params.level;
+    }
+    
+    // Filter by date range
     if (params.startDate || params.endDate) {
-      filter.timestamp = {};
+      query.timestamp = {};
       
       if (params.startDate) {
-        filter.timestamp.$gte = params.startDate;
+        query.timestamp.$gte = params.startDate.toISOString();
       }
       
       if (params.endDate) {
-        filter.timestamp.$lte = params.endDate;
+        query.timestamp.$lte = params.endDate.toISOString();
       }
     }
     
-    // Log level
-    if (params.level) {
-      if (Array.isArray(params.level)) {
-        filter.level = { $in: params.level };
-      } else {
-        filter.level = params.level;
-      }
-    }
-    
-    // Context
-    if (params.context) {
-      if (Array.isArray(params.context)) {
-        filter.context = { $in: params.context };
-      } else {
-        filter.context = params.context;
-      }
-    }
-    
-    // Correlation ID
-    if (params.correlationId) {
-      filter.correlationId = params.correlationId;
-    }
-    
-    // User ID
-    if (params.userId) {
-      filter.userId = params.userId;
-    }
-    
-    // Component
+    // Filter by component
     if (params.component) {
-      filter.component = params.component;
+      query.component = { $regex: params.component, $options: 'i' };
     }
     
-    // Method
-    if (params.method) {
-      filter.method = params.method;
+    // Filter by context
+    if (params.context) {
+      query.context = { $regex: params.context, $options: 'i' };
     }
     
-    // Path
-    if (params.path) {
-      filter.path = params.path;
+    // Filter by correlation ID
+    if (params.correlationId) {
+      query.correlationId = params.correlationId;
     }
     
-    // Status code
-    if (params.statusCode) {
-      filter.statusCode = params.statusCode;
+    // Filter by user ID
+    if (params.userId) {
+      query.userId = params.userId;
     }
     
-    // MCP server
+    // Filter by request ID
+    if (params.requestId) {
+      query.requestId = params.requestId;
+    }
+    
+    // Filter by MCP server
     if (params.mcpServer) {
-      filter.mcpServer = params.mcpServer;
+      query.mcpServer = params.mcpServer;
     }
     
-    // Text search
+    // Filter by environment
+    if (params.environment) {
+      query.environment = params.environment;
+    }
+    
+    // Filter by path
+    if (params.path) {
+      query.path = { $regex: params.path, $options: 'i' };
+    }
+    
+    // Filter by method
+    if (params.method) {
+      query.method = params.method;
+    }
+    
+    // Full text search
     if (params.search) {
-      filter.$text = { $search: params.search };
+      query.$or = [
+        { message: { $regex: params.search, $options: 'i' } },
+        { 'error.message': { $regex: params.search, $options: 'i' } },
+        { 'error.stack': { $regex: params.search, $options: 'i' } }
+      ];
     }
     
-    return filter;
+    return query;
   }
   
   /**
-   * Query logs based on parameters
+   * Query logs using the provided parameters
    */
-  async queryLogs(options: LogQueryParams): Promise<TransportLogEntry[]> {
-    await this.connect();
-    
-    // Build query filter
-    const filter = this.buildFilter(options);
-    
+  @LogMethod()
+  public async queryLogs(params: LogQueryParams): Promise<LogEntry[]> {
     try {
-      logger.debug('Querying logs', { filter, options });
+      const collection = await this.getCollection();
+      const query = this.buildQuery(params);
       
-      // Create a cursor for the query
-      const logsCursor = this.collection!.find(filter);
+      logger.debug('Querying logs with parameters', { params, query });
       
-      // Apply sort if provided
-      if (options.sort) {
-        logsCursor.sort(options.sort);
-      }
+      const logs = await collection
+        .find(query)
+        .sort({ timestamp: -1 })
+        .skip(params.skip || 0)
+        .limit(params.limit || 100)
+        .toArray();
       
-      // Apply pagination
-      if (options.skip) {
-        logsCursor.skip(options.skip);
-      }
-      
-      if (options.limit) {
-        logsCursor.limit(options.limit);
-      }
-      
-      // Execute query
-      const logs = await logsCursor.toArray();
-      
-      logger.debug(`Found ${logs.length} logs`);
+      logger.info('Log query successful', { count: logs.length });
       return logs;
     } catch (error) {
       logger.error('Error querying logs', error);
@@ -254,25 +145,19 @@ export class LogQuery {
   }
   
   /**
-   * Count logs matching parameters
+   * Count logs matching the provided parameters
    */
+  @LogMethod()
   public async countLogs(params: LogQueryParams): Promise<number> {
-    await this.connect();
-    
-    if (!this.collection) {
-      throw new Error('MongoDB collection not initialized');
-    }
-    
-    // Build filter
-    const filter = this.buildFilter(params);
-    
-    // Execute count
-    logger.debug('Counting logs', { filter });
-    
     try {
-      const count = await this.collection.countDocuments(filter);
-      logger.debug(`Counted ${count} logs`);
+      const collection = await this.getCollection();
+      const query = this.buildQuery(params);
       
+      logger.debug('Counting logs with parameters', { params, query });
+      
+      const count = await collection.countDocuments(query);
+      
+      logger.info('Log count successful', { count });
       return count;
     } catch (error) {
       logger.error('Error counting logs', error);
@@ -281,183 +166,217 @@ export class LogQuery {
   }
   
   /**
-   * Get a summary of logs
+   * Get log statistics summary
    */
-  async generateSummary(options: LogQueryParams): Promise<LogSummary> {
-    await this.connect();
-    
-    const filter = this.buildFilter(options);
-    
+  @LogMethod()
+  public async getLogStatistics(params: LogQueryParams): Promise<LogStatisticsSummary> {
     try {
-      logger.debug('Getting log summary', { filter });
+      const collection = await this.getCollection();
+      const query = this.buildQuery(params);
       
-      // Create a cursor for the query
-      const logsCursor = this.collection!.find(filter);
+      logger.debug('Getting log statistics with parameters', { params, query });
       
-      // Apply count to get total logs
-      const totalLogsResult = await this.collection!.countDocuments(filter);
+      // Get basic count statistics
+      const totalLogs = await collection.countDocuments(query);
       
-      // Calculate count by log level - use aggregate for SQL-like grouping
-      const levelResults = await this.collection!.aggregate<LogAggregationResult>([
-        { $match: filter },
-        { $group: { _id: '$level', count: { $sum: 1 } } }
-      ]).toArray();
+      // Count errors (ERROR and FATAL levels)
+      const errorQuery = { ...query, level: { $in: ['ERROR', 'FATAL'] } };
+      const totalErrors = await collection.countDocuments(errorQuery);
       
-      const countByLevel: Record<string, number> = {};
-      levelResults.forEach(result => {
-        countByLevel[result._id as string] = result.count;
-      });
+      // Get average response time for API requests with duration
+      const apiRequestsWithDuration = await collection
+        .find({ ...query, duration: { $exists: true } })
+        .toArray();
       
-      // Calculate count by context (source)
-      const contextResults = await this.collection!.aggregate<LogAggregationResult>([
-        { $match: filter },
-        { $group: { _id: '$source', count: { $sum: 1 } } }
-      ]).toArray();
+      const avgResponseTime = apiRequestsWithDuration.length > 0
+        ? apiRequestsWithDuration.reduce((sum, log) => sum + (log.duration || 0), 0) / apiRequestsWithDuration.length
+        : undefined;
       
-      const countByContext: Record<string, number> = {};
-      contextResults.forEach(result => {
-        countByContext[result._id as string] = result.count;
-      });
-      
-      // Calculate average duration for API requests
-      const durationResults = await this.collection!.aggregate<LogAggregationResult>([
-        { 
-          $match: { 
-            ...filter,
-            'context.duration': { $exists: true },
-            source: 'API'
-          } 
-        },
-        { 
-          $group: { 
-            _id: null, 
-            averageDuration: { $avg: '$context.duration' } 
-          } 
-        }
-      ]).toArray();
-      
-      const averageDuration = durationResults.length > 0 ? durationResults[0].averageDuration : undefined;
-      
-      // Get the slowest API endpoints
-      const slowestRequestsPipeline = [
-        { 
-          $match: { 
-            ...filter,
-            'context.duration': { $exists: true },
-            'context.path': { $exists: true },
-            source: 'API'
-          } 
-        },
-        { 
-          $group: { 
-            _id: {
-              path: '$context.path',
-              method: '$context.method'
-            },
-            averageDuration: { $avg: '$context.duration' },
-            count: { $sum: 1 }
-          } 
-        },
-        { $sort: { averageDuration: -1 } },
-        { $limit: 5 }
+      // Get status code distribution
+      const statusCodePipeline = [
+        { $match: { ...query, statusCode: { $exists: true } } },
+        { $group: { _id: '$statusCode', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
       ];
       
-      const slowestRequestsResults = await this.collection!.aggregate<any>(slowestRequestsPipeline).toArray();
+      const statusCodeDistribution = await collection
+        .aggregate(statusCodePipeline)
+        .toArray();
       
-      const topSlowest = slowestRequestsResults.map(result => ({
-        path: result._id.path,
-        method: result._id.method || 'GET',
-        averageDuration: result.averageDuration,
-        count: result.count
-      }));
+      // Get level distribution
+      const levelPipeline = [
+        { $match: query },
+        { $group: { _id: '$level', count: { $sum: 1 } } },
+        { $sort: { count: -1 } }
+      ];
       
-      // Get most frequent errors
-      const mostFrequentErrorsPipeline = [
-        { 
-          $match: { 
-            ...filter,
-            level: 'error'
-          } 
-        },
-        { 
-          $group: { 
-            _id: '$message',
-            count: { $sum: 1 }
-          } 
-        },
+      const levelDistribution = await collection
+        .aggregate(levelPipeline)
+        .toArray();
+      
+      // Get component distribution
+      const componentPipeline = [
+        { $match: { ...query, component: { $exists: true } } },
+        { $group: { _id: '$component', count: { $sum: 1 } } },
         { $sort: { count: -1 } },
-        { $limit: 5 }
+        { $limit: 10 }
       ];
       
-      const mostFrequentErrorsResults = await this.collection!.aggregate<LogAggregationResult>(mostFrequentErrorsPipeline).toArray();
+      const componentDistribution = await collection
+        .aggregate(componentPipeline)
+        .toArray();
       
-      const mostFrequentErrors = mostFrequentErrorsResults.map((result) => ({
-        message: result._id as string,
-        count: result.count ?? 0
-      }));
-      
-      // Get hourly distribution for the last 24 hours
-      const hourlyResults = await this.collection!.aggregate<LogAggregationResult>([
-        { $match: filter },
-        { 
-          $group: { 
-            _id: { $hour: '$timestamp' }, 
-            count: { $sum: 1 } 
-          } 
+      // Get timeframe distribution (by hour)
+      const timeframePipeline = [
+        { $match: query },
+        {
+          $project: {
+            hour: { $substr: ['$timestamp', 0, 13] },
+            level: 1
+          }
+        },
+        {
+          $group: {
+            _id: {
+              hour: '$hour',
+              level: '$level'
+            },
+            count: { $sum: 1 }
+          }
+        },
+        {
+          $group: {
+            _id: '$_id.hour',
+            levels: {
+              $push: {
+                level: '$_id.level',
+                count: '$count'
+              }
+            }
+          }
         },
         { $sort: { _id: 1 } }
-      ]).toArray();
+      ];
       
-      const requestsByHour = hourlyResults.map(result => ({
-        hour: Number(result._id),
-        count: result.count
-      }));
+      const timeframeResults = await collection
+        .aggregate(timeframePipeline)
+        .toArray();
       
-      // Construct the summary response
-      const summary: LogSummary = {
-        totalLogs: totalLogsResult,
-        countByLevel,
-        countByContext,
-        averageDuration,
-        errorRate: 0, // Assuming errorRate is not available in the new summary
-        topSlowest,
-        slowestRequests: topSlowest,
-        mostFrequentErrors,
-        requestsByHour,
-        timeDistribution: requestsByHour
+      // Transform timeframe results into usable format
+      const timeframeDistribution = timeframeResults.map(result => {
+        const counts: Record<string, number> = {};
+        
+        result.levels.forEach((levelData: any) => {
+          counts[levelData.level] = levelData.count;
+        });
+        
+        return {
+          timeframe: result._id,
+          counts
+        };
+      });
+      
+      // Prepare and return the complete statistics summary
+      const statistics: LogStatisticsSummary = {
+        totalLogs,
+        totalErrors,
+        avgResponseTime,
+        statusCodeDistribution: statusCodeDistribution.map(item => ({
+          statusCode: item._id,
+          count: item.count
+        })),
+        levelDistribution: levelDistribution.map(item => ({
+          level: item._id,
+          count: item.count
+        })),
+        componentDistribution: componentDistribution.map(item => ({
+          component: item._id,
+          count: item.count
+        })),
+        timeframeDistribution
       };
       
-      logger.debug('Log summary generated', { summary });
-      return summary;
+      logger.info('Log statistics generated successfully');
+      return statistics;
     } catch (error) {
-      logger.error('Error generating log summary', error);
+      logger.error('Error generating log statistics', error);
       throw error;
     }
   }
   
   /**
-   * Close the database connection
+   * Get related logs by correlation ID
    */
+  @LogMethod()
+  public async getRelatedLogs(correlationId: string, params?: Partial<LogQueryParams>): Promise<LogEntry[]> {
+    try {
+      if (!correlationId) {
+        throw new Error('Correlation ID is required');
+      }
+      
+      const collection = await this.getCollection();
+      const query = { correlationId };
+      
+      logger.debug('Getting related logs by correlation ID', { correlationId });
+      
+      const logs = await collection
+        .find(query)
+        .sort({ timestamp: 1 })
+        .limit(params?.limit || 500)
+        .toArray();
+      
+      logger.info('Related logs retrieved successfully', { count: logs.length });
+      return logs;
+    } catch (error) {
+      logger.error('Error retrieving related logs', error);
+      throw error;
+    }
+  }
+  
+  /**
+   * Get specific log by ID
+   */
+  @LogMethod()
+  public async getLogById(id: string): Promise<LogEntry | null> {
+    try {
+      if (!id) {
+        throw new Error('Log ID is required');
+      }
+      
+      const collection = await this.getCollection();
+      
+      logger.debug('Getting log by ID', { id });
+      
+      const log = await collection.findOne({ _id: new ObjectId(id) });
+      
+      if (log) {
+        logger.info('Log retrieved successfully', { id });
+      } else {
+        logger.info('Log not found', { id });
+      }
+      
+      return log;
+    } catch (error) {
+      logger.error('Error retrieving log by ID', error);
+      throw error;
+    }
+  }
+  
+  /**
+   * Close MongoDB connection
+   */
+  @LogMethod()
   public async close(): Promise<void> {
     if (this.client) {
       await this.client.close();
       this.client = null;
-      this.collection = null;
-      logger.debug('Closed MongoDB connection for log querying');
+      logger.info('MongoDB connection closed');
     }
   }
 }
 
-/**
- * Create a log query service
- */
-export function createLogQueryService(
-  connectionString: string = process.env.MONGODB_URI || '',
-  dbName: string = process.env.MONGODB_DB || 'the_story_teller',
-  collectionName: string = 'logs'
-): LogQuery {
-  return new LogQuery(connectionString, dbName, collectionName);
-}
+// Export a singleton instance of the service
+export const logQueryService = new LogQueryService();
 
-// Export a singleton instance for reuse
-export const logQueryService = createLogQueryService();
+// Export the LogQueryParams interface
+export type { LogQueryParams };

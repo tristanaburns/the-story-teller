@@ -30,6 +30,7 @@ export default function MainNav() {
     { name: 'Dashboard', href: '/dashboard', active: pathname === '/dashboard' },
     { name: 'My Stories', href: '/stories', active: pathname.startsWith('/stories') && pathname !== '/stories/new' },
     { name: 'Create New', href: '/stories/new', active: pathname === '/stories/new' },
+    { name: 'MCP Status', href: '/dashboard/mcp', active: pathname === '/dashboard/mcp' }
   ];
 
   const toggleMenu = () => {
@@ -80,6 +81,16 @@ export default function MainNav() {
                     alt={session.user.name || "User avatar"}
                   />
                 )}
+                <Link
+                  href="/settings"
+                  className={`ml-4 px-3 py-1 text-sm rounded-md ${
+                    pathname === '/settings'
+                      ? 'bg-white/20 text-white'
+                      : 'text-gray-300 hover:bg-white/10'
+                  }`}
+                >
+                  Settings
+                </Link>
                 <button
                   onClick={handleSignOut}
                   className="ml-4 px-3 py-1 text-sm text-gray-300 rounded-md hover:bg-white/10"
@@ -156,6 +167,16 @@ export default function MainNav() {
               </div>
             </div>
             <div className="mt-3 space-y-1">
+              <Link
+                href="/settings"
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  pathname === '/settings'
+                    ? 'bg-white/20 text-white'
+                    : 'text-gray-400 hover:text-white hover:bg-gray-700'
+                } w-full text-left`}
+              >
+                Settings
+              </Link>
               <button
                 onClick={handleSignOut}
                 className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 w-full text-left"

@@ -95,6 +95,7 @@ interface LocationFormProps {
   initialData?: Partial<Location>;
   onSuccess?: (location: Location) => void;
   onCancel?: () => void;
+  isEditing?: boolean;
 }
 
 // Form schema using Zod

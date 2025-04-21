@@ -1,7 +1,18 @@
+/**
+ * AI Character Generation API Route
+ * 
+ * Provides an endpoint to generate character suggestions based on a story prompt
+ * using OpenAI's GPT-4 model. The generated characters include detailed attributes
+ * like personality, background, and relationships with existing characters.
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import OpenAI from 'openai';
+import { createLogger } from '@/lib/logging';
+
+const logger = createLogger('API:AICharacterGeneration');
 
 // Define interfaces for the request and response
 interface ExistingCharacter {
@@ -18,23 +29,45 @@ interface GenerateCharactersRequest {
   count: number;
 }
 
+/**
+ * POST handler for generating AI-powered character suggestions
+ * 
+ * @param request - The incoming request containing story details and generation parameters
+ * @returns JSON response with generated characters or error information
+ */
 export async function POST(request: NextRequest) {
+  logger.debug('Processing character generation request');
+  
   try {
     // Verify authentication
     const session = await getServerSession(authOptions);
     if (!session) {
+      logger.warn('Unauthorized character generation attempt');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    
+    const userId = session.user?.id;
+    logger.debug('Authorized character generation request', { userId });
 
     // Parse request body
     const data = await request.json() as GenerateCharactersRequest;
     const { prompt, storyId, existingCharacters = [], characterType, count } = data;
 
+    logger.debug('Character generation parameters received', { 
+      storyId, 
+      characterType, 
+      count, 
+      existingCharactersCount: existingCharacters.length 
+    });
+
+    // Validate required fields
     if (!storyId) {
+      logger.warn('Missing story ID in request', { userId });
       return NextResponse.json({ error: 'Story ID is required' }, { status: 400 });
     }
 
     if (!prompt) {
+      logger.warn('Missing prompt in request', { userId, storyId });
       return NextResponse.json({ error: 'Prompt is required' }, { status: 400 });
     }
 
@@ -44,6 +77,7 @@ export async function POST(request: NextRequest) {
     });
     
     if (!openai.apiKey) {
+      logger.error('OpenAI API key not configured');
       return NextResponse.json(
         { error: 'OpenAI API key not configured' },
         { status: 500 }
@@ -97,51 +131,89 @@ IMPORTANT:
 4. For relationships, prioritize connecting to existing characters when appropriate
 `;
 
-    // Make the API call to OpenAI
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: [
-        { role: "system", content: "You are a creative writing assistant that specializes in character creation." },
-        { role: "user", content: fullPrompt }
-      ],
-      temperature: 0.7,
-      max_tokens: 2000,
+    logger.debug('Sending request to OpenAI', { 
+      model: "gpt-4", 
+      storyId, 
+      characterType, 
+      count 
     });
 
-    // Parse the response
-    const responseText = completion.choices[0]?.message?.content || '';
-    
-    // Extract JSON from the response
-    let characters = [];
+    // Make the API call to OpenAI
     try {
-      // Look for a JSON array in the response using a regular expression
-      // that supports matching across multiple lines
-      const jsonMatch = responseText.match(/\[[\s\S]*\]/);
-      if (jsonMatch) {
-        characters = JSON.parse(jsonMatch[0]);
-      } else {
-        // If no array found, try to parse the entire response as JSON
-        characters = JSON.parse(responseText);
-      }
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          { role: "system", content: "You are a creative writing assistant that specializes in character creation." },
+          { role: "user", content: fullPrompt }
+        ],
+        temperature: 0.7,
+        max_tokens: 2000,
+      });
+
+      // Parse the response
+      const responseText = completion.choices[0]?.message?.content || '';
+      logger.debug('Received response from OpenAI', { 
+        responseLength: responseText.length,
+        storyId
+      });
       
-      // Ensure characters is an array
-      if (!Array.isArray(characters)) {
-        characters = [characters];
+      // Extract JSON from the response
+      let characters = [];
+      try {
+        // Look for a JSON array in the response using a regular expression
+        // that supports matching across multiple lines
+        const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+        if (jsonMatch) {
+          characters = JSON.parse(jsonMatch[0]);
+        } else {
+          // If no array found, try to parse the entire response as JSON
+          characters = JSON.parse(responseText);
+        }
+        
+        // Ensure characters is an array
+        if (!Array.isArray(characters)) {
+          characters = [characters];
+        }
+        
+        logger.info('Successfully generated characters', { 
+          storyId, 
+          userId,
+          count: characters.length, 
+          characterType 
+        });
+      } catch (error) {
+        logger.error('Error parsing OpenAI response', { 
+          error: error instanceof Error ? error.message : String(error),
+          responseText: responseText.substring(0, 200) + (responseText.length > 200 ? '...' : '')
+        });
+        
+        return NextResponse.json(
+          { error: 'Failed to parse AI response', details: responseText },
+          { status: 500 }
+        );
       }
-    } catch (error) {
-      console.error('Error parsing OpenAI response:', error);
+
+      // Return the generated characters
+      return NextResponse.json({ characters });
+    } catch (openAiError) {
+      logger.error('OpenAI API error', { 
+        error: openAiError instanceof Error ? openAiError.message : String(openAiError),
+        storyId
+      });
+      
       return NextResponse.json(
-        { error: 'Failed to parse AI response', details: responseText },
-        { status: 500 }
+        { error: 'OpenAI API error', details: openAiError instanceof Error ? openAiError.message : String(openAiError) },
+        { status: 502 }
       );
     }
-
-    // Return the generated characters
-    return NextResponse.json({ characters });
   } catch (error) {
-    console.error('Error in character generation:', error);
+    logger.error('Unhandled error in character generation', { 
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined
+    });
+    
     return NextResponse.json(
-      { error: 'Failed to generate characters', details: (error as Error).message },
+      { error: 'Failed to generate characters', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }

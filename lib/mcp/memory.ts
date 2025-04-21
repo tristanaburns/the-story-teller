@@ -22,7 +22,7 @@ export async function storeMemory(
   metadata: Record<string, string | number | boolean> = {}
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
+    'memory' as const, // Type assertion to match keyof MCPServerRegistry
     {
       action: 'store_memory',
       payload: {
@@ -43,7 +43,7 @@ export async function retrieveMemory(
   memoryId: string
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
+    'memory' as const, // Type assertion to match keyof MCPServerRegistry
     {
       action: 'retrieve_memory',
       payload: {
@@ -62,7 +62,7 @@ export async function searchMemories(
   offset: number = 0
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
+    'memory' as const, // Type assertion to match keyof MCPServerRegistry
     {
       action: 'search_memory',
       payload: {
@@ -82,7 +82,7 @@ export async function updateMemory(
   updates: Partial<Memory>
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
+    'memory' as const, // Type assertion to match keyof MCPServerRegistry
     {
       action: 'update_memory',
       payload: {
@@ -100,7 +100,7 @@ export async function deleteMemory(
   memoryId: string
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
+    'memory' as const, // Type assertion to match keyof MCPServerRegistry
     {
       action: 'delete_memory',
       payload: {
@@ -118,7 +118,7 @@ export async function consolidateMemories(
   tags?: string[]
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
+    'memory' as const, // Type assertion to match keyof MCPServerRegistry
     {
       action: 'consolidate_memory',
       payload: {

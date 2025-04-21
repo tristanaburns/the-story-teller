@@ -3,202 +3,218 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth/next';
 import { ObjectId } from 'mongodb';
+import { getUserDb } from '@/lib/user-db';
 import { createLogger, withApiLogging } from '@/lib/logging';
-import { getCollection } from '@/lib/mongodb';
 
 // Create a logger specifically for the individual story API
-const logger = createLogger('API:Story');
-
-/**
- * Helper function to validate MongoDB ObjectId
- */
-function isValidObjectId(id: string): boolean {
-  try {
-    new ObjectId(id);
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
+const logger = createLogger('API:StoryDetail');
 
 /**
  * GET handler for retrieving a single story
  */
-async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-  const id = params.id;
-  
-  logger.debug(`Processing GET request for story ${id}`);
-  
-  // Validate ID format
-  if (!isValidObjectId(id)) {
-    logger.warn(`Invalid story ID format: ${id}`);
-    return NextResponse.json({ error: 'Invalid story ID format' }, { status: 400 });
-  }
-  
+async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+  const storyId = params.id;
+  logger.debug('Processing GET request for story', { storyId });
+
   try {
-    // Get stories collection
-    const storiesCollection = await getCollection('stories');
-    
-    // Find story by ID
-    const story = await storiesCollection.findOne({ _id: new ObjectId(id) });
-    
+    // Get the current session
+    const session = await getServerSession();
+
+    if (!session || !session.user) {
+      logger.warn('Unauthorized attempt to access story', { storyId });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const userId = session.user.id;
+    logger.debug('Authorized request for story', { userId, storyId });
+
+    // Validate story ID format
+    if (!ObjectId.isValid(storyId)) {
+      logger.warn('Invalid story ID format', { storyId });
+      return NextResponse.json({ error: 'Invalid story ID' }, { status: 400 });
+    }
+
+    // Get user's database
+    const userDb = await getUserDb(userId);
+
+    // Query the story
+    const story = await userDb.collection('stories').findOne({
+      _id: new ObjectId(storyId)
+    });
+
     if (!story) {
-      logger.warn(`Story not found with ID: ${id}`);
+      logger.warn('Story not found', { userId, storyId });
       return NextResponse.json({ error: 'Story not found' }, { status: 404 });
     }
-    
-    logger.info(`Retrieved story ${id}`, {
-      title: story.title,
-      userId: story.userId
-    });
-    
-    // Return story
-    return NextResponse.json({ story });
+
+    logger.info('Story retrieved successfully', { userId, storyId });
+    return NextResponse.json(story);
   } catch (error) {
-    // Log error with detailed context
-    logger.error(`Error retrieving story ${id}`, error);
-    
-    // Return error response
-    return NextResponse.json(
-      { error: 'Failed to retrieve story' },
-      { status: 500 }
-    );
+    logger.error('Error fetching story', { 
+      storyId,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined
+    });
+
+    return NextResponse.json({ error: 'Failed to fetch story' }, { status: 500 });
   }
 }
 
 /**
  * PUT handler for updating a story
  */
-async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
-  const id = params.id;
-  
-  logger.debug(`Processing PUT request for story ${id}`);
-  
-  // Validate ID format
-  if (!isValidObjectId(id)) {
-    logger.warn(`Invalid story ID format: ${id}`);
-    return NextResponse.json({ error: 'Invalid story ID format' }, { status: 400 });
-  }
-  
+async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+  const storyId = params.id;
+  logger.debug('Processing PUT request to update story', { storyId });
+
   try {
+    // Get the current session
+    const session = await getServerSession();
+
+    if (!session || !session.user) {
+      logger.warn('Unauthorized attempt to update story', { storyId });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const userId = session.user.id;
+    logger.debug('Authorized request to update story', { userId, storyId });
+
+    // Validate story ID format
+    if (!ObjectId.isValid(storyId)) {
+      logger.warn('Invalid story ID format', { storyId });
+      return NextResponse.json({ error: 'Invalid story ID' }, { status: 400 });
+    }
+
     // Parse request body
-    const body = await request.json();
-    
-    // Get stories collection
-    const storiesCollection = await getCollection('stories');
-    
-    // Check if story exists
-    const existingStory = await storiesCollection.findOne({ _id: new ObjectId(id) });
-    
+    const data = await req.json();
+    logger.debug('Update data received', { storyId, fields: Object.keys(data) });
+
+    // Get user's database
+    const userDb = await getUserDb(userId);
+
+    // Check if story exists and belongs to user
+    const existingStory = await userDb.collection('stories').findOne({
+      _id: new ObjectId(storyId)
+    });
+
     if (!existingStory) {
-      logger.warn(`Attempted to update non-existent story ${id}`);
+      logger.warn('Story not found for update', { userId, storyId });
       return NextResponse.json({ error: 'Story not found' }, { status: 404 });
     }
-    
-    // Prepare update data
-    const updateData = {
-      ...body,
+
+    // Prepare update document
+    const updateDoc = {
+      ...data,
       updatedAt: new Date()
     };
+
+    // Don't allow changing the userId
+    delete updateDoc.userId;
     
-    // Remove _id if present in the update data
-    delete updateData._id;
-    
-    logger.debug(`Updating story ${id}`, {
-      fields: Object.keys(updateData)
-    });
-    
-    // Update story
-    const result = await storiesCollection.updateOne(
-      { _id: new ObjectId(id) },
-      { $set: updateData }
+    // Don't allow modifying the _id
+    delete updateDoc._id;
+
+    // Update the story
+    const result = await userDb.collection('stories').updateOne(
+      { _id: new ObjectId(storyId) },
+      { $set: updateDoc }
     );
-    
-    logger.info(`Updated story ${id}`, {
-      modifiedCount: result.modifiedCount
+
+    if (result.matchedCount === 0) {
+      logger.warn('Story update failed - no matching document', { userId, storyId });
+      return NextResponse.json({ error: 'Failed to update story' }, { status: 500 });
+    }
+
+    // Get the updated story
+    const updatedStory = await userDb.collection('stories').findOne({
+      _id: new ObjectId(storyId)
     });
-    
-    // Return updated story
-    const updatedStory = await storiesCollection.findOne({ _id: new ObjectId(id) });
-    
-    return NextResponse.json({
-      success: true,
-      story: updatedStory
+
+    logger.info('Story updated successfully', { 
+      userId, 
+      storyId,
+      modifiedFields: Object.keys(data)
     });
+
+    return NextResponse.json(updatedStory);
   } catch (error) {
-    // Log error with detailed context
-    logger.error(`Error updating story ${id}`, error);
-    
-    // Return error response
-    return NextResponse.json(
-      { error: 'Failed to update story' },
-      { status: 500 }
-    );
+    logger.error('Error updating story', { 
+      storyId,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined
+    });
+
+    return NextResponse.json({ error: 'Failed to update story' }, { status: 500 });
   }
 }
 
 /**
  * DELETE handler for removing a story
  */
-async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
-  const id = params.id;
-  
-  logger.debug(`Processing DELETE request for story ${id}`);
-  
-  // Validate ID format
-  if (!isValidObjectId(id)) {
-    logger.warn(`Invalid story ID format: ${id}`);
-    return NextResponse.json({ error: 'Invalid story ID format' }, { status: 400 });
-  }
-  
+async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+  const storyId = params.id;
+  logger.debug('Processing DELETE request for story', { storyId });
+
   try {
-    // Get stories collection
-    const storiesCollection = await getCollection('stories');
-    
-    // Check if story exists
-    const existingStory = await storiesCollection.findOne({ _id: new ObjectId(id) });
-    
+    // Get the current session
+    const session = await getServerSession();
+
+    if (!session || !session.user) {
+      logger.warn('Unauthorized attempt to delete story', { storyId });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const userId = session.user.id;
+    logger.debug('Authorized request to delete story', { userId, storyId });
+
+    // Validate story ID format
+    if (!ObjectId.isValid(storyId)) {
+      logger.warn('Invalid story ID format', { storyId });
+      return NextResponse.json({ error: 'Invalid story ID' }, { status: 400 });
+    }
+
+    // Get user's database
+    const userDb = await getUserDb(userId);
+
+    // Check if story exists and belongs to user
+    const existingStory = await userDb.collection('stories').findOne({
+      _id: new ObjectId(storyId)
+    });
+
     if (!existingStory) {
-      logger.warn(`Attempted to delete non-existent story ${id}`);
+      logger.warn('Story not found for deletion', { userId, storyId });
       return NextResponse.json({ error: 'Story not found' }, { status: 404 });
     }
-    
-    // Store story info for logging before deletion
-    const storyInfo = {
-      title: existingStory.title,
-      userId: existingStory.userId
-    };
-    
-    // Delete story
-    const result = await storiesCollection.deleteOne({ _id: new ObjectId(id) });
-    
-    logger.info(`Deleted story ${id}`, {
-      ...storyInfo,
-      deletedCount: result.deletedCount
+
+    // Delete the story
+    const result = await userDb.collection('stories').deleteOne({
+      _id: new ObjectId(storyId)
     });
-    
-    // Return success response
-    return NextResponse.json({
-      success: true,
-      deletedCount: result.deletedCount
-    });
+
+    if (result.deletedCount === 0) {
+      logger.warn('Story deletion failed', { userId, storyId });
+      return NextResponse.json({ error: 'Failed to delete story' }, { status: 500 });
+    }
+
+    logger.info('Story deleted successfully', { userId, storyId });
+    return NextResponse.json({ success: true });
   } catch (error) {
-    // Log error with detailed context
-    logger.error(`Error deleting story ${id}`, error);
-    
-    // Return error response
-    return NextResponse.json(
-      { error: 'Failed to delete story' },
-      { status: 500 }
-    );
+    logger.error('Error deleting story', { 
+      storyId,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined
+    });
+
+    return NextResponse.json({ error: 'Failed to delete story' }, { status: 500 });
   }
 }
 
 // Wrap handlers with API logging middleware
-export const GET_handler = withApiLogging(GET, 'GET:story');
-export const PUT_handler = withApiLogging(PUT, 'PUT:story');
-export const DELETE_handler = withApiLogging(DELETE, 'DELETE:story');
+export const GET_handler = withApiLogging(GET, 'GET:storyDetail');
+export const PUT_handler = withApiLogging(PUT, 'PUT:storyDetail');
+export const DELETE_handler = withApiLogging(DELETE, 'DELETE:storyDetail');
 
 // Export handlers
 export { GET_handler as GET, PUT_handler as PUT, DELETE_handler as DELETE };

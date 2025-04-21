@@ -48,7 +48,7 @@ const mockPerformanceNow = () => {
 };
 
 describe('MCPServerStatus Component', () => {
-  let performanceMock;
+  let performanceMock: { restore: () => void };
   
   beforeEach(() => {
     jest.clearAllMocks();

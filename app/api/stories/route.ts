@@ -3,141 +3,133 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth/next';
+import { getUserDb } from '@/lib/user-db';
 import { createLogger, withApiLogging } from '@/lib/logging';
-import { getCollection } from '@/lib/mongodb';
+
+/**
+ * Stories Collection API Routes - Handles operations on the stories collection
+ * Implements GET (list all stories) and POST (create a story) operations
+ */
 
 // Create a logger specifically for the stories API
 const logger = createLogger('API:Stories');
 
 /**
- * GET handler for stories
+ * GET - retrieves all stories for the authenticated user
  */
-async function GET(request: NextRequest) {
-  logger.debug('Processing GET request for stories');
-  
+async function GET(req: NextRequest) {
+  logger.debug('Processing GET request for all stories');
+
   try {
-    // Extract query parameters
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get('userId');
-    const limit = Number(searchParams.get('limit') || '10');
-    const page = Number(searchParams.get('page') || '0');
-    
-    // Validate parameters
-    if (!userId) {
-      logger.warn('GET request missing required userId parameter');
-      return NextResponse.json({ error: 'userId is required' }, { status: 400 });
+    // Get the current session
+    const session = await getServerSession();
+
+    if (!session || !session.user) {
+      logger.warn('Unauthorized attempt to access stories');
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-    
-    logger.debug('Fetching stories from database', { userId, limit, page });
-    
-    // Get stories collection
-    const storiesCollection = await getCollection('stories');
-    
-    // Query stories for user
-    const stories = await storiesCollection.find(
-      { userId },
-      { 
-        limit,
-        skip: page * limit,
-        sort: { updatedAt: -1 } 
-      }
-    );
-    
-    // Get total count for pagination
-    const totalCount = await storiesCollection.getNativeCollection().countDocuments({ userId });
-    
-    logger.info(`Retrieved ${stories.length} stories for user ${userId}`, {
-      totalCount,
-      page,
-      limit
+
+    const userId = session.user.id;
+    logger.debug('Authorized request for stories list', { userId });
+
+    // Get user's database
+    const userDb = await getUserDb(userId);
+
+    // Query for all stories belonging to the user
+    const stories = await userDb.collection('stories')
+      .find({})
+      .sort({ updatedAt: -1 })
+      .toArray();
+
+    logger.info('Stories retrieved successfully', { 
+      userId, 
+      storyCount: stories.length 
     });
-    
-    // Return stories
-    return NextResponse.json({
-      stories,
-      pagination: {
-        total: totalCount,
-        page,
-        limit,
-        pages: Math.ceil(totalCount / limit)
-      }
-    });
+
+    return NextResponse.json(stories);
   } catch (error) {
-    // Log error with detailed context
-    logger.error('Error processing GET request for stories', error);
-    
-    // Return error response
+    logger.error('Error fetching stories', { 
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined
+    });
+
     return NextResponse.json(
-      { error: 'Failed to retrieve stories' },
+      { error: 'Failed to fetch stories' }, 
       { status: 500 }
     );
   }
 }
 
 /**
- * POST handler for creating a new story
+ * POST - creates a new story for the authenticated user
  */
-async function POST(request: NextRequest) {
-  logger.debug('Processing POST request for creating a story');
-  
+async function POST(req: NextRequest) {
+  logger.debug('Processing POST request to create a story');
+
   try {
+    // Get the current session
+    const session = await getServerSession();
+
+    if (!session || !session.user) {
+      logger.warn('Unauthorized attempt to create a story');
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const userId = session.user.id;
+    logger.debug('Authorized request to create a story', { userId });
+
     // Parse request body
-    const body = await request.json();
-    const { title, description, userId, genre, tags } = body;
-    
-    // Validate request body
-    if (!title || !userId) {
-      const missingFields = [];
-      if (!title) missingFields.push('title');
-      if (!userId) missingFields.push('userId');
-      
-      logger.warn('POST request missing required fields', { missingFields });
-      
+    const data = await req.json();
+    logger.debug('Story data received', { fields: Object.keys(data) });
+
+    // Validate required fields
+    if (!data.title) {
+      logger.warn('Missing required field: title', { userId });
       return NextResponse.json(
-        { error: `Missing required fields: ${missingFields.join(', ')}` },
+        { error: 'Title is required' },
         { status: 400 }
       );
     }
-    
-    logger.debug('Creating new story', { title, userId });
-    
-    // Get stories collection
-    const storiesCollection = await getCollection('stories');
-    
-    // Create story object
-    const story = {
-      title,
-      description: description || '',
-      userId,
-      genre: genre || 'General',
-      tags: tags || [],
+
+    // Get user's database
+    const userDb = await getUserDb(userId);
+
+    // Create the story document
+    const storyDoc = {
+      title: data.title,
+      description: data.description || '',
+      genre: data.genre || '',
+      status: data.status || 'draft',
+      content: data.content || '',
+      settings: data.settings || {},
+      userId: userId,
       createdAt: new Date(),
-      updatedAt: new Date(),
-      status: 'draft',
-      contentBlocks: [],
-      characters: [],
-      locations: [],
-      timeline: []
+      updatedAt: new Date()
     };
-    
-    // Insert story
-    const result = await storiesCollection.insertOne(story);
-    
-    logger.info(`Created new story "${title}" for user ${userId}`, {
-      storyId: result.insertedId
+
+    // Insert the story
+    const result = await userDb.collection('stories').insertOne(storyDoc);
+
+    // Return the created story with its ID
+    const createdStory = {
+      ...storyDoc,
+      _id: result.insertedId
+    };
+
+    logger.info('Story created successfully', { 
+      userId, 
+      storyId: result.insertedId.toString(),
+      storyTitle: data.title
     });
-    
-    // Return created story
-    return NextResponse.json({
-      success: true,
-      storyId: result.insertedId,
-      story
-    });
+
+    return NextResponse.json(createdStory, { status: 201 });
   } catch (error) {
-    // Log error with detailed context
-    logger.error('Error processing POST request for creating a story', error);
-    
-    // Return error response
+    logger.error('Error creating story', { 
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined
+    });
+
     return NextResponse.json(
       { error: 'Failed to create story' },
       { status: 500 }

@@ -1,5 +1,5 @@
 /**
- * API endpoint for generating log summaries
+ * API endpoint for retrieving log summary statistics
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -12,59 +12,14 @@ import { authOptions } from '@/lib/auth';
 const logger = createLogger('API:LogsSummary');
 
 /**
- * Handle POST requests for log summaries
- */
-export async function POST(request: NextRequest) {
-  try {
-    // Get user session and verify admin role
-    const session = await getServerSession(authOptions);
-    
-    // Only allow admins to query logs
-    if (!session?.user || !session.user.roles?.includes('admin')) {
-      return NextResponse.json(
-        { error: 'Unauthorized. Admin role required.' },
-        { status: 403 }
-      );
-    }
-    
-    // Parse query parameters
-    const queryParams: LogQueryParams = await request.json();
-    
-    // Parse date strings if provided
-    if (typeof queryParams.startDate === 'string') {
-      queryParams.startDate = new Date(queryParams.startDate);
-    }
-    
-    if (typeof queryParams.endDate === 'string') {
-      queryParams.endDate = new Date(queryParams.endDate);
-    }
-    
-    // Generate summary
-    logger.debug('Generating log summary', { queryParams });
-    const summary = await logQueryService.generateSummary(queryParams);
-    
-    return NextResponse.json({ 
-      summary,
-      params: queryParams
-    });
-  } catch (error) {
-    logger.error('Error generating log summary', error);
-    return NextResponse.json(
-      { error: 'Failed to generate log summary' }, 
-      { status: 500 }
-    );
-  }
-}
-
-/**
- * Handle GET requests for predefined summaries
+ * Handle GET requests for log summary statistics
  */
 export async function GET(request: NextRequest) {
   try {
     // Get user session and verify admin role
     const session = await getServerSession(authOptions);
     
-    // Only allow admins to query logs
+    // Only allow admins to access log statistics
     if (!session?.user || !session.user.roles?.includes('admin')) {
       return NextResponse.json(
         { error: 'Unauthorized. Admin role required.' },
@@ -72,50 +27,53 @@ export async function GET(request: NextRequest) {
       );
     }
     
-    // Parse time period from URL
+    // Parse query parameters from URL
     const searchParams = request.nextUrl.searchParams;
-    const period = searchParams.get('period') || 'day';
+    const queryParams: LogQueryParams = {};
     
-    // Create date range based on period
-    const now = new Date();
-    let startDate: Date;
-    
-    switch (period) {
-      case 'hour':
-        startDate = new Date(now.getTime() - 60 * 60 * 1000);
-        break;
-      case 'day':
-        startDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-        break;
-      case 'week':
-        startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-        break;
-      case 'month':
-        startDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-        break;
-      default:
-        startDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    // Parse date strings
+    if (searchParams.has('startDate')) {
+      queryParams.startDate = new Date(searchParams.get('startDate')!);
+    } else {
+      // Default to last 24 hours
+      queryParams.startDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
     }
     
-    const queryParams: LogQueryParams = {
-      startDate,
-      endDate: now
-    };
+    if (searchParams.has('endDate')) {
+      queryParams.endDate = new Date(searchParams.get('endDate')!);
+    } else {
+      queryParams.endDate = new Date();
+    }
     
-    // Generate summary
-    logger.debug('Generating log summary for period', { period, queryParams });
-    const summary = await logQueryService.generateSummary(queryParams);
+    // Parse other parameters
+    if (searchParams.has('level')) {
+      queryParams.level = searchParams.get('level')!;
+    }
     
-    return NextResponse.json({ 
-      summary,
-      period,
-      startDate,
-      endDate: now
+    if (searchParams.has('component')) {
+      queryParams.component = searchParams.get('component')!;
+    }
+    
+    if (searchParams.has('correlationId')) {
+      queryParams.correlationId = searchParams.get('correlationId')!;
+    }
+    
+    if (searchParams.has('userId')) {
+      queryParams.userId = searchParams.get('userId')!;
+    }
+    
+    // Execute query for statistics
+    logger.debug('Generating log statistics', { queryParams });
+    const statistics = await logQueryService.getLogStatistics(queryParams);
+    
+    return NextResponse.json({
+      statistics,
+      params: queryParams
     });
   } catch (error) {
-    logger.error('Error generating log summary', error);
+    logger.error('Error generating log statistics', error);
     return NextResponse.json(
-      { error: 'Failed to generate log summary' }, 
+      { error: 'Failed to generate log statistics' },
       { status: 500 }
     );
   }

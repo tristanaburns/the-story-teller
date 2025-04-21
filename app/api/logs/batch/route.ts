@@ -1,5 +1,5 @@
 /**
- * API endpoint for batch processing of client-side logs
+ * API endpoint for receiving batched client-side logs
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -7,6 +7,7 @@ import { createLogger } from '@/lib/logging';
 import { MongoTransport } from '@/lib/logging/transports';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
+import { ClientLogData } from '@/lib/logging/types';
 
 // Create a logger for this API route
 const logger = createLogger('API:LogsBatch');
@@ -21,11 +22,11 @@ const mongoTransport = new MongoTransport({
 
 // Connect to MongoDB
 mongoTransport.connect().catch(error => {
-  logger.error('Failed to connect MongoDB transport for client logs batch:', error);
+  logger.error('Failed to connect MongoDB transport for client logs:', error);
 });
 
 /**
- * Handle POST requests (batch log entries)
+ * Handle POST requests for batched logs
  */
 export async function POST(request: NextRequest) {
   try {
@@ -36,51 +37,44 @@ export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions);
     const userId = session?.user?.id || undefined;
     
-    // Parse batch request from body
-    const { entries } = await request.json();
+    // Parse log entries from request
+    const logEntries: ClientLogData[] = await request.json();
     
-    // Validate input
-    if (!Array.isArray(entries)) {
+    // Validate input is an array
+    if (!Array.isArray(logEntries)) {
       return NextResponse.json(
-        { error: 'Invalid request format. Expected "entries" array.' },
+        { error: 'Request body must be an array of log entries' },
         { status: 400 }
       );
     }
     
-    // Add server-side metadata to each entry and store
-    const serverMetadata = {
+    logger.debug('Received batch of client logs', {
+      count: logEntries.length,
+      correlationId,
+      userId
+    });
+    
+    // Process log entries
+    const enhancedLogs = logEntries.map(entry => ({
+      ...entry,
+      correlationId: entry.correlationId || correlationId,
+      userId: entry.userId || userId,
       receivedAt: new Date().toISOString(),
       clientIp: request.headers.get('x-forwarded-for') || request.ip || 'unknown',
-      userAgent: request.headers.get('user-agent') || 'unknown'
-    };
+      userAgent: entry.userAgent || request.headers.get('user-agent') || 'unknown'
+    }));
     
-    // Process each entry sequentially
-    for (const entry of entries) {
-      const enhancedEntry = {
-        ...entry,
-        ...serverMetadata,
-        correlationId: correlationId || entry.correlationId,
-        userId: userId || entry.userId
-      };
-      
-      // Store in MongoDB
-      await mongoTransport.log(enhancedEntry);
+    // Store in MongoDB
+    for (const log of enhancedLogs) {
+      await mongoTransport.log(log);
     }
-    
-    // Log summary (at debug level to avoid excessive logging)
-    logger.debug(`Processed batch of ${entries.length} client logs`, {
-      correlationId,
-      userId,
-      count: entries.length,
-      clientSide: true
-    });
     
     return NextResponse.json({ 
       success: true,
-      count: entries.length
+      count: enhancedLogs.length
     });
   } catch (error) {
-    logger.error('Error processing client logs batch', error);
+    logger.error('Error processing client log batch', error);
     return NextResponse.json(
       { error: 'Failed to process log entries' }, 
       { status: 500 }

@@ -19,7 +19,7 @@ export async function generateArtwork(
   payload: Omit<ArtPayload, 'artId'>
 ): Promise<EverartMCPResponse> {
   return sendMCPRequest<EverartMCPRequest, EverartMCPResponse>(
-    'everart' as 'everart',
+    'everart' as const,
     {
       action: 'generate',
       userId,
@@ -37,7 +37,7 @@ export async function editArtwork(
   payload: Partial<ArtPayload>
 ): Promise<EverartMCPResponse> {
   return sendMCPRequest<EverartMCPRequest, EverartMCPResponse>(
-    'everart' as 'everart',
+    'everart' as const,
     {
       action: 'edit',
       userId,
@@ -62,7 +62,7 @@ export async function searchArtwork(
   }
 ): Promise<EverartMCPResponse> {
   return sendMCPRequest<EverartMCPRequest, EverartMCPResponse>(
-    'everart' as 'everart',
+    'everart' as const,
     {
       action: 'search',
       userId,
@@ -79,7 +79,7 @@ export async function deleteArtwork(
   artId: string
 ): Promise<EverartMCPResponse> {
   return sendMCPRequest<EverartMCPRequest, EverartMCPResponse>(
-    'everart' as 'everart',
+    'everart' as const,
     {
       action: 'delete',
       userId,

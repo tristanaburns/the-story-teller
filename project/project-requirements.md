@@ -100,6 +100,19 @@ The Story Teller is an advanced schema-driven web application designed to create
 - Schema version control
 - Schema dependency tracking
 
+### Story Analytics
+
+- Comprehensive analytics for story metrics
+- Word count and character count tracking
+- Content statistics and reading time estimation
+- Character and location distribution analysis
+- Writing pace and revision frequency metrics
+- Status and genre distribution visualization
+- Story timeline and activity tracking
+- Cross-story analysis and comparisons
+- Visualizations for all analytics metrics
+- Actionable insights and recommendations
+
 ### AI Integration
 
 - OpenAI API integration for content generation
@@ -198,7 +211,7 @@ The Story Teller is an advanced schema-driven web application designed to create
 
 - Modular code architecture
 - Comprehensive code documentation
-- Testing coverage > 80%
+- 100% test coverage across all code with no exceptions
 - Consistent coding style using ESLint and Prettier
 - Design system for UI components
 - Independent MCP server components
@@ -648,6 +661,30 @@ The Story Teller is an advanced schema-driven web application designed to create
 }
 ```
 
+### User Settings Model
+
+```json
+{
+  "_id": "ObjectId",
+  "userId": "string",
+  "displayName": "string",
+  "email": "string",
+  "theme": "enum: ['light', 'dark', 'system']",
+  "editorFontSize": "number",
+  "enableAIFeatures": "boolean",
+  "enableEmailNotifications": "boolean",
+  "logLevel": "enum: ['error', 'warn', 'info', 'debug']",
+  "mcpServers": {
+    "memory": "boolean",
+    "art": "boolean",
+    "thinking": "boolean",
+    "database": "boolean"
+  },
+  "createdAt": "datetime",
+  "updatedAt": "datetime"
+}
+```
+
 ---
 
 ## API Endpoints
@@ -658,6 +695,11 @@ The Story Teller is an advanced schema-driven web application designed to create
 - `GET /api/auth/signout` - Sign out
 - `GET /api/auth/session` - Get current session
 - `POST /api/auth/callback/:provider` - OAuth callback handler
+
+### Settings API
+
+- `GET /api/settings` - Get user settings
+- `PUT /api/settings` - Update user settings
 
 ### Stories API
 
@@ -690,6 +732,16 @@ The Story Teller is an advanced schema-driven web application designed to create
 - `POST /api/stories/:storyId/timeline` - Create timeline event
 - `PUT /api/stories/:storyId/timeline/:id` - Update timeline event
 - `DELETE /api/stories/:storyId/timeline/:id` - Delete timeline event
+
+### Analytics API
+
+- `GET /api/stories/analytics` - Get analytics for all user stories
+- `GET /api/stories/:id/analytics` - Get analytics for a specific story
+
+### API Documentation
+
+- `GET /api/docs` - OpenAPI specification
+- `GET /api/docs/ui` - Interactive API documentation with Swagger UI
 
 ### Logging API
 
@@ -773,6 +825,14 @@ The Story Teller is an advanced schema-driven web application designed to create
 
 ## MCP Integration Requirements
 
+### MCP Server Naming and Implementation Standards
+
+- **Mandatory Platform Suffix**: All MCP server implementations must include a platform suffix in their directory names (e.g., `-nest` for NestJS implementations)
+- **Consistent Structure**: Each MCP service should have exactly one implementation per platform
+- **Standard Naming Pattern**: `{service-name}-{platform}` (e.g., `memory-nest`, `everart-nest`, `sequential-thinking-nest`)
+- **Directory Organization**: All MCP servers must reside directly under the `mcp-servers` directory
+- **No Duplicate Implementations**: Multiple implementations of the same service using the same platform are prohibited
+
 ### Memory MCP Integration
 
 - Context storage and retrieval for AI conversations
@@ -780,50 +840,43 @@ The Story Teller is an advanced schema-driven web application designed to create
 - Semantic search across stored memories
 - Importance-based memory management
 - Integration with story context and metadata
-- NestJS implementation with Mongoose schemas
-- DTO validation for request/response
+- NestJS implementation with MongoDB integration
+- Swagger API documentation
 - API key authentication
-- Swagger documentation
-- Comprehensive debug-level logging
 
 ### Everart MCP Integration
 
-- Character portrait generation based on descriptions
-- Location visualization from textual descriptions
-- Scene illustration from narrative passages
-- Consistent style enforcement across artwork
-- Metadata tagging for generated artwork
-- NestJS implementation with Mongoose schemas
-- DTO validation for request/response
+- Character artwork generation
+- Location visualization generation
+- Scene illustration creation
+- Visual style consistency management
+- NestJS implementation with MongoDB integration
+- Image storage and retrieval
+- Swagger API documentation
 - API key authentication
-- Swagger documentation
-- Comprehensive debug-level logging
 
 ### Sequential Thinking MCP Integration
 
-- Step-by-step reasoning for narrative consistency
-- Plot development assistance with logical flow
+- Structured reasoning for plot development
+- Consistency checking in narrative flow
 - Character motivation analysis and development
 - World-building logical consistency checks
 - Documentation of reasoning process for user review
-- NestJS implementation with Mongoose schemas
-- DTO validation for request/response
+- NestJS implementation with MongoDB integration
+- Step-by-step reasoning documentation
+- Swagger API documentation
 - API key authentication
-- Swagger documentation
-- Comprehensive debug-level logging
 
 ### MongoDB Atlas MCP Integration
 
-- Schema-aware database operations
+- Schema-based database operations
 - Complex query construction and optimization
 - Data transformation for cross-collection operations
 - Database performance monitoring and suggestions
 - Schema evolution management
-- NestJS implementation with Mongoose schemas
-- DTO validation for request/response
+- NestJS implementation with MongoDB integration
+- Swagger API documentation
 - API key authentication
-- Swagger documentation
-- Comprehensive debug-level logging
 
 ---
 
@@ -1018,6 +1071,11 @@ The Story Teller is an advanced schema-driven web application designed to create
 - ☑️ Dashboard UI implementation
 - ☑️ Story management interfaces
 - ☑️ API endpoint for AI integration
+- ☑️ API documentation with OpenAPI/Swagger
+- ☑️ API testing framework with Jest and Supertest
+- ☑️ MongoDB database indexing
+- ☑️ Vercel deployment pipeline with GitHub Actions
+- ☑️ User settings page implementation
 - 🔄 MCP server integration
 - 🔄 Comprehensive Logging System implementation
 
@@ -1026,9 +1084,14 @@ The Story Teller is an advanced schema-driven web application designed to create
 - ☑️ Story API implementation
 - ☑️ Story creation and editing UI
 - ☑️ Story listing and viewing UI
+- ☑️ Story analytics and insights
+  - ☑️ Word count tracking and history
+  - ☑️ Character distribution analysis
+  - ☑️ Timeline activity visualization
+  - ☑️ Progress tracking with goals
+  - ☑️ Content complexity metrics
 - ⏱️ Story sharing and collaboration
 - ⏱️ Story export capabilities
-- ⏱️ Story analytics and insights
 
 ### Narrative Element Management
 
@@ -1041,6 +1104,20 @@ The Story Teller is an advanced schema-driven web application designed to create
 - ☑️ Timeline visualization
 - ☑️ Relationship tracking between elements
 - 🔄 Consistency checking
+
+### Story Analytics
+
+- ☑️ Story analytics API endpoints
+- ☑️ Global analytics for user's stories
+- ☑️ Individual story analytics
+- ☑️ Word and character count tracking
+- ☑️ Character and location distribution analysis
+- ☑️ Genre and status distribution visualization
+- ☑️ Timeline and activity analysis
+- ☑️ Writing pace and reading time calculations
+- ☑️ Dashboard integration
+- ☑️ Interactive visualization components
+- ☑️ Analytics dashboard UI
 
 ### MCP Integration
 
@@ -1084,6 +1161,10 @@ The Story Teller is an advanced schema-driven web application designed to create
   - ☑️ Process search and filtering
   - ☑️ Error handling with filters
   - ☑️ Docker containerization
+  - ☑️ Asynchronous processing for thinking tasks
+  - ☑️ Structured ThinkingProcess with steps tracking
+  - ☑️ Comprehensive status tracking (pending, in-progress, completed, failed)
+  - ☑️ Progress monitoring with percentage tracking
   - 🔄 Comprehensive debug-level logging
   - ⏱️ Advanced reasoning patterns
   - ⏱️ UI integration components
@@ -1141,6 +1222,8 @@ The Story Teller is an advanced schema-driven web application designed to create
 - ☑️ Timeline visualization
 - ☑️ Relationship visualization
 - ☑️ Content editor with preview
+- ☑️ User settings UI with multi-tab interface
+- ☑️ Analytics dashboard and visualizations
 - 🔄 MCP integration UI components
 - 🔄 Logging configuration and monitoring UI
 
@@ -1148,36 +1231,58 @@ The Story Teller is an advanced schema-driven web application designed to create
 
 ## Testing Requirements
 
+### Test Coverage Mandates
+
+- **100% Test Coverage Required**: All code must be covered by tests with no exceptions
+- **Coverage Metrics**: 100% coverage required for statements, branches, functions, and lines
+- **No Exceptions Policy**: No code will be accepted into the codebase without 100% test coverage
+- **Enforcement**: Automated CI/CD pipeline will reject any PR that reduces coverage below 100%
+- **Coverage Reports**: Coverage reports must be generated for all test runs
+- **Coverage Verification**: Test coverage verification is required for all code reviews
+- **Mocking Requirements**: All external dependencies must be properly mocked for testing
+- **Edge Case Testing**: All edge cases and error paths must be explicitly tested
+- **Test Quality**: Tests must be meaningful and validate actual functionality, not just execute code
+- **Test Standards**: Tests must follow standard patterns and naming conventions
+- **Test Independence**: Tests must be independent and not affect other tests
+- **Test Documentation**: All tests must be documented with clear purpose and test cases
+
 ### Unit Testing
 
-- Test all API endpoints
-- Test database operations
-- Test authentication flows
-- Test business logic functions
-- Test schema validation
-- Test MCP server communication
-- Test NestJS controllers and services
-- Test logging system components
+- Test all API endpoints (100% coverage required)
+- Test database operations (100% coverage required)
+- Test authentication flows (100% coverage required)
+- Test business logic functions (100% coverage required)
+- Test schema validation (100% coverage required)
+- Test MCP server communication (100% coverage required)
+- Test NestJS controllers and services (100% coverage required)
+- Test logging system components (100% coverage required)
+- No exceptions to 100% test coverage requirement
+- Automated test coverage reports and enforcement in CI/CD pipeline
+- All new code must maintain 100% coverage before merging
 
 ### Integration Testing
 
-- Test authentication with OAuth providers
-- Test database creation and operations
-- Test AI integration with OpenAI
-- Test data consistency between collections
-- Test MCP server integration
-- Test NestJS MCP server endpoints
-- Test logging system end-to-end
+- Test authentication with OAuth providers (100% coverage required)
+- Test database creation and operations (100% coverage required)
+- Test AI integration with OpenAI (100% coverage required)
+- Test data consistency between collections (100% coverage required)
+- Test MCP server integration (100% coverage required)
+- Test NestJS MCP server endpoints (100% coverage required)
+- Test logging system end-to-end (100% coverage required)
+- No exceptions to 100% test coverage requirement
+- All integrations must be fully tested before deployment
 
 ### End-to-End Testing
 
-- Test user registration and login
-- Test story creation workflow
-- Test narrative element management
-- Test visualization components
-- Test content editing and preview
-- Test MCP functionality in workflows
-- Test logging system in real-world scenarios
+- Test user registration and login (100% coverage required)
+- Test story creation workflow (100% coverage required)
+- Test narrative element management (100% coverage required)
+- Test visualization components (100% coverage required)
+- Test content editing and preview (100% coverage required)
+- Test MCP functionality in workflows (100% coverage required)
+- Test logging system in real-world scenarios (100% coverage required)
+- No exceptions to 100% test coverage requirement
+- Automated E2E test suite must be run before each deployment
 
 ### Performance Testing
 
@@ -1254,3 +1359,58 @@ The Story Teller is an advanced schema-driven web application designed to create
 ---
 
 This requirements document serves as the authoritative source for The Story Teller project specifications. All development work should align with these requirements, and any deviations must be documented and approved.
+
+## Sequential Thinking MCP Server
+
+The Sequential Thinking MCP Server is a specialized NestJS-based service that enables structured, step-by-step reasoning processes for story development and analysis. It provides API endpoints for creating, managing, and querying thinking processes with multi-step operations.
+
+### Core Features
+
+- **Structured Thinking Processes**: Create and manage multi-step thinking processes with defined inputs, outputs, and intermediate steps.
+- **Asynchronous Processing**: Background execution of potentially long-running thinking tasks without blocking API responses.
+- **Step-by-Step Reasoning**: Breaking down complex problems into manageable steps with clear progression.
+- **Process Tracking**: Comprehensive status and progress tracking throughout the thinking lifecycle.
+- **API Authentication**: Secure API key-based authentication for all endpoints.
+- **Process Search**: Searchable by user, story, type, and status.
+
+### Schema Design
+
+The ThinkingProcess schema includes:
+- Unique process identifier
+- User and story association
+- Process type (story-analysis, character-development, etc.)
+- Status tracking (pending, in-progress, completed, failed)
+- Progress percentage
+- Input data for the process
+- Output results from the process
+- Error details if applicable
+- Timestamps for creation, start, and completion
+- Array of steps with individual status tracking
+
+### API Endpoints
+
+- `POST /thinking`: Create a new thinking process
+- `GET /thinking/:processId`: Get a specific thinking process by ID
+- `GET /thinking/user/:userId`: Get thinking processes by user ID
+- `GET /thinking/story/:storyId`: Get thinking processes by story ID
+- `PUT /thinking/:processId`: Update a thinking process
+- `DELETE /thinking/:processId`: Delete a thinking process
+
+### Integration Points
+
+The Sequential Thinking MCP Server integrates with:
+- MongoDB for data persistence
+- Core application for user and story context
+- Logging infrastructure for operational monitoring
+- MCP orchestration for cross-server communication
+
+### Implementation Details
+
+- NestJS framework with TypeScript
+- MongoDB with Mongoose ODM
+- Repository pattern for database access
+- DTOs for request/response validation
+- Swagger UI for API documentation
+- Modular architecture with separation of concerns
+- Comprehensive error handling
+- Environment-based configuration

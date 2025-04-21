@@ -25,7 +25,7 @@ export async function queryDocuments(
   }
 ): Promise<DatabaseMCPResponse> {
   return sendMCPRequest<DatabaseMCPRequest, DatabaseMCPResponse>(
-    'database' as 'database',
+    'database' as const,
     {
       action: 'query',
       userId,
@@ -48,7 +48,7 @@ export async function updateDocuments(
   }
 ): Promise<DatabaseMCPResponse> {
   return sendMCPRequest<DatabaseMCPRequest, DatabaseMCPResponse>(
-    'database' as 'database',
+    'database' as const,
     {
       action: 'update',
       userId,
@@ -69,7 +69,7 @@ export async function createDocument(
   }
 ): Promise<DatabaseMCPResponse> {
   return sendMCPRequest<DatabaseMCPRequest, DatabaseMCPResponse>(
-    'database' as 'database',
+    'database' as const,
     {
       action: 'create',
       userId,
@@ -91,7 +91,7 @@ export async function deleteDocuments(
   }
 ): Promise<DatabaseMCPResponse> {
   return sendMCPRequest<DatabaseMCPRequest, DatabaseMCPResponse>(
-    'database' as 'database',
+    'database' as const,
     {
       action: 'delete',
       userId,
@@ -112,7 +112,7 @@ export async function validateDocument(
   }
 ): Promise<DatabaseMCPResponse> {
   return sendMCPRequest<DatabaseMCPRequest, DatabaseMCPResponse>(
-    'database' as 'database',
+    'database' as const,
     {
       action: 'validate',
       userId,

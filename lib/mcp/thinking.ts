@@ -19,7 +19,7 @@ export async function analyzeContent(
   payload: Omit<ThinkingPayload, 'reasoning'>
 ): Promise<ThinkingMCPResponse> {
   return sendMCPRequest<ThinkingMCPRequest, ThinkingMCPResponse>(
-    'thinking' as 'thinking',
+    'thinking' as const,
     {
       action: 'analyze',
       userId,
@@ -36,7 +36,7 @@ export async function createPlan(
   payload: Omit<ThinkingPayload, 'reasoning'>
 ): Promise<ThinkingMCPResponse> {
   return sendMCPRequest<ThinkingMCPRequest, ThinkingMCPResponse>(
-    'thinking' as 'thinking',
+    'thinking' as const,
     {
       action: 'plan',
       userId,
@@ -53,7 +53,7 @@ export async function evaluateContent(
   payload: ThinkingPayload
 ): Promise<ThinkingMCPResponse> {
   return sendMCPRequest<ThinkingMCPRequest, ThinkingMCPResponse>(
-    'thinking' as 'thinking',
+    'thinking' as const,
     {
       action: 'evaluate',
       userId,
@@ -70,7 +70,7 @@ export async function generateContent(
   payload: Omit<ThinkingPayload, 'reasoning'>
 ): Promise<ThinkingMCPResponse> {
   return sendMCPRequest<ThinkingMCPRequest, ThinkingMCPResponse>(
-    'thinking' as 'thinking',
+    'thinking' as const,
     {
       action: 'generate',
       userId,

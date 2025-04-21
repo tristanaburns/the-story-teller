@@ -28,7 +28,7 @@ jest.mock('@/components/ui/use-toast', () => ({
 
 jest.mock('@/components/locations/MapSelector', () => ({
   __esModule: true,
-  default: ({ onSelectLocation }) => (
+  default: ({ onSelectLocation }: { onSelectLocation: (lat: number, lng: number, address?: string) => void }) => (
     <div data-testid="map-selector">
       <button 
         data-testid="select-location-btn" 
@@ -42,7 +42,7 @@ jest.mock('@/components/locations/MapSelector', () => ({
 
 jest.mock('@/components/TagInput', () => ({
   __esModule: true,
-  default: ({ tags, setTags }) => (
+  default: ({ tags, setTags }: { tags: string[], setTags: (tags: string[]) => void }) => (
     <div data-testid="tag-input">
       <input 
         data-testid="tag-input-field" 

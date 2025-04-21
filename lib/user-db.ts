@@ -7,6 +7,11 @@ import {
   timelineEventSchema,
   metadataSchema
 } from './schemas/story-schema';
+import { setupDatabaseIndexes } from './database/indexes';
+import { Logger } from './logging/logger';
+
+// Create a logger instance
+const logger = new Logger('user-db');
 
 // This function creates a new MongoDB database for each user
 export async function createUserDb(userId: string) {
@@ -18,7 +23,7 @@ export async function createUserDb(userId: string) {
     const collections = await userDb.listCollections({ name: 'metadata' }).toArray();
     
     if (collections.length === 0) {
-      console.log(`Creating new database for user: ${userId}`);
+      logger.info(`Creating new database for user: ${userId}`);
       
       // Create initial collections for the user's database with schema validation
       await userDb.createCollection('metadata', metadataSchema);
@@ -26,7 +31,10 @@ export async function createUserDb(userId: string) {
       await userDb.createCollection('characters', characterSchema);
       await userDb.createCollection('locations', locationSchema);
       await userDb.createCollection('timelines');
-      await userDb.createCollection('events', timelineEventSchema);
+      await userDb.createCollection('timelineEvents', timelineEventSchema);
+      await userDb.createCollection('relationships');
+      await userDb.createCollection('storyContent');
+      await userDb.createCollection('settings');
       
       // Initialize metadata collection with creation timestamp
       await userDb.collection('metadata').insertOne({
@@ -37,14 +45,21 @@ export async function createUserDb(userId: string) {
         storiesCount: 0
       });
       
-      console.log(`Database setup completed for user: ${userId}`);
+      // Setup database indexes for optimal performance
+      await setupDatabaseIndexes(userDb, userId);
+      
+      logger.info(`Database setup completed for user: ${userId}`);
     } else {
-      console.log(`Database already exists for user: ${userId}`);
+      logger.info(`Database already exists for user: ${userId}`);
+      
+      // Even if the database exists, check and update indexes
+      // This ensures that any new indexes added to the application are applied to existing databases
+      await setupDatabaseIndexes(userDb, userId);
     }
     
     return userDb;
   } catch (error) {
-    console.error(`Error creating user database: ${error}`);
+    logger.error(`Error creating user database:`, { error, userId });
     throw error;
   }
 }
@@ -55,21 +70,40 @@ export async function getUserDb(userId: string): Promise<Db> {
     const client = await clientPromise;
     return client.db(`user-${userId}`);
   } catch (error) {
-    console.error(`Error getting user database: ${error}`);
+    logger.error(`Error getting user database:`, { error, userId });
     throw error;
   }
 }
 
-// This function checks if a user's database exists
+/**
+ * Get the database name for a specific user
+ */
+export function getUserDatabaseName(userId: string): string {
+  return `user-${userId}`;
+}
+
+/**
+ * Check if a specific user database exists by userId
+ */
 export async function userDbExists(userId: string): Promise<boolean> {
   try {
+    logger.debug('Checking if user database exists', { userId });
+    
     const client = await clientPromise;
-    const userDb = client.db(`user-${userId}`);
+    const userDbName = getUserDatabaseName(userId);
+    
+    // Instead of using admin(), create a connection to the user db
+    // and check if the metadata collection exists
+    const userDb = client.db(userDbName);
     const collections = await userDb.listCollections({ name: 'metadata' }).toArray();
-    return collections.length > 0;
+    
+    const exists = collections.length > 0;
+    logger.debug('User database exists check completed', { userId, exists });
+    
+    return exists;
   } catch (error) {
-    console.error(`Error checking if user database exists: ${error}`);
-    return false;
+    logger.error('Error checking if user database exists', { userId, error });
+    return false; // Return false on error instead of throwing
   }
 }
 
@@ -86,20 +120,30 @@ export async function getStoryWithRelatedData(userId: string, storyId: string) {
     }
     
     // Get related data
-    const [characters, locations, events] = await Promise.all([
+    const [characters, locations, timelineEvents, relationships] = await Promise.all([
       userDb.collection('characters').find({ storyId }).toArray(),
       userDb.collection('locations').find({ storyId }).toArray(),
-      userDb.collection('events').find({ storyId }).toArray()
+      userDb.collection('timelineEvents').find({ storyId }).toArray(),
+      userDb.collection('relationships').find({ storyId }).toArray()
     ]);
+    
+    // Get the latest content version
+    const content = await userDb.collection('storyContent')
+      .find({ storyId })
+      .sort({ version: -1 })
+      .limit(1)
+      .toArray();
     
     return {
       story,
       characters,
       locations,
-      events
+      timelineEvents,
+      relationships,
+      content: content.length > 0 ? content[0] : null,
     };
   } catch (error) {
-    console.error(`Error getting story with related data: ${error}`);
+    logger.error(`Error getting story with related data:`, { error, userId, storyId });
     throw error;
   }
 }
@@ -108,4 +152,91 @@ export async function getStoryWithRelatedData(userId: string, storyId: string) {
 export function generateEntityId(): string {
   return Math.random().toString(36).substring(2, 15) + 
          Math.random().toString(36).substring(2, 15);
+}
+
+// Function to update database schema and indexes for all users
+// This can be called during application startup or as a maintenance task
+export async function updateAllUserDatabases() {
+  try {
+    logger.info('Starting database schema and index update for all users');
+    
+    const client = await clientPromise;
+    
+    // Instead of using admin().listDatabases(), we'll use a different approach
+    // We'll maintain a collection in the system database to track user IDs
+    const systemDb = client.db('system');
+    
+    // Check if the users collection exists, if not, create it
+    const collections = await systemDb.listCollections({ name: 'users' }).toArray();
+    if (collections.length === 0) {
+      await systemDb.createCollection('users');
+      logger.info('Created users collection in system database');
+    }
+    
+    // Get all user IDs from the users collection
+    const users = await systemDb.collection('users').find({}).toArray();
+    const userIds = users.map(user => user.userId);
+    
+    logger.info(`Found ${userIds.length} users to update`);
+    
+    for (const userId of userIds) {
+      try {
+        const dbName = getUserDatabaseName(userId);
+        const userDb = client.db(dbName);
+        
+        logger.info(`Updating database for user: ${userId}`);
+        
+        // Ensure all required collections exist
+        const requiredCollections = [
+          'metadata', 'stories', 'characters', 'locations', 
+          'timelineEvents', 'relationships', 'storyContent', 'settings'
+        ];
+        
+        const existingCollections = (await userDb.listCollections().toArray())
+          .map(c => c.name);
+        
+        for (const collName of requiredCollections) {
+          if (!existingCollections.includes(collName)) {
+            logger.info(`Creating missing collection: ${collName} for user: ${userId}`);
+            
+            // Apply the appropriate schema validation if available
+            let options = {};
+            switch (collName) {
+              case 'stories':
+                options = storySchema;
+                break;
+              case 'characters':
+                options = characterSchema;
+                break;
+              case 'locations':
+                options = locationSchema;
+                break;
+              case 'timelineEvents':
+                options = timelineEventSchema;
+                break;
+              case 'metadata':
+                options = metadataSchema;
+                break;
+            }
+            
+            await userDb.createCollection(collName, options);
+          }
+        }
+        
+        // Setup database indexes for optimal performance
+        await setupDatabaseIndexes(userDb, userId);
+        
+        logger.info(`Successfully updated database for user: ${userId}`);
+      } catch (dbError) {
+        logger.error(`Error updating database for user: ${userId}`, { dbError });
+        // Continue with other databases even if one fails
+      }
+    }
+    
+    logger.info('Completed database schema and index update for all users');
+    return { success: true, count: userIds.length };
+  } catch (error) {
+    logger.error('Failed to update all user databases', { error });
+    throw error;
+  }
 }

@@ -40,6 +40,12 @@ jest.mock('next/image', () => ({
 describe('MapSelector Component', () => {
   const mockOnPositionChange = jest.fn();
   
+  // Add defaultProps for the tests
+  const defaultProps = {
+    initialPosition: [51.505, -0.09] as [number, number],
+    onPositionChange: mockOnPositionChange
+  };
+  
   beforeEach(() => {
     jest.clearAllMocks();
   });

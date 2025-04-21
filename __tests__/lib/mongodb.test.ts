@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 import {
-  connectToDatabase,
+  clientPromise as mongoClientPromise,
   getCollection,
   disconnectFromDatabase,
   getDb,
@@ -52,24 +52,31 @@ describe('MongoDB Connection', () => {
   });
   
   it('should connect to MongoDB using environment variables', async () => {
-    const clientPromise = await connectToDatabase();
+    // Access the Promise directly, not calling it as a function
+    const clientPromiseResult = mongoClientPromise;
     
     expect(MongoClient).toHaveBeenCalledWith(process.env.MONGODB_URI, expect.any(Object));
-    expect(clientPromise).toBeDefined();
+    expect(clientPromiseResult).toBeDefined();
   });
   
-  it('should reuse the existing connection when called multiple times', async () => {
-    const firstClientPromise = await connectToDatabase();
-    const secondClientPromise = await connectToDatabase();
+  it('should reuse the existing connection when accessed multiple times', async () => {
+    // Access the Promise directly, not calling it as a function
+    const firstClientPromiseResult = mongoClientPromise;
+    const secondClientPromiseResult = mongoClientPromise;
     
     expect(MongoClient).toHaveBeenCalledTimes(1);
-    expect(firstClientPromise).toBe(secondClientPromise);
+    expect(firstClientPromiseResult).toBe(secondClientPromiseResult);
   });
   
   it('should throw an error if MONGODB_URI is not defined', async () => {
     delete process.env.MONGODB_URI;
     
-    await expect(connectToDatabase()).rejects.toThrow(
+    // Reset the module to force re-initialization
+    jest.resetModules();
+    
+    // Import the module again to trigger the error
+    const { clientPromise } = require('@/lib/mongodb');
+    await expect(clientPromise).rejects.toThrow(
       'Please define the MONGODB_URI environment variable'
     );
   });
@@ -141,9 +148,9 @@ describe('MongoDB Utilities', () => {
     jest.clearAllMocks();
   });
   
-  describe('connectToDatabase', () => {
+  describe('clientPromise', () => {
     it('connects to the database using the environment URI', async () => {
-      const client = await connectToDatabase();
+      const client = await mongoClientPromise;
       
       // Verify MongoClient was instantiated with correct URI
       expect(MongoClient).toHaveBeenCalledWith(
@@ -156,8 +163,8 @@ describe('MongoDB Utilities', () => {
     });
     
     it('returns the same client instance on subsequent calls', async () => {
-      const client1 = await connectToDatabase();
-      const client2 = await connectToDatabase();
+      const client1 = await mongoClientPromise;
+      const client2 = await mongoClientPromise;
       
       // Should be the same instance (singleton pattern)
       expect(client1).toBe(client2);
@@ -171,7 +178,7 @@ describe('MongoDB Utilities', () => {
       const mongoUri = process.env.MONGODB_URI;
       delete process.env.MONGODB_URI;
       
-      await expect(connectToDatabase()).rejects.toThrow(
+      await expect(mongoClientPromise).rejects.toThrow(
         'Please define the MONGODB_URI environment variable'
       );
       
@@ -182,7 +189,7 @@ describe('MongoDB Utilities', () => {
   
   describe('getCollection', () => {
     it('returns a collection from the database', async () => {
-      const client = await connectToDatabase();
+      const client = await mongoClientPromise;
       const collection = getCollection('users');
       
       // Verify client.db was called
@@ -209,7 +216,7 @@ describe('MongoDB Utilities', () => {
   
   describe('disconnectFromDatabase', () => {
     it('closes the database connection', async () => {
-      const client = await connectToDatabase();
+      const client = await mongoClientPromise;
       await disconnectFromDatabase();
       
       // Verify client.close was called

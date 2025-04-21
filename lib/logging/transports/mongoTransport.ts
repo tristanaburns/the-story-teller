@@ -1,18 +1,33 @@
 /**
  * mongoTransport.ts
  * 
- * A transport for storing logs in MongoDB
+ * MongoDB transport for the logger - stores logs in MongoDB for
+ * advanced querying, analysis, and long-term storage
  */
 
-import { MongoClient, Collection, Document } from 'mongodb';
+import { MongoClient, Collection, Db } from 'mongodb';
 import { LogLevel } from '../logger';
 
-// Interface for log entries stored in MongoDB
-export interface LogEntry extends Document {
+export interface MongoTransportOptions {
+  minLevel: LogLevel;
+  connectionString: string;
+  dbName: string;
+  collectionName: string;
+  batchSize: number;         // Number of logs to batch before writing
+  flushInterval: number;     // Milliseconds between forced flushes
+  maxRetries: number;        // Max retries for failed writes
+  retryInterval: number;     // Milliseconds between retries
+  maxQueueSize: number;      // Max logs to queue before dropping
+}
+
+/**
+ * Log entry for MongoDB
+ */
+export interface MongoLogEntry {
   timestamp: Date;
   level: string;
   message: string;
-  context: string;
+  context?: string;
   correlationId?: string;
   userId?: string;
   requestId?: string;
@@ -21,16 +36,7 @@ export interface LogEntry extends Document {
   path?: string;
   statusCode?: number;
   duration?: number;
-  environment: string;
-  appVersion?: string;
   mcpServer?: string;
-  data?: any;
-  error?: {
-    message: string;
-    stack?: string;
-    code?: string;
-    details?: any;
-  };
   clientInfo?: {
     ip?: string;
     userAgent?: string;
@@ -38,187 +44,271 @@ export interface LogEntry extends Document {
     os?: string;
   };
   metadata?: Record<string, any>;
-}
-
-// Options for MongoDB transport
-export interface MongoTransportOptions {
-  connectionString?: string;
-  dbName?: string;
-  collectionName?: string;
-  expireAfterSeconds?: number;
-  batchSize?: number;
-  flushInterval?: number;
-  minLevel?: LogLevel;
+  data?: any;
+  environment?: string;
+  appVersion?: string;
 }
 
 /**
- * A transport that stores logs in MongoDB
+ * Default options for the MongoDB transport
+ */
+const DEFAULT_OPTIONS: MongoTransportOptions = {
+  minLevel: LogLevel.INFO,
+  connectionString: '',
+  dbName: 'the_story_teller',
+  collectionName: 'logs',
+  batchSize: 10,
+  flushInterval: 5000, // 5 seconds
+  maxRetries: 3,
+  retryInterval: 1000, // 1 second
+  maxQueueSize: 1000
+};
+
+/**
+ * Transport for logging to MongoDB
  */
 export class MongoTransport {
-  private client: MongoClient | null = null;
-  private collection: Collection<LogEntry> | null = null;
   private options: MongoTransportOptions;
-  private logQueue: LogEntry[] = [];
-  private flushTimeout: NodeJS.Timeout | null = null;
-  private connected = false;
-  private connecting = false;
-
-  constructor(options: MongoTransportOptions) {
-    this.options = {
-      expireAfterSeconds: 30 * 24 * 60 * 60, // 30 days by default
-      batchSize: 10,
-      flushInterval: 5000, // 5 seconds
-      minLevel: LogLevel.INFO,
-      ...options
-    };
+  private client: MongoClient | null = null;
+  private db: Db | null = null;
+  private collection: Collection<MongoLogEntry> | null = null;
+  private queue: MongoLogEntry[] = [];
+  private isConnected: boolean = false;
+  private isConnecting: boolean = false;
+  private flushTimer: NodeJS.Timeout | null = null;
+  private isWriting: boolean = false;
+  
+  constructor(options: Partial<MongoTransportOptions> = {}) {
+    this.options = { ...DEFAULT_OPTIONS, ...options };
+    
+    // Start flush timer
+    this.startFlushTimer();
   }
-
+  
   /**
-   * Connect to MongoDB
+   * Connect to MongoDB if not already connected
    */
-  public async connect(): Promise<void> {
-    if (this.connected || this.connecting) {
+  async connect(): Promise<void> {
+    if (this.isConnected || this.isConnecting) {
       return;
     }
-
-    // Skip if connection string is missing
+    
+    // Validate connection string
     if (!this.options.connectionString) {
-      console.warn('MongoDB connection string is missing for logging');
-      return;
+      throw new Error('MongoDB connection string is required');
     }
-
-    this.connecting = true;
-
+    
+    this.isConnecting = true;
+    
     try {
-      this.client = new MongoClient(this.options.connectionString);
+      // Connect to MongoDB
+      this.client = new MongoClient(this.options.connectionString, {
+        // Add connection options if needed
+      });
+      
       await this.client.connect();
-
-      const dbName = this.options.dbName || 'logs';
-      const collectionName = this.options.collectionName || 'logs';
       
-      const db = this.client.db(dbName);
-      this.collection = db.collection<LogEntry>(collectionName);
-
-      // Create TTL index if it doesn't exist
-      if (this.options.expireAfterSeconds) {
-        await this.collection.createIndex(
-          { timestamp: 1 },
-          { 
-            expireAfterSeconds: this.options.expireAfterSeconds,
-            background: true 
-          }
-        );
-      }
-
-      // Create indexes for common queries
-      await this.collection.createIndex({ level: 1 });
-      await this.collection.createIndex({ context: 1 });
-      await this.collection.createIndex({ correlationId: 1 });
-      await this.collection.createIndex({ userId: 1 });
-      await this.collection.createIndex({ requestId: 1 });
-      await this.collection.createIndex({ timestamp: 1 });
-
-      this.connected = true;
-      this.connecting = false;
-
-      // Start flushing logs periodically
-      this.startFlushInterval();
+      // Get database and collection
+      this.db = this.client.db(this.options.dbName);
+      this.collection = this.db.collection<MongoLogEntry>(this.options.collectionName);
+      
+      // Set up indexes
+      await this.setupIndexes();
+      
+      this.isConnected = true;
+      this.isConnecting = false;
+      
+      // Flush any queued logs
+      this.flush().catch(error => {
+        console.error('Failed to flush logs after connection:', error);
+      });
     } catch (error) {
-      this.connecting = false;
-      console.error('Failed to connect to MongoDB for logging:', error);
-      
-      // Try to reconnect after a delay
-      setTimeout(() => this.connect(), 10000);
+      this.isConnecting = false;
+      throw error;
     }
   }
-
+  
   /**
-   * Start the flush interval
+   * Set up indexes for the logs collection
    */
-  private startFlushInterval(): void {
-    if (this.flushTimeout) {
-      clearInterval(this.flushTimeout);
-    }
-
-    this.flushTimeout = setInterval(
-      () => this.flush(),
-      this.options.flushInterval
-    );
-  }
-
-  /**
-   * Log an entry
-   */
-  public async log(entry: Partial<LogEntry>): Promise<void> {
-    // Add timestamp
-    const logEntry: LogEntry = {
-      timestamp: new Date(),
-      level: 'info', // Default level
-      message: '', // Default message
-      context: '', // Default context
-      environment: process.env.NODE_ENV || 'development',
-      appVersion: process.env.APP_VERSION || '1.0.0',
-      ...entry
-    };
-
-    // Add to queue
-    this.logQueue.push(logEntry);
-
-    // Connect if not already connected
-    if (!this.connected && !this.connecting) {
-      this.connect();
-    }
-
-    // Flush if batch size reached
-    if (this.logQueue.length >= this.options.batchSize!) {
-      this.flush();
-    }
-  }
-
-  /**
-   * Flush queued logs to MongoDB
-   */
-  public async flush(): Promise<void> {
-    if (!this.connected || this.logQueue.length === 0) {
+  private async setupIndexes(): Promise<void> {
+    if (!this.collection) {
       return;
     }
-
-    const logs = [...this.logQueue];
-    this.logQueue = [];
-
+    
     try {
+      // Create indexes for commonly queried fields
+      await this.collection.createIndexes([
+        { key: { timestamp: 1 }, name: 'timestamp_index' },
+        { key: { level: 1 }, name: 'level_index' },
+        { key: { correlationId: 1 }, name: 'correlationId_index' },
+        { key: { userId: 1 }, name: 'userId_index' },
+        { key: { requestId: 1 }, name: 'requestId_index' },
+        { key: { 'clientInfo.ip': 1 }, name: 'clientIp_index' },
+        // Compound indexes for common queries
+        { key: { timestamp: 1, level: 1 }, name: 'timestamp_level_index' },
+        { key: { userId: 1, timestamp: 1 }, name: 'userId_timestamp_index' },
+        // Text index for searching
+        { 
+          key: { message: 'text', component: 'text', method: 'text', path: 'text' },
+          name: 'text_search_index' 
+        }
+      ]);
+    } catch (error) {
+      console.error('Failed to create MongoDB indexes:', error);
+    }
+  }
+  
+  /**
+   * Log a message to MongoDB
+   */
+  async log(logEntry: Omit<MongoLogEntry, 'timestamp'>): Promise<void> {
+    // Skip if this log level is below the minimum configured level
+    if (LogLevel[logEntry.level as keyof typeof LogLevel] < this.options.minLevel) {
+      return;
+    }
+    
+    // Prepare log entry
+    const entry: MongoLogEntry = {
+      ...logEntry,
+      timestamp: new Date()
+    };
+    
+    // Add to queue
+    this.queue.push(entry);
+    
+    // Drop oldest logs if queue is too large
+    if (this.queue.length > this.options.maxQueueSize) {
+      this.queue.splice(0, this.queue.length - this.options.maxQueueSize);
+    }
+    
+    // Flush immediately if batch size is reached
+    if (this.queue.length >= this.options.batchSize) {
+      this.flush().catch(error => {
+        console.error('Failed to flush logs:', error);
+      });
+    }
+  }
+  
+  /**
+   * Flush all queued logs to MongoDB
+   */
+  async flush(): Promise<void> {
+    // Skip if no logs to flush or already writing
+    if (this.queue.length === 0 || this.isWriting) {
+      return;
+    }
+    
+    // Mark as writing
+    this.isWriting = true;
+    
+    try {
+      // Connect if not connected
+      if (!this.isConnected) {
+        await this.connect();
+      }
+      
+      // Get the logs to flush
+      const logsToFlush = [...this.queue];
+      this.queue = [];
+      
+      // Write to MongoDB
       if (this.collection) {
-        await this.collection.insertMany(logs, { ordered: false });
+        await this.writeToMongo(logsToFlush);
+      } else {
+        // If collection not available, put logs back in queue
+        this.queue = [...logsToFlush, ...this.queue];
       }
     } catch (error) {
-      console.error('Failed to write logs to MongoDB:', error);
+      console.error('Failed to flush logs to MongoDB:', error);
       
       // Put logs back in queue
-      this.logQueue = [...logs, ...this.logQueue];
+      this.queue = [...this.queue];
+    } finally {
+      this.isWriting = false;
     }
   }
-
+  
   /**
-   * Close the MongoDB connection
+   * Write logs to MongoDB with retries
    */
-  public async close(): Promise<void> {
+  private async writeToMongo(logs: MongoLogEntry[]): Promise<void> {
+    if (!this.collection || logs.length === 0) {
+      return;
+    }
+    
+    let retries = 0;
+    
+    while (retries <= this.options.maxRetries) {
+      try {
+        // Insert logs
+        await this.collection.insertMany(logs, { ordered: false });
+        return;
+      } catch (error) {
+        retries++;
+        
+        if (retries > this.options.maxRetries) {
+          throw error;
+        }
+        
+        // Wait before retrying
+        await new Promise<void>(resolve => {
+          setTimeout(resolve, this.options.retryInterval);
+        });
+      }
+    }
+  }
+  
+  /**
+   * Start the flush timer
+   */
+  private startFlushTimer(): void {
+    if (this.flushTimer) {
+      clearInterval(this.flushTimer);
+    }
+    
+    this.flushTimer = setInterval(() => {
+      this.flush().catch(error => {
+        console.error('Failed to flush logs on interval:', error);
+      });
+    }, this.options.flushInterval);
+  }
+  
+  /**
+   * Update the transport options
+   */
+  updateOptions(options: Partial<MongoTransportOptions>): void {
+    const oldInterval = this.options.flushInterval;
+    
+    // Update options
+    this.options = { ...this.options, ...options };
+    
+    // Restart flush timer if interval changed
+    if (oldInterval !== this.options.flushInterval) {
+      this.startFlushTimer();
+    }
+  }
+  
+  /**
+   * Close the transport and clean up resources
+   */
+  async close(): Promise<void> {
+    // Clear flush timer
+    if (this.flushTimer) {
+      clearInterval(this.flushTimer);
+      this.flushTimer = null;
+    }
+    
     // Flush any remaining logs
     await this.flush();
-
-    // Clear the flush interval
-    if (this.flushTimeout) {
-      clearInterval(this.flushTimeout);
-      this.flushTimeout = null;
-    }
-
-    // Close the connection
+    
+    // Close MongoDB connection
     if (this.client) {
       await this.client.close();
       this.client = null;
+      this.db = null;
       this.collection = null;
-      this.connected = false;
+      this.isConnected = false;
     }
   }
 }
-
-export default MongoTransport;

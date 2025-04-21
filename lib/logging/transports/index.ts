@@ -1,9 +1,9 @@
 /**
- * Transports index file
+ * index.ts
  * 
- * Re-exports all logging transports for easy imports
+ * Exports all transport classes for the logger
  */
 
-export { MongoTransport, type MongoTransportOptions, type LogEntry } from './mongoTransport';
-export { FileTransport, type FileTransportOptions } from './fileTransport';
-export { ConsoleTransport, type ConsoleTransportOptions } from './consoleTransport';
+export * from './consoleTransport';
+export * from './fileTransport';
+export * from './mongoTransport';

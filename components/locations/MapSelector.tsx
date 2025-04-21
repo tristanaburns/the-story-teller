@@ -6,7 +6,10 @@ import { Loader2 } from 'lucide-react';
 interface MapSelectorProps {
   initialLat?: number;
   initialLng?: number;
-  onSelectLocation: (lat: number, lng: number, address?: string) => void;
+  onSelectLocation?: (lat: number, lng: number, address?: string) => void;
+  
+  initialPosition?: [number, number];
+  onPositionChange?: (position: [number, number]) => void;
 }
 
 /**
@@ -16,15 +19,30 @@ interface MapSelectorProps {
 export default function MapSelector({ 
   initialLat, 
   initialLng, 
-  onSelectLocation 
+  onSelectLocation,
+  initialPosition,
+  onPositionChange
 }: MapSelectorProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
   // Default coordinates (centered on US if no initial coordinates)
-  const defaultLat = initialLat || 40.7128;
-  const defaultLng = initialLng || -74.0060;
+  // Use initialPosition if provided (for test compatibility)
+  const defaultLat = initialLat || (initialPosition ? initialPosition[0] : 40.7128);
+  const defaultLng = initialLng || (initialPosition ? initialPosition[1] : -74.0060);
+  
+  // Handle map selection
+  const handleMapSelection = (lat: number, lng: number, address?: string) => {
+    // Support both callback patterns
+    if (onSelectLocation) {
+      onSelectLocation(lat, lng, address);
+    }
+    
+    if (onPositionChange) {
+      onPositionChange([lat, lng]);
+    }
+  };
   
   useEffect(() => {
     // Dynamic import to avoid SSR issues with Leaflet
@@ -51,6 +69,8 @@ export default function MapSelector({
         let marker: L.Marker | null = null;
         if (initialLat && initialLng) {
           marker = L.marker([initialLat, initialLng]).addTo(map);
+        } else if (initialPosition) {
+          marker = L.marker(initialPosition).addTo(map);
         }
         
         // Handle map click
@@ -74,13 +94,13 @@ export default function MapSelector({
             if (response.ok) {
               const data = await response.json();
               const address = data.display_name;
-              onSelectLocation(lat, lng, address);
+              handleMapSelection(lat, lng, address);
             } else {
-              onSelectLocation(lat, lng);
+              handleMapSelection(lat, lng);
             }
           } catch (error) {
             console.error('Error reverse geocoding:', error);
-            onSelectLocation(lat, lng);
+            handleMapSelection(lat, lng);
           }
         });
         
@@ -102,7 +122,7 @@ export default function MapSelector({
     };
     
     initializeMap();
-  }, [defaultLat, defaultLng, initialLat, initialLng, onSelectLocation]);
+  }, [defaultLat, defaultLng, initialLat, initialLng, initialPosition]);
   
   if (error) {
     return (
@@ -128,6 +148,7 @@ export default function MapSelector({
         ref={mapRef} 
         className="h-full w-full rounded-md" 
         style={{ minHeight: '400px' }}
+        data-testid="map-container"
       />
       <div className="absolute bottom-4 left-4 right-4 bg-background/90 p-2 rounded-md text-xs text-muted-foreground">
         Click anywhere on the map to select a location.

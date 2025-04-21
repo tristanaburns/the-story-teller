@@ -1,43 +1,76 @@
-const nextJest = require('next/jest');
-
-const createJestConfig = nextJest({
-  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-  dir: './',
-});
-
-// Add any custom config to be passed to Jest
-const customJestConfig = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  testEnvironment: 'jest-environment-jsdom',
+/** @type {import('jest').Config} */
+const config = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
   moduleNameMapper: {
-    // Handle module aliases
-    '^@/components/(.*)$': '<rootDir>/components/$1',
-    '^@/lib/(.*)$': '<rootDir>/lib/$1',
-    '^@/types/(.*)$': '<rootDir>/types/$1',
-    '^@/app/(.*)$': '<rootDir>/app/$1',
+    '^@/(.*)$': '<rootDir>/$1',
   },
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/', '<rootDir>/mcp-servers/'],
-  collectCoverage: true,
+  transform: {
+    '^.+\\.(ts|tsx)$': ['ts-jest', {
+      tsconfig: 'tsconfig.jest.json',
+    }],
+  },
+  setupFilesAfterEnv: ['<rootDir>/__tests__/setup.ts'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/.next/',
+    '<rootDir>/mcp-servers/node_modules/',
+  ],
   collectCoverageFrom: [
-    '**/*.{js,jsx,ts,tsx}',
-    '!**/*.d.ts',
+    'app/api/**/*.ts',
+    'lib/**/*.ts',
+    'lib/**/*.tsx',
+    'components/**/*.tsx',
+    'app/**/*.tsx',
+    '!app/layout.tsx',  // Next.js files that have minimal testable logic
+    '!app/page.tsx',
+    '!app/**/_*.tsx',   // Next.js special files
+    '!**/*.d.ts',       // Type declaration files
     '!**/node_modules/**',
     '!**/.next/**',
-    '!**/coverage/**',
-    '!jest.config.js',
-    '!jest.setup.js',
-    '!next.config.js',
-    '!**/mcp-servers/**',
   ],
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
-      statements: 70,
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
+    },
+  },
+  coverageReporters: ['text', 'lcov', 'html'],
+  testMatch: [
+    '<rootDir>/__tests__/**/*.test.ts',
+    '<rootDir>/__tests__/**/*.test.tsx',
+  ],
+  // Enable verbose output for better debugging
+  verbose: true,
+  // Fail tests on uncovered lines when running in CI
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
+    },
+  },
+  // Allow individual files to have different coverage requirements
+  // Temporarily allow some files to have lower coverage while we work on them
+  coverageThreshold: {
+    global: {
+      branches: 90,   // Start with 90% and gradually increase to 100%
+      functions: 90,
+      lines: 90,
+      statements: 90,
+    },
+    // Example of specific file coverage requirements
+    "./lib/utils/**/*.ts": {
+      branches: 100,   // Critical utility functions must have 100% coverage
+      functions: 100,
+      lines: 100,
+      statements: 100,
     },
   },
 };
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-module.exports = createJestConfig(customJestConfig); 
+module.exports = config;

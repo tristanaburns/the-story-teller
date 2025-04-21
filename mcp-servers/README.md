@@ -44,6 +44,45 @@ This directory contains Model Context Protocol (MCP) servers used by The Story T
   - Performance monitoring
   - Schema evolution management
 
+## MCP Server Directory Structure
+
+### Naming Convention Standards
+
+All MCP servers must follow the standardized naming convention pattern:
+```
+{service-name}-{platform}
+```
+
+Where:
+- `service-name` identifies the MCP service functionality (e.g., memory, everart)
+- `platform` identifies the implementation technology (e.g., nest for NestJS)
+
+### Standardized Implementations
+
+The following are the official MCP server implementations:
+
+| Service Name | Platform | Directory | Status |
+|--------------|----------|-----------|--------|
+| memory | nest | memory-nest | Active |
+| everart | nest | everart-nest | Active |
+| sequential-thinking | nest | sequential-thinking-nest | Active |
+| mongodb-atlas | nest | mongodb-atlas-nest | Active |
+
+### Legacy Directories
+
+The duplicate directories have been removed from the codebase. The standard NestJS implementations are now the only active versions.
+
+### Migration Plan
+
+The following steps have been completed:
+1. ✅ Rename `sequential-thinking` to `sequential-thinking-nest`
+2. ✅ Rename `mongodb-atlas` to `mongodb-atlas-nest` 
+3. ✅ Remove duplicate implementations
+
+The following steps still need to be completed:
+1. Update references to these servers in the application code
+2. Update documentation throughout the project to reflect these changes
+
 ## Setup Instructions
 
 Each MCP server is designed to run as a standalone service. Follow these steps to set up and run an MCP server:

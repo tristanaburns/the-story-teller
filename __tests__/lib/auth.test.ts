@@ -95,7 +95,7 @@ describe('Auth Configuration', () => {
     const result = await sessionCallback?.({ session, user } as any);
     
     // Verify user ID was added to session
-    expect(result.user).toEqual({
+    expect(result?.user).toEqual({
       name: 'Test User',
       id: 'user-123',
     });
