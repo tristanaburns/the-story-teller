@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Story } from '@/types';
+import { Story } from '@/types/models';
 
 export default function StoryPage({ params }: { params: { storyId: string } }) {
   const { data: session, status } = useSession();

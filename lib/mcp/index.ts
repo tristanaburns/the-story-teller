@@ -99,7 +99,11 @@ export function configureMCPServers(config: Partial<MCPServerRegistry>): void {
  * Get MCP server configuration
  */
 export function getMCPServerConfig(serverId: keyof MCPServerRegistry): MCPServerConfig {
-  return mcpServers[serverId];
+  const server = mcpServers[serverId];
+  if (!server) {
+    throw new Error(`Unknown MCP server "${String(serverId)}"`);
+  }
+  return server;
 }
 
 /**
@@ -113,7 +117,7 @@ export async function sendMCPRequest<T extends MCPRequest, R extends MCPResponse
   const endpoint = server.endpoints[request.action];
 
   if (!endpoint) {
-    throw new Error(`Unknown action "${request.action}" for server "${serverId}"`);
+    throw new Error(`Unknown action "${request.action}" for server "${String(serverId)}"`);
   }
 
   const url = `${server.baseUrl}${endpoint}`;
@@ -180,7 +184,7 @@ export async function sendMCPRequest<T extends MCPRequest, R extends MCPResponse
   // Set up timeout
   const timeoutPromise = new Promise<R>((_, reject) => {
     setTimeout(() => {
-      reject(new Error(`Request to MCP server "${serverId}" timed out after ${server.timeout}ms`));
+      reject(new Error(`Request to MCP server "${String(serverId)}" timed out after ${server.timeout}ms`));
     }, server.timeout);
   });
 

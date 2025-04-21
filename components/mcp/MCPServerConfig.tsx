@@ -16,7 +16,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Loader, ServerOff, Server, Check, X, XCircle, ServerCrash, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { Loader2, Plus, Trash, Edit } from 'lucide-react';
+import { Loader2, Plus, Trash, Edit, Pencil, Trash2 } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -281,7 +281,12 @@ export default function MCPServerConfig({ initialConfigs = {} }: MCPServerConfig
 
   // Open the edit dialog for a server
   const editServer = (type: ServiceType, id: string) => {
-    const typeConfigs = configs[type] || [];
+    // Get all configs with the specified service type
+    const typeConfigs = Object.values(configs).filter(
+      config => config.service_type === type
+    );
+    
+    // Find the specific config by ID
     const serverConfig = typeConfigs.find(config => config.id === id);
     
     if (serverConfig) {
@@ -542,46 +547,43 @@ interface ServerConfigItemProps {
 }
 
 function ServerConfigItem({ config, type, onToggle, onEdit, onRemove }: ServerConfigItemProps) {
+  // Ensure we have a string ID (empty string fallback if undefined)
+  const serverId = config.id || '';
+  
   return (
-    <Card>
-      <CardContent className="p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex-1">
-            <h4 className="font-medium">{config.name}</h4>
-            <p className="text-sm text-muted-foreground truncate">{config.url}</p>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <div className="flex items-center space-x-2">
-              <Label htmlFor={`enabled-${config.id}`} className="text-sm">
-                {config.enabled ? 'Enabled' : 'Disabled'}
-              </Label>
-              <Switch
-                id={`enabled-${config.id}`}
-                checked={config.enabled}
-                onCheckedChange={() => onToggle(type, config.id)}
-              />
-            </div>
-            
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onEdit(type, config.id)}
-            >
-              <Edit className="h-4 w-4" />
-            </Button>
-            
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onRemove(type, config.id)}
-            >
-              <Trash className="h-4 w-4 text-destructive" />
-            </Button>
-          </div>
+    <div className="flex items-center justify-between px-4 py-2 border-b last:border-0">
+      <div className="flex items-center space-x-4">
+        <Switch 
+          id={`toggle-${serverId}`}
+          checked={!!config.enabled}
+          onCheckedChange={() => onToggle(type, serverId)}
+        />
+        <div>
+          <p className="font-medium">{config.name || config.url || 'Unnamed server'}</p>
+          <p className="text-sm text-muted-foreground">{config.description || ''}</p>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+      
+      <div className="flex items-center space-x-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => onEdit(type, serverId)}
+        >
+          <Pencil className="h-4 w-4" />
+          <span className="sr-only">Edit</span>
+        </Button>
+        
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => onRemove(type, serverId)}
+        >
+          <Trash2 className="h-4 w-4" />
+          <span className="sr-only">Delete</span>
+        </Button>
+      </div>
+    </div>
   );
 }
 

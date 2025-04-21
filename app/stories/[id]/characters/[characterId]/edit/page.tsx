@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import CharacterForm from '@/components/characters/CharacterForm';
-import { Character, Story, RelatedCharacter } from '@/types';
+import { Character, Story, RelatedCharacter } from '@/types/models';
 
 export default function EditCharacterPage({ params }: { params: { id: string; characterId: string } }) {
   const router = useRouter();

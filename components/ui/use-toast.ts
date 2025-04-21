@@ -1,18 +1,16 @@
 // Adapted from https://ui.shadcn.com/docs/components/toast
-import { useToast as useSonnerToast } from "@/components/ui/sonner";
+import { toast as sonnerToast } from "sonner";
 
 export function useToast() {
-  const { toast } = useSonnerToast();
-
   return {
     toast: (options: any) => {
-      return toast(options.title, {
+      return sonnerToast(options.title, {
         description: options.description,
-        variant: options.variant,
         duration: options.duration || 3000,
       });
     },
   };
 }
 
-export { toast } from "@/components/ui/sonner"; 
+// Re-export the toast function from sonner
+export const toast = sonnerToast; 

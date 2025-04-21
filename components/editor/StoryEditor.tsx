@@ -1,9 +1,17 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Save, AlertCircle } from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
 import ContentEditor from './ContentEditor';
-import SchemaIntegration from './SchemaIntegration';
+import EnhancedSchemaIntegration from './EnhancedSchemaIntegration';
+import { 
+  Character, 
+  Location, 
+  TimelineEvent, 
+  SchemaEntityReference, 
+  EnhancedSchemaIntegrationProps 
+} from './schema-integration-types';
 
 interface ContentSection {
   id: string;
@@ -23,33 +31,6 @@ interface StoryMetadata {
   timeframe?: string;
   pov?: 'first_person' | 'second_person' | 'third_person_limited' | 'third_person_omniscient';
   [key: string]: any;
-}
-
-interface Character {
-  _id: string;
-  name: string;
-  type?: string;
-  description?: string;
-}
-
-interface Location {
-  _id: string;
-  name: string;
-  description?: string;
-}
-
-interface TimelineEvent {
-  _id: string;
-  name: string;
-  date?: string;
-  description?: string;
-}
-
-interface SchemaEntityReference {
-  type: 'character' | 'location' | 'event';
-  id: string;
-  name: string;
-  displayMode?: 'mention' | 'detail' | 'summary';
 }
 
 interface StoryEditorProps {
@@ -105,35 +86,61 @@ export default function StoryEditor({
   /**
    * Load entities (characters, locations, events) for the schema integration panel
    */
-  const loadEntities = async (type: string) => {
+  const loadEntities = async (type: string): Promise<Character[] | Location[] | TimelineEvent[]> => {
     try {
-      // Convert string type to the expected type for API call
-      const entityType = type as 'character' | 'location' | 'event';
+      let endpoint = '';
       
-      const response = await fetch(`/api/stories/${storyId}/${entityType}s`);
+      switch (type) {
+        case 'character':
+          endpoint = `/api/stories/${storyId}/characters`;
+          
+          if (characters.length > 0) {
+            return characters;
+          }
+          break;
+        case 'location':
+          endpoint = `/api/stories/${storyId}/locations`;
+          
+          if (locations.length > 0) {
+            return locations;
+          }
+          break;
+        case 'event':
+          endpoint = `/api/stories/${storyId}/timeline`;
+          
+          if (events.length > 0) {
+            return events;
+          }
+          break;
+        default:
+          console.error(`Unknown entity type: ${type}`);
+          return [];
+      }
+      
+      const response = await fetch(endpoint);
       
       if (!response.ok) {
-        throw new Error(`Failed to load ${entityType}s`);
+        throw new Error(`Failed to load ${type}s`);
       }
       
       const data = await response.json();
       
-      switch (entityType) {
-        case 'character':
-          setCharacters(data);
-          break;
-        case 'location':
-          setLocations(data);
-          break;
-        case 'event':
-          setEvents(data);
-          break;
+      // Update the appropriate state
+      if (type === 'character') {
+        setCharacters(data.characters || []);
+        return data.characters || [];
+      } else if (type === 'location') {
+        setLocations(data.locations || []);
+        return data.locations || [];
+      } else if (type === 'event') {
+        setEvents(data.events || []);
+        return data.events || [];
       }
+      
+      return [];
     } catch (error) {
-      console.error(`Error loading entities: ${error instanceof Error ? error.message : String(error)}`);
-      if (onError) {
-        onError(`Failed to load story elements. Please try again.`);
-      }
+      console.error(`Error loading ${type}s:`, error);
+      return [];
     }
   };
   
@@ -261,7 +268,7 @@ export default function StoryEditor({
       {/* Schema Integration */}
       {!readOnly && (
         <div>
-          <SchemaIntegration
+          <EnhancedSchemaIntegration
             storyId={storyId}
             characters={characters}
             locations={locations}

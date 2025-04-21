@@ -7,7 +7,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { MCPServerRegistry } from '@/types/mcp';
 import { defaultMCPServers } from '@/lib/mcp';
 
 interface MCPServerStatusProps {
@@ -20,6 +19,13 @@ interface ServerStatus {
   status: 'online' | 'offline' | 'error' | 'unknown';
   message?: string;
   latency?: number;
+}
+
+// Define an interface for the server objects
+interface MCPServer {
+  id: string;
+  name: string;
+  baseUrl: string;
 }
 
 export default function MCPServerStatus({ className = '' }: MCPServerStatusProps) {
@@ -48,8 +54,9 @@ export default function MCPServerStatus({ className = '' }: MCPServerStatusProps
 
   useEffect(() => {
     const checkServerStatus = async () => {
-      const servers = Object.values(defaultMCPServers);
-      const statusPromises = servers.map(async (server) => {
+      // Cast to array of MCPServer to provide proper typing
+      const servers = Object.values(defaultMCPServers) as MCPServer[];
+      const statusPromises = servers.map(async (server: MCPServer) => {
         const startTime = performance.now();
         try {
           const response = await fetch(`${server.baseUrl}/health`, {

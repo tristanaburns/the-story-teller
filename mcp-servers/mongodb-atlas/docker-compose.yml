@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  mongodb-atlas-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build
+    container_name: mongodb-atlas-mcp
+    ports:
+      - "3004:3004"
+    environment:
+      - NODE_ENV=development
+      - PORT=3004
+      - MONGODB_URI=mongodb://mongodb:27017/mongodb-atlas-mcp
+      - MONGODB_DB_NAME=mongodb-atlas-mcp
+      - API_KEY_REQUIRED=false
+      - API_KEY=development-api-key
+      - LOG_LEVEL=debug
+    volumes:
+      - ./src:/app/src
+      - ./test:/app/test
+    command: npm run start:dev
+    depends_on:
+      - mongodb
+    networks:
+      - mcp-network
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - mcp-network
+
+networks:
+  mcp-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import CharacterForm from '@/components/characters/CharacterForm';
-import { Character, Story, RelatedCharacter } from '@/types';
+import { Character, Story, RelatedCharacter } from '@/types/models';
 
 export default function EditCharacterPage({ params }: { params: { id: string[] } }) {
   const { data: session, status } = useSession();

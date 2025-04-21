@@ -6,7 +6,7 @@
  */
 
 // Service Types
-export type ServiceType = 'story-generation' | 'character-creation' | 'memory' | 'reasoning' | 'planning';
+export type ServiceType = 'story-generation' | 'character-creation' | 'memory' | 'reasoning' | 'planning' | 'database' | 'everart' | 'thinking';
 
 // Server Status Types
 export type ServerStatus = 'online' | 'offline' | 'error' | 'busy' | 'maintenance';
@@ -25,6 +25,22 @@ export interface ServerConfig {
   priority: number;
   apiKey?: string;
   metadata: ServerMetadata;
+}
+
+/**
+ * Extended Server Configuration with endpoints
+ */
+export interface MCPServerConfig {
+  id: string;
+  name: string;
+  description?: string;
+  version: string;
+  baseUrl: string;
+  endpoints: Record<string, string>; 
+  timeout: number;
+  retryCount: number;
+  retryDelay: number;
+  apiKey?: string;
 }
 
 /**
@@ -53,6 +69,7 @@ export interface BaseMCPRequest<T = unknown> {
   serverId: string;
   action: string;
   payload: T;
+  userId?: string;
   requestId: string;
   timestamp: number;
 }
@@ -401,3 +418,91 @@ export interface PlanningResponsePayload {
   twists?: string[];
   characterSuggestions?: CharacterCreationResponsePayload[];
 }
+
+// Type aliases for specific service requests and responses
+export type MCPRequest<T = unknown> = BaseMCPRequest<T>;
+export type MCPResponse<T = unknown> = BaseMCPResponse<T>;
+
+// Memory service types
+export type MemoryMCPRequest = BaseMCPRequest<MemoryPayload>;
+export type MemoryMCPResponse = BaseMCPResponse<MemoryResponsePayload>;
+
+// Database service types
+export type DatabaseMCPRequest = BaseMCPRequest<DatabasePayload>;
+export type DatabaseMCPResponse = BaseMCPResponse<DatabaseResponsePayload>;
+
+// Thinking service types
+export type ThinkingMCPRequest = BaseMCPRequest<ThinkingPayload>;
+export type ThinkingMCPResponse = BaseMCPResponse<ThinkingResponsePayload>;
+
+// Art service types
+export type EverartMCPRequest = BaseMCPRequest<ArtPayload>;
+export type EverartMCPResponse = BaseMCPResponse<ArtResponsePayload>;
+
+// Simple database payload type
+export interface DatabasePayload {
+  collection?: string;
+  operation?: 'find' | 'findOne' | 'insertOne' | 'updateOne' | 'deleteOne';
+  query?: Record<string, any>;
+  update?: Record<string, any>;
+  options?: Record<string, any>;
+  document?: Record<string, any>;
+}
+
+// Database response payload
+export interface DatabaseResponsePayload {
+  result?: any;
+  count?: number;
+  error?: string;
+}
+
+// Thinking payload
+export interface ThinkingPayload {
+  prompt?: string;
+  context?: string;
+  options?: GenerationOptions;
+}
+
+// Thinking response payload
+export interface ThinkingResponsePayload {
+  thought?: string;
+  analysis?: string;
+  reasoning?: string[];
+}
+
+/**
+ * Art payload interface for Everart MCP server
+ */
+export interface ArtPayload {
+  prompt?: string;
+  style?: string;
+  size?: string;
+  artId?: string;
+  storyId?: string;
+  artType?: 'character' | 'location' | 'scene' | 'item';
+  query?: string;
+  metadata?: Record<string, any>;
+  negative_prompt?: string;
+  options?: Record<string, any>;
+}
+
+// Art generation response payload
+export interface ArtResponsePayload {
+  imageUrl?: string;
+  alt?: string;
+  metadata?: Record<string, any>;
+}
+
+/**
+ * MCP Server Registry
+ */
+export interface MCPServerRegistry {
+  memory?: MCPServerConfig;
+  everart?: MCPServerConfig;
+  thinking?: MCPServerConfig;
+  database?: MCPServerConfig;
+  [key: string]: MCPServerConfig | undefined;
+}
+
+// Re-export MCPServerConfig as ServerConfig alias for backward compatibility
+// export type MCPServerConfig = ServerConfig;

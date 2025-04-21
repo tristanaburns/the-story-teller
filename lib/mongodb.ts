@@ -4,7 +4,7 @@
  * A MongoDB client wrapper with integrated logging
  */
 
-import { MongoClient, Db, Collection } from 'mongodb';
+import { MongoClient, Db, Collection, Document } from 'mongodb';
 import { createLogger, DbOperation, logDbOperation } from './logging';
 
 // MongoDB connection string from environment variables
@@ -76,7 +76,7 @@ export async function getClient(): Promise<MongoClient> {
   client.on('serverClosed', () => {
     logger.info('MongoDB server connection closed');
     client = null;
-    clientPromise = null;
+    clientPromise = null as unknown as Promise<MongoClient>;
   });
   
   client.on('error', (error) => {
@@ -97,7 +97,7 @@ export async function getDb(): Promise<Db> {
 /**
  * Get a MongoDB collection with logging wrapper
  */
-export async function getCollection<T>(collectionName: string): Promise<LoggedCollection<T>> {
+export async function getCollection<T extends Document>(collectionName: string): Promise<LoggedCollection<T>> {
   const db = await getDb();
   const collection = db.collection<T>(collectionName);
   
@@ -111,7 +111,7 @@ export async function getCollection<T>(collectionName: string): Promise<LoggedCo
 /**
  * A wrapper for MongoDB collections that adds logging
  */
-class LoggedCollection<T> {
+class LoggedCollection<T extends Document> {
   private collection: Collection<T>;
   private collectionName: string;
   private logger: any;
@@ -126,142 +126,429 @@ class LoggedCollection<T> {
    * Find documents with logging
    */
   async find(filter: any = {}, options: any = {}): Promise<T[]> {
-    return logDbOperation(
-      DbOperation.FIND,
-      this.collectionName,
-      { filter, options },
-      async () => {
-        const result = await this.collection.find(filter, options).toArray();
-        return result;
-      }
-    );
+    const operation = DbOperation.FIND;
+    const collection = this.collectionName;
+    const query = { filter, options };
+    // Using a different approach to log instead of calling logDbOperation
+    // Start timing
+    const startTime = performance.now();
+    
+    try {
+      // Log the operation start with sanitized query
+      this.logger.debug(`${operation} started`, {
+        collection,
+        operation,
+        query
+      });
+      
+      // Execute the database operation directly
+      const result = await this.collection.find(filter, options).toArray();
+      
+      // Calculate duration
+      const duration = performance.now() - startTime;
+      
+      // Log the operation completion
+      this.logger.debug(
+        `${operation} completed in ${duration.toFixed(2)}ms`,
+        {
+          collection,
+          operation,
+          duration,
+          documentCount: result.length
+        }
+      );
+      
+      // Return as T[] with correct type assertion
+      return result as unknown as T[];
+    } catch (error) {
+      // Calculate duration
+      const duration = performance.now() - startTime;
+      
+      // Log the error
+      this.logger.error(`${operation} failed after ${duration.toFixed(2)}ms`, {
+        error,
+        collection,
+        operation,
+        duration,
+        query
+      });
+      
+      // Re-throw the error
+      throw error;
+    }
   }
   
   /**
    * Find a single document with logging
    */
   async findOne(filter: any = {}, options: any = {}): Promise<T | null> {
-    return logDbOperation(
-      DbOperation.FIND_ONE,
-      this.collectionName,
-      { filter, options },
-      async () => {
-        const result = await this.collection.findOne(filter, options);
-        return result;
-      }
-    );
+    const operation = DbOperation.FIND_ONE;
+    const collection = this.collectionName;
+    const query = { filter, options };
+    const startTime = performance.now();
+    
+    try {
+      this.logger.debug(`${operation} started`, {
+        collection,
+        operation,
+        query
+      });
+      
+      const result = await this.collection.findOne(filter, options);
+      
+      const duration = performance.now() - startTime;
+      
+      this.logger.debug(
+        `${operation} completed in ${duration.toFixed(2)}ms`,
+        {
+          collection,
+          operation,
+          duration,
+          documentCount: result ? 1 : 0
+        }
+      );
+      
+      return result as unknown as T | null;
+    } catch (error) {
+      const duration = performance.now() - startTime;
+      
+      this.logger.error(`${operation} failed after ${duration.toFixed(2)}ms`, {
+        error,
+        collection,
+        operation,
+        duration,
+        query
+      });
+      
+      throw error;
+    }
   }
   
   /**
    * Insert a document with logging
    */
   async insertOne(document: any): Promise<any> {
-    return logDbOperation(
-      DbOperation.INSERT,
-      this.collectionName,
-      { document },
-      async () => {
-        const result = await this.collection.insertOne(document);
-        return result;
-      }
-    );
+    const operation = DbOperation.INSERT;
+    const collection = this.collectionName;
+    const startTime = performance.now();
+    
+    try {
+      this.logger.debug(`${operation} started`, {
+        collection,
+        operation
+      });
+      
+      const result = await this.collection.insertOne(document);
+      
+      const duration = performance.now() - startTime;
+      
+      this.logger.debug(
+        `${operation} completed in ${duration.toFixed(2)}ms`,
+        {
+          collection,
+          operation,
+          duration,
+          documentCount: 1
+        }
+      );
+      
+      return result;
+    } catch (error) {
+      const duration = performance.now() - startTime;
+      
+      this.logger.error(`${operation} failed after ${duration.toFixed(2)}ms`, {
+        error,
+        collection,
+        operation,
+        duration
+      });
+      
+      throw error;
+    }
   }
   
   /**
    * Insert multiple documents with logging
    */
   async insertMany(documents: any[]): Promise<any> {
-    return logDbOperation(
-      DbOperation.INSERT,
-      this.collectionName,
-      { count: documents.length },
-      async () => {
-        const result = await this.collection.insertMany(documents);
-        return result;
-      }
-    );
+    const operation = DbOperation.INSERT;
+    const collection = this.collectionName;
+    const count = documents.length;
+    const startTime = performance.now();
+    
+    try {
+      this.logger.debug(`${operation} started`, {
+        collection,
+        operation,
+        count
+      });
+      
+      const result = await this.collection.insertMany(documents);
+      
+      const duration = performance.now() - startTime;
+      
+      this.logger.debug(
+        `${operation} completed in ${duration.toFixed(2)}ms`,
+        {
+          collection,
+          operation,
+          duration,
+          documentCount: count
+        }
+      );
+      
+      return result;
+    } catch (error) {
+      const duration = performance.now() - startTime;
+      
+      this.logger.error(`${operation} failed after ${duration.toFixed(2)}ms`, {
+        error,
+        collection,
+        operation,
+        duration,
+        count
+      });
+      
+      throw error;
+    }
   }
   
   /**
    * Update a document with logging
    */
   async updateOne(filter: any, update: any, options: any = {}): Promise<any> {
-    return logDbOperation(
-      DbOperation.UPDATE,
-      this.collectionName,
-      { filter, update, options },
-      async () => {
-        const result = await this.collection.updateOne(filter, update, options);
-        return result;
-      }
-    );
+    const operation = DbOperation.UPDATE;
+    const collection = this.collectionName;
+    const query = { filter, update, options };
+    const startTime = performance.now();
+    
+    try {
+      this.logger.debug(`${operation} started`, {
+        collection,
+        operation,
+        query
+      });
+      
+      const result = await this.collection.updateOne(filter, update, options);
+      
+      const duration = performance.now() - startTime;
+      
+      this.logger.debug(
+        `${operation} completed in ${duration.toFixed(2)}ms`,
+        {
+          collection,
+          operation,
+          duration,
+          modifiedCount: result.modifiedCount,
+          matchedCount: result.matchedCount
+        }
+      );
+      
+      return result;
+    } catch (error) {
+      const duration = performance.now() - startTime;
+      
+      this.logger.error(`${operation} failed after ${duration.toFixed(2)}ms`, {
+        error,
+        collection,
+        operation,
+        duration,
+        query
+      });
+      
+      throw error;
+    }
   }
   
   /**
    * Update multiple documents with logging
    */
   async updateMany(filter: any, update: any, options: any = {}): Promise<any> {
-    return logDbOperation(
-      DbOperation.UPDATE,
-      this.collectionName,
-      { filter, update, options },
-      async () => {
-        const result = await this.collection.updateMany(filter, update, options);
-        return result;
-      }
-    );
+    const operation = DbOperation.UPDATE;
+    const collection = this.collectionName;
+    const query = { filter, update, options };
+    const startTime = performance.now();
+    
+    try {
+      this.logger.debug(`${operation} started`, {
+        collection,
+        operation,
+        query
+      });
+      
+      const result = await this.collection.updateMany(filter, update, options);
+      
+      const duration = performance.now() - startTime;
+      
+      this.logger.debug(
+        `${operation} completed in ${duration.toFixed(2)}ms`,
+        {
+          collection,
+          operation,
+          duration,
+          modifiedCount: result.modifiedCount,
+          matchedCount: result.matchedCount
+        }
+      );
+      
+      return result;
+    } catch (error) {
+      const duration = performance.now() - startTime;
+      
+      this.logger.error(`${operation} failed after ${duration.toFixed(2)}ms`, {
+        error,
+        collection,
+        operation,
+        duration,
+        query
+      });
+      
+      throw error;
+    }
   }
   
   /**
    * Delete a document with logging
    */
   async deleteOne(filter: any, options: any = {}): Promise<any> {
-    return logDbOperation(
-      DbOperation.DELETE,
-      this.collectionName,
-      { filter, options },
-      async () => {
-        const result = await this.collection.deleteOne(filter, options);
-        return result;
-      }
-    );
+    const operation = DbOperation.DELETE;
+    const collection = this.collectionName;
+    const query = { filter, options };
+    const startTime = performance.now();
+    
+    try {
+      this.logger.debug(`${operation} started`, {
+        collection,
+        operation,
+        query
+      });
+      
+      const result = await this.collection.deleteOne(filter, options);
+      
+      const duration = performance.now() - startTime;
+      
+      this.logger.debug(
+        `${operation} completed in ${duration.toFixed(2)}ms`,
+        {
+          collection,
+          operation,
+          duration,
+          deletedCount: result.deletedCount
+        }
+      );
+      
+      return result;
+    } catch (error) {
+      const duration = performance.now() - startTime;
+      
+      this.logger.error(`${operation} failed after ${duration.toFixed(2)}ms`, {
+        error,
+        collection,
+        operation,
+        duration,
+        query
+      });
+      
+      throw error;
+    }
   }
   
   /**
    * Delete multiple documents with logging
    */
   async deleteMany(filter: any, options: any = {}): Promise<any> {
-    return logDbOperation(
-      DbOperation.DELETE,
-      this.collectionName,
-      { filter, options },
-      async () => {
-        const result = await this.collection.deleteMany(filter, options);
-        return result;
-      }
-    );
+    const operation = DbOperation.DELETE;
+    const collection = this.collectionName;
+    const query = { filter, options };
+    const startTime = performance.now();
+    
+    try {
+      this.logger.debug(`${operation} started`, {
+        collection,
+        operation,
+        query
+      });
+      
+      const result = await this.collection.deleteMany(filter, options);
+      
+      const duration = performance.now() - startTime;
+      
+      this.logger.debug(
+        `${operation} completed in ${duration.toFixed(2)}ms`,
+        {
+          collection,
+          operation,
+          duration,
+          deletedCount: result.deletedCount
+        }
+      );
+      
+      return result;
+    } catch (error) {
+      const duration = performance.now() - startTime;
+      
+      this.logger.error(`${operation} failed after ${duration.toFixed(2)}ms`, {
+        error,
+        collection,
+        operation,
+        duration,
+        query
+      });
+      
+      throw error;
+    }
   }
   
   /**
    * Aggregate with logging
    */
   async aggregate(pipeline: any[], options: any = {}): Promise<any[]> {
-    return logDbOperation(
-      DbOperation.AGGREGATE,
-      this.collectionName,
-      { pipeline, options },
-      async () => {
-        const result = await this.collection.aggregate(pipeline, options).toArray();
-        return result;
-      }
-    );
+    const operation = DbOperation.AGGREGATE;
+    const collection = this.collectionName;
+    const query = { pipeline, options };
+    const startTime = performance.now();
+    
+    try {
+      this.logger.debug(`${operation} started`, {
+        collection,
+        operation,
+        query
+      });
+      
+      const result = await this.collection.aggregate(pipeline, options).toArray();
+      
+      const duration = performance.now() - startTime;
+      
+      this.logger.debug(
+        `${operation} completed in ${duration.toFixed(2)}ms`,
+        {
+          collection,
+          operation,
+          duration,
+          documentCount: result.length
+        }
+      );
+      
+      return result;
+    } catch (error) {
+      const duration = performance.now() - startTime;
+      
+      this.logger.error(`${operation} failed after ${duration.toFixed(2)}ms`, {
+        error,
+        collection,
+        operation,
+        duration,
+        query
+      });
+      
+      throw error;
+    }
   }
   
   /**
-   * Get the native collection (for operations not covered by the wrapper)
+   * Get the native MongoDB collection object
    */
   getNativeCollection(): Collection<T> {
-    this.logger.debug('Getting native collection');
     return this.collection;
   }
 }
@@ -288,9 +575,32 @@ export async function closeConnection(): Promise<void> {
     throw error;
   } finally {
     client = null;
-    clientPromise = null;
+    clientPromise = null as unknown as Promise<MongoClient>;
   }
 }
 
 // Export the MongoDB client cache
 export { clientPromise };
+
+export async function disconnectFromDatabase(): Promise<void> {
+  if (client) {
+    await client.close();
+    client = null;
+    clientPromise = null as unknown as Promise<MongoClient>;
+    logger.info('Disconnected from MongoDB', { source: 'mongodb' });
+  }
+}
+
+// Add export for development testing
+if (process.env.NODE_ENV === 'development') {
+  process.on('SIGINT', async () => {
+    logger.info('Received SIGINT, closing MongoDB connection', { source: 'mongodb' });
+    if (client) {
+      await client.close();
+      client = null;
+      clientPromise = null as unknown as Promise<MongoClient>;
+      logger.info('Closed MongoDB connection', { source: 'mongodb' });
+    }
+    process.exit(0);
+  });
+}

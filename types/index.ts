@@ -1,8 +1,33 @@
 /**
- * Type exports for the application
- * 
- * This file re-exports types from across the application for easy access
+ * Main type definitions export file
+ * This file exports all types used throughout the application
  */
 
+// Import and explicitly export model types
+import type { Story, Character, RelatedCharacter } from './models';
+export type { Story, Character, RelatedCharacter };
+
+// Export remaining model types
 export * from './models';
-export * from './mcp'; 
+
+// Import all MCP types
+import * as MCPTypesImport from './mcp';
+
+// Re-export MCP types namespace
+export { MCPTypesImport as MCPTypes };
+
+// Re-export individual types from MCP that don't conflict with model types
+export type { 
+  BaseMCPRequest,
+  BaseMCPResponse,
+  ServerConfig,
+  ServerConfigs,
+  ServerMetadata,
+  ServiceType,
+  ServerStatus
+} from './mcp';
+
+// Export Next Auth types
+export * from './next-auth';
+
+// Add additional type exports here as needed 

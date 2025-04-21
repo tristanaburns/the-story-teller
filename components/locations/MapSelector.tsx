@@ -47,13 +47,15 @@ export default function MapSelector({
         }).addTo(map);
         
         // Add marker if initial coordinates exist
-        let marker: any = null;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let marker: L.Marker | null = null;
         if (initialLat && initialLng) {
           marker = L.marker([initialLat, initialLng]).addTo(map);
         }
         
         // Handle map click
-        map.on('click', async (e: any) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        map.on('click', async (e: L.LeafletMouseEvent) => {
           const { lat, lng } = e.latlng;
           
           // Update marker

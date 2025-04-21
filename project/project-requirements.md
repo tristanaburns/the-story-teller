@@ -563,6 +563,48 @@ The Story Teller is an advanced schema-driven web application designed to create
 }
 ```
 
+### DatabaseOperation Model
+
+```json
+{
+  "_id": "ObjectId",
+  "userId": "string",
+  "requestId": "string",
+  "responseId": "string",
+  "operationType": "enum: ['create', 'read', 'update', 'delete', 'query', 'schema', 'search']",
+  "databaseName": "string",
+  "collectionName": "string",
+  "query": "object?",
+  "data": "object?",
+  "result": "object?",
+  "executionTimeMs": "number?",
+  "isSuccessful": "boolean",
+  "errorMessage": "string?",
+  "timestamp": "number",
+  "createdAt": "datetime",
+  "updatedAt": "datetime"
+}
+```
+
+### SchemaDefinition Model
+
+```json
+{
+  "_id": "ObjectId",
+  "userId": "string",
+  "databaseName": "string",
+  "collectionName": "string",
+  "schema": "object",
+  "isActive": "boolean",
+  "validationErrors": ["string"],
+  "isDraft": "boolean",
+  "version": "number",
+  "description": "string?",
+  "createdAt": "datetime",
+  "updatedAt": "datetime"
+}
+```
+
 ### LogEntry Model
 
 ```json
@@ -711,10 +753,12 @@ The Story Teller is an advanced schema-driven web application designed to create
 - `GET /health` - Server health check
 - `POST /` - Main entry point for all MongoDB Atlas MCP operations
 - `POST /query` - Query documents
-- `POST /update` - Update documents
 - `POST /create` - Create documents
+- `POST /update` - Update documents
 - `POST /delete` - Delete documents
-- `POST /validate` - Validate documents against schemas
+- `POST /schema` - Manage collection schemas
+- `POST /search` - Text search across collections
+- `POST /execute` - Execute aggregation pipeline
 - `GET /logs` - Query server logs with filtering options
 - `POST /logs/config` - Update logging configuration
 
@@ -1044,8 +1088,24 @@ The Story Teller is an advanced schema-driven web application designed to create
   - ⏱️ Advanced reasoning patterns
   - ⏱️ UI integration components
 
-- 🔄 MongoDB Atlas MCP implementation
-  - 🔄 Comprehensive debug-level logging
+- ☑️ MongoDB Atlas MCP NestJS server implementation
+  - ☑️ MongoDB schemas for DatabaseOperation and SchemaDefinition
+  - ☑️ DTOs for request/response validation
+  - ☑️ API key authentication
+  - ☑️ Swagger API documentation
+  - ☑️ Repository pattern implementation
+  - ☑️ Query, create, update, and delete operations
+  - ☑️ Schema management and validation
+  - ☑️ Text search functionality
+  - ☑️ Aggregation pipeline execution
+  - ☑️ Error handling with filters
+  - ☑️ Docker containerization
+  - ☑️ Comprehensive debug-level logging
+  - ⏱️ Advanced schema-aware operations
+  - ⏱️ Complex query construction UI
+  - ⏱️ Performance monitoring dashboard
+  - ⏱️ Schema evolution management UI
+
 - 🔄 MCP API endpoints integration
   - 🔄 Comprehensive debug-level logging
 

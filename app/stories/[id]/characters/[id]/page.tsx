@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Character, Story, RelatedCharacter } from '@/types';
+import { Character, Story, RelatedCharacter } from '@/types/models';
 
 export default function CharacterPage({ params }: { params: { id: string[] } }) {
   const { data: session, status } = useSession();

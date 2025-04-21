@@ -37,41 +37,13 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-// Define the types for our entities and schema
-export interface EntityField {
-  id: string;
-  name: string;
-  type: string;
-  required: boolean;
-  description?: string;
-  options?: string[];
-}
-
-export interface Entity {
-  id: string;
-  name: string;
-  description: string;
-  fields: EntityField[];
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-export interface Schema {
-  id: string;
-  name: string;
-  description: string;
-  entities: Entity[];
-  isDefault?: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-interface SchemaIntegrationProps {
-  storyId?: string;
-  initialSchema?: Schema;
-  onSchemaChange?: (schema: Schema) => void;
-  readOnly?: boolean;
-}
+import {
+  Schema,
+  Entity,
+  EntityField,
+  EnhancedSchemaIntegrationProps,
+  SchemaIntegrationProps
+} from './schema-integration-types';
 
 export default function SchemaIntegration({
   storyId,

@@ -225,6 +225,7 @@ export default function CharacterForm({
               value={formData.name}
               onChange={handleChange}
               required
+              data-testid="name-input"
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
               placeholder="Character name"
             />
@@ -240,6 +241,7 @@ export default function CharacterForm({
               name="full_name"
               value={formData.full_name || ''}
               onChange={handleChange}
+              data-testid="full-name-input"
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
               placeholder="Complete name (if different)"
             />
@@ -256,6 +258,7 @@ export default function CharacterForm({
               name="type"
               value={formData.type || 'supporting'}
               onChange={handleChange}
+              data-testid="type-select"
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
             >
               <option value="protagonist">Protagonist</option>
@@ -274,6 +277,7 @@ export default function CharacterForm({
               name="status"
               value={formData.status || 'alive'}
               onChange={handleChange}
+              data-testid="status-select"
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
             >
               <option value="alive">Alive</option>
@@ -293,6 +297,7 @@ export default function CharacterForm({
             name="story_role"
             value={formData.story_role || ''}
             onChange={handleChange}
+            data-testid="story-role-input"
             className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
             placeholder="Character's role or function in the story"
           />
@@ -307,9 +312,10 @@ export default function CharacterForm({
             name="description"
             value={formData.description || ''}
             onChange={handleChange}
-            rows={4}
+            data-testid="description-input"
             className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
             placeholder="Brief character description"
+            rows={4}
           />
         </div>
       </div>
@@ -328,6 +334,7 @@ export default function CharacterForm({
               name="physical_appearance.height"
               value={formData.physical_appearance?.height || ''}
               onChange={handleChange}
+              data-testid="height-input"
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
               placeholder="Character's height"
             />
@@ -343,23 +350,25 @@ export default function CharacterForm({
               name="physical_appearance.build"
               value={formData.physical_appearance?.build || ''}
               onChange={handleChange}
+              data-testid="build-input"
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-              placeholder="Body type/build"
+              placeholder="Character's build (e.g., athletic, slim)"
             />
           </div>
         </div>
         
         <div className="mb-6">
           <label htmlFor="distinctive_features" className="block text-sm font-medium mb-2 text-gray-300">
-            Distinctive Features (comma separated)
+            Distinctive Features
           </label>
           <input
             type="text"
             id="distinctive_features"
             value={formData.physical_appearance?.distinctive_features?.join(', ') || ''}
             onChange={(e) => handleArrayChange(e, 'physical_appearance.distinctive_features')}
+            data-testid="distinctive-features-input"
             className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-            placeholder="Scars, tattoos, unique physical traits"
+            placeholder="Distinctive features separated by commas"
           />
         </div>
         
@@ -373,8 +382,9 @@ export default function CharacterForm({
             name="physical_appearance.typical_attire"
             value={formData.physical_appearance?.typical_attire || ''}
             onChange={handleChange}
+            data-testid="typical-attire-input"
             className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-            placeholder="Usual clothing or style"
+            placeholder="Character's typical clothing"
           />
         </div>
       </div>
@@ -384,43 +394,46 @@ export default function CharacterForm({
         
         <div className="mb-6">
           <label htmlFor="traits" className="block text-sm font-medium mb-2 text-gray-300">
-            Personality Traits (comma separated)
+            Personality Traits
           </label>
           <input
             type="text"
             id="traits"
             value={formData.personality?.traits?.join(', ') || ''}
             onChange={(e) => handleArrayChange(e, 'personality.traits')}
+            data-testid="traits-input"
             className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-            placeholder="Brave, cautious, impulsive, etc."
+            placeholder="Personality traits separated by commas"
           />
         </div>
         
         <div className="mb-6">
           <label htmlFor="values" className="block text-sm font-medium mb-2 text-gray-300">
-            Values (comma separated)
+            Values
           </label>
           <input
             type="text"
             id="values"
             value={formData.personality?.values?.join(', ') || ''}
             onChange={(e) => handleArrayChange(e, 'personality.values')}
+            data-testid="values-input"
             className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-            placeholder="Family, honor, wealth, freedom, etc."
+            placeholder="Character's values separated by commas"
           />
         </div>
         
         <div>
           <label htmlFor="motivations" className="block text-sm font-medium mb-2 text-gray-300">
-            Motivations (comma separated)
+            Motivations
           </label>
           <input
             type="text"
             id="motivations"
             value={formData.personality?.motivations?.join(', ') || ''}
             onChange={(e) => handleArrayChange(e, 'personality.motivations')}
+            data-testid="motivations-input"
             className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-            placeholder="Revenge, discovery, proving themselves, etc."
+            placeholder="Character's motivations separated by commas"
           />
         </div>
       </div>
@@ -439,8 +452,9 @@ export default function CharacterForm({
               name="background.birthplace"
               value={formData.background?.birthplace || ''}
               onChange={handleChange}
+              data-testid="birthplace-input"
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-              placeholder="Place of birth"
+              placeholder="Character's birthplace"
             />
           </div>
           
@@ -454,138 +468,139 @@ export default function CharacterForm({
               name="background.occupation"
               value={formData.background?.occupation || ''}
               onChange={handleChange}
+              data-testid="occupation-input"
               className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-              placeholder="Job or role in society"
+              placeholder="Character's occupation"
             />
           </div>
         </div>
         
         <div>
           <label htmlFor="significant_events" className="block text-sm font-medium mb-2 text-gray-300">
-            Significant Life Events (comma separated)
+            Significant Events
           </label>
-          <textarea
+          <input
+            type="text"
             id="significant_events"
             value={formData.background?.significant_events?.join(', ') || ''}
             onChange={(e) => handleArrayChange(e, 'background.significant_events')}
-            rows={3}
+            data-testid="significant-events-input"
             className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-            placeholder="Major events that shaped the character"
+            placeholder="Significant events in character's life (separated by commas)"
           />
         </div>
       </div>
       
       <div className="bg-gray-800/40 rounded-xl p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-white">Relationships</h2>
-          <button 
-            type="button"
-            onClick={addRelationship}
-            className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-lg transition-colors"
-          >
-            Add Relationship
-          </button>
-        </div>
+        <h2 className="text-xl font-bold mb-4 text-white">Relationships</h2>
         
-        {formData.relationships && formData.relationships.length > 0 ? (
-          <div className="space-y-4">
-            {formData.relationships.map((relationship, index) => (
-              <div key={index} className="bg-gray-700/50 p-4 rounded-lg">
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="font-medium text-white">Relationship #{index + 1}</h3>
-                  <button 
-                    type="button" 
-                    onClick={() => removeRelationship(index)}
-                    className="text-red-400 hover:text-red-300 text-sm"
-                  >
-                    Remove
-                  </button>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-300">
-                      Character
-                    </label>
-                    <select
-                      value={relationship.character_id}
-                      onChange={(e) => handleRelationshipChange(index, 'character_id', e.target.value)}
-                      className="w-full bg-gray-600 border border-gray-500 rounded-lg p-2 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-                    >
-                      <option value="">Select a character</option>
-                      {relatedCharacters.map(char => (
-                        <option key={char.id} value={char.id}>
-                          {char.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-300">
-                      Relationship Type
-                    </label>
-                    <select
-                      value={relationship.relationship_type}
-                      onChange={(e) => handleRelationshipChange(index, 'relationship_type', e.target.value)}
-                      className="w-full bg-gray-600 border border-gray-500 rounded-lg p-2 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-                    >
-                      <option value="family">Family</option>
-                      <option value="friend">Friend</option>
-                      <option value="enemy">Enemy</option>
-                      <option value="ally">Ally</option>
-                      <option value="rival">Rival</option>
-                      <option value="romantic">Romantic</option>
-                      <option value="professional">Professional</option>
-                      <option value="acquaintance">Acquaintance</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-300">
-                    Dynamics
-                  </label>
-                  <input
-                    type="text"
-                    value={relationship.dynamics || ''}
-                    onChange={(e) => handleRelationshipChange(index, 'dynamics', e.target.value)}
-                    className="w-full bg-gray-600 border border-gray-500 rounded-lg p-2 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-                    placeholder="Describe the dynamics of this relationship"
-                  />
-                </div>
-              </div>
-            ))}
+        {formData.relationships && formData.relationships.map((relationship, index) => (
+          <div key={index} className="mb-6 p-4 border border-gray-700 rounded-lg" data-testid={`relationship-${index}`}>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-medium text-white">Relationship #{index + 1}</h3>
+              <button
+                type="button"
+                onClick={() => removeRelationship(index)}
+                data-testid={`remove-relationship-${index}`}
+                className="text-sm text-red-400 hover:text-red-300"
+              >
+                Remove
+              </button>
+            </div>
+            
+            <div className="mb-4">
+              <label htmlFor={`relationship-character-${index}`} className="block text-sm font-medium mb-2 text-gray-300">
+                Character
+              </label>
+              <select
+                id={`relationship-character-${index}`}
+                value={relationship.character_id}
+                onChange={(e) => handleRelationshipChange(index, 'character_id', e.target.value)}
+                data-testid={`related-character-select-${index}`}
+                className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+              >
+                <option value="">Select a character</option>
+                {relatedCharacters.map((char) => (
+                  <option key={char._id} value={char._id}>
+                    {char.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            
+            <div className="mb-4">
+              <label htmlFor={`relationship-type-${index}`} className="block text-sm font-medium mb-2 text-gray-300">
+                Relationship Type
+              </label>
+              <select
+                id={`relationship-type-${index}`}
+                value={relationship.relationship_type}
+                onChange={(e) => handleRelationshipChange(index, 'relationship_type', e.target.value)}
+                data-testid={`relationship-type-select-${index}`}
+                className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+              >
+                <option value="friend">Friend</option>
+                <option value="family">Family</option>
+                <option value="ally">Ally</option>
+                <option value="enemy">Enemy</option>
+                <option value="rival">Rival</option>
+                <option value="lover">Lover</option>
+                <option value="mentor">Mentor</option>
+                <option value="student">Student</option>
+                <option value="colleague">Colleague</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div>
+              <label htmlFor={`relationship-dynamics-${index}`} className="block text-sm font-medium mb-2 text-gray-300">
+                Dynamics
+              </label>
+              <textarea
+                id={`relationship-dynamics-${index}`}
+                value={relationship.dynamics}
+                onChange={(e) => handleRelationshipChange(index, 'dynamics', e.target.value)}
+                data-testid={`relationship-dynamics-input-${index}`}
+                className="w-full bg-gray-700 border border-gray-600 rounded-lg p-3 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+                placeholder="Describe the relationship dynamics"
+                rows={3}
+              />
+            </div>
           </div>
-        ) : (
-          <div className="text-center py-8 text-gray-400">
-            <p>No relationships added yet.</p>
-            <p className="text-sm mt-2">Click &ldquo;Add Relationship&rdquo; to define connections with other characters.</p>
-          </div>
-        )}
+        ))}
+        
+        <button
+          type="button"
+          onClick={addRelationship}
+          data-testid="add-relationship-button"
+          className="mt-2 flex items-center text-blue-400 hover:text-blue-300"
+        >
+          <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          Add Relationship
+        </button>
       </div>
       
-      <div className="flex gap-4 justify-end">
+      <div className="flex justify-end">
         <Link
-          href={isEditing ? `/stories/${storyId}/characters/${character?._id}` : `/stories/${storyId}/characters`}
-          className="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors duration-200 font-medium"
+          href={`/stories/${storyId}/characters`}
+          className="mr-4 px-6 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
         >
           Cancel
         </Link>
-        
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200 font-medium flex items-center"
+          data-testid="submit-button"
+          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
-            <>
-              <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white mr-2"></div>
-              {isEditing ? 'Saving...' : 'Creating...'}
-            </>
+            'Saving...'
+          ) : isEditing ? (
+            'Save Changes'
           ) : (
-            isEditing ? 'Save Changes' : 'Create Character'
+            'Create Character'
           )}
         </button>
       </div>

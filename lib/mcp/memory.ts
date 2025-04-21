@@ -1,30 +1,37 @@
 /**
- * Memory MCP Client
+ * Memory MCP Utility
  * 
- * Utilities for interacting with the Memory MCP server.
+ * Functions for interacting with the Memory MCP Service.
  */
-
-import { sendMCPRequest } from './index';
 import { 
   MemoryMCPRequest,
   MemoryMCPResponse,
-  MemoryPayload,
-  Memory
+  Memory,
+  MemoryCriteria
 } from '../../types/mcp';
+import { sendMCPRequest } from './index';
 
 /**
- * Store a memory in the Memory MCP server
+ * Store a new memory
  */
 export async function storeMemory(
-  userId: string,
-  payload: Omit<MemoryPayload, 'memoryId'>
+  content: string,
+  contextId: string,
+  importance: number = 1,
+  tags: string[] = [],
+  metadata: Record<string, string | number | boolean> = {}
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory',
+    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
     {
-      action: 'store',
-      userId,
-      payload
+      action: 'store_memory',
+      payload: {
+        content,
+        importance,
+        tags,
+        metadata,
+        contextId
+      }
     }
   );
 }
@@ -33,87 +40,55 @@ export async function storeMemory(
  * Retrieve a specific memory by ID
  */
 export async function retrieveMemory(
-  userId: string,
   memoryId: string
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory',
+    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
     {
-      action: 'retrieve',
-      userId,
+      action: 'retrieve_memory',
       payload: {
-        memoryId
+        memory_id: memoryId
       }
     }
   );
 }
 
 /**
- * Search for memories based on query, tags, and timeframe
+ * Search for memories based on criteria
  */
 export async function searchMemories(
-  userId: string,
-  payload: {
-    storyId?: string;
-    contextId?: string;
-    query?: string;
-    tags?: string[];
-    timeframe?: {
-      start?: string;
-      end?: string;
-    };
-  }
+  criteria: MemoryCriteria,
+  limit: number = 10,
+  offset: number = 0
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory',
+    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
     {
-      action: 'search',
-      userId,
-      payload
+      action: 'search_memory',
+      payload: {
+        criteria,
+        limit,
+        offset
+      }
     }
   );
 }
 
 /**
- * Consolidate related memories to create a summary
+ * Update an existing memory
  */
-export async function consolidateMemories(
-  userId: string,
-  payload: {
-    storyId?: string;
-    contextId?: string;
-    memoryIds?: string[];
-    query?: string;
-  }
+export async function updateMemory(
+  memoryId: string,
+  updates: Partial<Memory>
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory',
+    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
     {
-      action: 'consolidate',
-      userId,
-      payload
-    }
-  );
-}
-
-/**
- * Rank memories by importance
- */
-export async function rankMemories(
-  userId: string,
-  payload: {
-    storyId?: string;
-    contextId?: string;
-    memoryIds?: string[];
-    query?: string;
-  }
-): Promise<MemoryMCPResponse> {
-  return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory',
-    {
-      action: 'rank',
-      userId,
-      payload
+      action: 'update_memory',
+      payload: {
+        memory_id: memoryId,
+        ...updates
+      }
     }
   );
 }
@@ -122,16 +97,33 @@ export async function rankMemories(
  * Delete a memory
  */
 export async function deleteMemory(
-  userId: string,
   memoryId: string
 ): Promise<MemoryMCPResponse> {
   return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
-    'memory',
+    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
     {
-      action: 'delete',
-      userId,
+      action: 'delete_memory',
       payload: {
-        memoryId
+        memory_id: memoryId
+      }
+    }
+  );
+}
+
+/**
+ * Consolidate memories into a summary
+ */
+export async function consolidateMemories(
+  contextId: string,
+  tags?: string[]
+): Promise<MemoryMCPResponse> {
+  return sendMCPRequest<MemoryMCPRequest, MemoryMCPResponse>(
+    'memory' as 'memory', // Type assertion to match keyof MCPServerRegistry
+    {
+      action: 'consolidate_memory',
+      payload: {
+        contextId,
+        tags
       }
     }
   );
