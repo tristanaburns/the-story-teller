@@ -7,9 +7,12 @@ When working on The Story Teller project, follow these guidelines to ensure prop
 1. **Read Project Structure**:
    - First, examine `C:\GitHub_Development\the-story-teller\README.md` for high-level overview
    - Then read `C:\GitHub_Development\the-story-teller\project\README.md` for implementation details
-   - Explore the `project/docs/` directory structure:
+   - **CRITICAL**: Read the consolidated documentation files:
+     - `project/project-plan.md` for the complete implementation plan
+     - `project/project-requirements.md` for comprehensive requirements
+   - Explore the `project/docs/` directory structure for detailed documentation:
      - `project/docs/index.md` for documentation organization
-     - `project/docs/plan/` for implementation plans and roadmaps
+     - `project/docs/plan/` for detailed implementation plans and roadmaps
      - `project/docs/structure/` for project structure documentation
      - `project/docs/architecture/` for architectural documentation
      - `project/docs/status/` for implementation status
@@ -21,6 +24,26 @@ When working on The Story Teller project, follow these guidelines to ensure prop
    - Examine `project/devlogs/DEVLOG.md` for the complete development timeline
    - Review entries in `project/devlogs/entries/` for detailed implementation logs
    - Look for items marked with 🔄 (in progress) or ⏱️ (planned) to identify current focus
+
+## Consolidated Documentation Preservation (MANDATORY)
+
+1. **DO NOT DELETE Consolidated Documentation**:
+   - `project/project-plan.md` and `project/project-requirements.md` are carefully consolidated reference documents
+   - They serve as high-level entry points to the detailed documentation
+   - They MUST NEVER be deleted, as documented in the devlog entry from 2025-04-23
+   - Their purpose is to improve accessibility and onboarding efficiency while preserving all detailed docs
+
+2. **Limited Modification Rules**:
+   - Only update specific sections in these files directly related to changes (status updates, etc.)
+   - Never remove or delete sections, especially unimplemented features
+   - When updating, follow the Documentation Integrity Guidelines in the files themselves
+   - Always preserve the structure, formatting, and organization of these documents
+   - Add information incrementally rather than replacing existing content
+
+3. **Documentation Consistency**:
+   - When updating detailed docs in project/docs/, also update the corresponding sections in the consolidated files
+   - Ensure consistency between consolidated docs and detailed docs
+   - Reference relationships must be maintained between these document sets
 
 ## Schema Integration Requirements
 
@@ -104,3 +127,21 @@ When working on The Story Teller project, follow these guidelines to ensure prop
    - Maintain consistent error handling and logging approaches
 
 When suggesting or implementing code, always refer back to these foundational principles and ensure your work aligns with the schema-driven architecture that defines The Story Teller project.
+
+## Documentation Consolidation Strategy
+
+Per the 2025-04-23 devlog entry on "Project Documentation Consolidation," The Story Teller project follows a dual documentation approach:
+
+1. **Consolidated Reference Documents** (`project-plan.md` and `project-requirements.md`):
+   - Provide high-level, comprehensive overviews
+   - Serve as entry points for new team members and stakeholders
+   - Act as integration points for all documentation
+   - MUST be preserved and properly maintained
+
+2. **Detailed Documentation** (in `project/docs/` subdirectories):
+   - Provides in-depth details for specific aspects
+   - Organized by functional area and purpose
+   - Contains authoritative implementation details
+   - MUST be preserved alongside the consolidated documents
+
+This strategy ensures both accessibility for new team members and depth for implementation, while maintaining the project's documentation integrity guidelines.
