@@ -1,81 +1,84 @@
-# The Story Teller: Architecture Documentation
+# Architecture Documentation
 
-This directory contains comprehensive documentation on the architecture of The Story Teller project, providing insights into system design, component interactions, and technical decisions.
+*Last Updated: 2025-04-22*
 
-## Purpose of Architecture Documentation
+This directory contains architecture documentation for The Story Teller project, detailing the system design, component relationships, and architectural decisions.
 
-Architecture documentation serves to:
+## Purpose
 
-- Establish a shared understanding of the system structure
-- Provide guidance for development and maintenance
-- Document significant design decisions and their rationales
-- Support onboarding for new developers
-- Create a reference for future system extensions
+The architecture documentation provides a high-level overview of The Story Teller system design, explaining the relationships between components, data flows, and design patterns used throughout the application.
 
-## Available Documents
+## Contents
 
-The following architectural documents are available:
+This directory contains:
 
-1. **Project Architecture Overview**: High-level description of the entire system
-2. **Component Diagrams**: Visual representations of system components and their interactions
-3. **Data Flow Diagrams**: Illustrations of how data moves through the system
-4. **API Specifications**: Details of internal and external APIs
-5. **Database Schema**: Structure of the database and entity relationships
-6. **Security Architecture**: Security mechanisms and considerations
-7. **Performance Considerations**: Design decisions related to system performance
-8. **Scalability Strategy**: Approaches for scaling the application
+- **Architecture Overview**: High-level description of the system architecture
+- **Component Architecture**: Details of major system components
+- **Data Flow Diagrams**: Visualizations of data movement through the system
+- **Technology Stack**: Documentation of technology choices
+- **Design Patterns**: Architectural patterns used in the implementation
+- **Security Architecture**: Security design and implementation
+- **Integration Points**: External system integrations
 
-## How to Use These Documents
+## Key Documents
 
-- **For New Developers**: Start with the Project Architecture Overview to get a holistic understanding
-- **For Feature Development**: Reference component diagrams and API specifications
-- **For Database Work**: Consult the database schema documentation
-- **For Technical Decisions**: Review existing patterns before implementing new solutions
+- [**Project Architecture Overview**](./project-architecture-overview.md): Comprehensive system architecture description
 
-## Architecture Documentation Standards
+## Architectural Principles
 
-Our documentation follows these standards:
+The Story Teller architecture follows these core principles:
 
-1. **Diagrams**: Created using standardized UML and C4 model notations
-2. **Technical Writing**: Clear, concise language with consistent terminology
-3. **Version Control**: All documents are versioned with change histories
-4. **Currency**: Documents are regularly reviewed and updated
+1. **Modularity**: System composed of loosely coupled, highly cohesive modules
+2. **Scalability**: Design that allows for growth in users and features
+3. **Maintainability**: Easy-to-understand and modify structure
+4. **Security**: Security by design throughout the architecture
+5. **Performance**: Optimized for responsive user experience
+6. **Testability**: Architecture that facilitates comprehensive testing
+7. **Accessibility**: Design that supports accessible implementation
 
-## Maintaining Architecture Documentation
+## Architecture Views
 
-When making architectural changes:
+The architecture is documented through multiple views:
 
-1. Update relevant documentation **before** implementing changes
-2. Include rationales for significant decisions
-3. Use diagrams to illustrate complex concepts
-4. Ensure consistency across documentation
-5. Add references to related codebase sections
+1. **Logical View**: Conceptual components and their relationships
+2. **Process View**: Runtime behavior and data flows
+3. **Development View**: Code organization and module structure
+4. **Physical View**: Deployment and infrastructure
+5. **Scenarios**: How the architecture supports key use cases
 
-## Architecture Principles
+## Architecture Decision Records
 
-These core principles guide our architectural decisions:
+Important architectural decisions are documented with:
 
-1. **Modularity**: System composed of loosely coupled components
-2. **Scalability**: Design to handle increasing load
-3. **Maintainability**: Architecture that supports long-term maintenance
-4. **Security by Design**: Security considerations integrated from the start
-5. **Performance Efficiency**: Optimized for resource utilization
+1. **Context**: Situation requiring a decision
+2. **Options**: Alternatives that were considered
+3. **Decision**: The chosen approach and justification
+4. **Consequences**: Resulting impacts, both positive and negative
+5. **Status**: Current status of the decision
 
-## Relation to Other Documentation
+## Using This Documentation
 
-Architecture documentation connects to:
+This architecture documentation should be used by:
 
-- **Codebase Documentation**: Providing implementation details for architectural concepts
-- **Development Logs**: Recording the evolution of architecture over time
-- **User Documentation**: Mapping user-facing features to system components
-- **Testing Documentation**: Informing test strategies for components
+- **Developers**: To understand system design and relationships
+- **Technical Leads**: For architectural governance and consistency
+- **New Team Members**: For onboarding and system understanding
+- **System Administrators**: To understand deployment architecture
+- **External Integrators**: To understand integration points
 
-## Reviewing Architecture
+## Document Maintenance
 
-Schedule regular architecture reviews to:
+Architecture documentation should be updated:
 
-1. Validate alignment with project goals
-2. Identify areas needing updates or improvements
-3. Ensure documentation reflects the current state
-4. Address emerging technical challenges
-5. Incorporate feedback from development experience 
+- When architectural decisions change
+- When new components are added
+- When component relationships change
+- When technology choices evolve
+- After architecture reviews and assessments
+
+## Related Documentation
+
+- **Technical Documentation**: For detailed implementation information
+- **API Documentation**: For service interface details
+- **Codebase Structure**: For code organization information
+- **Infrastructure Documentation**: For deployment details

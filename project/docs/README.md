@@ -1,45 +1,85 @@
-# The Story Teller: Documentation
+# Project Documentation
 
-This directory contains the comprehensive documentation for The Story Teller project. The documentation is organized into logical sections to make it easier to maintain and update.
+*Last Updated: 2025-04-22*
 
-## Documentation Structure
+This directory contains comprehensive documentation for The Story Teller project, covering all aspects of the project from architecture to user guides.
 
-The documentation is organized into the following directories:
+## Purpose
 
-- **plan/**: Project planning documents, implementation phases, and roadmaps
-- **structure/**: Project structure documentation, directory layouts, and component organization
-- **architecture/**: Technical architecture documentation, including frontend, backend, and database designs
-- **status/**: Implementation status tracking, covering completed, in-progress, and planned features
+The documentation directory serves as the central repository for all project-related documentation, providing team members and stakeholders with detailed information about the project's design, implementation, planning, and usage.
 
-## File Naming Convention
+## Documentation Categories
 
-All documentation files follow a consistent naming convention:
+The documentation is organized into these main categories:
 
-- **project-plan-\*.md**: Files related to project planning
-- **project-structure-\*.md**: Files related to project structure
-- **project-architecture-\*.md**: Files related to technical architecture
-- **project-status-\*.md**: Files related to implementation status
+1. **Architecture**: System design and component relationships
+2. **Codebase**: Technical implementation and code organization
+3. **Guidelines**: Development standards and best practices
+4. **Planning**: Project roadmap, sprints, and resource allocation
+5. **Status**: Current project progress and milestone tracking
+6. **Structure**: Code organization and file structure
+7. **Technical**: Detailed technical implementation information
+8. **User**: End-user documentation and guides
 
-## Documentation Access
+## Directory Structure
 
-The primary entry point to the documentation is the `index.md` file in this directory, which provides a comprehensive overview of all documentation files and their purposes.
+```
+docs/
+├── architecture/       # System architecture documentation
+├── codebase/           # Codebase implementation details
+├── guidelines/         # Development standards and practices
+├── planning/           # Project roadmap and planning
+├── status/             # Project status and progress tracking
+├── structure/          # Code organization and structure
+├── technical/          # Technical implementation details
+├── user/               # User-facing documentation
+├── README.md           # This overview document
+└── index.md            # Documentation portal starting point
+```
 
-## Updating Documentation
+## Documentation Standards
 
-When updating documentation:
+All documentation in this directory follows these standards:
 
-1. **Follow Existing Conventions**: Maintain consistent formats and naming conventions
-2. **Update Related Files**: If updating status information, ensure corresponding files are updated
-3. **Preserve Unimplemented Plans**: Never delete unimplemented items from planning documents
-4. **Include Last Updated Date**: Add or update the "Last Updated" timestamp at the top of edited files
-5. **Cross-Reference**: Use relative links to reference related documentation files
+1. **Markdown Format**: All documentation is written in Markdown
+2. **Date Stamping**: All documents include a "Last Updated" date
+3. **Clear Structure**: Consistent section organization
+4. **Cross-References**: Links to related documentation
+5. **Comprehensive Coverage**: Complete information on all aspects
+6. **Regular Updates**: Documentation is kept in sync with the project
 
-## Documentation Integrity Guidelines
+## Using This Documentation
 
-1. **Never Delete Unimplemented Items**: Plan items that have not yet been implemented must NEVER be deleted.
-2. **Limited-Scope Updates**: Only update sections directly related to your specific changes.
-3. **Preserve Project Roadmap**: The full project roadmap must be maintained regardless of implementation status.
-4. **Maintain Historical Context**: Previous planning decisions must be preserved for reference and continuity.
-5. **Incremental Updates Only**: Add new information incrementally rather than replacing existing content.
+This documentation is designed to be:
 
-These guidelines ensure that the documentation serves as both a current reference and a historical record of the project's evolution. 
+- **Navigable**: Easy to find specific information
+- **Comprehensive**: Covering all aspects of the project
+- **Current**: Regularly updated to reflect the project state
+- **Practical**: Focused on providing useful information
+- **Audience-Specific**: Tailored to the needs of different stakeholders
+
+## Documentation Maintenance
+
+The documentation is maintained through these processes:
+
+1. **Regular Reviews**: Scheduled documentation reviews
+2. **Update Requirements**: Documentation updates required for feature completion
+3. **Version Control**: Documentation changes tracked in version control
+4. **Ownership Assignment**: Specific responsibility for documentation areas
+5. **Feedback Incorporation**: User feedback on documentation quality
+
+## Getting Started
+
+New team members should start with:
+
+1. **Architecture Overview**: To understand the system design
+2. **Project Roadmap**: To understand the development timeline
+3. **Guidelines**: To understand development standards
+4. **Current Status**: To understand the project's current state
+
+## Related Resources
+
+- **Project Repository**: For code access and version control
+- **Issue Tracker**: For tracking bugs and feature requests
+- **Team Communication**: For discussions about the project
+- **CI/CD Pipeline**: For build and deployment information
