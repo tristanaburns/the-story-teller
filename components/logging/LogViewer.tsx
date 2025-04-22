@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { LogLevel } from '@/lib/logging/logger';
 import { clientLogger } from '@/lib/logging/client/clientLogger';
+import { LogEntry } from '@/lib/logging';
 import { 
   Card, 
   CardContent, 
@@ -64,34 +65,6 @@ import {
   DialogTrigger,
   DialogClose
 } from '@/components/ui/dialog';
-
-// Log entry interface
-interface LogEntry {
-  _id: string;
-  timestamp: string;
-  level: string;
-  message: string;
-  component?: string;
-  correlationId?: string;
-  userId?: string;
-  requestId?: string;
-  method?: string;
-  path?: string;
-  statusCode?: number;
-  duration?: number;
-  mcpServer?: string;
-  clientInfo?: {
-    ip?: string;
-    userAgent?: string;
-    browser?: string;
-    os?: string;
-  };
-  metadata?: Record<string, any>;
-  data?: any;
-  stackTrace?: string;
-  environment?: string;
-  appVersion?: string;
-}
 
 // Filter interface
 interface LogFilter {

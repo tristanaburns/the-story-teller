@@ -1,54 +1,29 @@
 /**
- * Auth.js v5 configuration
- * This file contains the main configuration for the authentication system
+ * auth.ts
  * 
+ * Root authentication file for Next.js 13+ compatibility
+ * Contains Auth.js v5 configuration and re-exports
+ * 
+ * IMPORTANT: This project uses Auth.js v5 (NextAuth v5) EXCLUSIVELY.
+ * Do NOT mix with v4 patterns or generic Auth.js implementations.
+ * 
+ * This file mimics the default Auth.js v5 installation pattern
+ * while using our organized directory structure internally
+ * 
+ * @version Auth.js v5
  * @see https://authjs.dev/guides/upgrade-to-v5
  */
+
 import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
-import GitHub from "next-auth/providers/github";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import { clientPromise } from '@/lib/mongodb';
-import { createUserDb } from '@/lib/user-db';
+import { authOptions } from "@/lib/auth";
 
-export const config = {
-  providers: [
-    Google({
-      clientId: process.env.AUTH_GOOGLE_ID || process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.AUTH_GOOGLE_SECRET || process.env.GOOGLE_CLIENT_SECRET || "",
-    }),
-    GitHub({
-      clientId: process.env.AUTH_GITHUB_ID || process.env.GITHUB_ID || "",
-      clientSecret: process.env.AUTH_GITHUB_SECRET || process.env.GITHUB_SECRET || "",
-    }),
-  ],
-  adapter: MongoDBAdapter(clientPromise),
-  callbacks: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async signIn({ user }: { user: any }) {
-      if (user.email) {
-        // Create a user-specific database when they first sign in
-        await createUserDb(user.id);
-      }
-      return true;
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    async session({ session, user }: { session: any, user: any }) {
-      // Add the user ID to the session object
-      if (session.user) {
-        session.user.id = user.id;
-      }
-      return session;
-    },
-  },
-  pages: {
-    signIn: '/auth/signin',
-  },
-};
+// Re-export everything from our auth modules
+export * from '@/lib/auth';
 
-export const { handlers, auth, signIn, signOut } = NextAuth(config);
+// Create and export Auth.js v5 handlers
+export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
 
-// Use the auth middleware to protect routes
+// Export auth middleware config for use with middleware.ts
 export const authConfig = {
   pages: {
     signIn: '/auth/signin',

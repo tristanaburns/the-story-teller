@@ -16,13 +16,21 @@ import { CreateThinkingDto } from './dto/create-thinking.dto';
 import { UpdateThinkingDto } from './dto/update-thinking.dto';
 import { ThinkingResponseDto } from './dto/thinking-response.dto';
 import { AuthGuard } from '../auth/guards/auth.guard';
+import { MCPLoggerService } from '../../../shared/logging';
+import { LogClass, LogMethod } from '../../../shared/logging/method-logger.decorator';
 
 @ApiTags('thinking')
 @ApiBearerAuth()
 @UseGuards(AuthGuard)
 @Controller('thinking')
+@LogClass({ level: 'debug', logParameters: true })
 export class ThinkingController {
-  constructor(private readonly thinkingService: ThinkingService) {}
+  constructor(
+    private readonly thinkingService: ThinkingService,
+    private readonly logger: MCPLoggerService
+  ) {
+    this.logger.setContext('ThinkingController');
+  }
 
   @Post()
   @ApiOperation({ summary: 'Create a new thinking process' })
@@ -40,6 +48,7 @@ export class ThinkingController {
     status: 401, 
     description: 'Unauthorized. Invalid API key.' 
   })
+  @LogMethod({ level: 'debug' })
   async createThinkingProcess(@Body() createThinkingDto: CreateThinkingDto): Promise<ThinkingResponseDto> {
     return this.thinkingService.createThinkingProcess(createThinkingDto);
   }
@@ -60,6 +69,7 @@ export class ThinkingController {
     status: 401, 
     description: 'Unauthorized. Invalid API key.' 
   })
+  @LogMethod({ level: 'debug' })
   async getThinkingProcess(@Param('processId') processId: string): Promise<ThinkingResponseDto> {
     return this.thinkingService.getThinkingProcess(processId);
   }
@@ -78,6 +88,7 @@ export class ThinkingController {
     status: 401, 
     description: 'Unauthorized. Invalid API key.' 
   })
+  @LogMethod({ level: 'debug' })
   async getThinkingProcessesByUserId(
     @Param('userId') userId: string,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
@@ -100,6 +111,7 @@ export class ThinkingController {
     status: 401, 
     description: 'Unauthorized. Invalid API key.' 
   })
+  @LogMethod({ level: 'debug' })
   async getThinkingProcessesByStoryId(
     @Param('storyId') storyId: string,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
@@ -129,6 +141,7 @@ export class ThinkingController {
     status: 401, 
     description: 'Unauthorized. Invalid API key.' 
   })
+  @LogMethod({ level: 'debug' })
   async updateThinkingProcess(
     @Param('processId') processId: string,
     @Body() updateThinkingDto: UpdateThinkingDto
@@ -152,6 +165,7 @@ export class ThinkingController {
     status: 401, 
     description: 'Unauthorized. Invalid API key.' 
   })
+  @LogMethod({ level: 'debug' })
   async deleteThinkingProcess(@Param('processId') processId: string): Promise<ThinkingResponseDto> {
     return this.thinkingService.deleteThinkingProcess(processId);
   }

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseGuards, Logger, HttpStatus, HttpCode } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, HttpStatus, HttpCode } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 import { MemoryService } from './memory.service';
 import { 
@@ -12,15 +12,21 @@ import {
   HealthCheckResponseDto
 } from './dto';
 import { ApiKeyGuard } from '../auth/api-key.guard';
+import { MCPLoggerService } from '../../../shared/logging';
+import { LogClass, LogMethod } from '../../../shared/logging/method-logger.decorator';
 
 @ApiTags('memory')
 @Controller()
 @UseGuards(ApiKeyGuard)
 @ApiBearerAuth()
+@LogClass({ level: 'debug', logParameters: true, logResult: true })
 export class MemoryController {
-  private readonly logger = new Logger(MemoryController.name);
-
-  constructor(private readonly memoryService: MemoryService) {}
+  constructor(
+    private readonly memoryService: MemoryService,
+    private readonly logger: MCPLoggerService
+  ) {
+    this.logger.setContext('MemoryController');
+  }
 
   @Get('health')
   @ApiOperation({ summary: 'Check server health' })

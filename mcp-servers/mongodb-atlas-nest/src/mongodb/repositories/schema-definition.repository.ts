@@ -1,17 +1,22 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { SchemaDefinition } from '../schemas/schema-definition.schema';
+import { MCPLoggerService } from '../../../../shared/logging';
+import { LogClass, LogMethod } from '../../../../shared/logging/method-logger.decorator';
 
 @Injectable()
+@LogClass({ level: 'debug', logParameters: true })
 export class SchemaDefinitionRepository {
-  private readonly logger = new Logger(SchemaDefinitionRepository.name);
-
   constructor(
     @InjectModel(SchemaDefinition.name)
     private readonly schemaDefinitionModel: Model<SchemaDefinition>,
-  ) {}
+    private readonly logger: MCPLoggerService
+  ) {
+    this.logger.setContext('SchemaDefinitionRepository');
+  }
 
+  @LogMethod({ level: 'debug' })
   async createOrUpdate(schemaDefinition: Partial<SchemaDefinition>): Promise<SchemaDefinition> {
     const { userId, databaseName, collectionName } = schemaDefinition;
     
@@ -61,6 +66,7 @@ export class SchemaDefinitionRepository {
     }
   }
 
+  @LogMethod({ level: 'debug' })
   async findByCollection(
     userId: string,
     databaseName: string,
@@ -80,6 +86,7 @@ export class SchemaDefinitionRepository {
     }).exec();
   }
 
+  @LogMethod({ level: 'debug' })
   async findAllByUserId(userId: string): Promise<SchemaDefinition[]> {
     this.logger.debug(`Finding all schema definitions for userId: ${userId}`);
     
@@ -89,6 +96,7 @@ export class SchemaDefinitionRepository {
       .exec();
   }
 
+  @LogMethod({ level: 'debug' })
   async deactivateSchema(
     userId: string,
     databaseName: string,
@@ -106,6 +114,7 @@ export class SchemaDefinitionRepository {
     return result.modifiedCount > 0;
   }
 
+  @LogMethod({ level: 'debug' })
   async validateDocumentAgainstSchema(
     userId: string,
     databaseName: string,

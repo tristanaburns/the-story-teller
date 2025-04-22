@@ -39,6 +39,7 @@ export interface LoggerConfig {
   userIdFn?: () => string | undefined;
   requestIdFn?: () => string | undefined;
   appVersion?: string;
+  logFunctionInputsOutputs: boolean;
 }
 
 // Context information for logs
@@ -52,6 +53,8 @@ export interface LogContext {
   path?: string;
   statusCode?: number;
   duration?: number;
+  functionParams?: any[];
+  functionResult?: any;
   clientInfo?: {
     ip?: string;
     userAgent?: string;
@@ -63,12 +66,12 @@ export interface LogContext {
 
 // Default configuration
 const defaultConfig: LoggerConfig = {
-  minLevel: process.env.NODE_ENV === 'production' ? LogLevel.INFO : LogLevel.DEBUG,
+  minLevel: LogLevel.DEBUG,
   includeTimestamp: true,
   includeContext: true,
   enableConsoleTransport: true,
-  enableFileTransport: process.env.NODE_ENV === 'production',
-  enableMongoTransport: process.env.NODE_ENV === 'production' && !!process.env.MONGODB_URI,
+  enableFileTransport: true,
+  enableMongoTransport: !!process.env.MONGODB_URI,
   consoleOptions: {},
   fileOptions: {},
   mongoOptions: {
@@ -79,7 +82,8 @@ const defaultConfig: LoggerConfig = {
   redactionPatterns: [
     /password/i, /token/i, /secret/i, /key/i, /auth/i, /cookie/i, /session/i
   ],
-  appVersion: process.env.APP_VERSION || '1.0.0'
+  appVersion: process.env.APP_VERSION || '1.0.0',
+  logFunctionInputsOutputs: true
 };
 
 // Global configuration that can be updated at runtime
@@ -183,7 +187,9 @@ export class Logger {
                           ('correlationId' in contextOrData || 
                            'userId' in contextOrData || 
                            'requestId' in contextOrData ||
-                           'component' in contextOrData);
+                           'component' in contextOrData ||
+                           'functionParams' in contextOrData ||
+                           'functionResult' in contextOrData);
     
     // Extract context and data
     const context: LogContext = isContextObject ? contextOrData : {};

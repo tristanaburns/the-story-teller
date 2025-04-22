@@ -1,4 +1,6 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { MCPLoggerService } from '../../../shared/logging';
+import { LogClass, LogMethod } from '../../../shared/logging/method-logger.decorator';
 import { ArtworkRepository } from './repositories/artwork.repository';
 import { StyleRepository } from './repositories/style.repository';
 import { 
@@ -11,20 +13,27 @@ import {
 } from './dto';
 
 @Injectable()
+@LogClass({ level: 'debug', logParameters: true })
 export class EverartService {
   constructor(
     private readonly artworkRepository: ArtworkRepository,
     private readonly styleRepository: StyleRepository,
+    private readonly logger: MCPLoggerService,
   ) {
+    this.logger.setContext('EverartService');
     // Initialize system styles
     this.initializeSystemStyles();
   }
 
+  @LogMethod({ level: 'debug' })
   private async initializeSystemStyles(): Promise<void> {
+    this.logger.info('Initializing system styles');
     await this.styleRepository.createSystemStyles();
+    this.logger.debug('System styles initialized');
   }
 
   // Artwork Methods
+  @LogMethod({ level: 'debug' })
   async generateArtwork(request: GenerateArtworkRequestDto): Promise<any> {
     const { 
       requestId, 
@@ -120,6 +129,7 @@ export class EverartService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async getArtwork(request: GetArtworkRequestDto): Promise<any> {
     const { requestId, artworkId } = request;
 
@@ -152,6 +162,7 @@ export class EverartService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async updateArtwork(request: UpdateArtworkRequestDto): Promise<any> {
     const { 
       requestId, 
@@ -190,6 +201,7 @@ export class EverartService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async deleteArtwork(artworkId: string, requestId: string): Promise<any> {
     const success = await this.artworkRepository.delete(artworkId);
     if (!success) {
@@ -204,6 +216,7 @@ export class EverartService {
   }
 
   // Style Methods
+  @LogMethod({ level: 'debug' })
   async createStyle(request: CreateStyleRequestDto): Promise<any> {
     const { 
       requestId, 
@@ -238,6 +251,7 @@ export class EverartService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async getStyles(request: GetStylesRequestDto): Promise<any> {
     const { requestId, styleId } = request;
 
@@ -264,6 +278,7 @@ export class EverartService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async updateStyle(request: UpdateStyleRequestDto): Promise<any> {
     const { 
       requestId, 
@@ -305,6 +320,7 @@ export class EverartService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async deleteStyle(styleId: string, requestId: string): Promise<any> {
     // Check if it's a system style
     const style = await this.styleRepository.findById(styleId);

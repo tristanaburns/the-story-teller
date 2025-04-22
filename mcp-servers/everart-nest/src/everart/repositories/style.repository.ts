@@ -3,12 +3,18 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Style, StyleDocument } from '../schemas/style.schema';
 import { GetStylesRequestDto, StyleScope } from '../dto/style.dto';
+import { MCPLoggerService } from '../../../../shared/logging';
+import { LogClass, LogMethod } from '../../../../shared/logging/method-logger.decorator';
 
 @Injectable()
+@LogClass({ level: 'debug', logParameters: true })
 export class StyleRepository {
   constructor(
     @InjectModel(Style.name) private styleModel: Model<StyleDocument>,
-  ) {}
+    private readonly logger: MCPLoggerService,
+  ) {
+    this.logger.setContext('StyleRepository');
+  }
 
   async create(style: Partial<Style>): Promise<Style> {
     const createdStyle = new this.styleModel(style);
@@ -105,12 +111,17 @@ export class StyleRepository {
       .exec();
   }
 
+  @LogMethod({ level: 'debug' })
   async createSystemStyles(): Promise<void> {
     // Check if we already have system styles
     const count = await this.styleModel.countDocuments({ isSystem: true }).exec();
-    if (count > 0) return;
+    if (count > 0) {
+      this.logger.debug(`System styles already exist (${count} styles found)`);
+      return;
+    }
 
-    // Create default system styles
+    this.logger.info('Creating default system styles');
+
     const defaultStyles = [
       {
         name: 'Default',
@@ -185,5 +196,6 @@ export class StyleRepository {
     ];
 
     await this.styleModel.insertMany(defaultStyles);
+    this.logger.info(`Created ${defaultStyles.length} system styles`);
   }
 }

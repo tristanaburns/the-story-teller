@@ -1,13 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { MCPLoggerService } from '../../../../shared/logging';
+import { LogClass, LogMethod } from '../../../../shared/logging/method-logger.decorator';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Memory } from '../schemas/memory.schema';
 
 @Injectable()
+@LogClass({ level: 'debug', logParameters: true, logResult: true })
 export class MemoryRepository {
   constructor(
     @InjectModel(Memory.name) private memoryModel: Model<Memory>,
-  ) {}
+    private logger: MCPLoggerService,
+  ) {
+    this.logger.setContext('MemoryRepository');
+  }
 
   async create(memoryData: Partial<Memory>): Promise<Memory> {
     const newMemory = new this.memoryModel(memoryData);

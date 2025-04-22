@@ -3,8 +3,7 @@
  */
 
 import { MongoClient, Collection, ObjectId } from 'mongodb';
-import { createLogger, LogMethod } from './logger';
-import { LogEntry, LogQueryParams, LogStatisticsSummary } from './types';
+import { createLogger, LogMethod, LogEntry, LogQueryParams, LogStatisticsSummary } from './index';
 
 // Initialize logger
 const logger = createLogger('LogQueryService');
@@ -359,6 +358,35 @@ class LogQueryService {
     } catch (error) {
       logger.error('Error retrieving log by ID', error);
       throw error;
+    }
+  }
+  
+  /**
+   * Get distinct values for a field
+   */
+  @LogMethod()
+  public async getDistinctValues(field: string): Promise<string[]> {
+    try {
+      if (!field) {
+        throw new Error('Field is required');
+      }
+      
+      const collection = await this.getCollection();
+      
+      logger.debug('Getting distinct values for field', { field });
+      
+      const values = await collection.distinct(field);
+      
+      logger.debug('Distinct values retrieved successfully', { 
+        field, 
+        count: values.length 
+      });
+      
+      return values.filter(Boolean) as string[];
+    } catch (error) {
+      logger.error('Error retrieving distinct values', { field, error });
+      // Return empty array on error instead of throwing
+      return [];
     }
   }
   

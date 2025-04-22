@@ -7,6 +7,7 @@
 
 import { MongoClient, Collection, Db } from 'mongodb';
 import { LogLevel } from '../logger';
+import { LogEntry } from '../types/common';
 
 export interface MongoTransportOptions {
   minLevel: LogLevel;
@@ -22,31 +23,10 @@ export interface MongoTransportOptions {
 
 /**
  * Log entry for MongoDB
+ * @deprecated Use LogEntry from '@/lib/logging/types/common' instead
  */
-export interface MongoLogEntry {
-  timestamp: Date;
-  level: string;
-  message: string;
-  context?: string;
-  correlationId?: string;
-  userId?: string;
-  requestId?: string;
-  component?: string;
-  method?: string;
-  path?: string;
-  statusCode?: number;
-  duration?: number;
-  mcpServer?: string;
-  clientInfo?: {
-    ip?: string;
-    userAgent?: string;
-    browser?: string;
-    os?: string;
-  };
-  metadata?: Record<string, any>;
-  data?: any;
-  environment?: string;
-  appVersion?: string;
+export interface MongoLogEntry extends LogEntry {
+  timestamp: Date; // Override timestamp to be Date type for MongoDB
 }
 
 /**

@@ -1,17 +1,22 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { DatabaseOperation, DatabaseOperationType } from '../schemas/database-operation.schema';
+import { MCPLoggerService } from '../../../../shared/logging';
+import { LogClass, LogMethod } from '../../../../shared/logging/method-logger.decorator';
 
 @Injectable()
+@LogClass({ level: 'debug', logParameters: true })
 export class DatabaseOperationRepository {
-  private readonly logger = new Logger(DatabaseOperationRepository.name);
-
   constructor(
     @InjectModel(DatabaseOperation.name)
     private readonly databaseOperationModel: Model<DatabaseOperation>,
-  ) {}
+    private readonly logger: MCPLoggerService
+  ) {
+    this.logger.setContext('DatabaseOperationRepository');
+  }
 
+  @LogMethod({ level: 'debug' })
   async create(databaseOperation: Partial<DatabaseOperation>): Promise<DatabaseOperation> {
     this.logger.debug(`Creating database operation record for ${databaseOperation.operationType}`, {
       userId: databaseOperation.userId,
@@ -25,11 +30,13 @@ export class DatabaseOperationRepository {
     return createdOperation.save();
   }
 
+  @LogMethod({ level: 'debug' })
   async findByRequestId(requestId: string): Promise<DatabaseOperation[]> {
     this.logger.debug(`Finding database operations by requestId: ${requestId}`);
     return this.databaseOperationModel.find({ requestId }).exec();
   }
 
+  @LogMethod({ level: 'debug' })
   async findByUserId(
     userId: string,
     limit: number = 100,
@@ -44,6 +51,7 @@ export class DatabaseOperationRepository {
       .exec();
   }
 
+  @LogMethod({ level: 'debug' })
   async findByUserIdAndOperationType(
     userId: string,
     operationType: DatabaseOperationType,
@@ -59,6 +67,7 @@ export class DatabaseOperationRepository {
       .exec();
   }
 
+  @LogMethod({ level: 'debug' })
   async findByCollection(
     userId: string,
     databaseName: string,
@@ -75,11 +84,13 @@ export class DatabaseOperationRepository {
       .exec();
   }
 
+  @LogMethod({ level: 'debug' })
   async countByUserId(userId: string): Promise<number> {
     this.logger.debug(`Counting database operations for userId: ${userId}`);
     return this.databaseOperationModel.countDocuments({ userId }).exec();
   }
 
+  @LogMethod({ level: 'debug' })
   async deleteOlderThan(userId: string, timestamp: number): Promise<number> {
     this.logger.debug(`Deleting operations older than ${new Date(timestamp).toISOString()} for userId: ${userId}`);
     const result = await this.databaseOperationModel

@@ -17,8 +17,7 @@ import {
   TabsTrigger,
   TabsContent
 } from '@/components/ui/tabs';
-import { LogEntry } from '@/lib/logging/types';
-import { createLogger } from '@/lib/logging';
+import { LogEntry, createLogger } from '@/lib/logging';
 
 // Initialize logger
 const logger = createLogger('LogDetailView');
@@ -28,6 +27,10 @@ interface LogDetailViewProps {
   onClose: () => void;
 }
 
+/**
+ * Component for displaying detailed log information
+ * Provides a tabbed interface to view different aspects of a log entry
+ */
 const LogDetailView: React.FC<LogDetailViewProps> = ({ log, onClose }) => {
   const [activeTab, setActiveTab] = useState<string>('overview');
   
@@ -52,23 +55,28 @@ const LogDetailView: React.FC<LogDetailViewProps> = ({ log, onClose }) => {
       const date = new Date(timestamp);
       return date.toLocaleString();
     } catch (error) {
+      logger.error('Error formatting date', { error, timestamp });
       return timestamp;
     }
   };
   
   // Handle follow correlation ID
   const handleFollowCorrelation = () => {
-    // Navigate to logs with this correlation ID
-    if (log.correlationId) {
-      // This would typically update the filters in the parent component
-      logger.debug('Following correlation ID', { correlationId: log.correlationId });
-      // For now, we'll just close this view since we don't have direct access to the filters
-      onClose();
+    try {
+      // Navigate to logs with this correlation ID
+      if (log.correlationId) {
+        // This would typically update the filters in the parent component
+        logger.debug('Following correlation ID', { correlationId: log.correlationId });
+        // For now, we'll just close this view since we don't have direct access to the filters
+        onClose();
+      }
+    } catch (error) {
+      logger.error('Error following correlation ID', { error, correlationId: log.correlationId });
     }
   };
   
   // Safely stringify object for display
-  const safeStringify = (obj: any): string => {
+  const safeStringify = (obj: unknown): string => {
     if (!obj) return 'null';
     
     try {
@@ -119,37 +127,34 @@ const LogDetailView: React.FC<LogDetailViewProps> = ({ log, onClose }) => {
               </div>
               <div>
                 <h3 className="text-sm font-semibold mb-1">Method</h3>
-                <p className="text-sm font-mono">{log.method || 'N/A'}</p>
+                <p className="text-sm font-mono">{log.context?.method || 'N/A'}</p>
               </div>
               <div>
                 <h3 className="text-sm font-semibold mb-1">Path</h3>
-                <p className="text-sm font-mono">{log.path || 'N/A'}</p>
+                <p className="text-sm font-mono">{log.context?.path || 'N/A'}</p>
               </div>
-              {log.statusCode && (
+              {log.context?.statusCode && (
                 <div>
                   <h3 className="text-sm font-semibold mb-1">Status Code</h3>
-                  <p className="text-sm">{log.statusCode}</p>
+                  <p className="text-sm">{log.context.statusCode}</p>
                 </div>
               )}
-              {log.duration && (
+              {log.context?.duration && (
                 <div>
                   <h3 className="text-sm font-semibold mb-1">Duration</h3>
-                  <p className="text-sm">{log.duration.toFixed(2)} ms</p>
+                  <p className="text-sm">{log.context.duration.toFixed(2)} ms</p>
                 </div>
               )}
             </div>
             
-            {log.error && (
+            {log.stackTrace && (
               <div className="mt-4">
                 <h3 className="text-sm font-semibold mb-1">Error Details</h3>
                 <div className="bg-red-50 dark:bg-red-950 p-4 rounded border border-red-200 dark:border-red-800">
-                  <p className="font-semibold text-red-600 dark:text-red-400">{log.error.name || 'Error'}</p>
-                  <p className="text-sm text-red-600 dark:text-red-400">{log.error.message}</p>
-                  {log.error.stack && (
-                    <pre className="mt-2 text-xs font-mono overflow-auto p-2 bg-red-100 dark:bg-red-900 rounded">
-                      {log.error.stack}
-                    </pre>
-                  )}
+                  <p className="text-sm text-red-600 dark:text-red-400">Error Details</p>
+                  <pre className="mt-2 text-xs font-mono overflow-auto p-2 bg-red-100 dark:bg-red-900 rounded">
+                    {log.stackTrace}
+                  </pre>
                 </div>
               </div>
             )}
@@ -181,62 +186,44 @@ const LogDetailView: React.FC<LogDetailViewProps> = ({ log, onClose }) => {
                 <p className="text-sm font-mono">{log.requestId || 'N/A'}</p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold mb-1">MCP Server</h3>
-                <p className="text-sm">{log.mcpServer || 'N/A'}</p>
+                <h3 className="text-sm font-semibold mb-1">Source</h3>
+                <p className="text-sm">{log.source || 'N/A'}</p>
               </div>
             </div>
             
-            {log.clientInfo && (
+            {log.context?.params && (
               <div className="mt-4">
-                <h3 className="text-sm font-semibold mb-1">Client Information</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-xs font-semibold">IP Address</p>
-                    <p className="text-sm">{log.clientInfo.ip || 'N/A'}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold">User Agent</p>
-                    <p className="text-sm">{log.clientInfo.userAgent || 'N/A'}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold">Browser</p>
-                    <p className="text-sm">{log.clientInfo.browser || 'N/A'}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold">Operating System</p>
-                    <p className="text-sm">{log.clientInfo.os || 'N/A'}</p>
-                  </div>
-                </div>
+                <h3 className="text-sm font-semibold mb-1">Request Parameters</h3>
+                <pre className="overflow-auto p-4 bg-muted rounded-md text-xs font-mono">
+                  {safeStringify(log.context.params)}
+                </pre>
               </div>
             )}
           </TabsContent>
           
           <TabsContent value="data">
-            {log.data ? (
-              <pre className="overflow-auto p-4 bg-muted rounded-md text-xs font-mono">
-                {safeStringify(log.data)}
-              </pre>
-            ) : (
-              <p className="text-center py-4 text-muted-foreground">No data available</p>
-            )}
+            <pre className="overflow-auto p-4 bg-muted rounded-md text-xs font-mono">
+              {log.context ? safeStringify(log.context) : 'No context data available'}
+            </pre>
           </TabsContent>
           
           <TabsContent value="metadata">
             <div className="space-y-4">
               <div>
-                <h3 className="text-sm font-semibold mb-1">Log ID</h3>
-                <p className="text-sm font-mono">{log._id || 'N/A'}</p>
-              </div>
-              
-              <div>
                 <h3 className="text-sm font-semibold mb-1">Environment</h3>
                 <p className="text-sm">{log.environment || 'N/A'}</p>
               </div>
               
-              <div>
-                <h3 className="text-sm font-semibold mb-1">Application Version</h3>
-                <p className="text-sm">{log.appVersion || 'N/A'}</p>
-              </div>
+              {log.tags && log.tags.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-semibold mb-1">Tags</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {log.tags.map((tag, index) => (
+                      <Badge key={index} variant="secondary">{tag}</Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
               
               {log.metadata && (
                 <div>

@@ -1,15 +1,25 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe, Logger } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
+import { MCPLoggerService } from '../../shared/logging';
 import * as fs from 'fs';
 import * as path from 'path';
 
 async function bootstrap() {
-  const logger = new Logger('Bootstrap');
-  const app = await NestFactory.create(AppModule);
+  // Create the application with buffered logs
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
+  
+  // Get the logger from the application context
+  const logger = app.get(MCPLoggerService);
+  logger.setContext('Bootstrap');
+  
+  // Set the logger as the application logger
+  app.useLogger(logger);
   
   // Enable CORS
   app.enableCors();
@@ -40,7 +50,10 @@ async function bootstrap() {
     );
     version = packageJson.version;
   } catch (error) {
-    logger.warn(`Could not read package.json version: ${error.message}`);
+    logger.warn(`Could not read package.json version: ${error.message}`, {
+      error: error.message,
+      stack: error.stack,
+    });
   }
 
   // Configure Swagger documentation
@@ -73,7 +86,7 @@ async function bootstrap() {
       path.join(process.cwd(), 'swagger.json'),
       JSON.stringify(document, null, 2),
     );
-    logger.log('Swagger JSON file has been written');
+    logger.debug('Swagger JSON file has been written');
   }
   
   SwaggerModule.setup('api', app, document);
@@ -82,8 +95,8 @@ async function bootstrap() {
   const port = process.env.PORT || 3004;
   
   await app.listen(port);
-  logger.log(`MongoDB Atlas MCP server running on port ${port}`);
-  logger.log(`Swagger API documentation available at http://localhost:${port}/api`);
+  logger.info(`MongoDB Atlas MCP server running on port ${port}`);
+  logger.info(`Swagger API documentation available at http://localhost:${port}/api`);
 }
 
 bootstrap();

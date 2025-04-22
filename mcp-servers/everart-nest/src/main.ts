@@ -2,9 +2,20 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { MCPLoggerService } from '../../shared/logging';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  // Create the application with buffered logs
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
+  
+  // Get the logger from the application context
+  const logger = app.get(MCPLoggerService);
+  logger.setContext('Bootstrap');
+  
+  // Set the logger as the application logger
+  app.useLogger(logger);
   
   // Enable CORS
   app.enableCors();
@@ -30,9 +41,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
   
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 3002;
   await app.listen(port);
-  console.log(`Everart MCP Server running on port ${port}`);
+  logger.info(`Everart MCP Server running on port ${port}`);
+  logger.info(`Swagger API documentation available at http://localhost:${port}/api`);
 }
 
 bootstrap();

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseGuards, Logger, HttpStatus, HttpCode } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, HttpStatus, HttpCode } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 import { MongodbService } from './mongodb.service';
 import {
@@ -13,15 +13,21 @@ import {
   ExecuteRequestDto
 } from './dto';
 import { ApiKeyGuard } from '../auth/api-key.guard';
+import { MCPLoggerService } from '../../../shared/logging';
+import { LogClass, LogMethod } from '../../../shared/logging/method-logger.decorator';
 
 @ApiTags('mongodb')
 @Controller()
 @UseGuards(ApiKeyGuard)
 @ApiBearerAuth('API Key')
+@LogClass({ level: 'debug', logParameters: true })
 export class MongodbController {
-  private readonly logger = new Logger(MongodbController.name);
-
-  constructor(private readonly mongodbService: MongodbService) {}
+  constructor(
+    private readonly mongodbService: MongodbService,
+    private readonly logger: MCPLoggerService
+  ) {
+    this.logger.setContext('MongodbController');
+  }
 
   @Get('health')
   @ApiOperation({ summary: 'Check server health' })
@@ -30,6 +36,7 @@ export class MongodbController {
     description: 'Server is healthy',
     type: HealthCheckResponseDto
   })
+  @LogMethod({ level: 'debug' })
   async getHealth(): Promise<HealthCheckResponseDto> {
     return this.mongodbService.getHealth();
   }
@@ -54,8 +61,9 @@ export class MongodbController {
     status: HttpStatus.NOT_FOUND, 
     description: 'Resource not found' 
   })
+  @LogMethod({ level: 'debug' })
   async processRequest(@Body() requestDto: any): Promise<BaseMCPResponseDto> {
-    this.logger.log(`Processing ${requestDto.action} request with ID ${requestDto.requestId}`, {
+    this.logger.debug(`Processing ${requestDto.action} request with ID ${requestDto.requestId}`, {
       requestId: requestDto.requestId,
       action: requestDto.action,
       userId: requestDto.userId
@@ -92,12 +100,11 @@ export class MongodbController {
           };
       }
     } catch (error) {
-      this.logger.error(`Error processing request: ${error.message}`, {
+      this.logger.error(`Error processing request: ${error.message}`, error.stack, {
         requestId: requestDto.requestId,
         action: requestDto.action,
         userId: requestDto.userId,
-        error: error.message,
-        stack: error.stack
+        error: error.message
       });
       
       return {
@@ -122,8 +129,9 @@ export class MongodbController {
     description: 'Query executed successfully',
     type: BaseMCPResponseDto
   })
+  @LogMethod({ level: 'debug' })
   async query(@Body() queryRequestDto: QueryRequestDto): Promise<BaseMCPResponseDto> {
-    this.logger.log(`Querying database with request ID ${queryRequestDto.requestId}`, {
+    this.logger.debug(`Querying database with request ID ${queryRequestDto.requestId}`, {
       requestId: queryRequestDto.requestId,
       userId: queryRequestDto.userId,
       database: queryRequestDto.payload.databaseName,
@@ -141,8 +149,9 @@ export class MongodbController {
     description: 'Documents created successfully',
     type: BaseMCPResponseDto
   })
+  @LogMethod({ level: 'debug' })
   async create(@Body() createRequestDto: CreateRequestDto): Promise<BaseMCPResponseDto> {
-    this.logger.log(`Creating documents with request ID ${createRequestDto.requestId}`, {
+    this.logger.debug(`Creating documents with request ID ${createRequestDto.requestId}`, {
       requestId: createRequestDto.requestId,
       userId: createRequestDto.userId,
       database: createRequestDto.payload.databaseName,
@@ -161,8 +170,9 @@ export class MongodbController {
     description: 'Documents updated successfully',
     type: BaseMCPResponseDto
   })
+  @LogMethod({ level: 'debug' })
   async update(@Body() updateRequestDto: UpdateRequestDto): Promise<BaseMCPResponseDto> {
-    this.logger.log(`Updating documents with request ID ${updateRequestDto.requestId}`, {
+    this.logger.debug(`Updating documents with request ID ${updateRequestDto.requestId}`, {
       requestId: updateRequestDto.requestId,
       userId: updateRequestDto.userId,
       database: updateRequestDto.payload.databaseName,
@@ -180,8 +190,9 @@ export class MongodbController {
     description: 'Documents deleted successfully',
     type: BaseMCPResponseDto
   })
+  @LogMethod({ level: 'debug' })
   async delete(@Body() deleteRequestDto: DeleteRequestDto): Promise<BaseMCPResponseDto> {
-    this.logger.log(`Deleting documents with request ID ${deleteRequestDto.requestId}`, {
+    this.logger.debug(`Deleting documents with request ID ${deleteRequestDto.requestId}`, {
       requestId: deleteRequestDto.requestId,
       userId: deleteRequestDto.userId,
       database: deleteRequestDto.payload.databaseName,
@@ -199,8 +210,9 @@ export class MongodbController {
     description: 'Schema operation completed successfully',
     type: BaseMCPResponseDto
   })
+  @LogMethod({ level: 'debug' })
   async manageSchema(@Body() schemaRequestDto: SchemaRequestDto): Promise<BaseMCPResponseDto> {
-    this.logger.log(`Managing schema with request ID ${schemaRequestDto.requestId}`, {
+    this.logger.debug(`Managing schema with request ID ${schemaRequestDto.requestId}`, {
       requestId: schemaRequestDto.requestId,
       userId: schemaRequestDto.userId,
       database: schemaRequestDto.payload.databaseName,
@@ -219,8 +231,9 @@ export class MongodbController {
     description: 'Search completed successfully',
     type: BaseMCPResponseDto
   })
+  @LogMethod({ level: 'debug' })
   async search(@Body() searchRequestDto: SearchRequestDto): Promise<BaseMCPResponseDto> {
-    this.logger.log(`Searching documents with request ID ${searchRequestDto.requestId}`, {
+    this.logger.debug(`Searching documents with request ID ${searchRequestDto.requestId}`, {
       requestId: searchRequestDto.requestId,
       userId: searchRequestDto.userId,
       database: searchRequestDto.payload.databaseName,
@@ -239,8 +252,9 @@ export class MongodbController {
     description: 'Aggregation executed successfully',
     type: BaseMCPResponseDto
   })
+  @LogMethod({ level: 'debug' })
   async execute(@Body() executeRequestDto: ExecuteRequestDto): Promise<BaseMCPResponseDto> {
-    this.logger.log(`Executing aggregation with request ID ${executeRequestDto.requestId}`, {
+    this.logger.debug(`Executing aggregation with request ID ${executeRequestDto.requestId}`, {
       requestId: executeRequestDto.requestId,
       userId: executeRequestDto.userId,
       database: executeRequestDto.payload.databaseName,
@@ -250,6 +264,7 @@ export class MongodbController {
     return this.mongodbService.execute(executeRequestDto);
   }
 
+  @LogMethod({ level: 'trace' })
   private generateResponseId(): string {
     return 'res_' + Math.random().toString(36).substring(2, 15);
   }

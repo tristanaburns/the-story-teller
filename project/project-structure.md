@@ -28,8 +28,11 @@ the-story-teller/
 │   └── ai/                       # AI-related components
 │
 ├── lib/                          # Utility functions
-│   ├── mongodb.ts                # MongoDB connection
-│   ├── user-db.ts                # User database management
+│   ├── mongodb.ts                # MongoDB connection utilities for application data
+│   ├── auth-mongodb.ts           # Deprecated re-export for backward compatibility
+│   ├── user-db.ts                # User-specific database management
+│   ├── auth/                     # Authentication-related utilities
+│   │   └── index.ts              # Central exports for auth functionality
 │   ├── auth.ts                   # Authentication utilities
 │   └── ai.ts                     # AI integration utilities
 │
@@ -103,9 +106,14 @@ The `components` directory contains reusable React components organized by funct
 
 The `lib` directory contains utility functions and services:
 
-- **mongodb.ts**: MongoDB connection utilities
+- **mongodb.ts**: MongoDB connection utilities for application data
+- **auth-mongodb.ts**: Deprecated re-export for backward compatibility
 - **user-db.ts**: User-specific database management
-- **auth.ts**: Authentication-related utilities
+- **auth/**: Authentication-related utilities
+  - **index.ts**: Central exports for auth functionality
+  - **options.ts**: NextAuth.js configuration
+  - **session.ts**: Session utility functions
+  - **mongodb.ts**: Dedicated MongoDB connection for AuthJS authentication
 - **ai.ts**: AI integration utilities
 
 ### Types Directory
@@ -160,10 +168,11 @@ Each user has their own MongoDB database with collections for:
 ### Authentication Flow
 
 1. User initiates sign-in with Google or GitHub
-2. NextAuth.js handles OAuth flow
-3. On successful authentication, a session is created
-4. User-specific database is created if it doesn't exist
-5. User is redirected to the dashboard
+2. NextAuth.js handles OAuth flow using dedicated auth-mongodb client
+3. Auth data is stored in separate MongoDB collections from application data
+4. On successful authentication, a session is created
+5. User-specific database is created if it doesn't exist using the application MongoDB client
+6. User is redirected to the dashboard
 
 ### Data Flow
 

@@ -9,12 +9,13 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
   typescript: {
-    // This is a temporary fix to bypass build errors during route standardization
-    ignoreBuildErrors: true
+    // Enforce TypeScript errors
+    ignoreBuildErrors: false
   },
   eslint: {
-    // This is a temporary fix to bypass build errors during route standardization
-    ignoreDuringBuilds: true
+    // Enforce ESLint rules
+    ignoreDuringBuilds: false,
+    dirs: ['pages', 'app', 'components', 'lib', 'utils']
   },
   // Use static export to bypass route checks
   output: 'export',

@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from './providers'
 import { initializeLogging, createLogger } from '@/lib/logging'
+import { LoggingProvider } from '@/lib/logging/client/LoggingProvider'
 
 // Initialize logging as early as possible
 initializeLogging();
@@ -17,20 +18,25 @@ export const metadata: Metadata = {
   description: 'Advanced narrative schema system for AI-assisted storytelling',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  logger.debug('Rendering root layout');
-  // Log when the layout is about to render
-  logger.debug('Rendering application shell');
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
+  // Log server-side render of root layout
+  logger.debug('Server rendering root layout', {
+    componentName: 'RootLayout',
+    renderType: 'server'
+  });
   
   return (
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          {children}
+          {/* Wrap the application with logging provider to enable client-side logging */}
+          <LoggingProvider componentName="RootLayout">
+            {children}
+          </LoggingProvider>
         </AuthProvider>
       </body>
     </html>

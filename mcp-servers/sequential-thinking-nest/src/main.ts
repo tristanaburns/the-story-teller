@@ -8,12 +8,23 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
+import { MCPLoggerService } from '../../shared/logging';
 import * as fs from 'fs';
 import * as path from 'path';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  // Create the application with buffered logs
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
+  
+  // Get the logger from the application context
+  const logger = app.get(MCPLoggerService);
+  logger.setContext('Bootstrap');
+  
+  // Set the logger as the application logger
+  app.useLogger(logger);
   
   // Get ConfigService
   const configService = app.get(ConfigService);
@@ -50,9 +61,9 @@ async function bootstrap() {
         JSON.stringify(document, null, 2),
         { encoding: 'utf8' }
       );
-      console.log(`Swagger JSON file written to: ${outputPath}`);
+      logger.debug(`Swagger JSON file written to: ${outputPath}`);
     } catch (error) {
-      console.error('Failed to write Swagger JSON file', error);
+      logger.error(`Failed to write Swagger JSON file: ${error.message}`, error.stack);
     }
   }
   
@@ -62,7 +73,8 @@ async function bootstrap() {
   const port = configService.get<number>('PORT', 3004);
   
   await app.listen(port);
-  console.log(`Sequential Thinking MCP Server is running on: ${await app.getUrl()}`);
+  logger.info(`Sequential Thinking MCP Server is running on port ${port}`);
+  logger.info(`Swagger API documentation available at http://localhost:${port}/api`);
 }
 
 bootstrap(); 

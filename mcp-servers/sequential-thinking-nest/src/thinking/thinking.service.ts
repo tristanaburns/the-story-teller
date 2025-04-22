@@ -3,7 +3,7 @@
  * This service implements the business logic for thinking processes.
  */
 
-import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { v4 as uuidv4 } from 'uuid';
 import { ThinkingRepository } from './repositories/thinking.repository';
@@ -11,21 +11,26 @@ import { CreateThinkingDto } from './dto/create-thinking.dto';
 import { UpdateThinkingDto } from './dto/update-thinking.dto';
 import { ThinkingProcess } from './schemas/thinking.schema';
 import { ThinkingResponseDto } from './dto/thinking-response.dto';
+import { MCPLoggerService } from '../../../shared/logging';
+import { LogClass, LogMethod } from '../../../shared/logging/method-logger.decorator';
 
 @Injectable()
+@LogClass({ level: 'debug', logParameters: true })
 export class ThinkingService {
-  private readonly logger = new Logger(ThinkingService.name);
-
   constructor(
     private readonly thinkingRepository: ThinkingRepository,
-    private readonly configService: ConfigService
-  ) {}
+    private readonly configService: ConfigService,
+    private readonly logger: MCPLoggerService
+  ) {
+    this.logger.setContext('ThinkingService');
+  }
 
   /**
    * Create a new thinking process
    * @param createThinkingDto The data for creating a thinking process
    * @returns Response with the created thinking process
    */
+  @LogMethod({ level: 'debug' })
   async createThinkingProcess(createThinkingDto: CreateThinkingDto): Promise<ThinkingResponseDto> {
     try {
       const processId = createThinkingDto.processId || `thinking-${uuidv4()}`;
@@ -66,6 +71,7 @@ export class ThinkingService {
    * @param processId The ID of the thinking process to retrieve
    * @returns Response with the thinking process
    */
+  @LogMethod({ level: 'debug' })
   async getThinkingProcess(processId: string): Promise<ThinkingResponseDto> {
     try {
       const thinking = await this.thinkingRepository.findById(processId);
@@ -92,6 +98,7 @@ export class ThinkingService {
    * @param offset Number of results to skip
    * @returns Response with the thinking processes
    */
+  @LogMethod({ level: 'debug' })
   async getThinkingProcessesByUserId(userId: string, limit = 10, offset = 0): Promise<ThinkingResponseDto> {
     try {
       const processes = await this.thinkingRepository.findByUserId(userId, limit, offset);
@@ -124,6 +131,7 @@ export class ThinkingService {
    * @param offset Number of results to skip
    * @returns Response with the thinking processes
    */
+  @LogMethod({ level: 'debug' })
   async getThinkingProcessesByStoryId(storyId: string, limit = 10, offset = 0): Promise<ThinkingResponseDto> {
     try {
       const processes = await this.thinkingRepository.findByStoryId(storyId, limit, offset);
@@ -155,6 +163,7 @@ export class ThinkingService {
    * @param updateThinkingDto The data for updating the thinking process
    * @returns Response with the updated thinking process
    */
+  @LogMethod({ level: 'debug' })
   async updateThinkingProcess(processId: string, updateThinkingDto: UpdateThinkingDto): Promise<ThinkingResponseDto> {
     try {
       const thinking = await this.thinkingRepository.findById(processId);
@@ -211,6 +220,7 @@ export class ThinkingService {
    * @param processId The ID of the thinking process to delete
    * @returns Response indicating success
    */
+  @LogMethod({ level: 'debug' })
   async deleteThinkingProcess(processId: string): Promise<ThinkingResponseDto> {
     try {
       const thinking = await this.thinkingRepository.findById(processId);
@@ -237,6 +247,7 @@ export class ThinkingService {
    * @param thinking The thinking process to format
    * @returns Formatted thinking process
    */
+  @LogMethod({ level: 'trace' })
   private formatThinkingProcess(thinking: ThinkingProcess): Record<string, any> {
     if (!thinking) return null;
     
@@ -277,6 +288,7 @@ export class ThinkingService {
    * Process a thinking request asynchronously
    * @param processId The ID of the thinking process to process
    */
+  @LogMethod({ level: 'debug' })
   private async processThinking(processId: string): Promise<void> {
     try {
       // Update status to in-progress
@@ -416,6 +428,7 @@ export class ThinkingService {
    * @param stepData The step data to add or update
    * @param progress Optional progress update
    */
+  @LogMethod({ level: 'debug' })
   private async simulateProcessingStep(
     processId: string, 
     stepData: any, 
@@ -457,6 +470,7 @@ export class ThinkingService {
    * Simple delay function for simulating async processing
    * @param ms Milliseconds to delay
    */
+  @LogMethod({ level: 'trace' })
   private delay(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
   }

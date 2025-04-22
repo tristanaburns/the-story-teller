@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { LogEntry } from '@/lib/logging/types';
+import { LogEntry } from '@/lib/logging';
 
 interface LogTableProps {
   logs: LogEntry[];

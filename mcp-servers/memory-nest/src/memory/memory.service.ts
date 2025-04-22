@@ -1,4 +1,6 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { MCPLoggerService } from '../../../shared/logging';
+import { LogClass, LogMethod } from '../../../shared/logging/method-logger.decorator';
 import { MemoryRepository } from './repositories/memory.repository';
 import {
   StoreMemoryDto,
@@ -14,11 +16,15 @@ import { Memory } from './schemas/memory.schema';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
+@LogClass({ level: 'debug', logParameters: true })
 export class MemoryService {
   constructor(
     private memoryRepository: MemoryRepository,
     private configService: ConfigService,
-  ) {}
+    private logger: MCPLoggerService,
+  ) {
+    this.logger.setContext('MemoryService');
+  }
 
   async getHealth(): Promise<HealthCheckResponseDto> {
     // Get memory count for health status

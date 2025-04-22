@@ -1,6 +1,8 @@
 /**
  * Client log collection API endpoint
  * Receives and stores client-side logs
+ * 
+ * PREFERRED ENDPOINT: Use this endpoint instead of /api/logs for client-side logging
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -11,6 +13,8 @@ import { ClientLogEntry } from '@/lib/logging/client/clientLogger';
 import { getClientIp } from '@/lib/utils/network';
 import { connectToDatabase } from '@/lib/mongodb';
 import { v4 as uuidv4 } from 'uuid';
+import { validateLogRequest, isRateLimited, createApiResponse } from '@/lib/api/apiHelpers';
+import { checkUserAccess } from '@/lib/api/authMiddleware';
 
 // Create a logger for this API endpoint
 const logger = createLogger('API:ClientLogs');
@@ -99,10 +103,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     // Check rate limit
     if (isRateLimited(ip)) {
       logger.warn(`Rate limit exceeded for client logs API`, { ip });
-      return NextResponse.json(
-        { error: 'Rate limit exceeded' },
-        { status: 429 }
-      );
+      return createApiResponse({ 
+        error: 'Rate limit exceeded' 
+      }, 429);
     }
     
     // Get session and user
@@ -118,12 +121,11 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const logs = await request.json();
     
     // Validate logs array
-    if (!Array.isArray(logs)) {
+    if (!validateLogRequest(logs)) {
       logger.warn('Invalid logs format', { correlationId, ip });
-      return NextResponse.json(
-        { error: 'Invalid request format. Expected array of log entries.' },
-        { status: 400 }
-      );
+      return createApiResponse({
+        error: 'Invalid request format. Expected array of log entries.'
+      }, 400);
     }
     
     // Limit number of logs per request
@@ -166,7 +168,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (processedLogs.length > 0) {
       try {
         const { db } = await connectToDatabase();
+        
+        // Store in both collections for backward compatibility during transition
+        // Main storage in client_logs
         await db.collection('client_logs').insertMany(processedLogs);
+        
+        // Also store in the legacy logs collection for backward compatibility
+        await db.collection('logs').insertMany(processedLogs);
         
         logger.debug(`Stored ${processedLogs.length} client logs`, { correlationId });
       } catch (dbError) {
@@ -180,26 +188,32 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
     
     // Return success
-    return NextResponse.json(
-      { 
-        status: 'success', 
-        processed: processedLogs.length 
-      },
-      { 
-        status: 200,
-        headers: {
-          'x-correlation-id': correlationId
-        }
-      }
-    );
+    return createApiResponse({ 
+      status: 'success', 
+      processed: processedLogs.length 
+    }, 200, {
+      'x-correlation-id': correlationId
+    });
   } catch (error) {
     // Log error
     logger.error('Error processing client logs', error);
     
     // Return error response
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return createApiResponse({
+      error: 'Internal server error',
+      message: error instanceof Error ? error.message : 'Unknown error',
+      success: false
+    }, 500);
   }
+}
+
+/**
+ * OPTIONS handler for CORS
+ */
+export async function OPTIONS() {
+  return createApiResponse(null, 204, {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, X-Correlation-ID'
+  });
 }

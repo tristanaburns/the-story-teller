@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider } from '@/components/auth/SessionProvider';
 import { Toaster } from '@/components/ui/sonner';
 import { createLogger } from '@/lib/logging';
 
@@ -141,10 +141,17 @@ function AppStateProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// Auth provider component (already provided by next-auth)
+// Auth provider component updated for Auth.js v5
 export function AuthProvider({ children }: { children: ReactNode }) {
-  logger.debug('Rendering auth provider');
-  return <SessionProvider>{children}</SessionProvider>;
+  logger.debug('Rendering auth provider with Auth.js v5');
+  
+  // Use the SessionProvider from our components/auth folder
+  // which is specifically built for Auth.js v5
+  return (
+    <SessionProvider>
+      {children}
+    </SessionProvider>
+  );
 }
 
 // Custom hooks for using contexts

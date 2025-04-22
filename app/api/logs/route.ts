@@ -1,5 +1,8 @@
 /**
  * API endpoint for receiving client-side logs
+ * 
+ * DEPRECATED: Use /api/logging/client-logs instead.
+ * This endpoint is maintained for backward compatibility.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -7,9 +10,10 @@ import { createLogger } from '@/lib/logging';
 import { MongoTransport } from '@/lib/logging/transports';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
+import { createApiResponse } from '@/lib/api/apiHelpers';
 
 // Create a logger for this API route
-const logger = createLogger('API:Logs');
+const logger = createLogger('API:Logs:Deprecated');
 
 // Initialize MongoDB transport
 const mongoTransport = new MongoTransport({
@@ -28,6 +32,9 @@ mongoTransport.connect().catch(error => {
  * Handle POST requests (single log entry)
  */
 export async function POST(request: NextRequest) {
+  // Log deprecation warning
+  logger.warn('Deprecated endpoint used: /api/logs. Use /api/logging/client-logs instead.');
+  
   try {
     // Get correlation ID from headers
     const correlationId = request.headers.get('x-correlation-id') || undefined;
@@ -61,12 +68,15 @@ export async function POST(request: NextRequest) {
       clientSide: true
     });
     
-    return NextResponse.json({ success: true });
+    return createApiResponse({
+      success: true,
+      warning: 'This endpoint is deprecated. Please use /api/logging/client-logs instead.'
+    });
   } catch (error) {
     logger.error('Error processing client log', error);
-    return NextResponse.json(
+    return createApiResponse(
       { error: 'Failed to process log entry' }, 
-      { status: 500 }
+      500
     );
   }
 }
@@ -75,12 +85,9 @@ export async function POST(request: NextRequest) {
  * Handle OPTIONS requests (for CORS)
  */
 export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, X-Correlation-ID'
-    }
+  return createApiResponse(null, 204, {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, X-Correlation-ID'
   });
 }

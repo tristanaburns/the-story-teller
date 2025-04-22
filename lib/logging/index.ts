@@ -19,6 +19,23 @@ export {
   type MethodTracker
 } from './logger';
 
+// Types - Centralized location for all logging types
+export {
+  type LogEntry,
+  type LogQueryParams,
+  type LogStatisticsSummary,
+  type ClientLogData,
+  type ClientLoggerConfig,
+  type LogAggregationResult,
+  type LogLevelCount,
+  type LogComponentCount,
+  type LogTimeframeCount,
+  type LogStatusCodeCount,
+  type ApiLoggerConfig,
+  type DbLoggerConfig,
+  type McpLoggerConfig
+} from './types';
+
 // Initialization
 export { initializeLogging } from './init';
 
@@ -50,8 +67,7 @@ export {
   ConsoleTransport,
   type MongoTransportOptions,
   type FileTransportOptions,
-  type ConsoleTransportOptions,
-  type LogEntry
+  type ConsoleTransportOptions
 } from './transports';
 
 // Client-side logging (browser environment)
@@ -65,3 +81,22 @@ export {
   useInteractionLogging,
   useFeatureLogging
 } from './client';
+
+// Method decorators for function logging
+export {
+  LogMethod,
+  LogTrace,
+  LogDebug,
+  LogInfo
+} from './decorators/logMethod';
+
+// React hooks for component logging
+export {
+  useLoggedFunction,
+  useLoggedEffect,
+  useLoggedEventHandler,
+  useLoggedState
+} from './client/hooks/useLoggedFunction';
+
+// Function wrapper for non-class functions
+export { logFunction } from './utils/logFunction';

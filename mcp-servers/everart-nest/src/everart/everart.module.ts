@@ -7,6 +7,7 @@ import { ArtworkRepository } from './repositories/artwork.repository';
 import { Style, StyleSchema } from './schemas/style.schema';
 import { StyleRepository } from './repositories/style.repository';
 import { AuthModule } from '../auth/auth.module';
+import { MCPLoggerModule } from '../../../shared/logging';
 
 @Module({
   imports: [

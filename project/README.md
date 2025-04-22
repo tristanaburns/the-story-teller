@@ -145,6 +145,16 @@ the-story-teller/
 
 ## 💻 Development
 
+### MongoDB Client Architecture
+
+The application uses two separate MongoDB clients:
+
+1. **Application MongoDB Client** (`lib/mongodb.ts`): Used for all application data operations including user databases, stories, characters, etc.
+
+2. **Auth MongoDB Client** (`lib/auth-mongodb.ts`): Dedicated client for AuthJS authentication, ensuring separation of auth operations from application data.
+
+This separation improves security, maintainability, and performance by isolating authentication concerns from application data management.
+
 ### Adding Development Log Entries
 
 The project maintains a detailed development log with individual files for each significant change. To add a new entry:

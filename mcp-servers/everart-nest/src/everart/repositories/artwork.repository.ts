@@ -4,12 +4,18 @@ import { Model } from 'mongoose';
 import { Artwork, ArtworkDocument } from '../schemas/artwork.schema';
 import { GetArtworkRequestDto } from '../dto/get-artwork.dto';
 import { UpdateArtworkRequestDto } from '../dto/update-artwork.dto';
+import { MCPLoggerService } from '../../../../shared/logging';
+import { LogClass, LogMethod } from '../../../../shared/logging/method-logger.decorator';
 
 @Injectable()
+@LogClass({ level: 'debug', logParameters: true })
 export class ArtworkRepository {
   constructor(
     @InjectModel(Artwork.name) private artworkModel: Model<ArtworkDocument>,
-  ) {}
+    private readonly logger: MCPLoggerService,
+  ) {
+    this.logger.setContext('ArtworkRepository');
+  }
 
   async create(artwork: Partial<Artwork>): Promise<Artwork> {
     const createdArtwork = new this.artworkModel(artwork);

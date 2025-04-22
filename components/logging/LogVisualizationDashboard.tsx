@@ -33,9 +33,7 @@ import {
   Pie,
   Cell
 } from 'recharts';
-import { createLogger } from '@/lib/logging';
-import { LogLevel } from '@/lib/logging/logger';
-import { LogEntry, LogQueryParams } from '@/lib/logging/types';
+import { createLogger, LogEntry, LogQueryParams, LogLevel } from '@/lib/logging';
 import LogTable from './LogTable';
 import LogFilterPanel from './LogFilterPanel';
 import LogDetailView from './LogDetailView';

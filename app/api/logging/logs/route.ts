@@ -4,10 +4,10 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
-import { createLogger } from '@/lib/logging/logger';
-import { connectToDatabase } from '@/lib/mongodb';
+import { createLogger } from '@/lib/logging';
+import { logQueryService } from '@/lib/logging/logQuery';
+import { withAuth, AccessLevel, hasViewLogsPermission } from '@/lib/api/authMiddleware';
+import { createApiResponse, formatError } from '@/lib/api/apiHelpers';
 
 // Create a logger for this API endpoint
 const logger = createLogger('API:LogsEndpoint');
@@ -22,158 +22,78 @@ const DEFAULT_PAGE_SIZE = 20;
  * GET handler for retrieving logs
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
-  try {
-    // Get session and ensure user is authorized
-    const session = await getServerSession(authOptions);
-    
-    // Check if user is authenticated and has the required role
-    if (!session?.user || !isAuthorizedUser(session.user)) {
-      logger.warn('Unauthorized access attempt to logs API', {
-        userId: session?.user?.id || 'unauthenticated'
+  return withAuth(request, async (request, session) => {
+    try {
+      // Extract query parameters
+      const { searchParams } = request.nextUrl;
+      
+      // Pagination
+      const page = parseInt(searchParams.get('page') || '1', 10);
+      const pageSize = Math.min(
+        parseInt(searchParams.get('pageSize') || String(DEFAULT_PAGE_SIZE), 10),
+        MAX_PAGE_SIZE
+      );
+      
+      // Setup query params
+      const queryParams = {
+        level: searchParams.get('level') || undefined,
+        component: searchParams.get('component') || undefined,
+        correlationId: searchParams.get('correlationId') || undefined,
+        userId: searchParams.get('userId') || undefined,
+        search: searchParams.get('search') || undefined,
+        mcpServer: searchParams.get('mcpServer') || undefined,
+        environment: searchParams.get('environment') || undefined,
+        skip: (page - 1) * pageSize,
+        limit: pageSize
+      };
+      
+      // Parse dates if provided
+      if (searchParams.has('startDate')) {
+        queryParams.startDate = new Date(searchParams.get('startDate')!);
+      }
+      
+      if (searchParams.has('endDate')) {
+        queryParams.endDate = new Date(searchParams.get('endDate')!);
+      }
+      
+      // Get logs using the logQueryService
+      const logs = await logQueryService.queryLogs(queryParams);
+      
+      // Get total count for pagination
+      const total = await logQueryService.countLogs(queryParams);
+      
+      // Get distinct components for filtering
+      const availableComponents = await logQueryService.getDistinctValues('component');
+      
+      // Log the request (at debug level to avoid excessive logging)
+      logger.debug('Logs retrieved', {
+        userId: session.user.id,
+        queryParams,
+        resultCount: logs.length,
+        total
       });
       
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 403 }
-      );
-    }
-    
-    // Extract query parameters
-    const { searchParams } = request.nextUrl;
-    
-    // Pagination
-    const page = parseInt(searchParams.get('page') || '1', 10);
-    const pageSize = Math.min(
-      parseInt(searchParams.get('pageSize') || String(DEFAULT_PAGE_SIZE), 10),
-      MAX_PAGE_SIZE
-    );
-    
-    // Filtering
-    const level = searchParams.get('level') || null;
-    const component = searchParams.get('component') || null;
-    const correlationId = searchParams.get('correlationId') || null;
-    const userId = searchParams.get('userId') || null;
-    const search = searchParams.get('search') || null;
-    const startDate = searchParams.get('startDate') || null;
-    const endDate = searchParams.get('endDate') || null;
-    const mcpServer = searchParams.get('mcpServer') || null;
-    const environment = searchParams.get('environment') || null;
-    
-    // Build query
-    const query: Record<string, any> = {};
-    
-    // Apply filters
-    if (level) query.level = level;
-    if (component) query.component = component;
-    if (correlationId) query.correlationId = correlationId;
-    if (userId) query.userId = userId;
-    if (mcpServer) query.mcpServer = mcpServer;
-    if (environment) query.environment = environment;
-    
-    // Date range filter
-    if (startDate || endDate) {
-      query.timestamp = {};
-      
-      if (startDate) {
-        query.timestamp.$gte = new Date(startDate);
-      }
-      
-      if (endDate) {
-        query.timestamp.$lte = new Date(endDate);
-      }
-    }
-    
-    // Text search
-    if (search) {
-      // Use text index if available, otherwise search in message field
-      try {
-        query.$text = { $search: search };
-      } catch (error) {
-        // Fallback to regex search on message field if text index is not available
-        query.message = { $regex: search, $options: 'i' };
-      }
-    }
-    
-    // Connect to database
-    const { db } = await connectToDatabase();
-    
-    // Calculate skip value for pagination
-    const skip = (page - 1) * pageSize;
-    
-    // Get logs from database
-    const logs = await db
-      .collection('logs')
-      .find(query)
-      .sort({ timestamp: -1 }) // Most recent first
-      .skip(skip)
-      .limit(pageSize)
-      .toArray();
-    
-    // Get total count for pagination
-    const total = await db
-      .collection('logs')
-      .countDocuments(query);
-    
-    // Get available components for filtering
-    const availableComponents = await db
-      .collection('logs')
-      .distinct('component');
-    
-    // Log the request
-    logger.debug('Logs retrieved', {
-      userId: session.user.id,
-      filters: {
-        level,
-        component,
-        correlationId,
-        userId: userId,
-        search,
-        startDate,
-        endDate,
-        mcpServer,
-        environment
-      },
-      pagination: {
+      // Return response
+      return createApiResponse({
+        logs,
+        total,
         page,
         pageSize,
-        total
-      }
-    });
-    
-    // Return logs with pagination info
-    return NextResponse.json({
-      logs,
-      total,
-      page,
-      pageSize,
-      totalPages: Math.ceil(total / pageSize),
-      availableComponents
-    });
-  } catch (error) {
-    // Log error
-    logger.error('Error retrieving logs', error);
-    
-    // Return error response
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
-  }
-}
-
-/**
- * Check if user is authorized to access logs
- */
-function isAuthorizedUser(user: any): boolean {
-  // Check for admin role
-  const isAdmin = user.role === 'admin';
-  
-  // Check for developer role
-  const isDeveloper = user.role === 'developer';
-  
-  // Check for specific permission
-  const hasPermission = Array.isArray(user.permissions) && 
-                        user.permissions.includes('view_logs');
-  
-  return isAdmin || isDeveloper || hasPermission;
+        totalPages: Math.ceil(total / pageSize),
+        availableComponents
+      });
+    } catch (error) {
+      // Log error
+      logger.error('Error retrieving logs', error);
+      
+      // Return error response
+      return createApiResponse({
+        error: 'Internal server error',
+        details: formatError(error)
+      }, 500);
+    }
+  }, {
+    accessLevel: AccessLevel.DEVELOPER,
+    permissionCheck: hasViewLogsPermission
+  });
 }

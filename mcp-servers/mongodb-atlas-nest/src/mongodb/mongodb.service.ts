@@ -1,10 +1,12 @@
-import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as os from 'os';
 import { InjectConnection } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
 import { DatabaseOperationRepository } from './repositories/database-operation.repository';
 import { SchemaDefinitionRepository } from './repositories/schema-definition.repository';
+import { MCPLoggerService } from '../../../shared/logging';
+import { LogClass, LogMethod } from '../../../shared/logging/method-logger.decorator';
 import {
   BaseMCPResponseDto,
   HealthCheckResponseDto,
@@ -18,21 +20,24 @@ import {
 } from './dto';
 
 @Injectable()
+@LogClass({ level: 'debug', logParameters: true })
 export class MongodbService {
-  private readonly logger = new Logger(MongodbService.name);
   private readonly startTime: number;
 
   constructor(
     @InjectConnection() private readonly connection: Connection,
     private readonly configService: ConfigService,
     private readonly databaseOperationRepository: DatabaseOperationRepository,
-    private readonly schemaDefinitionRepository: SchemaDefinitionRepository
+    private readonly schemaDefinitionRepository: SchemaDefinitionRepository,
+    private readonly logger: MCPLoggerService
   ) {
+    this.logger.setContext('MongodbService');
     this.startTime = Date.now();
   }
 
+  @LogMethod({ level: 'debug' })
   async getHealth(): Promise<HealthCheckResponseDto> {
-    this.logger.log('Performing health check');
+    this.logger.info('Performing health check');
     
     const uptime = Math.floor((Date.now() - this.startTime) / 1000);
     const dbStatus = this.connection.readyState === 1 ? 'connected' : 'disconnected';
@@ -54,6 +59,7 @@ export class MongodbService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async query(queryRequestDto: QueryRequestDto): Promise<BaseMCPResponseDto> {
     const { requestId, userId, payload } = queryRequestDto;
     const { databaseName, collectionName, filter, projection, sort, skip, limit } = payload;
@@ -108,14 +114,12 @@ export class MongodbService {
         }
       };
     } catch (error) {
-      this.logger.error(`Error executing query: ${error.message}`, {
+      this.logger.error(`Error executing query: ${error.message}`, error.stack, {
         requestId,
         userId,
         databaseName,
         collectionName,
         filter,
-        error: error.message,
-        stack: error.stack
       });
       
       // Log failed operation
@@ -151,6 +155,7 @@ export class MongodbService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async create(createRequestDto: CreateRequestDto): Promise<BaseMCPResponseDto> {
     const { requestId, userId, payload } = createRequestDto;
     const { databaseName, collectionName, documents, validateSchema } = payload;
@@ -217,14 +222,12 @@ export class MongodbService {
         }
       };
     } catch (error) {
-      this.logger.error(`Error executing create: ${error.message}`, {
+      this.logger.error(`Error executing create: ${error.message}`, error.stack, {
         requestId,
         userId,
         databaseName,
         collectionName,
-        documentsCount: documents.length,
-        error: error.message,
-        stack: error.stack
+        documentsCount: documents.length
       });
       
       // Log failed operation
@@ -259,6 +262,7 @@ export class MongodbService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async update(updateRequestDto: UpdateRequestDto): Promise<BaseMCPResponseDto> {
     const { requestId, userId, payload } = updateRequestDto;
     const { databaseName, collectionName, filter, update, multi, upsert, validateSchema } = payload;
@@ -312,14 +316,12 @@ export class MongodbService {
         }
       };
     } catch (error) {
-      this.logger.error(`Error executing update: ${error.message}`, {
+      this.logger.error(`Error executing update: ${error.message}`, error.stack, {
         requestId,
         userId,
         databaseName,
         collectionName,
-        filter,
-        error: error.message,
-        stack: error.stack
+        filter
       });
       
       // Log failed operation
@@ -355,6 +357,7 @@ export class MongodbService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async delete(deleteRequestDto: DeleteRequestDto): Promise<BaseMCPResponseDto> {
     const { requestId, userId, payload } = deleteRequestDto;
     const { databaseName, collectionName, filter, multi } = payload;
@@ -403,14 +406,12 @@ export class MongodbService {
         }
       };
     } catch (error) {
-      this.logger.error(`Error executing delete: ${error.message}`, {
+      this.logger.error(`Error executing delete: ${error.message}`, error.stack, {
         requestId,
         userId,
         databaseName,
         collectionName,
-        filter,
-        error: error.message,
-        stack: error.stack
+        filter
       });
       
       // Log failed operation
@@ -446,6 +447,7 @@ export class MongodbService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async manageSchema(schemaRequestDto: SchemaRequestDto): Promise<BaseMCPResponseDto> {
     const { requestId, userId, payload } = schemaRequestDto;
     const { databaseName, collectionName, schema, getSchema, isDraft, description } = payload;
@@ -547,14 +549,12 @@ export class MongodbService {
         };
       }
     } catch (error) {
-      this.logger.error(`Error managing schema: ${error.message}`, {
+      this.logger.error(`Error managing schema: ${error.message}`, error.stack, {
         requestId,
         userId,
         databaseName,
         collectionName,
-        operation: getSchema ? 'get' : 'set',
-        error: error.message,
-        stack: error.stack
+        operation: getSchema ? 'get' : 'set'
       });
       
       // Log failed operation
@@ -589,6 +589,7 @@ export class MongodbService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async search(searchRequestDto: SearchRequestDto): Promise<BaseMCPResponseDto> {
     const { requestId, userId, payload } = searchRequestDto;
     const { databaseName, collectionName, searchText, fields, projection, sort, skip, limit } = payload;
@@ -644,14 +645,12 @@ export class MongodbService {
         }
       };
     } catch (error) {
-      this.logger.error(`Error executing search: ${error.message}`, {
+      this.logger.error(`Error executing search: ${error.message}`, error.stack, {
         requestId,
         userId,
         databaseName,
         collectionName,
-        searchText,
-        error: error.message,
-        stack: error.stack
+        searchText
       });
       
       // Log failed operation
@@ -687,6 +686,7 @@ export class MongodbService {
     };
   }
 
+  @LogMethod({ level: 'debug' })
   async execute(executeRequestDto: ExecuteRequestDto): Promise<BaseMCPResponseDto> {
     const { requestId, userId, payload } = executeRequestDto;
     const { databaseName, collectionName, pipeline, options } = payload;
@@ -739,14 +739,12 @@ export class MongodbService {
         }
       };
     } catch (error) {
-      this.logger.error(`Error executing aggregation: ${error.message}`, {
+      this.logger.error(`Error executing aggregation: ${error.message}`, error.stack, {
         requestId,
         userId,
         databaseName,
         collectionName,
-        pipelineStages: pipeline.length,
-        error: error.message,
-        stack: error.stack
+        pipelineStages: pipeline.length
       });
       
       // Log failed operation
@@ -782,6 +780,7 @@ export class MongodbService {
     };
   }
 
+  @LogMethod({ level: 'trace' })
   private generateResponseId(): string {
     return 'res_' + Math.random().toString(36).substring(2, 15);
   }

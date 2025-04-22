@@ -1,5 +1,5 @@
 import { Db, ObjectId } from 'mongodb';
-import { clientPromise } from './mongodb';
+import { clientPromise, getDb } from './mongodb';
 import { 
   storySchema, 
   characterSchema, 
