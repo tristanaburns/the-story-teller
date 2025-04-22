@@ -1,318 +1,324 @@
 /**
- * Correlation Propagation Tests
- * 
- * Tests for the correlation ID propagation utilities
- * that ensure proper tracing across service boundaries
+ * Tests for correlation propagation utilities
+ * This file contains tests for correlation ID propagation including:
+ * - Generating correlation IDs
+ * - Propagating correlation IDs across API calls
+ * - Retrieving correlation IDs from different contexts
+ * - Thread-local storage for correlation tracking
  */
 
-import {
-  getOrCreateCorrelationId,
-  addCorrelationToHeaders,
-  extractCorrelationFromResponse,
-  fetchWithCorrelation,
-  mcpRequestWithCorrelation
-} from '../../../../lib/logging/utils';
+import { jest } from '@jest/globals';
+import { 
+  generateCorrelationId, 
+  getCorrelationId, 
+  setCorrelationId, 
+  clearCorrelationId,
+  withCorrelation,
+  correlationFetch,
+  getCorrelationHeaders,
+  extractCorrelationFromRequest
+} from '@/lib/logging/utils/correlationPropagation';
+import { getContextStore } from '@/lib/logging/utils/contextStore';
 
-// Mock the context functions
-jest.mock('../../../../lib/logging/middleware', () => ({
-  getContextValue: jest.fn(),
-  setContextValue: jest.fn(),
-  clearContext: jest.fn()
-}));
-
-// Import the mocked functions
-import { getContextValue, setContextValue, clearContext } from '../../../../lib/logging/middleware';
-
-// Mock uuid generation
-jest.mock('uuid', () => ({
-  v4: jest.fn().mockReturnValue('test-correlation-id')
-}));
-
-// Mock fetch
+// Mock the fetch API
 global.fetch = jest.fn();
 
-describe('Correlation ID Propagation', () => {
+describe('Correlation Propagation', () => {
   beforeEach(() => {
-    // Clear all mocks
     jest.clearAllMocks();
+    // Reset context store
+    const contextStore = getContextStore();
+    contextStore.clear();
     
-    // Reset fetch mock
+    // Reset global fetch mock
     (global.fetch as jest.Mock).mockReset();
   });
   
-  describe('getOrCreateCorrelationId', () => {
-    it('should return existing correlation ID from context', () => {
-      // Mock getContextValue to return a correlation ID
-      (getContextValue as jest.Mock).mockReturnValue('existing-correlation-id');
+  describe('Correlation ID Generation and Management', () => {
+    test('should generate valid correlation IDs', () => {
+      const id = generateCorrelationId();
       
-      const result = getOrCreateCorrelationId();
+      // UUID format validation - simple check
+      expect(id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);
       
-      // Should return the existing ID
-      expect(result).toBe('existing-correlation-id');
-      
-      // Should have called getContextValue
-      expect(getContextValue).toHaveBeenCalledWith('correlationId');
-      
-      // Should not have called setContextValue
-      expect(setContextValue).not.toHaveBeenCalled();
+      // Generate another one to ensure uniqueness
+      const id2 = generateCorrelationId();
+      expect(id).not.toBe(id2);
     });
     
-    it('should generate and store new correlation ID if none exists', () => {
-      // Mock getContextValue to return undefined
-      (getContextValue as jest.Mock).mockReturnValue(undefined);
+    test('should allow setting and retrieving correlation ID', () => {
+      const testId = 'test-correlation-123';
       
-      const result = getOrCreateCorrelationId();
+      // Set correlation ID
+      setCorrelationId(testId);
       
-      // Should return the new ID
-      expect(result).toBe('test-correlation-id');
+      // Get correlation ID
+      const retrievedId = getCorrelationId();
       
-      // Should have called getContextValue
-      expect(getContextValue).toHaveBeenCalledWith('correlationId');
+      // Assert
+      expect(retrievedId).toBe(testId);
+    });
+    
+    test('should clear correlation ID', () => {
+      // Set correlation ID
+      setCorrelationId('test-correlation-123');
       
-      // Should have called setContextValue with the new ID
-      expect(setContextValue).toHaveBeenCalledWith('correlationId', 'test-correlation-id');
+      // Clear correlation ID
+      clearCorrelationId();
+      
+      // Get correlation ID
+      const retrievedId = getCorrelationId();
+      
+      // Assert
+      expect(retrievedId).toBeUndefined();
+    });
+    
+    test('should generate new ID if none exists', () => {
+      // No correlation ID set
+      clearCorrelationId();
+      
+      // Get correlation ID - should generate new one
+      const id = getCorrelationId(true);
+      
+      // Assert
+      expect(id).toBeDefined();
+      expect(id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);
     });
   });
   
-  describe('addCorrelationToHeaders', () => {
-    it('should add correlation ID to headers object', () => {
-      // Mock getContextValue to return a correlation ID
-      (getContextValue as jest.Mock).mockReturnValue('existing-correlation-id');
+  describe('Correlation Context Management', () => {
+    test('should maintain correlation ID within async boundaries', async () => {
+      // Set correlation ID
+      const testId = 'test-async-correlation';
+      setCorrelationId(testId);
       
-      const headers = { 'Content-Type': 'application/json' };
-      const result = addCorrelationToHeaders(headers);
+      // Create nested async functions
+      const nestedAsyncFunction = async () => {
+        // Should still have the same correlation ID
+        return getCorrelationId();
+      };
       
-      // Should add correlation ID header
-      expect(result).toEqual({
-        'Content-Type': 'application/json',
-        'x-correlation-id': 'existing-correlation-id'
-      });
+      const outerAsyncFunction = async () => {
+        const innerResult = await nestedAsyncFunction();
+        return innerResult;
+      };
+      
+      // Execute async function chain
+      const result = await outerAsyncFunction();
+      
+      // Assert correlation ID is maintained
+      expect(result).toBe(testId);
     });
     
-    it('should use default header name', () => {
-      // Mock getContextValue to return a correlation ID
-      (getContextValue as jest.Mock).mockReturnValue('existing-correlation-id');
+    test('should isolate correlation IDs between parallel executions', async () => {
+      // Function that sets and uses its own correlation ID
+      const isolatedFunction = async (id: string) => {
+        setCorrelationId(id);
+        
+        // Simulate some asynchronous work
+        await new Promise(resolve => setTimeout(resolve, 10));
+        
+        // Return current correlation ID
+        return getCorrelationId();
+      };
       
-      const result = addCorrelationToHeaders({});
+      // Execute two instances in parallel
+      const [result1, result2] = await Promise.all([
+        isolatedFunction('correlation-1'),
+        isolatedFunction('correlation-2')
+      ]);
       
-      // Should add correlation ID header with default name
-      expect(result).toEqual({
-        'x-correlation-id': 'existing-correlation-id'
-      });
+      // Assert each function maintained its own correlation ID
+      expect(result1).toBe('correlation-1');
+      expect(result2).toBe('correlation-2');
     });
     
-    it('should use custom header name if provided', () => {
-      // Mock getContextValue to return a correlation ID
-      (getContextValue as jest.Mock).mockReturnValue('existing-correlation-id');
+    test('should support scoped correlation with withCorrelation', async () => {
+      // Set initial correlation ID
+      setCorrelationId('initial-correlation');
       
-      const result = addCorrelationToHeaders({}, { headerName: 'X-Custom-Correlation' });
-      
-      // Should add correlation ID header with custom name
-      expect(result).toEqual({
-        'X-Custom-Correlation': 'existing-correlation-id'
+      // Run with different correlation ID
+      const result = await withCorrelation('scoped-correlation', async () => {
+        // Inside the scope, we should have the scoped correlation ID
+        const insideScope = getCorrelationId();
+        
+        // Simulate async work
+        await new Promise(resolve => setTimeout(resolve, 10));
+        
+        // Check again after async work
+        const afterAsync = getCorrelationId();
+        
+        return { insideScope, afterAsync };
       });
-    });
-    
-    it('should generate new correlation ID if none exists and generateIfMissing is true', () => {
-      // Mock getContextValue to return undefined
-      (getContextValue as jest.Mock).mockReturnValue(undefined);
       
-      const result = addCorrelationToHeaders({}, { generateIfMissing: true });
+      // After withCorrelation completes, we should have the original ID
+      const afterScope = getCorrelationId();
       
-      // Should generate and add correlation ID header
-      expect(result).toEqual({
-        'x-correlation-id': 'test-correlation-id'
-      });
-    });
-    
-    it('should not add correlation ID if none exists and generateIfMissing is false', () => {
-      // Mock getContextValue to return undefined
-      (getContextValue as jest.Mock).mockReturnValue(undefined);
-      
-      const headers = { 'Content-Type': 'application/json' };
-      const result = addCorrelationToHeaders(headers, { generateIfMissing: false });
-      
-      // Should not modify headers
-      expect(result).toEqual({
-        'Content-Type': 'application/json'
-      });
+      // Assert
+      expect(result.insideScope).toBe('scoped-correlation');
+      expect(result.afterAsync).toBe('scoped-correlation');
+      expect(afterScope).toBe('initial-correlation');
     });
   });
   
-  describe('extractCorrelationFromResponse', () => {
-    it('should extract correlation ID from response headers', () => {
-      // Create mock response with correlation ID header
-      const response = {
-        headers: {
-          get: jest.fn().mockImplementation(name => {
-            if (name === 'x-correlation-id') {
-              return 'response-correlation-id';
-            }
-            return null;
-          })
-        }
-      } as unknown as Response;
+  describe('HTTP Integration', () => {
+    test('should add correlation ID to fetch headers', async () => {
+      // Set correlation ID
+      const testId = 'http-correlation-123';
+      setCorrelationId(testId);
       
-      const result = extractCorrelationFromResponse(response);
+      // Mock successful fetch response
+      (global.fetch as jest.Mock).mockResolvedValue({
+        ok: true,
+        json: jest.fn().mockResolvedValue({ data: 'test' })
+      });
       
-      // Should return the correlation ID
-      expect(result).toBe('response-correlation-id');
+      // Use correlation-aware fetch
+      await correlationFetch('https://api.example.com/data', {
+        method: 'GET'
+      });
       
-      // Should have called response.headers.get
-      expect(response.headers.get).toHaveBeenCalledWith('x-correlation-id');
+      // Check that fetch was called with correlation headers
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+      const [url, options] = (global.fetch as jest.Mock).mock.calls[0];
       
-      // Should have set the correlation ID in context
-      expect(setContextValue).toHaveBeenCalledWith('correlationId', 'response-correlation-id');
+      expect(url).toBe('https://api.example.com/data');
+      expect(options.headers).toBeDefined();
+      expect(options.headers['x-correlation-id']).toBe(testId);
     });
     
-    it('should use custom header name if provided', () => {
-      // Create mock response with custom correlation ID header
-      const response = {
+    test('should preserve existing headers in fetch requests', async () => {
+      // Set correlation ID
+      setCorrelationId('preserve-headers-test');
+      
+      // Mock successful fetch response
+      (global.fetch as jest.Mock).mockResolvedValue({
+        ok: true,
+        json: jest.fn().mockResolvedValue({ data: 'test' })
+      });
+      
+      // Use correlation-aware fetch with existing headers
+      await correlationFetch('https://api.example.com/data', {
+        method: 'POST',
         headers: {
-          get: jest.fn().mockImplementation(name => {
-            if (name === 'X-Custom-Correlation') {
-              return 'response-correlation-id';
-            }
-            return null;
-          })
-        }
-      } as unknown as Response;
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer token123'
+        },
+        body: JSON.stringify({ test: true })
+      });
       
-      const result = extractCorrelationFromResponse(response, { headerName: 'X-Custom-Correlation' });
+      // Check that fetch was called with all headers
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+      const [url, options] = (global.fetch as jest.Mock).mock.calls[0];
       
-      // Should return the correlation ID
-      expect(result).toBe('response-correlation-id');
-      
-      // Should have called response.headers.get with the custom name
-      expect(response.headers.get).toHaveBeenCalledWith('X-Custom-Correlation');
+      expect(options.headers['Content-Type']).toBe('application/json');
+      expect(options.headers['Authorization']).toBe('Bearer token123');
+      expect(options.headers['x-correlation-id']).toBe('preserve-headers-test');
+      expect(options.body).toBe(JSON.stringify({ test: true }));
     });
     
-    it('should return undefined if correlation ID is not in response headers', () => {
-      // Create mock response without correlation ID header
-      const response = {
-        headers: {
-          get: jest.fn().mockReturnValue(null)
-        }
-      } as unknown as Response;
+    test('should generate correlation headers object', () => {
+      // Set correlation ID
+      const testId = 'header-generation-test';
+      setCorrelationId(testId);
       
-      const result = extractCorrelationFromResponse(response);
+      // Generate headers
+      const headers = getCorrelationHeaders();
       
-      // Should return undefined
-      expect(result).toBeUndefined();
-      
-      // Should have called response.headers.get
-      expect(response.headers.get).toHaveBeenCalledWith('x-correlation-id');
-      
-      // Should not have set the correlation ID in context
-      expect(setContextValue).not.toHaveBeenCalled();
+      // Assert
+      expect(headers).toEqual({
+        'x-correlation-id': testId
+      });
     });
-  });
-  
-  describe('fetchWithCorrelation', () => {
-    it('should add correlation ID to fetch request and extract from response', async () => {
-      // Mock getContextValue to return a correlation ID
-      (getContextValue as jest.Mock).mockReturnValue('existing-correlation-id');
-      
-      // Create mock response
-      const mockResponse = {
+    
+    test('should extract correlation ID from request headers', () => {
+      // Mock request with correlation header
+      const mockRequest = {
         headers: {
-          get: jest.fn().mockImplementation(name => {
-            if (name === 'x-correlation-id') {
-              return 'response-correlation-id';
+          get: jest.fn().mockImplementation((name) => {
+            if (name.toLowerCase() === 'x-correlation-id') {
+              return 'extracted-correlation-123';
             }
             return null;
           })
         }
       };
       
-      // Mock fetch to return the mock response
-      (global.fetch as jest.Mock).mockResolvedValue(mockResponse);
+      // Extract correlation ID
+      const extractedId = extractCorrelationFromRequest(mockRequest as any);
       
-      // Call fetchWithCorrelation
-      const result = await fetchWithCorrelation('https://example.com/api', {
-        method: 'GET',
+      // Assert
+      expect(extractedId).toBe('extracted-correlation-123');
+      expect(mockRequest.headers.get).toHaveBeenCalledWith('x-correlation-id');
+    });
+    
+    test('should handle missing correlation ID in request', () => {
+      // Mock request without correlation header
+      const mockRequest = {
         headers: {
-          'Content-Type': 'application/json'
+          get: jest.fn().mockReturnValue(null)
         }
-      });
+      };
       
-      // Should return the mock response
-      expect(result).toBe(mockResponse);
+      // Extract correlation ID
+      const extractedId = extractCorrelationFromRequest(mockRequest as any);
       
-      // Should have called fetch with the correlation ID header
-      expect(global.fetch).toHaveBeenCalledWith('https://example.com/api', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-correlation-id': 'existing-correlation-id'
-        }
-      });
-      
-      // Should have extracted the correlation ID from the response
-      expect(setContextValue).toHaveBeenCalledWith('correlationId', 'response-correlation-id');
+      // Assert
+      expect(extractedId).toBeUndefined();
     });
   });
   
-  describe('mcpRequestWithCorrelation', () => {
-    it('should add correlation ID to MCP request headers', async () => {
-      // Mock getContextValue to return a correlation ID
-      (getContextValue as jest.Mock).mockReturnValue('existing-correlation-id');
+  describe('Edge Cases', () => {
+    test('should handle multiple correlation ID changes', () => {
+      // Start with no correlation ID
+      clearCorrelationId();
+      expect(getCorrelationId()).toBeUndefined();
       
-      // Create mock request function
-      const mockRequestFn = jest.fn().mockResolvedValue({ success: true });
+      // Set correlation ID
+      setCorrelationId('first-id');
+      expect(getCorrelationId()).toBe('first-id');
       
-      // Call mcpRequestWithCorrelation
-      const result = await mcpRequestWithCorrelation(mockRequestFn);
+      // Change correlation ID
+      setCorrelationId('second-id');
+      expect(getCorrelationId()).toBe('second-id');
       
-      // Should return the mock request result
-      expect(result).toEqual({ success: true });
-      
-      // Should have called the request function with correlation ID header
-      expect(mockRequestFn).toHaveBeenCalledWith({
-        'x-correlation-id': 'existing-correlation-id'
-      });
+      // Clear correlation ID
+      clearCorrelationId();
+      expect(getCorrelationId()).toBeUndefined();
     });
     
-    it('should use custom header name if provided', async () => {
-      // Mock getContextValue to return a correlation ID
-      (getContextValue as jest.Mock).mockReturnValue('existing-correlation-id');
+    test('should handle nested withCorrelation calls', async () => {
+      // Set initial correlation ID
+      setCorrelationId('outer-correlation');
       
-      // Create mock request function
-      const mockRequestFn = jest.fn().mockResolvedValue({ success: true });
-      
-      // Call mcpRequestWithCorrelation with custom header name
-      const result = await mcpRequestWithCorrelation(mockRequestFn, {
-        headerName: 'X-Custom-Correlation'
+      // Execute nested withCorrelation
+      const result = await withCorrelation('middle-correlation', async () => {
+        const middleId = getCorrelationId();
+        
+        // Nested withCorrelation
+        const innerResult = await withCorrelation('inner-correlation', async () => {
+          const innerId = getCorrelationId();
+          return innerId;
+        });
+        
+        // After inner withCorrelation
+        const afterInnerId = getCorrelationId();
+        
+        return {
+          middleId,
+          innerResult,
+          afterInnerId
+        };
       });
       
-      // Should return the mock request result
-      expect(result).toEqual({ success: true });
+      // After outer withCorrelation
+      const outerId = getCorrelationId();
       
-      // Should have called the request function with custom correlation ID header
-      expect(mockRequestFn).toHaveBeenCalledWith({
-        'X-Custom-Correlation': 'existing-correlation-id'
-      });
-    });
-    
-    it('should generate new correlation ID if none exists and generateIfMissing is true', async () => {
-      // Mock getContextValue to return undefined
-      (getContextValue as jest.Mock).mockReturnValue(undefined);
-      
-      // Create mock request function
-      const mockRequestFn = jest.fn().mockResolvedValue({ success: true });
-      
-      // Call mcpRequestWithCorrelation
-      const result = await mcpRequestWithCorrelation(mockRequestFn, {
-        generateIfMissing: true
-      });
-      
-      // Should return the mock request result
-      expect(result).toEqual({ success: true });
-      
-      // Should have called the request function with generated correlation ID header
-      expect(mockRequestFn).toHaveBeenCalledWith({
-        'x-correlation-id': 'test-correlation-id'
-      });
+      // Assert
+      expect(result.middleId).toBe('middle-correlation');
+      expect(result.innerResult).toBe('inner-correlation');
+      expect(result.afterInnerId).toBe('middle-correlation');
+      expect(outerId).toBe('outer-correlation');
     });
   });
 });
