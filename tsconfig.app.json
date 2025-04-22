@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "skipLibCheck": true
-  },
-  "include": ["app/**/*", "components/**/*", "lib/**/*", "types/**/*", "next-env.d.ts", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "**/*.test.tsx", "__tests__/**/*", "mcp-servers/**/*"]
-} 
