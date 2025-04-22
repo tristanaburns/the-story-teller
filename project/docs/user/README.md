@@ -1,80 +1,69 @@
-# The Story Teller: User Documentation
+# User Documentation
 
-This directory contains user-facing documentation for The Story Teller project, designed to help users understand and effectively use the application.
+*Last Updated: 2025-04-22*
 
-## Purpose of User Documentation
+This directory contains user-facing documentation for The Story Teller application, providing guidelines, tutorials, and reference materials for end users.
 
-User documentation serves to:
+## Purpose
 
-- Guide users through the application's features and functionality
-- Provide answers to common questions and issues
-- Help users achieve their goals with the application
-- Improve user experience and satisfaction
-- Reduce support requests through self-service information
+The user documentation provides comprehensive guidance for users of The Story Teller application, helping them understand features, workflows, and best practices for effective storytelling using the platform.
 
-## Available Documents
+## Contents
 
-The following user documents are available:
+This directory contains:
 
-1. **Getting Started Guide**: Basic introduction and initial setup instructions
-2. **User Manual**: Comprehensive documentation of all features and functions
-3. **Feature Guides**: Detailed walkthroughs for specific application features
-4. **FAQ**: Answers to frequently asked questions
-5. **Troubleshooting Guide**: Solutions for common issues users may encounter
-6. **Tutorial Videos**: Step-by-step video demonstrations of key features
-7. **Quick Reference Cards**: At-a-glance summaries of essential functions
+- **User Guides**: Comprehensive guides for using the application
+- **Tutorials**: Step-by-step instructions for common tasks
+- **FAQs**: Frequently asked questions and answers
+- **Feature Overviews**: Explanations of key application features
+- **Best Practices**: Recommendations for effective use
+- **Troubleshooting**: Solutions for common issues
 
-## How to Use These Documents
+## Document Categories
 
-- **New Users**: Start with the Getting Started Guide and Tutorial Videos
-- **Regular Users**: Reference the User Manual and Feature Guides as needed
-- **Problem Solving**: Consult the FAQ and Troubleshooting Guide when issues arise
-- **Quick Reference**: Use the Quick Reference Cards for reminders of key functions
+User documentation is organized into these categories:
 
-## User Documentation Standards
+1. **Getting Started**: Onboarding materials for new users
+2. **Core Features**: Documentation of primary application features
+3. **Advanced Features**: Guides for more complex functionality
+4. **Workflows**: End-to-end processes for common storytelling tasks
+5. **Integration**: Using The Story Teller with other tools and platforms
+6. **Account Management**: User account and subscription information
 
-Our user documentation follows these standards:
+## Document Formats
 
-1. **Plain Language**: Clear, concise writing without unnecessary technical jargon
-2. **Visual Aids**: Screenshots, diagrams, and illustrations to enhance understanding
-3. **Sequential Instructions**: Step-by-step guidance for completing tasks
-4. **Consistency**: Uniform terminology and formatting across all documents
-5. **Accessibility**: Documentation designed to be accessible to users of all abilities
+Documentation is provided in multiple formats:
 
-## Maintaining User Documentation
+- **Markdown Articles**: Comprehensive written documentation
+- **Video Tutorials**: Visual guides for complex features
+- **Interactive Guides**: In-app tutorials and walkthroughs
+- **Cheat Sheets**: Quick reference materials
+- **Example Projects**: Sample stories demonstrating features
 
-When updating these documents:
+## User Documentation Principles
 
-1. Update documentation whenever features change or are added
-2. Verify accuracy through user testing
-3. Incorporate user feedback to address gaps or unclear explanations
-4. Keep examples and screenshots current with the latest version
-5. Regularly review for outdated content or references
+The Story Teller user documentation follows these principles:
 
-## User Experience Principles
+1. **User-Centered**: Written from the user's perspective
+2. **Task-Oriented**: Organized around specific user tasks
+3. **Progressive Disclosure**: Basic concepts first, advanced later
+4. **Consistent Structure**: Similar organization across documents
+5. **Visual Support**: Screenshots and diagrams to aid understanding
+6. **Accessible Language**: Clear, concise, jargon-free when possible
 
-The following principles guide our user documentation:
+## Document Maintenance
 
-1. **User-Centered**: Focused on what users need to know
-2. **Task-Oriented**: Organized around common user tasks and goals
-3. **Progressive Disclosure**: Presenting information from basic to advanced
-4. **Searchable**: Easy to find specific information quickly
-5. **Feedback-Driven**: Continuously improved based on user feedback
+User documentation should be updated:
 
-## Relation to Other Documentation
+- When new features are released
+- When existing features change
+- Based on user feedback and common questions
+- To address identified gaps in documentation
+- To improve clarity and completeness
 
-User documentation connects to:
+## Related Documentation
 
-- **Technical Documentation**: Simplified explanations derived from technical details
-- **API Documentation**: User-friendly descriptions of integration capabilities
-- **Release Notes**: Updates on new features and improvements
-
-## User Documentation Review Process
-
-User documentation undergoes review to ensure:
-
-1. Accuracy and completeness
-2. Clarity and usability
-3. Alignment with actual application behavior
-4. Appropriate level of detail for the target audience
-5. Consistency with application design and terminology 
+- **API Documentation**: For developers integrating with The Story Teller
+- **Release Notes**: For information on recent changes and updates
+- **Accessibility Guide**: For information on accessibility features
+- **Support Resources**: For additional help and support options
