@@ -119,12 +119,21 @@ the-story-teller/
 │
 ├── project/                      # Project documentation
 │   ├── project-requirements.md   # Project requirements
-│   ├── project-plan.md           # Implementation plan
 │   ├── project-structure.md      # Structure documentation
 │   ├── service-deployment-guide.md # Deployment guide
 │   ├── test-implementation-plan.md # Testing plan
 │   ├── DEVLOG_INDEX.md           # Development log index
 │   ├── DEVLOG_INSTRUCTIONS.md    # Development logging guidelines
+│   ├── docs/                     # Detailed documentation
+│   │   ├── plan/                 # Planning documentation
+│   │   │   ├── project-plan-overview.md      # Project overview
+│   │   │   ├── project-plan-phases.md        # Implementation phases
+│   │   │   ├── project-plan-milestones.md    # Project milestones
+│   │   │   ├── project-plan-testing.md       # Testing philosophy
+│   │   │   └── project-plan-extensions.md    # Future extensions
+│   │   ├── architecture/         # Architecture documentation
+│   │   ├── status/               # Status documentation
+│   │   └── structure/            # Structure documentation
 │   └── devlogs/                  # Individual development log entries
 │
 ├── scripts/                      # Utility scripts
@@ -232,14 +241,51 @@ The Story Teller includes an API endpoint for integration with OpenAI's Custom G
 3. Configure the OpenAPI schema as described in the [Service Deployment Guide](service-deployment-guide.md)
 4. Generate an API key and add it to your environment variables
 
-## 📚 Documentation
+## 📄 Documentation
 
-- [Project Requirements](project-requirements.md)
-- [Project Plan](project-plan.md)
-- [Project Structure](project-structure.md)
-- [Service Deployment Guide](service-deployment-guide.md)
-- [Test Implementation Plan](test-implementation-plan.md)
-- [Development Log Index](DEVLOG_INDEX.md)
+- [Requirements Overview](docs/requirements/project-requirements-overview.md)
+- [Functional Requirements](docs/requirements/functional-requirements.md)
+- [Non-Functional Requirements](docs/requirements/non-functional-requirements.md)
+- [Technical Requirements](docs/requirements/technical-requirements.md)
+- [MCP Server Requirements](docs/requirements/mcp-requirements.md)
+
+## 🧠 Efficient Documentation Navigation
+
+For AI assistants and developers, follow this priority sequence to quickly understand the project:
+
+### Documentation Hierarchy (Most Important First)
+
+1. **Current Status** - Start here for immediate context:
+   - [Status Overview](docs/status/project-status-overview.md) - High-level status
+   - [In-Progress Items](docs/status/project-status-in-progress.md) - Active work
+   - [Planned Items](docs/status/project-status-planned.md) - Upcoming work
+
+2. **Planning Documentation** - For sprint details and feature specifications:
+   - [Project Roadmap](docs/planning/project-roadmap.md) - Timeline and goals
+   - [Sprint Planning](docs/planning/project-sprint-planning.md) - Current sprint details
+   - [Feature Specifications](docs/planning/project-feature-specifications.md) - Detailed feature specs
+
+3. **Project Plan** - For high-level planning:
+   - [Project Overview](docs/plan/project-plan-overview.md) - The big picture
+   - [Project Milestones](docs/plan/project-plan-milestones.md) - Major achievements
+   - [Implementation Phases](docs/plan/project-plan-phases.md) - Detailed phases
+
+4. **Requirements** - For detailed specifications:
+   - [Requirements Overview](docs/requirements/project-requirements-overview.md) - High-level requirements
+   - [Functional Requirements](docs/requirements/functional-requirements.md) - What the system does
+   - [Technical Requirements](docs/requirements/technical-requirements.md) - How the system works
+
+See [ai-coding-assistant-project-instructions.md](ai-coding-assistant-project-instructions.md) for comprehensive guidance on understanding and contributing to the project efficiently.
+
+### Current Focus
+
+As of the last update, the project is focused on:
+
+1. **Core Editor Functionality** - Rich text editing, chapter navigation, autosave
+2. **Character Management System** - Profile components, data models, relationship mapping
+3. **Upcoming** - Location management, timeline visualization, AI assistance
+
+When assisting with development, always check the status documents first to understand the current state before diving into other documentation.
 
 ## 🧑‍💻 Contributing
 

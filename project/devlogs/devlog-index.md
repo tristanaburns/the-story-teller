@@ -6,6 +6,11 @@ This document provides an automatically generated index of all development log e
 
 | Date | Category | Title | Author |
 |------|----------|-------|--------|
+| 2025-04-28 15:00 | docs | [Integrate Expanded Concept and Publishing Layer](./entries/2025-04-28-15-00-docs-integrate-expanded-concept-and-publishing-layer.md) | Development Team |
+| 2025-04-26 14:00 | test | [Logging System 100% Test Coverage](./entries/2025-04-26-14-00-test-logging-system-100-percent-coverage.md) | Development Team |
+| 2025-04-25 11:00 | update | [Next Auth v5 Compatibility Updates](./entries/2025-04-25-11-00-update-next-auth-v5-compatibility.md) | Development Team |
+| 2025-04-24 11:00 | Documentation | [Requirements Documentation Reorganization](./entries/2025-04-24-11-00-documentation-requirements-reorganization.md) | Development Team |
+| 2025-04-24 10:00 | Documentation | [Documentation Reorganization](./entries/2025-04-24-10-00-documentation-reorganization.md) | Development Team |
 | 2025-04-23 14:00 | Feature | [Complete Centralized Logging System Implementation](./entries/2025-04-23-14-00-feature-complete-centralized-logging-system.md) | Development Team |
 | 2025-04-23 11:00 | Feature | [Context Collection and Correlation Propagation Implementation](./entries/2025-04-23-11-00-feature-context-collection-correlation-propagation.md) | Development Team |
 | 2025-04-23 10:00 | Docs | [Project Documentation Consolidation](./entries/2025-04-23-10-00-docs-project-documentation-consolidation.md) | Development Team |
@@ -45,35 +50,11 @@ This document provides an automatically generated index of all development log e
 | 2025-04-20 14:00 | Dependency | [Update Dependencies to Latest Versions](./entries/2025-04-20-14-00-dependency-update-dependencies-to-latest-versions.md) | Project Team |
 | 2025-04-20 10:00 | Setup | [Project Documentation and Structure](./entries/2025-04-20-10-00-setup-project-documentation-and-structure.md) | Project Team |
 
-## Week 21 (April 20 - April 26, 2025)
+## Week 22 (April 27 - May 3, 2025)
 
 | Date | Type | Status | Title | Author |
 |------|------|--------|-------|--------|
-| 2025-04-26 14:00 | test | ✅ | [100% Test Coverage for Centralized Logging System](./entries/2025-04-26-14-00-test-logging-system-100-percent-coverage.md) | Development Team |
-| 2025-04-25 11:00 | update | ✅ | [Next Auth v5 Compatibility Updates](./entries/2025-04-25-11-00-update-next-auth-v5-compatibility.md) | Development Team |
-| 2025-04-23 15:00 | refactor | ✅ | [Move Auth MongoDB to Auth Directory](./entries/2025-04-23-15-00-refactor-move-auth-mongodb-to-auth-dir.md) | Claude |
-| 2025-04-23 14:00 | docs | ✅ | [Update MongoDB Auth Architecture](./entries/2025-04-23-14-00-docs-update-mongodb-auth-architecture.md) | Claude |
-| 2025-04-23 13:00 | refactor | ✅ | [Auth MongoDB Naming Convention Standardization](./entries/2025-04-23-13-00-refactor-auth-mongodb-naming-convention.md) | Claude |
-| 2025-04-23 12:00 | refactor | ✅ | [MongoDB Auth Integration Refactoring](./entries/2025-04-23-12-00-refactor-mongodb-auth-integration.md) | Claude |
-| 2025-04-23 11:00 | review | ✅ | [Devlog System Structure Review](./entries/2025-04-23-11-00-review-devlog-system-structure.md) | Claude |
-| 2025-04-23 10:00 | fix | ✅ | [NestJS TypeScript Configuration Fix](./entries/2025-04-23-10-00-fix-nestjs-typescript-configuration.md) | Claude |
-| 2025-04-22 20:30 | feature | ✅ | [MongoDB Atlas MCP Logging Implementation](./entries/2025-04-22-20-30-feature-mongodb-atlas-mcp-logging-implementation.md) | Development Team |
-| 2025-04-22 19:30 | feature | ✅ | [Sequential Thinking MCP Logging Implementation](./entries/2025-04-22-19-30-feature-sequential-thinking-mcp-logging-implementation.md) | Development Team |
-
-## Week 21 (April 20 - April 26, 2025)
-
-| Date | Type | Status | Title | Author |
-|------|------|--------|-------|--------|
-| 2025-04-26 14:00 | test | ✅ | [100% Test Coverage for Centralized Logging System](./entries/2025-04-26-14-00-test-logging-system-100-percent-coverage.md) | Development Team |
-| 2025-04-25 11:00 | update | ✅ | [Next Auth v5 Compatibility Updates](./entries/2025-04-25-11-00-update-next-auth-v5-compatibility.md) | Development Team |
-| 2025-04-23 15:00 | refactor | ✅ | [Move Auth MongoDB to Auth Directory](./entries/2025-04-23-15-00-refactor-move-auth-mongodb-to-auth-dir.md) | Claude |
-| 2025-04-23 14:00 | docs | ✅ | [Update MongoDB Auth Architecture](./entries/2025-04-23-14-00-docs-update-mongodb-auth-architecture.md) | Claude |
-| 2025-04-23 13:00 | refactor | ✅ | [Auth MongoDB Naming Convention Standardization](./entries/2025-04-23-13-00-refactor-auth-mongodb-naming-convention.md) | Claude |
-| 2025-04-23 12:00 | refactor | ✅ | [MongoDB Auth Integration Refactoring](./entries/2025-04-23-12-00-refactor-mongodb-auth-integration.md) | Claude |
-| 2025-04-23 11:00 | review | ✅ | [Devlog System Structure Review](./entries/2025-04-23-11-00-review-devlog-system-structure.md) | Claude |
-| 2025-04-23 10:00 | fix | ✅ | [NestJS TypeScript Configuration Fix](./entries/2025-04-23-10-00-fix-nestjs-typescript-configuration.md) | Claude |
-| 2025-04-22 20:30 | feature | ✅ | [MongoDB Atlas MCP Logging Implementation](./entries/2025-04-22-20-30-feature-mongodb-atlas-mcp-logging-implementation.md) | Development Team |
-| 2025-04-22 19:30 | feature | ✅ | [Sequential Thinking MCP Logging Implementation](./entries/2025-04-22-19-30-feature-sequential-thinking-mcp-logging-implementation.md) | Development Team |
+| 2025-04-28 15:00 | docs | ✅ | [Integrate Expanded Concept and Publishing Layer](./entries/2025-04-28-15-00-docs-integrate-expanded-concept-and-publishing-layer.md) | Development Team |
 
 ## Week 21 (April 20 - April 26, 2025)
 
@@ -87,8 +68,6 @@ This document provides an automatically generated index of all development log e
 | 2025-04-23 12:00 | refactor | ✅ | [MongoDB Auth Integration Refactoring](./entries/2025-04-23-12-00-refactor-mongodb-auth-integration.md) | Claude |
 | 2025-04-23 11:00 | review | ✅ | [Devlog System Structure Review](./entries/2025-04-23-11-00-review-devlog-system-structure.md) | Claude |
 | 2025-04-23 10:00 | fix | ✅ | [NestJS TypeScript Configuration Fix](./entries/2025-04-23-10-00-fix-nestjs-typescript-configuration.md) | Claude |
-| 2025-04-22 20:30 | feature | ✅ | [MongoDB Atlas MCP Logging Implementation](./entries/2025-04-22-20-30-feature-mongodb-atlas-mcp-logging-implementation.md) | Development Team |
-| 2025-04-22 19:30 | feature | ✅ | [Sequential Thinking MCP Logging Implementation](./entries/2025-04-22-19-30-feature-sequential-thinking-mcp-logging-implementation.md) | Development Team |
 
 ## Creating New Entries
 

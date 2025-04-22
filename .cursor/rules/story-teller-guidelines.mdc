@@ -1,0 +1,56 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Mandatory Code Quality Requirements
+
+- ALWAYS WITHOUT EXCEPTION fix all lint and typecheck errors properly - never bypass or use shortcuts that would allow deployments with errors
+- ENSURE complete type safety by properly typing all variables, functions, and components
+- RUN linting and typechecking verification before considering any implementation complete
+- NEVER use // @ts-ignore, // eslint-disable, or similar comments to bypass errors
+- IMPLEMENT proper error handling and logging according to project guidelines
+- MAINTAIN schema compliance for all data structures according to JSON schemas in database_schemas/
+- ENSURE all code follows the schema-driven architecture and maintains proper relationships between narrative elements
+
+# Documentation and Project Structure
+
+- NEVER delete unimplemented features from documentation, even if marked as planned (⏱️)
+- PRESERVE documentation integrity when making updates - add incrementally rather than replacing content
+- DOCUMENT significant changes by following devlog creation procedures in @project/devlogs/devlog-instructions.md
+- ALWAYS reference @project/ai-coding-assistant-project-instructions.md for specific guidance on coding for this project
+
+# Architecture and Implementation Standards
+
+- MAINTAIN separation of concerns across application components as defined in the architecture documentation
+- ADHERE to coding standards defined in project documentation for file naming, organization, and style
+- VERIFY changes against requirements in @project/docs/requirements/ to ensure compliance
+- FOLLOW the document hierarchy specified in the project instructions, starting with status files first
+
+# Current Project Focus
+
+- Core Editor Functionality (rich text editing, chapter navigation, autosave)
+- Character Management System (profile components, data models, relationship mapping) 
+- Upcoming focus: Location management, timeline visualization, AI assistance features
+
+# Priority Documentation Sequence
+
+Always FOLLOW the priority sequence:
+1. Status files - @project/docs/status/project-status-overview.md
+2. Planning documents - @project/docs/planning/project-roadmap.md
+3. Plan documents - @project/docs/plan/project-plan-milestones.md
+4. Requirements verification - @project/docs/requirements/project-requirements-overview.md
+
+# Blocked Phrases and Patterns
+
+- delete requirements
+- remove planned features
+- skip documentation
+- @ts-ignore
+- eslint-disable
+- // @ts-expect-error
+- any
+- bypass linting
+- fix later
+- TODO: fix type
+- ignore error

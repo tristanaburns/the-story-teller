@@ -2,6 +2,18 @@
 
 This directory contains the project planning documentation for The Story Teller. These documents outline the project's goals, implementation phases, testing philosophy, and roadmap.
 
+## Documentation Integrity Guidelines
+
+**MANDATORY**: All planning documentation is subject to strict documentation integrity requirements:
+
+1. **Never Delete Unimplemented Items**: Plan items that have not yet been implemented must NEVER be deleted from these documents.
+2. **Limited-Scope Updates**: Only update sections directly related to your specific changes.
+3. **Preserve Project Roadmap**: The full project roadmap must be maintained regardless of implementation status.
+4. **Maintain Historical Context**: Previous planning decisions must be preserved for reference and continuity.
+5. **Incremental Updates Only**: Add new information incrementally rather than replacing existing content.
+
+These requirements ensure that the project plan remains a comprehensive roadmap and historical record. Removing planned but unimplemented features from documentation is strictly prohibited as it compromises project integrity.
+
 ## Available Documents
 
 - **project-plan-overview.md**: High-level project overview and guiding principles
@@ -16,6 +28,7 @@ This directory contains the project planning documentation for The Story Teller.
 - **For Timeline Information**: Consult `project-plan-milestones.md` and `project-plan-phases.md`
 - **For Testing Guidelines**: Review `project-plan-testing.md` for test coverage requirements
 - **For Future Planning**: See `project-plan-extensions.md` for potential enhancements
+- **For Implementation Status**: Check `project-plan-phases.md` for the current status of each feature
 
 ## Updating Planning Documents
 

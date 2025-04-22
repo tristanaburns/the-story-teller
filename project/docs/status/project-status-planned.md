@@ -1,135 +1,169 @@
-# The Story Teller: Planned Features
+# The Story Teller: Planned Development Items
 
-*Last Updated: 2025-04-22*
+*Last Updated: 2025-04-29*
 
-This document provides a detailed list of features and components that are planned for future development in The Story Teller application. These items are not yet in active development but are scheduled for implementation in upcoming phases.
+This document details the planned development items for The Story Teller project, aligned with the Blueprint v2 and prioritizing the Minimum Testable Product (MTP) followed by the phased roadmap.
 
-## Content Management
+## Upcoming Development Focus
 
-- ⏱️ Export functionality
-- ⏱️ Collaborative editing features
-- ⏱️ Advanced content editor features
+After completing the current work on the MTP components, the following phases are planned for development:
 
-## MCP Server Features
+### Minimum Testable Product Completion (Target: May 15, 2025)
 
-### Memory MCP Server
-- ⏱️ Memory visualization
-- ⏱️ Memory integration with story context
-- ⏱️ Memory management UI
-- ⏱️ Memory export/import
+- **Finalizing Epic E0: Author can create & AI-generate a passage**
+  - Complete editor with sample story loading
+  - Finalize AI Generate Draft functionality with MCP integration
+  - Extend content insertion and update workflow
+  - Fine-tune error handling and recovery mechanisms
+  - Add loading states and success indicators
 
-### Everart MCP Server
-- ⏱️ Artwork gallery UI
-- ⏱️ Artwork integration with narrative
-- ⏱️ Artwork editing and refinement
-- ⏱️ Artwork export options
+- **Finalizing Epic E1: Schema enforcement & DB isolation**
+  - Optimize schema validation performance for larger documents
+  - Implement comprehensive tests for validation system
+  - Add schema version management and migration
+  - Enhance error handling for complex validation failures
+  - Create user-facing documentation for schema errors
 
-### Sequential Thinking MCP Server
-- ⏱️ Plot development assistance
-- ⏱️ Character motivation analysis
-- ⏱️ World-building consistency checking
-- ⏱️ Reasoning visualization
-- ⏱️ Reasoning UI integration
-- ⏱️ Reasoning export functions
-- ⏱️ Reasoning feedback loop
+- **Implementing Epic E2: Importer & Seed**
+  - Complete CLI seed functionality
+  - Finalize Shadow Team Chronicles sample data
+  - Implement first-login detection and seeding
+  - Add error handling for seed failures
+  - Create documentation for sample data
 
-### MongoDB Atlas MCP Server
-- ⏱️ Schema-aware database operations
-- ⏱️ Complex query construction
-- ⏱️ Data transformation
-- ⏱️ Performance monitoring
-- ⏱️ Schema evolution management
-- ⏱️ Database visualization UI
-- ⏱️ Database management interface
-- ⏱️ Database export/import functions
-- ⏱️ Database backup and restore
+- **MTP Testing & Validation**
+  - Implement Cypress test suite for MTP
+  - Create test cases for all acceptance criteria
+  - Set up CI/CD pipeline for MTP validation
+  - Implement end-to-end testing
+  - Create documentation for MTP features
 
-## MCP Server Orchestration
+### Phase 3: Interactive Runner (Target: June 30, 2025)
 
-- ⏱️ Design MCP orchestration system
-- ⏱️ Cross-server communication
-- ⏱️ Unified API interface
-- ⏱️ Synchronization mechanisms
-- ⏱️ Error handling and recovery
-- ⏱️ Performance optimization
-- ⏱️ Monitoring dashboard
-- ⏱️ Orchestration UI
-- ⏱️ Documentation generation
-- ⏱️ Deployment automation
+- **WebSocket Infrastructure**
+  - Implement WebSocket channel for sessions
+  - Create real-time update mechanism
+  - Add connection management
+  - Implement error handling
+  - Set up scaling architecture
 
-## Export & Sharing
+- **Choice Engine**
+  - Create choice button rendering
+  - Implement choice selection API
+  - Develop server-side processing
+  - Add next passage generation
+  - Implement branching narrative structure
 
-- ⏱️ Design export formats
-- ⏱️ PDF export
-- ⏱️ EPUB export
-- ⏱️ HTML export
-- ⏱️ JSON export
-- ⏱️ Sharing functionality
-- ⏱️ Public story viewing
-- ⏱️ Story embedding
-- ⏱️ Collaborative sharing
-- ⏱️ Access control for shared content
+- **TTS Integration**
+  - Set up ElevenLabs streaming
+  - Implement audio playback controls
+  - Create word highlighting system
+  - Add audio synchronization
+  - Implement voice selection
 
-## AI Integration
+- **Session State Management**
+  - Create session storage model
+  - Implement bookmark functionality
+  - Add inventory and variable tracking
+  - Create session restoration system
+  - Implement session analytics
 
-- ⏱️ AI-assisted plot generation
-- ⏱️ AI-assisted description enhancement
-- ⏱️ AI prompt management
-- ⏱️ AI usage analytics
-- ⏱️ Custom AI instruction sets
+### Phase 4: Media Layer (Target: July 30, 2025)
 
-## Character Management
+- **Media API Workers**
+  - Implement image generation API
+  - Create video generation service
+  - Set up BullMQ job queue
+  - Add media processing pipelines
+  - Implement error handling and retry logic
 
-- ⏱️ Character gallery view
-- ⏱️ Character metadata management
+- **Asset Gallery**
+  - Create S3 storage integration
+  - Implement searchable grid interface
+  - Add faceted search capabilities
+  - Develop tagging system
+  - Create bulk operations functionality
 
-## Location Management
+- **Media Integration**
+  - Implement drag-and-drop into passages
+  - Create embedded media rendering
+  - Add media metadata management
+  - Implement media optimization
+  - Add accessibility features
 
-- ⏱️ Location hierarchy management
-- ⏱️ Location gallery view
-- ⏱️ Location metadata management
+### Phase 5: Publishing Wizard (Target: August 30, 2025)
 
-## Timeline Management
+- **PDF/Print Generation**
+  - Implement React-PDF templates
+  - Create format selection interface
+  - Add layout and style controls
+  - Implement pagination system
+  - Create table of contents generation
 
-- ⏱️ Chronology validation
-- ⏱️ Alternative timeline views
-- ⏱️ Timeline export
+- **ePub & MOBI Creation**
+  - Set up epub-gen pipeline
+  - Implement cover art integration
+  - Add image handling and optimization
+  - Create metadata management
+  - Implement table of contents generation
 
-## Relationship Visualization
+- **Audiobook Builder**
+  - Create voice mapping interface
+  - Implement chapter generation
+  - Add MP3 and CUE file creation
+  - Set up FFmpeg processing
+  - Create audiobook metadata system
 
-- ⏱️ Relationship types management
-- ⏱️ Relationship analytics
-- ⏱️ Relationship visualization export
+- **Podcast & Video Export**
+  - Implement RSS generation
+  - Create S3 upload functionality
+  - Add platform integration (PodBean, YouTube)
+  - Implement Remotion for video composition
+  - Create export configuration interface
 
-## Performance Optimization
+## Dependencies
 
-- ⏱️ Analyze application performance
-- ⏱️ Database query optimization
-- ⏱️ Data caching strategy
-- ⏱️ UI rendering optimization
-- ⏱️ Lazy loading for large datasets
-- ⏱️ Image optimization
-- ⏱️ Code splitting and bundling optimization
-- ⏱️ Server-side rendering improvements
+The development of these planned items depends on:
 
-## Implementation Timeline
+1. **Completion of MTP**
+   - Editor with AI generation must be functional
+   - Schema validation and testing must be complete (✅ Schema implementation completed)
+   - Per-user database isolation must be optimized (✅ Base implementation completed)
+   - Sample data seeding must be operational
 
-These planned features are scheduled for implementation in Phases 4 and 5 of the project plan. For detailed timing, refer to the [Implementation Phases](../plan/phases.md) document.
+2. **Technical Requirements**
+   - WebSocket infrastructure for Interactive Runner
+   - Media processing pipeline for Asset Gallery
+   - Job queue for asynchronous processing
+   - S3 storage for media assets
 
-## Prioritization
+## Risk Assessment
 
-Planned features will be prioritized based on:
+Potential risks for these planned items include:
 
-1. User impact
-2. Implementation complexity
-3. Dependencies on other features
-4. Strategic alignment with project goals
+| Risk | Impact | Mitigation | Priority |
+|------|--------|------------|----------|
+| AI service reliability | Could affect MTP functionality | Implement robust error handling and fallbacks (Schema validation in place) | **HIGH** |
+| WebSocket scaling challenges | Could limit concurrent users | Design for horizontal scaling from the start | **HIGH** |
+| Media generation performance | Could create bottlenecks | Implement queuing and background processing | **MEDIUM** |
+| Publishing complexity | Could delay export features | Start with simplest formats, then expand | **MEDIUM** |
+
+## Preliminary Timeline
+
+| Feature | Start | Completion | Duration | Priority |
+|---------|-------|------------|----------|----------|
+| MTP Completion | In Progress | May 15, 2025 | 2 weeks | **HIGHEST** |
+| Interactive Runner | May 16, 2025 | June 30, 2025 | 6 weeks | **HIGH** |
+| Media Layer | June 15, 2025 | July 30, 2025 | 6 weeks | **MEDIUM** |
+| Publishing Wizard | July 15, 2025 | August 30, 2025 | 6 weeks | **MEDIUM** |
+| Advanced MCP | August 15, 2025 | September 30, 2025 | 6 weeks | **LOW** |
+| Mobile & Plugins | September 15, 2025 | October 31, 2025 | 6 weeks | **LOW** |
 
 ## Relation to Other Documentation
 
-This planned features document is part of the status documentation. For more information, refer to:
+These planned items align with:
 
-- [Implementation Status Overview](./overview.md) - Overall implementation status
-- [Completed Features](./completed.md) - Features that have been completed
-- [In-Progress Features](./in-progress.md) - Features currently in development
-- [Implementation Phases](../plan/phases.md) - Detailed implementation phases 
+- **Project Blueprint**: Based on the MTP and phased roadmap
+- **Project Roadmap**: Following the established development timeline
+- **Sprint Planning**: Will be incorporated into upcoming sprints
+- **Project Milestones**: Contributing to defined milestone achievements

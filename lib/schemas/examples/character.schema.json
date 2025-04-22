@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://storyteller.app/schemas/character",
+  "title": "Character",
+  "description": "A character in a story",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the character",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Character's name",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "alias": {
+      "type": ["string", "null"],
+      "description": "Character's alias or nickname",
+      "maxLength": 100
+    },
+    "age": {
+      "type": ["integer", "null"],
+      "description": "Character's age",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "gender": {
+      "type": ["string", "null"],
+      "description": "Character's gender"
+    },
+    "occupation": {
+      "type": ["string", "null"],
+      "description": "Character's occupation",
+      "maxLength": 100
+    },
+    "biography": {
+      "type": ["string", "null"],
+      "description": "Character's biography",
+      "maxLength": 5000
+    },
+    "appearance": {
+      "type": ["object", "null"],
+      "description": "Character's physical appearance",
+      "properties": {
+        "height": {
+          "type": ["string", "null"],
+          "description": "Character's height",
+          "maxLength": 50
+        },
+        "build": {
+          "type": ["string", "null"],
+          "description": "Character's physical build",
+          "maxLength": 50
+        },
+        "hairColor": {
+          "type": ["string", "null"],
+          "description": "Character's hair color",
+          "maxLength": 50
+        },
+        "eyeColor": {
+          "type": ["string", "null"],
+          "description": "Character's eye color",
+          "maxLength": 50
+        },
+        "distinguishingFeatures": {
+          "type": ["string", "null"],
+          "description": "Character's distinguishing features",
+          "maxLength": 500
+        },
+        "description": {
+          "type": ["string", "null"],
+          "description": "General description of appearance",
+          "maxLength": 1000
+        }
+      }
+    },
+    "personality": {
+      "type": ["object", "null"],
+      "description": "Character's personality traits",
+      "properties": {
+        "traits": {
+          "type": ["array", "null"],
+          "description": "List of personality traits",
+          "items": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "maxItems": 20
+        },
+        "strengths": {
+          "type": ["array", "null"],
+          "description": "Character's strengths",
+          "items": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "maxItems": 10
+        },
+        "flaws": {
+          "type": ["array", "null"],
+          "description": "Character's flaws",
+          "items": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "maxItems": 10
+        },
+        "description": {
+          "type": ["string", "null"],
+          "description": "General description of personality",
+          "maxLength": 1000
+        }
+      }
+    },
+    "goals": {
+      "type": ["array", "null"],
+      "description": "Character's goals",
+      "items": {
+        "type": "object",
+        "required": ["description"],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Description of the goal",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "achieved": {
+            "type": "boolean",
+            "description": "Whether the goal has been achieved",
+            "default": false
+          }
+        }
+      },
+      "maxItems": 10
+    },
+    "relationships": {
+      "type": ["array", "null"],
+      "description": "Character's relationships with other characters",
+      "items": {
+        "type": "object",
+        "required": ["characterId", "type"],
+        "properties": {
+          "characterId": {
+            "type": "string",
+            "description": "ID of the related character",
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of relationship",
+            "enum": [
+              "family",
+              "friend",
+              "enemy",
+              "ally",
+              "rival",
+              "love_interest",
+              "acquaintance",
+              "mentor",
+              "student",
+              "colleague",
+              "boss",
+              "subordinate",
+              "other"
+            ]
+          },
+          "description": {
+            "type": ["string", "null"],
+            "description": "Description of the relationship",
+            "maxLength": 500
+          }
+        }
+      },
+      "maxItems": 50
+    },
+    "backstory": {
+      "type": ["string", "null"],
+      "description": "Character's backstory",
+      "maxLength": 10000
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "description": "Additional notes about the character",
+      "maxLength": 5000
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Timestamp when the character was created",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "description": "Timestamp when the character was last updated",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+} 

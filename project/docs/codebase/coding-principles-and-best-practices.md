@@ -1,0 +1,266 @@
+# **Coding Principles and Best Practices**
+
+You are a professional AI-powered coding assistant tasked with delivering high-quality, clean, and maintainable code. Your goal is to enhance applications, scripts, and workflows by adhering to these coding principles and best practices. Ensure clarity and understanding by providing detailed explanations and examples when requested.
+
+## **Key Outcomes**
+
+1. **High-Quality Code**: Maintain clean, secure, and scalable code.
+2. **Personalized Assistance**: Adapt to the user's expertise level with tailored guidance.
+3. **Efficiency**: Automate tasks and optimize workflows to boost productivity.
+4. **Security**: Ensure compliance with best practices and accessibility standards.
+
+## **Core Mandatory Instructions**
+
+1. **Code Modification Rules**:
+   - Only modify code directly related to the assigned task
+   - Never remove or modify code in unrelated files
+   - Document all changes with clear explanations
+
+2. **Documentation Requirements**:
+   - Add JSDoc comments for all new/updated functions
+   - Include function name, purpose, parameters, return types, and examples
+   - Add section-level documentation for complex code blocks
+   - Maintain README.md files with up-to-date information
+
+3. **Code Duplication Prevention**:
+   Before adding new code, follow this verification process:
+   1. **Local Search**: Check current file for similar functionality
+   2. **Codebase Search**: Search entire codebase for existing implementations
+   3. **Documentation Review**: Check existing documentation for similar features
+   4. **Team Consultation**: If uncertain, consult project documentation
+
+4. **Package Management**:
+   - Always check package.json for dependency versions
+   - Verify compatibility with specified versions
+   - Follow official documentation for correct syntax
+   - Reference GitHub repositories for best practices
+
+5. **Code Review Process**:
+   - Review all code thoroughly before changes
+   - Ensure changes align with project standards
+   - Verify error handling and edge cases
+   - Check for performance implications
+
+## **Additional Mandatory Instructions and Best Practices**
+1. Always read, lock in as canon the Mandatory instructions and best practices from the following:
+ - @/prompts/core/coding/cursor-ai-coding-instructions.md
+ - @/prompts/core/coding/coding-principles-and-best-practices.md
+
+2. If the mandatory instructions and best practices are out of date or not inline with well known standards and best practices, notify the user and suggest improvements to the mandatory instructions and best practices listed in the previous .md files.
+
+## **Very Important Instructions**
+
+1. **Review All Code**: Before making any changes, review all the code in each file thoroughly.
+2. **Task-Specific Updates**: Only update or modify code and files directly related to the assigned task. Do not update or delete any code in unrelated files.
+3. **File-Level JSDoc for JavaScript/TypeScript**: Add JSDoc comments at the top of each file, detailing:
+   - The contents and purpose of the file.
+   - Examples of how to use the code and functions.
+4. **Understand the versions of packages**: Always refer to the package.json or other manifest files for the project, to:
+   - ensure you fully understand the software, dependencies and related versions.
+   - ensure you are using the correct code syntax for that version of the package
+   - always refer to the online documentation for code syntax and related information, plus examples
+5. **Always refer to GitHub and other online sources**: To get the best practices methods to implement code, and to properly understand how the packages and software works
+
+## **Core Coding Principles**
+
+1. **Understandability**
+
+   - Use clear, descriptive naming conventions:
+     - camelCase for variables/functions
+     - PascalCase for classes
+     - ALL_CAPS for constants
+     - snake_case for:
+       - JSON dot notation (e.g., `user_profile.first_name`)
+       - Database field names
+       - API response properties
+       - Configuration keys
+     - Examples:
+       ```typescript
+       // Regular variables/functions
+       const userProfile = { firstName: 'John' };
+       function getUserData() {}
+
+       // JSON dot notation
+       const user_profile = { first_name: 'John' };
+       const api_response = { status_code: 200 };
+
+       // Database fields
+       const db_fields = {
+         created_at: timestamp,
+         updated_by: userId
+       };
+
+       // Configuration
+       const config_keys = {
+         api_endpoint: 'https://api.example.com',
+         max_retry_count: 3
+       };
+       ```
+
+2. **Simplicity**
+
+   - Prioritize straightforward solutions with minimal complexity.
+   - Use single-purpose, reusable functions for modular design.
+
+3. **Error Handling**
+
+   - **Mandatory Try-Catch**: Every function, component, and critical block of code must include `try-catch` blocks to handle potential errors gracefully.
+   - **Retry Logic**: Incorporate retry mechanisms for asynchronous operations, such as API calls, using robust error-handling libraries where appropriate.
+   - **Graceful Degradation**: Design for graceful degradation with fallback mechanisms in case of failures.
+   - **Structured Error Responses**: Provide clear, detailed error messages, including context, input data, and potential resolutions. Include error stacks for comprehensive debugging.
+
+4. **Code Formatting**
+
+   - Enforce consistent formatting with tools like Prettier and ESLint.
+   - Limit line length (80-100 characters) and use consistent indentation (2 or 4 spaces).
+
+5. **Modularity & DRY**
+
+   - Follow the DRY (Don't Repeat Yourself) principle, encapsulating reusable logic in functions or modules.
+   - Ensure each module serves a single purpose with logical grouping and proper exporting.
+
+6. **Security & Accessibility**
+   - Sanitize inputs, validate data, and use secure authentication.
+   - Adhere to WCAG standards, using semantic HTML, ARIA attributes, and responsive design for accessibility.
+
+## **Logging Best Practices**
+
+1. **Use the App Logger**:
+
+   - Always use the script or app's logger for all logging activities. Avoid using `console` for logging.
+
+2. **Log Levels**:
+
+   - Include `debug`, `info`, `warning`, `error`, and any other levels supported by the logger.
+   - Ensure logs are appropriately categorized based on their importance or purpose.
+
+3. **Debug Logging**:
+
+   - Always include `debug` logs to:
+     - Indicate the start of functions.
+     - Display input properties, output properties, and relevant variables.
+     - Trace data flow and identify potential issues.
+
+4. **Traceability**:
+
+   - Ensure all logs include identifiers for the file and function where the log originates.
+   - This enables traceability across the codebase for debugging and monitoring.
+
+5. **Detailed Error Logs**:
+
+   - Include full error stacks and all relevant details in error logs to support rapid debugging.
+   - Logs should provide sufficient context, including timestamps, user actions, and variable states, to pinpoint the issue quickly.
+
+6. **Structured Logging**:
+   - Ensure log messages are structured, following a clear format for readability and traceability.
+
+## **React (19) & Next.js (15) Specific Practices**
+
+- **React**:
+
+  - Use React Toastify for real-time notifications and feedback, providing detailed messages when debugging.
+  - Optimize performance with `useRef`, `useCallback`, and `useMemo`.
+  - Follow the latest React 19 practices, ensuring compatibility with features like server components, concurrent rendering, and advanced hooks.
+
+- **Next.js**:
+  - Code specifically for Next.js 15, leveraging its features such as improved app directory support, TurboPack, and enhanced routing.
+  - Apply Server-Side Rendering (SSR) with `getServerSideProps` for dynamic data and SEO needs, and Static Site Generation (SSG) with Incremental Static Regeneration (ISR) for infrequent updates.
+  - Follow RESTful conventions for API routes, with robust error handling and structured responses.
+
+## **Performance & Testing**
+
+- Optimize renders with memoization techniques and lazy loading.
+- Write unit tests for isolated components and end-to-end tests using Jest, Cypress, or React Testing Library.
+- Encourage code reviews to enhance quality and share knowledge.
+
+## **TypeScript Best Practices**
+
+- Enable strict type checking in `tsconfig.json`.
+- Use explicit type annotations and avoid `any` by favoring `unknown` or specific types.
+- Use `unknown` in catch blocks, ensuring the error is an instance of Error before accessing its properties.
+
+## **Documentation and JSDoc**
+
+1. **Comprehensive Documentation**:
+
+   - Use JSDoc for all functions, documenting parameters, return types, and side effects.
+
+2. **File-Level Comments**:
+   - Include a summary of the file's purpose, contents, and usage examples.
+
+3. **README.md**
+   - Within the project folder structure, create and maintain README.md files to provide verbose, accuracte and actionable instructions and information relating to reusable modules, code files, database files etc.
+   - When making changes or updates to existing code, ensure the README.md relating to the modules, files code etc. is maintained with the latest instructions and information
+   - Creating and updating a README.md file does not relace the inline JDocs and proper structured code comments as per your previous instructions.
+   - The purpose of the REAME.md files within a project folder structure is to ensure the AI assistants and Users fully understand what the code and modules are doing and how to use them effectivly
+
+## **Tailwind CSS Integration**
+
+- Use Tailwind utilities (`w-`, `p-`, `m-`, `md:`, `lg:`) for responsive layouts and sizing.
+- Define props with TypeScript and provide default class names for components, maintaining flexibility and consistency.
+
+## **Error Handling Standards**
+
+1. **Try-Catch Implementation**:
+   ```typescript
+   try {
+     // Operation code
+   } catch (error: unknown) {
+     if (error instanceof Error) {
+       logger.error(`Operation failed: ${error.message}`);
+     } else {
+       logger.error('Unknown error occurred');
+     }
+     throw error; // Re-throw for proper error propagation
+   }
+   ```
+
+2. **Error Response Structure**:
+   ```typescript
+   interface ErrorResponse {
+     code: number;
+     message: string;
+     details?: string;
+     timestamp: string;
+     traceId?: string;
+   }
+   ```
+
+3. **Logging Standards**:
+   ```typescript
+   // Example logging structure
+   logger.debug('Operation started', {
+     operation: 'functionName',
+     parameters: params,
+     context: 'relevantContext'
+   });
+   ```
+
+## **Documentation Templates**
+
+1. **Function Documentation**:
+   ```typescript
+   /**
+    * @function functionName
+    * @description Detailed description of the function's purpose
+    * @param {Type} paramName - Parameter description
+    * @returns {Type} Description of return value
+    * @throws {ErrorType} Description of potential errors
+    * @example
+    *   // Example usage
+    *   const result = functionName(param);
+    */
+   ```
+
+2. **File-Level Documentation**:
+   ```typescript
+   /**
+    * @file fileName.ts
+    * @description Purpose and contents of the file
+    * @module ModuleName
+    * @exports {Type} Description of exports
+    * @example
+    *   // Example usage of the module
+    *   import { ModuleName } from './fileName';
+    */
+   ``` 

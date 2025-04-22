@@ -14,6 +14,13 @@ project/docs/
 │   ├── project-plan-testing.md     # Testing philosophy and approach
 │   └── project-plan-extensions.md  # Future extension ideas
 │
+├── requirements/             # Project requirements documentation
+│   ├── project-requirements-overview.md  # High-level requirements summary
+│   ├── functional-requirements.md        # Functional requirements
+│   ├── non-functional-requirements.md    # Non-functional requirements
+│   ├── technical-requirements.md         # Technical requirements
+│   └── mcp-requirements.md               # MCP server requirements
+│
 ├── structure/                # Project structure documentation
 │   ├── project-structure-overview.md    # High-level structure overview
 │   ├── project-structure-directory.md   # Directory structure documentation
@@ -44,6 +51,16 @@ The `plan` directory contains documents related to the implementation plan and r
 - **phases.md**: Detailed breakdown of implementation phases and tasks
 - **testing.md**: Testing philosophy, approach, and requirements
 - **extensions.md**: Ideas for future extensions and enhancements
+
+### Requirements
+
+The `requirements` directory contains comprehensive project requirements:
+
+- **project-requirements-overview.md**: High-level summary of requirements
+- **functional-requirements.md**: Detailed functional requirements
+- **non-functional-requirements.md**: Performance, security, and other quality attributes
+- **technical-requirements.md**: Technical specifications and constraints
+- **mcp-requirements.md**: MCP server requirements
 
 ### Structure
 

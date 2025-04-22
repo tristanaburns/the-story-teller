@@ -1,202 +1,263 @@
 # The Story Teller: Architecture Overview
 
-*Last Updated: 2025-04-22*
+*Last Updated: 2025-04-28*
 
-This document provides a high-level overview of the architecture for The Story Teller application. It outlines the major architectural components, their relationships, and the design patterns used throughout the application.
+This document provides a comprehensive overview of the architecture for The Story Teller platform, detailing the system components, their interactions, and the technical design principles.
 
-## Architecture Overview
+## System Architecture
 
-The Story Teller is built on a modern web architecture using React, Next.js, and MongoDB. The application follows a component-based approach with a clear separation between frontend and backend concerns.
+The Story Teller platform is built as a modern web application following a modular architecture with clear separation of concerns. The architecture is designed to support the AI-native, multimodal, schema-driven narrative platform vision.
 
-### Frontend Architecture
+### High-Level Architecture Diagram
 
-The application follows a component-based architecture using React and Next.js:
+```
+┌───────────────────┐      ┌───────────────────┐      ┌───────────────────┐
+│                   │      │                   │      │                   │
+│  Client Layer     │◄────►│  API Layer        │◄────►│  Database Layer   │
+│  (Next.js)        │      │  (Next.js Routes) │      │  (MongoDB)        │
+│                   │      │                   │      │                   │
+└───────────────────┘      └─────────┬─────────┘      └───────────────────┘
+                                     │
+                                     ▼
+                           ┌───────────────────┐
+                           │                   │
+                           │  MCP Services     │◄────► External AI Services
+                           │  (NestJS)         │      (Claude, GPT, DALLE, etc.)
+                           │                   │
+                           └───────────────────┘
+```
 
-1. **App Router**: Defined by the Next.js App Router file system for page routing
-2. **Components**: Reusable UI elements organized in a hierarchical structure
-3. **Hooks**: Custom React hooks for shared logic and state management
-4. **Context Providers**: React Context API for state management across components
-5. **Client-Side Logging**: Browser-based logging with batched server submission
+## Component Breakdown
 
-### Backend Architecture
+### 1. Client Layer (Next.js)
 
-The backend is implemented using Next.js API routes with a robust organization structure:
+The frontend application built with Next.js that provides the user interface for interacting with the platform.
 
-1. **API Routes**: Server-side endpoints for data operations organized by domain
-   - `/api/stories` - Story management endpoints
-   - `/api/mcp` - Model Context Protocol integration
-   - `/api/settings` - User settings management
-   - `/api/logs` - Logging system endpoints
-   - `/api/ai` - AI integration endpoints
-   - `/api/auth` - Authentication endpoints
+#### Key Components:
 
-2. **Database Access Layer**: MongoDB Atlas for data storage with connection pooling
-3. **Authentication Layer**: NextAuth.js for OAuth integration with Google and GitHub
-4. **Middleware Layer**: Request validation and authentication checking
-5. **Logging Middleware**: Comprehensive request/response logging
+- **World/Story Explorer**
+  - World Dashboard with grid/list views
+  - Story Kanban board
+  - Navigation and filtering controls
+  
+- **Schema IDE / Passage Editor**
+  - Split-pane workspace (Markdown, JSON metadata, preview)
+  - Monaco editor integration
+  - AI generation buttons
+  - Real-time validation
+  
+- **Storyteller Runner**
+  - Interactive reader interface
+  - Audio playback controls
+  - Choice engine UI
+  - Media display components
+  
+- **Timeline & Graph Visualization**
+  - Vis-timeline integration
+  - React-force-graph integration
+  - Interactive controls
+  
+- **Media Gallery**
+  - Media browsing interface
+  - Generation controls
+  - Asset management
 
-### Database Architecture
+- **Publishing Tools**
+  - Format selection interface
+  - Configuration controls
+  - Preview components
 
-The application uses a multi-tenant database design where each user has their own MongoDB database with collections for:
+### 2. API Layer (Next.js Routes)
 
-1. **metadata**: User metadata and configuration
-2. **stories**: Stories collection with core narrative data
-3. **characters**: Characters in stories with relationships
-4. **locations**: Locations in stories with spatial data
-5. **timelines**: Timelines for stories with chronological events
-6. **events**: Events in the storylines with temporal and character associations
-7. **logs**: Application logs with structured data
+The server-side API built using Next.js API routes that handle requests from the client and communicate with the database and MCP services.
 
-The database layer includes several architectural components:
+#### Key Endpoints:
 
-1. **Connection Pooling**: Reused MongoDB connections to optimize resources
-2. **Schema Validation**: JSON Schema validation for MongoDB collections
-3. **Logged Operations**: Automatic logging of all database operations
-4. **User-Specific Databases**: Complete isolation between user data
-5. **Automatic Reconnection**: Built-in retry logic for database operations
+- **/api/auth** 
+  - Authentication and session management
+  - JWT with key rotation
+  
+- **/api/meta** 
+  - Schema and enumeration retrieval
+  
+- **/api/worlds**
+  - World CRUD operations
+  - World stats and metadata
+  
+- **/api/stories**
+  - Story management
+  - Passage operations
+  - Status updates
+  
+- **/api/ai**
+  - AI generation requests
+  - Validation operations
+  - Content enhancement
+  
+- **/api/media**
+  - Image generation
+  - Audio generation
+  - Media management
+  
+- **/api/timeline**
+  - Timeline events
+  - Consistency validation
+  
+- **/api/publish**
+  - Export operations
+  - Format conversion
+  - Distribution integrations
 
-### MCP Server Architecture
+### 3. MCP Services (NestJS)
 
-The application integrates with four specialized NestJS-based MCP (Model Context Protocol) servers, each providing distinct capabilities:
+Microservices that handle specialized AI operations and provide Model Context Protocol (MCP) functionality.
 
-1. **Memory MCP Server**: 
-   - Handles memory storage and retrieval
-   - Implements importance-based ranking
-   - Provides context management
-   - Supports memory consolidation
-   - Enables advanced memory search
+#### Services:
 
-2. **Everart MCP Server**: 
-   - Manages character and location visualization
-   - Supports artwork generation and storage
-   - Implements style consistency management
-   - Handles artwork metadata tagging
-   - Provides search functionality for visual assets
+- **Structure-Smith**
+  - Schema compliance
+  - Outline generation
+  - Claude integration
+  
+- **Prose-Crafter**
+  - Rich prose generation
+  - Dialogue creation
+  - GPT-4o integration
+  
+- **EverArt**
+  - Style-consistent art
+  - Image prompt expansion
+  - Visual asset management
+  
+- **Seq-Think**
+  - Long-horizon planning
+  - Quest logic
+  - Causal reasoning
 
-3. **Sequential Thinking MCP Server**: 
-   - Provides step-by-step reasoning capabilities
-   - Supports structured thinking processes
-   - Enables process creation and management
-   - Implements reasoning step addition
-   - Handles process completion with conclusions
+### 4. Database Layer (MongoDB)
 
-4. **MongoDB Atlas MCP Server**: 
-   - Offers schema-aware database operations
-   - Supports complex query construction
-   - Provides schema management and validation
-   - Implements text search functionality
-   - Enables aggregation pipeline execution
+The data storage system using MongoDB with multi-tenant isolation through per-user databases.
 
-### Logging Architecture
+#### Data Organization:
 
-The application implements a sophisticated centralized logging system that spans all components:
+- **Multi-Tenant Structure**
+  - `{userId}_stories` database per user
+  - Collection isolation for security
+  
+- **Collections**
+  - `worlds` - Top-level narrative universes
+  - `stories` - Narrative units within worlds
+  - `passages` - Content segments with metadata
+  - `characters` - Character definitions and relationships
+  - `locations` - Setting information
+  - `events` - Timeline events
+  - `media` - Asset metadata (with S3 references)
+  - `sessions` - Interactive session state
 
-1. **Centralized Logger Configuration**:
-   - Environment-based log levels (DEBUG in development, INFO in production)
-   - Structured JSON format for machine parsing
-   - Multiple transport mechanisms (Console, File, MongoDB)
-   - Log level hierarchy (TRACE, DEBUG, INFO, WARN, ERROR, FATAL)
-   - Automatic sensitive data redaction
+## Technical Design Patterns
 
-2. **Context Propagation**:
-   - Correlation ID tracking across components
-   - Request ID association for web requests
-   - User ID inclusion for authenticated operations
-   - Component and method identification
-   - Performance metrics with duration tracking
+### Schema-Driven Development
 
-3. **Specialized Loggers**:
-   - Database operation logging (MongoDB)
-   - API request/response logging
-   - MCP server communication logging
-   - AI integration logging
-   - Client-side error and event logging
+- **JSON Schema Validation**
+  - Ajv for schema compilation and validation
+  - Type definition generation
+  - Error formatting for user feedback
+  
+- **Schema Registration**
+  - Central registry for all schema definitions
+  - Versioning and evolution tracking
+  - Documentation generation
 
-4. **Log Management**:
-   - Log querying and search functionality
-   - Log visualization dashboard
-   - Log level configuration management
-   - Log-based alerting system
-   - Performance impact optimization
+### AI Integration Pattern
 
-## Key Architectural Patterns
+- **AI Pipeline**
+  1. Client sends request with context
+  2. API route formats for MCP
+  3. Structure-Smith provides schema-compliant outline
+  4. Prose-Crafter generates detailed content
+  5. Validator ensures schema compliance
+  6. Database stores the result
+  7. Client receives validated content
 
-The application incorporates several key architectural patterns:
+### Multi-Tenant Data Isolation
 
-1. **Model-View-Controller (MVC)**: Separation of data models, user interface, and control logic
-2. **Repository Pattern**: Data access abstracted through repositories
-3. **Dependency Injection**: Services injected into components as needed
-4. **Middleware Pattern**: Request/response processing through middleware chains
-5. **Schema Validation**: Data validation through JSON schemas
-6. **Service Pattern**: Business logic encapsulated in service classes
-7. **Decorator Pattern**: Method decoration for cross-cutting concerns like logging
-8. **Factory Pattern**: Creation of complex objects through factory methods
-9. **Proxy Pattern**: Interception of operations for logging and validation
-10. **Observer Pattern**: Event-based communication between components
+- **Database Per User**
+  - Connection factory creates isolated databases
+  - Naming convention: `{userId}_stories`
+  - Resource limits and monitoring
+  
+- **Access Control**
+  - JWT authentication with database mapping
+  - Permission validation for all operations
+  - Rate limiting and quota management
 
-## Integration Architecture
+### Content Processing Workflow
 
-The application integrates with several external services:
+- **Creative Loop**
+  - Trigger: User edit or AI generation
+  - Process: Validation → Metadata update → Related updates
+  - Notification: Subscribers to related content
 
-1. **MongoDB Atlas**: Cloud database for persistent storage
-2. **NextAuth.js**: Authentication service with multiple OAuth providers
-3. **OpenAI API**: AI capabilities for content generation and analysis
-4. **Vercel**: Deployment and hosting platform
-5. **NestJS MCP Servers**: Specialized microservices for specific capabilities
+### Media Management
 
-## Communication Patterns
+- **S3 Integration**
+  - Direct uploads with signed URLs
+  - Metadata in MongoDB with S3 references
+  - CDN distribution for performance
+  
+- **Processing Pipeline**
+  - BullMQ for job queuing
+  - Worker processes for async operations
+  - Webhook notifications on completion
 
-The application uses several communication patterns for inter-component interaction:
+## Scalability Considerations
 
-1. **RESTful APIs**: HTTP-based communication between frontend and backend
-2. **JSON-RPC**: Remote procedure calls for MCP server communication
-3. **WebSockets**: Real-time communication for collaborative features
-4. **Event Bus**: Internal event broadcasting for loosely coupled components
-5. **Message Queues**: Asynchronous processing for long-running operations
+- **Horizontal Scaling**
+  - Stateless API layer for easy scaling
+  - Redis-backed session and cache
+  - Read replicas for database
+
+- **Resource Management**
+  - Connection pooling for database efficiency
+  - Caching strategy for frequent data
+  - Background processing for heavy operations
 
 ## Security Architecture
 
-The application implements a comprehensive security architecture:
+- **Authentication**
+  - OAuth integration with NextAuth
+  - JWT with short expiration and rotation
+  
+- **Authorization**
+  - Role-based access control
+  - Resource ownership validation
+  - Action-based permissions
+  
+- **Data Protection**
+  - Database isolation
+  - In-transit encryption
+  - Content validation
 
-1. **Authentication**: OAuth 2.0 integration with identity providers
-2. **Authorization**: Fine-grained access control to resources
-3. **Data Isolation**: Complete separation of user data
-4. **Input Validation**: Schema-based validation of all inputs
-5. **API Keys**: Secure communication with MCP servers
-6. **Sensitive Data Handling**: Automatic redaction in logs
-7. **HTTPS Encryption**: Secure transport for all communication
+## Observability
 
-## Deployment Architecture
+- **Logging**
+  - Structured JSON logging
+  - Context propagation
+  - Correlation IDs
+  
+- **Monitoring**
+  - OpenTelemetry integration
+  - Grafana dashboards
+  - Alert thresholds and notifications
 
-The application is designed for deployment on Vercel:
+## Implementation Phases
 
-1. **Next.js Application**: Deployed on Vercel with automatic scaling
-2. **Database**: MongoDB Atlas for database hosting
-3. **Environment Variables**: Configured in Vercel dashboard
-4. **CI/CD**: Automated deployment on commits to main branch
-5. **MCP Servers**: Deployed as separate NestJS applications
-6. **Domain**: Custom domain configuration in Vercel
-7. **SSL**: Automatic SSL certificate management by Vercel
-8. **Preview Deployments**: Per-branch preview environments
-
-## Development Architecture
-
-The development environment is streamlined for productivity:
-
-1. **Hot Reloading**: Automatic reloading of code changes
-2. **Environment Switching**: Different configurations for development/production
-3. **Mocking**: Simulation of external services for testing
-4. **Local MCP Servers**: Development instances of MCP servers
-5. **Development Database**: Local or cloud-based development database
+The architecture will be implemented according to the phased approach detailed in the [Project Blueprint](../plan/project-blueprint.md), starting with the MTP (Minimum Testable Product) and progressively adding functionality through subsequent phases.
 
 ## Relation to Other Documentation
 
-This architecture overview document is part of the architecture documentation. For more detailed information, refer to:
-
-- [Frontend Architecture](./frontend-architecture.md) - Frontend architecture in detail
-- [Backend Architecture](./backend-architecture.md) - Backend architecture in detail
-- [Database Architecture](./database-architecture.md) - Database design and schema
-- [Authentication Flow](./authentication-flow.md) - Authentication architecture
-- [Structure Overview](../structure/structure-overview.md) - Project structure overview
-- [Logging System](./logging-architecture.md) - Detailed logging system architecture
-- [MCP Integration](./mcp-architecture.md) - MCP server integration details
+This architecture overview connects to:
+- **Project Blueprint**: For MTP and phase definitions
+- **Technical Requirements**: For detailed implementation specs
+- **Database Schemas**: For data structure definitions
+- **API Documentation**: For detailed endpoint specifications

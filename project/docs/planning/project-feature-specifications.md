@@ -1,292 +1,350 @@
 # The Story Teller: Feature Specifications
 
-*Last Updated: 2025-04-22*
+*Last Updated: 2025-04-28*
 
-This document provides detailed specifications for the features planned for The Story Teller application. Each feature is described with requirements, user stories, acceptance criteria, and implementation details.
+This document provides detailed specifications for the features planned for The Story Teller application, aligned with the feature catalogue. Each feature is described with requirements, user stories, acceptance criteria, and implementation details.
 
 ## Core Features
 
-### Story Editor
+### Schema IDE & Passage Editor
 
-**Description**: The primary interface for creating and editing story content.
+**Description**: The primary interface for creating and editing story content with a split-pane workspace.
 
 **User Stories**:
-- As a writer, I want to create new stories with basic metadata so I can organize my work
-- As a writer, I want to edit my story content in a distraction-free environment so I can focus on writing
-- As a writer, I want to format my text with basic styling so I can emphasize certain elements
-- As a writer, I want to organize my story into chapters and scenes so I can structure my narrative
-- As a writer, I want to save versions of my story so I can track changes and revert if needed
+- As a writer, I want a split-pane workspace with rich Markdown editing and metadata management so I can manage content and metadata simultaneously
+- As a writer, I want real-time validation of my metadata so I can ensure consistency with schemas
+- As a writer, I want AI assistance buttons to help with content creation so I can overcome writer's block
+- As a writer, I want automatic versioning and snapshots so I can track changes and revert if needed
+- As a writer, I want to preview my content in real-time so I can see how it will appear to readers
 
 **Requirements**:
-1. Rich text editing capabilities
-2. Chapter and scene organization
-3. Version history tracking
-4. Automatic saving
-5. Basic formatting options
-6. Word and character count statistics
-7. Full-screen mode
-8. Custom styling options
+1. Split-pane workspace with Monaco-based Markdown editor
+2. JSON metadata editor with Ajv validation
+3. Live preview rendering Markdown to React
+4. AI assist buttons for content generation
+5. Versioning system with automatic snapshots
+6. Diff viewer for comparing versions
+7. Syntax highlighting for Markdown
+8. Embedded media support
 
 **Implementation Details**:
-- Technology: Slate.js editor with custom plugins
-- Data Storage: MongoDB with versioning support
+- Technology: Monaco editor with custom plugins
+- Validation: Ajv schema validation
+- Preview: React-based Markdown renderer
+- AI Integration: MCP server connections
+- Versioning: Diff-based snapshot system
 - UI Components: Custom editor components with Tailwind styling
-- Integration Points: Character system, location system, timeline
 
 **Acceptance Criteria**:
-- Editor loads with proper formatting
-- All text styling functions work as expected
-- Content saves automatically every 30 seconds
-- Version history shows all previous saved versions
-- Chapter navigation works correctly
-- Word count updates in real-time
+- Split-pane layout renders correctly
+- Markdown editor supports all required syntax
+- Metadata editor validates against schemas
+- Live preview updates in real-time
+- AI assist buttons trigger appropriate actions
+- Versioning system captures changes automatically
+- Diff viewer shows changes between versions
 
-### Character Management
+### World & Story Management
 
-**Description**: System for creating, organizing, and developing characters within stories.
+**Description**: System for creating, organizing, and managing narrative worlds and stories.
 
 **User Stories**:
-- As a writer, I want to create character profiles so I can keep track of character details
-- As a writer, I want to link characters to my stories so I can see which characters appear in each story
-- As a writer, I want to define character relationships so I can visualize connections
-- As a writer, I want to track character development over time so I can ensure consistency
-- As a writer, I want to generate character visualizations so I can better imagine my characters
+- As a writer, I want a dashboard view of my worlds so I can manage multiple narrative settings
+- As a writer, I want to create new worlds with a guided wizard so I can quickly establish narrative settings
+- As a writer, I want to view stories in a Kanban board so I can track their status and progress
+- As a writer, I want quick actions for common world and story operations so I can work efficiently
+- As a writer, I want to see usage metrics for my worlds so I can understand my content scope
 
 **Requirements**:
-1. Character profile creation and editing
-2. Character gallery view
-3. Relationship mapping
-4. Character development tracking
-5. AI-assisted character generation
-6. Image generation for characters
-7. Character linking to story elements
+1. World Dashboard with grid/list views
+2. Create Wizard with templates and AI starter packs
+3. Story List & Kanban board with status columns
+4. Quick-actions for common operations
+5. Usage metrics display
+6. Filtering and search capabilities
+7. Drag-drop functionality for status updates
 
 **Implementation Details**:
-- Database Schema: Character collection with relationship mapping
-- UI Components: Character card components, relationship graph
-- Integration: Everart MCP for visualization
-- API: Character CRUD operations
+- Database Schema: World and Story collections
+- UI Components: Card components, Kanban board, grid/list views
+- Wizard Flow: Multi-step creation process
+- Metrics: Real-time calculation of usage statistics
+- Integration: Webhook triggers for status changes
 
 **Acceptance Criteria**:
-- Character profiles save correctly
-- All profile fields render properly
-- Relationship visualization displays accurately
-- Character search works efficiently
-- Characters link correctly to story elements
-- AI generation produces appropriate character details
+- World Dashboard displays all worlds correctly
+- Create Wizard guides users through world creation
+- Story Kanban shows correct status columns
+- Drag-drop functionality updates story status
+- Quick-actions perform expected operations
+- Usage metrics display accurate information
+- Filtering and search return expected results
 
-### Location Management
+### Timeline & Relationship Visualization
 
-**Description**: System for creating and managing locations and settings in stories.
+**Description**: System for visualizing timeline events and relationship networks.
 
 **User Stories**:
-- As a writer, I want to create location profiles so I can track setting details
-- As a writer, I want to organize locations hierarchically so I can represent geographic relationships
-- As a writer, I want to link locations to story scenes so I can maintain setting consistency
-- As a writer, I want to generate visual representations of locations so I can better imagine settings
-- As a writer, I want to include maps of my story world so I can understand spatial relationships
+- As a writer, I want to visualize my story timeline so I can organize events chronologically
+- As a writer, I want to see relationships between characters, locations, and items so I can understand their connections
+- As a writer, I want to drag events on the timeline so I can adjust their timing
+- As a writer, I want to get warnings for timeline inconsistencies so I can maintain narrative coherence
+- As a writer, I want to see character appearances and upcoming events so I can maintain character consistency
 
 **Requirements**:
-1. Location profile creation and editing
-2. Hierarchical location organization
-3. Map interface for spatial relationships
-4. Location linking to story elements
-5. AI-assisted location description generation
-6. Image generation for locations
+1. Timeline View with vis-timeline
+2. Graph View with react-force-graph
+3. Drag functionality for timeline events
+4. Constraint validation for timeline consistency
+5. Hover tooltips showing event details
+6. Edge coloring for relationship types
+7. Filtering and search capabilities
 
 **Implementation Details**:
-- Database Schema: Location collection with hierarchy support
-- UI Components: Location card, location tree, map viewer
-- Integration: Everart MCP for visualization
-- APIs: Location CRUD operations, mapping service
+- Technology: vis-timeline and react-force-graph
+- Data Models: Event and relationship schemas
+- Visualization: Interactive timeline and force-directed graph
+- Validation: Constraint checking for timeline events
+- Integration: Connection to character and location data
 
 **Acceptance Criteria**:
-- Location profiles save correctly
-- Hierarchical view displays properly
-- Map interface allows placement and organization
-- Locations link correctly to story elements
-- AI generation produces appropriate location descriptions
+- Timeline View displays events in correct categories
+- Graph View shows relationships with appropriate nodes and edges
+- Dragging events updates their timing correctly
+- Constraint violations trigger appropriate warnings
+- Hover tooltips show relevant information
+- Relationship types are visually distinguishable
+- Filtering and search work as expected
 
-### Timeline Management
+### Interactive Storyteller Runner
 
-**Description**: System for organizing and visualizing story events chronologically.
+**Description**: System for interactive story playback and branching narratives.
 
 **User Stories**:
-- As a writer, I want to create a timeline of story events so I can organize my narrative chronologically
-- As a writer, I want to link characters and locations to timeline events so I can track who was where and when
-- As a writer, I want to visualize parallel timelines so I can track multiple narrative threads
-- As a writer, I want to detect timeline inconsistencies so I can ensure plot coherence
-- As a writer, I want to organize events by plot arcs so I can manage story structure
+- As a reader, I want to experience stories with audio narration so I can be immersed in the narrative
+- As a reader, I want to make choices in stories so I can influence the narrative direction
+- As a reader, I want to save my progress so I can resume reading later
+- As a reader, I want visual elements that enhance the story so I can better visualize scenes
+- As a reader, I want to see my choices highlighted so I understand what I selected
 
 **Requirements**:
-1. Timeline creation and editing
-2. Event creation with date, time, and duration
-3. Character and location linking to events
-4. Timeline visualization interface
-5. Multiple timeline support
-6. Inconsistency detection
-7. Plot arc organization
+1. Realtime playback with audio streaming
+2. Scene background image integration
+3. Scrolling subtitles with word highlighting
+4. Choice engine for branching narratives
+5. Session state management
+6. Bookmark functionality
+7. Playback controls
 
 **Implementation Details**:
-- Database Schema: Events collection with references
-- UI Components: Timeline viewer, event editor
-- Visualization: Interactive timeline with filtering
-- Integration: Story, character, and location systems
+- Technology: ElevenLabs TTS for audio
+3. UI: Subtitles with synchronized highlighting
+4. Choice System: Button rendering from metadata
+5. Backend: WebSocket for real-time updates
+6. Database: Session storage in MongoDB
+7. API: Choice selection and state management
 
 **Acceptance Criteria**:
-- Events appear correctly on timeline
-- Events link properly to characters and locations
-- Parallel timelines display correctly
-- Timeline zooming and navigation works smoothly
-- Inconsistency detection flags actual problems
-- Export of timeline data works properly
+- Audio plays correctly with proper pacing
+- Scene backgrounds change at appropriate times
+- Subtitles scroll and highlight words in sync with audio
+- Choice buttons render correctly from metadata
+- Selecting a choice triggers appropriate narrative branch
+- Session state saves correctly
+- Bookmarks allow returning to specific points
 
-### AI Writing Assistant
+### Media Generation & Asset Library
 
-**Description**: AI-powered tools to assist with story creation and development.
+**Description**: System for generating and managing media assets for stories.
 
 **User Stories**:
-- As a writer, I want to generate story ideas so I can overcome writer's block
-- As a writer, I want to get suggestions for plot development so I can improve my narrative
-- As a writer, I want to analyze my writing style so I can understand my tendencies
-- As a writer, I want to check for consistency issues so I can fix plot holes
-- As a writer, I want to generate descriptive text so I can enhance my settings and characters
+- As a writer, I want to generate images for my stories so I can visualize characters and scenes
+- As a writer, I want to maintain consistent visual styles so my story art looks cohesive
+- As a writer, I want to organize and search my media assets so I can find and reuse them easily
+- As a writer, I want to embed media directly in my stories so readers can see visual elements
+- As a writer, I want to perform bulk operations on assets so I can efficiently manage large collections
 
 **Requirements**:
-1. AI-powered idea generation
-2. Plot suggestion tools
-3. Style analysis
-4. Consistency checking
-5. Descriptive text generation
-6. Dialogue suggestions
-7. Integration with writing flow
+1. Image Generation Panel with style presets
+2. EverArt service integration for consistency
+3. Asset Library with S3 backend
+4. Searchable grid interface with facets
+5. Bulk operations functionality
+6. Markdown embedding capability
+7. Asset metadata management
 
 **Implementation Details**:
-- Technology: Integration with MCP servers
-- API: Structured prompts and response handling
-- UI Components: AI suggestion interface, generation controls
-- Performance: Asynchronous processing for longer operations
+- Technology: Integration with image generation APIs
+- Storage: S3 for asset files
+- Database: Asset metadata collection
+- UI: Prompt builder and style selector
+- Grid: Searchable asset display
+- Integration: Drag-and-drop into Markdown
 
 **Acceptance Criteria**:
-- AI suggestions are relevant to context
-- Generation occurs within acceptable time limits
-- Suggestions can be easily accepted or rejected
-- Style analysis provides meaningful insights
-- Consistency checks identify actual issues
-- Integration doesn't disrupt writing flow
+- Image generation produces appropriate results
+- Style consistency is maintained across generated images
+- Asset Library displays all assets correctly
+- Search and filtering return expected results
+- Bulk operations affect multiple assets
+- Dragging assets into Markdown embeds them correctly
+- Asset metadata is complete and accurate
+
+### Publishing Wizard
+
+**Description**: System for exporting stories in various formats for publication.
+
+**User Stories**:
+- As a writer, I want to generate PDF versions of my stories so I can distribute them for print
+- As a writer, I want to create ePub and MOBI files so readers can use e-readers
+- As a writer, I want to produce audiobooks from my stories so they can be heard
+- As a writer, I want to export stories as podcasts so they can be distributed on podcast platforms
+- As a writer, I want to create videos from my stories so they can be shared on video platforms
+
+**Requirements**:
+1. PDF/Print generation with templates
+2. ePub & MOBI creation pipeline
+3. Audiobook generation with voice mapping
+4. Podcast export with RSS generation
+5. Video export with Remotion
+6. Format-specific customization options
+7. Template selection per genre
+
+**Implementation Details**:
+- Technology: React-PDF, epub-gen, ElevenLabs TTS, Remotion
+- Templates: Genre-specific design templates
+- Audio: Voice mapping for characters
+- Metadata: Format-specific metadata handling
+- Distribution: Optional platform integration
+
+**Acceptance Criteria**:
+- PDF generation produces properly formatted documents
+- ePub and MOBI files work on standard e-readers
+- Audiobooks include proper chapter markers and voice acting
+- Podcasts include correct RSS metadata
+- Videos incorporate text and assets effectively
+- Templates apply appropriate styling
+- Customization options affect output as expected
 
 ## Extended Features
 
-### Collaboration Tools
+### Advanced AI Services
 
-**Description**: Features enabling multiple users to collaborate on story projects.
+**Description**: Advanced AI capabilities for enhancing storytelling.
 
 **User Stories**:
-- As a writer, I want to invite collaborators to my story so we can work together
-- As a writer, I want to see who is currently editing a story so I can avoid conflicts
-- As a writer, I want to leave comments on story elements so I can provide feedback
-- As a writer, I want to see a history of changes so I can track contributions
-- As a writer, I want to assign specific roles to collaborators so I can control access
+- As a writer, I want an AI memory vault so the system can better understand my story world
+- As a writer, I want style DNA representation so generated content maintains consistent style
+- As a writer, I want a quest composer so I can generate multi-step narrative arcs
+- As a writer, I want consistent AI-generated content so my story feels cohesive
+- As a writer, I want AI assistance that understands my story context so suggestions are relevant
 
 **Requirements**:
-1. User invitation system
-2. Real-time collaboration
-3. Presence awareness
-4. Comment and feedback system
-5. Change tracking with attribution
-6. Role-based access control
-7. Conflict resolution
+1. Memory Vault with vector DB
+2. Style DNA vector representation
+3. Quest Composer with Seq-Think LLM
+4. Long-context understanding
+5. Style consistency algorithms
+6. Multi-step arc generation
+7. Timeline integration
 
 **Implementation Details**:
-- Technology: WebSockets for real-time updates
-- Database: Collaborative editing support
-- UI: Presence indicators, comment interface
-- Security: Permission system for access control
+- Technology: Vector database for memory storage
+- Algorithms: Style embedding and consistency checking
+- LLM: Sequential thinking for complex reasoning
+- Integration: Timeline and event generation
+- UI: Quest management interface
 
 **Acceptance Criteria**:
-- Multiple users can edit simultaneously
-- Changes from different users appear in real-time
-- Comments appear correctly with attribution
-- History shows who made which changes
-- Different permission levels work as expected
+- Memory Vault retrieves relevant context
+- Style DNA ensures consistent generated content
+- Quest Composer creates coherent multi-step arcs
+- Generated content reflects story world state
+- AI suggestions are relevant to current context
 
-### Export and Publishing
+### Mobile Companion
 
-**Description**: Tools for exporting stories in various formats and publishing to platforms.
-
-**User Stories**:
-- As a writer, I want to export my story in different formats so I can use it elsewhere
-- As a writer, I want to generate a formatted manuscript so I can submit to publishers
-- As a writer, I want to publish directly to blogging platforms so I can share my work
-- As a writer, I want to create e-books from my stories so I can self-publish
-- As a writer, I want to control formatting options so my exports look professional
-
-**Requirements**:
-1. Export to multiple formats (PDF, DOCX, EPUB, HTML)
-2. Manuscript formatting according to industry standards
-3. Direct publishing to integrated platforms
-4. Customizable formatting options
-5. Cover page generation
-6. Table of contents creation
-7. Metadata management for publishing
-
-**Implementation Details**:
-- Technology: Document generation libraries
-- Integration: Publishing platform APIs
-- UI: Export configuration interface
-- Processing: Server-side document generation
-
-**Acceptance Criteria**:
-- Exported documents maintain proper formatting
-- All specified formats generate correctly
-- Direct publishing works with supported platforms
-- Customization options affect output as expected
-- Generated manuscripts meet industry standards
-
-### Mobile Application
-
-**Description**: Mobile version of The Story Teller for iOS and Android platforms.
+**Description**: Mobile application for on-the-go storytelling and reading.
 
 **User Stories**:
-- As a writer, I want to access my stories on mobile devices so I can write anywhere
-- As a writer, I want to capture ideas on the go so I don't forget them
-- As a writer, I want to read and review my work on mobile so I can edit away from my computer
-- As a writer, I want offline access to my stories so I can work without internet
-- As a writer, I want to dictate content on mobile so I can write hands-free
+- As a user, I want to read stories on my mobile device so I can enjoy content anywhere
+- As a writer, I want to jot down ideas on the go so I don't forget them
+- As a reader, I want offline access to stories so I can read without internet
+- As a user, I want synchronized data across devices so my content is always up-to-date
+- As a writer, I want to use AI mini-prompts so I can quickly generate ideas
 
 **Requirements**:
-1. Native iOS and Android applications
-2. Core writing and editing features
-3. Offline mode with synchronization
-4. Voice-to-text input
-5. Mobile-optimized UI
-6. Push notifications for collaboration
-7. Quick idea capture tools
+1. Reader Mode with audio playback
+2. Author Light for quick idea capture
+3. Offline cache with PouchDB
+4. Sync mechanism for cross-device usage
+5. AI mini-prompt integration
+6. Mobile-optimized UI
+7. Push notifications
 
 **Implementation Details**:
 - Technology: React Native for cross-platform support
-- Data: Local storage with sync capabilities
-- UI: Mobile-optimized components
-- Integration: Core API integration with offline support
+- Database: PouchDB for offline storage
+- Sync: Bidirectional synchronization
+- Audio: Mobile playback optimization
+- UI: Touch-friendly interface design
 
 **Acceptance Criteria**:
-- Application functions on both iOS and Android
-- Core features work similarly to web version
-- Offline changes sync correctly when online
-- UI is optimized for smaller screens
-- Performance is acceptable on target devices
+- Reader Mode displays content correctly
+- Audio playback works smoothly on mobile
+- Offline access functions without internet
+- Data synchronizes correctly across devices
+- AI mini-prompts generate useful ideas
+- Interface is optimized for mobile use
+- Notifications alert users appropriately
+
+## Cross-Cutting Concerns
+
+### Security & Compliance
+
+**Requirements**:
+1. Row-level security for data isolation
+2. Signed URLs for media access
+3. Rate limiting on AI endpoints
+4. Content policy checks
+5. AI guardrails for safety
+6. Data encryption at rest and in transit
+7. Authentication and authorization
+
+### Observability & Performance
+
+**Requirements**:
+1. OpenTelemetry traces for monitoring
+2. Grafana dashboards for metrics
+3. Performance optimization for large documents
+4. Asset generation queue system
+5. Efficient database queries
+6. Client-side performance monitoring
+7. Error tracking and reporting
+
+### Accessibility & Internationalization
+
+**Requirements**:
+1. WCAG 2.2 compliance for accessibility
+2. Screen reader compatibility
+3. Keyboard navigation
+4. Contrast and color considerations
+5. Internationalization framework
+6. AI translation service
+7. Multi-language support
 
 ## Feature Dependencies
 
 The following dependencies exist between features:
 
-1. **Character Management** depends on basic Story Editor functionality
-2. **Location Management** depends on basic Story Editor functionality
-3. **Timeline Management** depends on Character and Location Management
-4. **AI Writing Assistant** depends on Story Editor integration
-5. **Collaboration Tools** depend on basic Story Editor and Version History
-6. **Export and Publishing** depend on complete Story Editor functionality
-7. **Mobile Application** depends on core web application features
+1. **Schema IDE & Passage Editor** is foundational for all content creation
+2. **World & Story Management** organizes and structures narrative content
+3. **Timeline & Relationship Visualization** depends on world and character data
+4. **Interactive Storyteller Runner** depends on passage content and metadata
+5. **Media Generation** enhances all other features with visual elements
+6. **Publishing Wizard** depends on complete story content
+7. **Advanced AI Services** enhance all other features with intelligence
+8. **Mobile Companion** extends access to core functionality
 
 ## Feature Prioritization Matrix
 
@@ -294,20 +352,20 @@ Features are prioritized based on this matrix:
 
 | Feature | Importance | Complexity | Priority |
 |---------|------------|------------|----------|
-| Story Editor | Critical | High | 1 |
-| Character Management | High | Medium | 2 |
-| Location Management | High | Medium | 3 |
-| Timeline Management | Medium | High | 4 |
-| AI Writing Assistant | High | High | 5 |
-| Collaboration Tools | Medium | Very High | 6 |
-| Export and Publishing | Medium | Medium | 7 |
-| Mobile Application | Low | High | 8 |
+| Schema IDE & Passage Editor | Critical | High | **HIGHEST** |
+| World & Story Management | Critical | Medium | **HIGHEST** |
+| Timeline & Relationship Visualization | High | High | **HIGH** |
+| Interactive Storyteller Runner | High | High | **HIGH** |
+| Media Generation & Asset Library | Medium | Medium | **MEDIUM** |
+| Publishing Wizard | Medium | Medium | **MEDIUM** |
+| Advanced AI Services | Medium | Very High | **LOW** |
+| Mobile Companion | Low | High | **LOW** |
 
 ## Feature Implementation Guidelines
 
 When implementing these features, developers should:
 
-1. **Follow the Modular Architecture**: Ensure features are implemented as loosely coupled modules
+1. **Follow the Feature Catalogue**: Ensure implementation aligns with the detailed feature catalogue
 2. **Maintain Consistent UI**: Adhere to the design system for visual consistency
 3. **Consider Performance**: Optimize for both initial load and operation time
 4. **Ensure Accessibility**: Make all features accessible according to WCAG standards
@@ -318,7 +376,8 @@ When implementing these features, developers should:
 
 This feature specification connects to:
 
+- **Feature Catalogue**: For primary feature definitions and priorities
 - **Project Roadmap**: For feature timeline and release planning
 - **Architecture Documentation**: For implementation guidance
 - **Status Documentation**: For current implementation status
-- **Technical Documentation**: For specific implementation details 
+- **Technical Documentation**: For specific implementation details
