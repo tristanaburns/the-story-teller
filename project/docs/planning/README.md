@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Planning
 
 *Last Updated: 2025-04-22*
@@ -64,7 +63,6 @@ These planning documents should be used by:
 - **Project Architecture**: For understanding how planning relates to technical implementation
 - **Team Workflow**: For information on the development process
 - **Project Guidelines**: For standards and best practices
-=======
 # The Story Teller: Planning Documentation
 
 This directory contains planning documents for The Story Teller project, including roadmaps, feature specifications, and implementation plans.
@@ -133,4 +131,3 @@ The planning documents should evolve through:
 3. Adjustments based on development realities
 4. Reprioritization as needed
 5. Historical record of completed work 
->>>>>>> bae9f3cfbce51b7010ab5841389c3aad62d2429d
